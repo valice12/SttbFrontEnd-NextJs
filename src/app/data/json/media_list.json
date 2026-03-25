@@ -1,0 +1,79 @@
+[
+  {
+    "id": "j-1",
+    "title": "Jurnal Teologi Transformatio: Volume 22, No. 1",
+    "category": "Peer-reviewed",
+    "date": "2026-03-01T00:00:00Z",
+    "author": "Akademik STTB",
+    "description": "Diskusi tentang teologi biblika dan penerapannya di era modern.",
+    "content": "Volume terbaru Jurnal Transformatio ini menghadirkan berbagai artikel penelitian mengenai teologi biblika yang dikontestualisasikan dengan isu-isu kontemporer. Fokus utama edisi ini adalah \"Etika Kristen di Ruang Publik Digital\".\n\nArtikel-artikel di dalamnya melalui proses peer-review yang ketat untuk menjamin kualitas akademisnya.",
+    "image": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1000",
+    "slug": "jurnal-transformatio-v22-n1",
+    "link": "https://e-journal.sttb.ac.id/index.php/transformatio",
+    "type": "jurnal"
+  },
+  {
+    "id": "v-1",
+    "title": "Seminar Nasional: Teologi di Era Digital",
+    "category": "Seminar",
+    "date": "2026-02-15T10:00:00Z",
+    "author": "Pdt. Dr. Yohanes",
+    "description": "Rekaman seminar nasional mengenai tantangan dan peluang teologi di era digital.",
+    "content": "Seminar ini membahas bagaimana Gereja dan teolog merespons perkembangan teknologi AI dan ruang digital.",
+    "image": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=1000",
+    "slug": "seminar-teologi-digital",
+    "duration": "1:24:05",
+    "type": "video"
+  },
+  {
+    "id": "a-1",
+    "title": "Menjaga Api Pelayanan di Tengah Rutinitas Kampus",
+    "category": "Opini",
+    "date": "2026-03-10T00:00:00Z",
+    "author": "Staf Literatur",
+    "description": "Sebuah tulisan ringkas untuk memberikan insight baru dalam pelayanan.",
+    "content": "Seringkali rutinitas akademik yang padat membuat kita kehilangan esensi dari panggilan awal kita. Artikel ini mengajak pembaca untuk merefleksikan kembali motivasi pelayanan dan bagaimana menjaga keseimbangan antara studi dan pertumbuhan spiritual.\n\nPelayanan yang efektif lahir dari hubungan yang intim dengan Tuhan, bukan sekadar kesibukan di berbagai departemen.",
+    "image": "https://images.unsplash.com/photo-1455390582262-044cdead2708?auto=format&fit=crop&q=80&w=1000",
+    "slug": "menjaga-api-pelayanan",
+    "type": "artikel"
+  },
+  {
+    "id": "v-2",
+    "title": "Kuliah Tamu: Pengantar Dogmatika II",
+    "category": "Lecture",
+    "date": "2026-01-20T09:00:00Z",
+    "author": "Prof. Martin",
+    "description": "Sesi pertama kuliah tamu mengenai dasar-dasar dogmatika Kristen.",
+    "content": "Pembahasan mendalam mengenai doktrin Allah dan Kristologi dalam tradisi teologi sistematis.",
+    "image": "https://images.unsplash.com/photo-1524178232363-1fb28f74b671?auto=format&fit=crop&q=80&w=1000",
+    "slug": "lecture-dogmatika-2",
+    "duration": "45:12",
+    "type": "video"
+  },
+  {
+    "id": "m-1",
+    "title": "Monograf: Teologi dan Kebudayaan di Indonesia",
+    "category": "Monograf",
+    "date": "2026-01-05T00:00:00Z",
+    "author": "Dr. Lukas Wijaya",
+    "description": "Sebuah studi mendalam mengenai interaksi antara iman Kristen dan kebhinekaan budaya di Indonesia.",
+    "content": "Monograf ini mengeksplorasi bagaimana teologi Reformed dapat berdialog secara konstruktif dengan budaya lokal. Penulis memaparkan riset lapangan selama 5 tahun yang mencakup berbagai wilayah di Nusantara.\n\nFokus utama adalah pada pembentukan identitas Kristen yang tetap plural namun berakar kuat pada nilai-nilai Alkitabiah.",
+    "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=1000",
+    "slug": "monograf-teologi-kebudayaan",
+    "link": "#",
+    "type": "monograf"
+  },
+  {
+    "id": "v-3",
+    "title": "Shorts: Tips Belajar Bahasa Yunani Koine",
+    "category": "Shorts",
+    "date": "2026-03-05T15:00:00Z",
+    "author": "Staf Akademik",
+    "description": "Video singkat berisi tips praktis untuk menghafal kosakata Bahasa Yunani.",
+    "content": "Gunakan flashcards dan aplikasi mobile untuk membantu hafalan harian Anda.",
+    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1000",
+    "slug": "shorts-belajar-yunani",
+    "duration": "0:59",
+    "type": "video"
+  }
+]

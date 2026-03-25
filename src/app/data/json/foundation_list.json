@@ -1,0 +1,88 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Pdt. Yohanes Simanjuntak",
+      "division": "Dewan Pembina",
+      "role": ""
+    },
+    {
+      "id": 2,
+      "name": "Dr. Elia Manurung",
+      "division": "Dewan Pembina",
+      "role": ""
+    },
+    {
+      "id": 3,
+      "name": "Benny Wijaya",
+      "division": "Dewan Pengurus",
+      "role": "Ketua"
+    },
+    {
+      "id": 4,
+      "name": "Ruth Natalia",
+      "division": "Dewan Pengurus",
+      "role": "Wakil Ketua"
+    },
+    {
+      "id": 5,
+      "name": "Ir. Samuel Haryanto",
+      "division": "Dewan Pengurus",
+      "role": "Sekretaris"
+    },
+    {
+      "id": 6,
+      "name": "Lydia Kusuma",
+      "division": "Dewan Pengurus",
+      "role": "Bendahara"
+    },
+    {
+      "id": 7,
+      "name": "Daniel Sitorus",
+      "division": "Anggota",
+      "role": ""
+    },
+    {
+      "id": 8,
+      "name": "Martha Silalahi",
+      "division": "Anggota",
+      "role": ""
+    },
+    {
+      "id": 9,
+      "name": "Pdt. Andreas Budiarjo",
+      "division": "Dewan Pengawas",
+      "role": "Ketua"
+    },
+    {
+      "id": 10,
+      "name": "Dr. Maria Susanti",
+      "division": "Dewan Pengawas",
+      "role": "Anggota"
+    },
+    {
+      "id": 11,
+      "name": "Hendra Gunawan, M.Th.",
+      "division": "Anggota",
+      "role": ""
+    },
+    {
+      "id": 12,
+      "name": "Sarah Angelina",
+      "division": "Anggota",
+      "role": ""
+    },
+    {
+      "id": 13,
+      "name": "David Pratama",
+      "division": "Anggota",
+      "role": ""
+    },
+    {
+      "id": 14,
+      "name": "Grace Tanuwijaya",
+      "division": "Anggota",
+      "role": ""
+    }
+  ]
+}

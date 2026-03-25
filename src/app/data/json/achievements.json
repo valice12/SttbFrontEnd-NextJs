@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "title": "Juara 1 Lomba Debat Teologi Nasional",
+    "recipient": "Tim Debat STT Stulos",
+    "year": "2025",
+    "category": "Student",
+    "description": "Berhasil mengalahkan 20 institusi teologi lainnya dari seluruh Indonesia."
+  },
+  {
+    "id": "2",
+    "title": "Akreditasi Unggul",
+    "recipient": "Program Studi Sarjana Teologi",
+    "year": "2025",
+    "category": "Institutional",
+    "description": "Mendapatkan predikat Unggul dari BAN-PT."
+  },
+  {
+    "id": "3",
+    "title": "Hibah Penelitian Internasional",
+    "recipient": "Dr. Samuel Siregar",
+    "year": "2026",
+    "category": "Research",
+    "description": "Penghargaan riset dari Global Christian Research Fund."
+  }
+]

@@ -1,0 +1,479 @@
+{
+  "s-th": {
+    "programName": "Sarjana Teologi",
+    "programDescription": "Program studi Sarjana Teologi ditujukan untuk memperlengkapi mereka yang terpanggil untuk melayani sebagai rohaniwan penuh waktu di gereja, lembaga pelayanan, maupun ladang misi.",
+    "programRequirements": [
+      "Minimal lulusan SMA/sederajat.",
+      "Memiliki pengalaman pelayanan gerejawi/lembaga Kristen minimal 2 tahun.",
+      "Memiliki panggilan jelas sebagai hamba Tuhan penuh waktu.",
+      "Memiliki kemampuan dasar Bahasa Inggris yang baik."
+    ],
+    "totalCredits": 148,
+    "duration": "8 Semester",
+    "notes": [
+      "Mahasiswa yang belum menikah wajib tinggal di asrama.",
+      "Praktik pelayanan dilakukan selama 6 bulan di akhir masa studi."
+    ],
+    "lecturingSystem": [
+      "Sistem blok teaching selama 3 minggu diikuti minggu pengerjaan tugas.",
+      "Satu semester terdiri dari 15x pertemuan (kuliah & evaluasi)."
+    ],
+    "degree": "S.Th.",
+    "motto": "Transformative Pastor-Scholar",
+    "informedDescription": "Pastor-scholar yang berpengetahuan luas dan aplikatif terhadap tantangan perkembangan pelayanan gerejawi dalam konteks urban.",
+    "transformedDescription": "Pembelajar yang memiliki fondasi spiritualitas yang kokoh dan karakter yang matang.",
+    "transformativeDescription": "Pastor-scholar yang berdampak bagi jemaat dan lingkungan tempatnya melayani.",
+    "lectureCategory": [
+      {
+        "categoryName": "Dasar Umum",
+        "totalCredits": 14,
+        "lectures": [
+          {
+            "lectureName": "Pancasila Dan Kewarganegaraan",
+            "credits": 2,
+            "description": "Membentuk pemikiran kebangsaan yang didorong iman Kristen dan Pancasila sebagai falsafah hidup."
+          },
+          {
+            "lectureName": "Bahasa Indonesia",
+            "credits": 2,
+            "description": "Keterampilan membaca, finding main idea, skimming, scanning, dan summarizing."
+          },
+          {
+            "lectureName": "Bahasa Inggris Teologi",
+            "credits": 3,
+            "description": "Tata bahasa Inggris dasar serta penerapannya pada bacaan teologis sederhana."
+          }
+        ]
+      },
+      {
+        "categoryName": "Studi Biblika",
+        "totalCredits": 34,
+        "lectures": [
+          {
+            "lectureName": "Pengantar Alkitab dan Teologi Biblika",
+            "credits": 3,
+            "description": "Studi asal-usul sejarah dan perkembangan pemikiran religius utama dari PL dan PB."
+          },
+          {
+            "lectureName": "Studi PL 1: Kitab Taurat",
+            "credits": 3,
+            "description": "Studi komprehensif terhadap kitab Kejadian sampai Ulangan."
+          },
+          {
+            "lectureName": "Bahasa Ibrani",
+            "credits": 3,
+            "description": "Dasar-dasar tata bahasa Ibrani untuk keperluan studi PL."
+          }
+        ]
+      },
+      {
+        "categoryName": "Studi Teologi",
+        "totalCredits": 23,
+        "lectures": [
+          {
+            "lectureName": "Prolegomena & Doktrin Alkitab",
+            "credits": 3,
+            "description": "Pengantar teologi sistematika dan doktrin tentang firman Allah."
+          },
+          {
+            "lectureName": "Doktrin Allah, Penciptaan & Manusia",
+            "credits": 3,
+            "description": "Mempelajari sifat Allah, karya penciptaan, dan hakikat manusia."
+          }
+        ]
+      }
+    ]
+  },
+  "s-pd-k": {
+    "programName": "Sarjana Pendidikan Kristen",
+    "programDescription": "Program studi ini ditujukan untuk memperlengkapi mereka yang terpanggil sebagai pendidik Kristen penuh waktu di sekolah maupun lembaga pendidikan gerejawi.",
+    "programRequirements": [
+      "Minimal lulusan SMA/sederajat.",
+      "Memiliki pengalaman pelayanan gerejawi/lembaga Kristen minimal 2 tahun.",
+      "Memiliki panggilan jelas sebagai pendidik Kristen penuh waktu."
+    ],
+    "totalCredits": 148,
+    "duration": "8 Semester",
+    "notes": [
+      "Mahasiswa wajib mengikuti program formasi spiritualitas.",
+      "STTB memberikan subsidi untuk biaya akomodasi & konsumsi."
+    ],
+    "lecturingSystem": [
+      "Sistem blok teaching.",
+      "Melibatkan observasi dan praktik mengajar langsung di lapangan."
+    ],
+    "degree": "S.Pd.K.",
+    "motto": "Transformative Christian Educator",
+    "informedDescription": "Pendidik yang memahami teori pedagogi modern dan mengintegrasikannya dengan wawasan Kristen.",
+    "transformedDescription": "Pendidik dengan keteladanan hidup dan karakter Kristus.",
+    "transformativeDescription": "Pendidik yang mampu membawa pembaruan budi dan karakter bagi murid didiknya.",
+    "lectureCategory": [
+      {
+        "categoryName": "Dasar Umum Kependidikan",
+        "totalCredits": 20,
+        "lectures": [
+          {
+            "lectureName": "Pengantar Pendidikan Kristen",
+            "credits": 3,
+            "description": "Membahas dasar-dasar, sejarah, dan filosofi dari pendidikan Kristen."
+          },
+          {
+            "lectureName": "Psikologi Perkembangan Anak",
+            "credits": 3,
+            "description": "Mempelajari tahap-tahap perkembangan kognitif dan emosional anak."
+          }
+        ]
+      },
+      {
+        "categoryName": "Keterampilan Pedagogi",
+        "totalCredits": 30,
+        "lectures": [
+          {
+            "lectureName": "Strategi Pembelajaran Efektif",
+            "credits": 3,
+            "description": "Metode dan teknik mengajar di dalam ruang kelas."
+          },
+          {
+            "lectureName": "Media dan Teknologi Pendidikan",
+            "credits": 2,
+            "description": "Penggunaan alat digital dan media kreatif untuk menunjang pembelajaran."
+          }
+        ]
+      }
+    ]
+  },
+  "m-th-pastoral-urban": {
+    "programName": "Magister Teologi Pelayanan Pastoral Gereja Urban",
+    "programDescription": "Program studi ini memperlengkapi rohaniwan agar mampu merancang dan melakukan pelayanan yang integral dan transformatif dalam konteks gereja masa kini di wilayah perkotaan (urban).",
+    "programRequirements": [
+      "Minimal lulusan S.Th. / M.Div. / M.Min. yang terakreditasi.",
+      "Lulusan S1 Umum wajib mengikuti program matrikulasi terlebih dahulu.",
+      "Menyerahkan paper/tulisan akademik minimal 15 halaman."
+    ],
+    "totalCredits": 48,
+    "duration": "4 Semester",
+    "notes": [
+      "Biaya pendidikan dibayarkan selambat-lambatnya 2 minggu sebelum kuliah."
+    ],
+    "lecturingSystem": [
+      "Sistem block teaching secara luring dan daring (Senin - Jumat).",
+      "Rata-rata 5 mata kuliah online dan 1 onsite per semester."
+    ],
+    "degree": "M.Th.",
+    "motto": "Urban Pastoral Leader",
+    "informedDescription": "Pemimpin gereja yang peka terhadap dinamika sosial, budaya, dan tantangan sosiologis masyarakat perkotaan.",
+    "transformedDescription": "Gembala dengan kedalaman relasi pribadi bersama Tuhan di tengah kesibukan urban.",
+    "transformativeDescription": "Inovator pelayanan yang menghadirkan gereja relevan dan berdampak bagi kota.",
+    "lectureCategory": [
+      {
+        "categoryName": "Mata Kuliah Inti",
+        "totalCredits": 15,
+        "lectures": [
+          {
+            "lectureName": "Gereja Perkotaan",
+            "credits": 3,
+            "description": "Mempelajari karakteristik, tantangan, dan peluang bergereja di pusat kota besar."
+          },
+          {
+            "lectureName": "Sosiologi dan Misi Perkotaan",
+            "credits": 3,
+            "description": "Analisis struktur sosial masyarakat urban untuk merumuskan strategi misi yang tepat."
+          }
+        ]
+      },
+      {
+        "categoryName": "Mata Kuliah Konsentrasi",
+        "totalCredits": 18,
+        "lectures": [
+          {
+            "lectureName": "Homiletika Lanjutan",
+            "credits": 3,
+            "description": "Teknik penyampaian firman yang relevan dengan pergumulan jemaat modern."
+          },
+          {
+            "lectureName": "Konseling Pastoral Lintas Generasi",
+            "credits": 3,
+            "description": "Pendekatan konseling untuk berbagai kelompok umur dalam gereja."
+          }
+        ]
+      }
+    ]
+  },
+  "m-th-transformasi-budaya": {
+    "programName": "Magister Teologi Transformasi Budaya & Masyarakat",
+    "programDescription": "Fokus pada peran esensial gereja dan umat Kristen dalam berpartisipasi mewujudkan transformasi sosial, budaya, and kemasyarakatan di era kontemporer.",
+    "programRequirements": [
+      "Minimal lulusan S.Th. / M.Div. / M.Min. yang terakreditasi.",
+      "Pengalaman pelayanan minimal 2 tahun.",
+      "Lulus tes potensi akademik dan wawancara."
+    ],
+    "totalCredits": 48,
+    "duration": "4 Semester",
+    "notes": [
+      "Wajib melakukan riset lapangan terkait isu-isu kultural atau sosial kemasyarakatan."
+    ],
+    "lecturingSystem": [
+      "Sistem modular (block teaching) yang dikombinasikan dengan seminar interaktif.",
+      "Penelitian mandiri dan bimbingan tesis secara intensif."
+    ],
+    "degree": "M.Th.",
+    "motto": "Agent of Cultural Transformation",
+    "informedDescription": "Teolog yang kritis terhadap fenomena budaya pop, media, dan struktur sosial modern.",
+    "transformedDescription": "Hamba Tuhan yang teguh memegang integritas firman di tengah arus relativisme.",
+    "transformativeDescription": "Katalisator yang membawa nilai-nilai Kerajaan Allah menembus berbagai lapisan masyarakat.",
+    "lectureCategory": [
+      {
+        "categoryName": "Analisis Sosial Budaya",
+        "totalCredits": 18,
+        "lectures": [
+          {
+            "lectureName": "Teologi dan Kebudayaan Kontemporer",
+            "credits": 3,
+            "description": "Tinjauan teologis terhadap tren budaya massa, seni, and media saat ini."
+          },
+          {
+            "lectureName": "Etika Sosial dan Keadilan Publik",
+            "credits": 3,
+            "description": "Membahas tanggung jawab Kristen terhadap isu kemiskinan, HAM, and politik."
+          }
+        ]
+      },
+      {
+        "categoryName": "Riset Transformasi",
+        "totalCredits": 15,
+        "lectures": [
+          {
+            "lectureName": "Metodologi Penelitian Sosial",
+            "credits": 3,
+            "description": "Pendekatan penelitian kualitatif untuk memetakan fenomena masyarakat."
+          },
+          {
+            "lectureName": "Proyek Advokasi Komunitas",
+            "credits": 3,
+            "description": "Praktikum merancang program intervensi sosial berbasis gereja."
+          }
+        ]
+      }
+    ]
+  },
+  "m-pd": {
+    "programName": "Magister Pendidikan Kristen",
+    "programDescription": "Dirancang untuk memperlengkapi para pemimpin pendidikan Kristen, kepala sekolah, and praktisi pendidikan dalam mengembangkan kurikulum and strategi manajemen berbasis alkitabiah.",
+    "programRequirements": [
+      "Lulus program S1 dari semua jurusan.",
+      "Memiliki pengalaman pelayanan di sekolah/gereja minimal 2 tahun.",
+      "Menyerahkan book review saat mendaftar di STTB."
+    ],
+    "totalCredits": 42,
+    "duration": "4 Semester",
+    "notes": [
+      "Penyusunan tesis wajib mengacu pada permasalahan pendidikan nyata."
+    ],
+    "lecturingSystem": [
+      "Blok teaching (hybrid: online dan onsite).",
+      "Studi kasus manajemen dan perancangan kurikulum pendidikan."
+    ],
+    "degree": "M.Pd.",
+    "motto": "Christian Education Leader",
+    "informedDescription": "Pimpinan pendidikan yang menguasai filsafat pendidikan Kristen and metodologi instruksional terkini.",
+    "transformedDescription": "Pemimpin yang melayani dengan hati hamba (servant leadership) dalam dunia akademis.",
+    "transformativeDescription": "Desainer kurikulum yang mampu membentuk institusi pendidikan Kristen unggul.",
+    "lectureCategory": [
+      {
+        "categoryName": "Manajemen Institusi",
+        "totalCredits": 15,
+        "lectures": [
+          {
+            "lectureName": "Kepemimpinan Sekolah Kristen",
+            "credits": 3,
+            "description": "Prinsip tata kelola and kepemimpinan visioner untuk yayasan and sekolah."
+          },
+          {
+            "lectureName": "Desain Kurikulum Holistik",
+            "credits": 3,
+            "description": "Merancang silabus yang mengintegrasikan keilmuan sekuler and iman Kristen."
+          }
+        ]
+      },
+      {
+        "categoryName": "Pengembangan Karakter",
+        "totalCredits": 12,
+        "lectures": [
+          {
+            "lectureName": "Pembinaan Guru dan Staf",
+            "credits": 3,
+            "description": "Strategi mentoring and pengembangan kapasitas pengajar."
+          }
+        ]
+      }
+    ]
+  },
+  "m-min-marketplace": {
+    "programName": "Magister Ministri Marketplace",
+    "programDescription": "Ditujukan secara khusus bagi para profesional Kristen untuk melayani, berjejaring, and membawa nilai-nilai Injil secara nyata di dunia kerja and industri.",
+    "programRequirements": [
+      "Lulusan S-1 Teologi maupun Umum.",
+      "Memiliki pengalaman bekerja di dunia profesional minimal 2 tahun.",
+      "Menyerahkan book review saat mendaftar."
+    ],
+    "totalCredits": 36,
+    "duration": "4 Semester",
+    "notes": [
+      "Tugas akhir berbentuk Proyek (Project-Based) bukan Tesis murni.",
+      "Waktu kuliah diatur agar tidak mengganggu jam kerja reguler."
+    ],
+    "lecturingSystem": [
+      "Perkuliahan weekend atau kelas malam berbasis eksekutif.",
+      "Diskusi panel dengan praktisi industri and teolog."
+    ],
+    "degree": "M.Min.",
+    "motto": "Marketplace Minister",
+    "informedDescription": "Profesional yang memiliki landasan teologis yang solid mengenai etika kerja and bisnis.",
+    "transformedDescription": "Pekerja yang memandang profesinya sebagai panggilan ilahi (vocation).",
+    "transformativeDescription": "Pemimpin yang menghadirkan keadilan, integritas, and inovasi redemtif di tempat kerjanya.",
+    "lectureCategory": [
+      {
+        "categoryName": "Teologi Kerja",
+        "totalCredits": 12,
+        "lectures": [
+          {
+            "lectureName": "Biblical Theology of Work",
+            "credits": 3,
+            "description": "Memahami mandat budaya and makna bekerja dari perspektif Alkitab."
+          },
+          {
+            "lectureName": "Etika Bisnis Kristen",
+            "credits": 3,
+            "description": "Dilema etis di dunia korporat and pengambilan keputusan berdasarkan integritas."
+          }
+        ]
+      },
+      {
+        "categoryName": "Praktik Marketplace",
+        "totalCredits": 15,
+        "lectures": [
+          {
+            "lectureName": "Penginjilan di Tempat Kerja",
+            "credits": 3,
+            "description": "Strategi kesaksian hidup yang elegan di lingkungan sekuler."
+          },
+          {
+            "lectureName": "Manajemen Keuangan Kingdom-Based",
+            "credits": 3,
+            "description": "Mengelola profit and resources bisnis demi perluasan kerajaan Allah."
+          }
+        ]
+      }
+    ]
+  },
+  "m-min-kepemimpinan-pastoral": {
+    "programName": "Magister Ministri Kepemimpinan Pastoral",
+    "programDescription": "Program yang berfokus pada penguatan kapasitas manajerial, konseling, and kepemimpinan strategis bagi para hamba Tuhan yang telah terjun langsung dalam penggembalaan jemaat.",
+    "programRequirements": [
+      "Lulusan S-1 Teologi atau S1 Umum dengan pengalaman penggembalaan.",
+      "Rekomendasi dari sinode atau gereja tempat melayani.",
+      "Lulus seleksi wawancara."
+    ],
+    "totalCredits": 36,
+    "duration": "4 Semester",
+    "notes": [
+      "Kurikulum sangat berorientasi pada pemecahan masalah (problem-solving) pastoral."
+    ],
+    "lecturingSystem": [
+      "Sistem modular (block teaching) untuk memfasilitasi pendeta yang sibuk.",
+      "Pembelajaran banyak menggunakan studi kasus jemaat."
+    ],
+    "degree": "M.Min.",
+    "motto": "Effective Pastoral Leader",
+    "informedDescription": "Gembala yang menguasai seni manajerial gereja, hukum gerejawi, and konseling resolusi konflik.",
+    "transformedDescription": "Pemimpin rohani yang bertumbuh dalam kepekaan empati and ketahanan emosional.",
+    "transformativeDescription": "Penggembala yang mampu membawa gerejanya bertumbuh secara sehat, organis, and bermisi.",
+    "lectureCategory": [
+      {
+        "categoryName": "Manajemen Gerejawi",
+        "totalCredits": 15,
+        "lectures": [
+          {
+            "lectureName": "Dinamika Kepemimpinan Jemaat",
+            "credits": 3,
+            "description": "Manajemen konflik, regenerasi, and pembinaan majelis gereja."
+          },
+          {
+            "lectureName": "Pertumbuhan Gereja Organik",
+            "credits": 3,
+            "description": "Model-model pengembangan gereja lokal yang sehat and berdampak."
+          }
+        ]
+      },
+      {
+        "categoryName": "Asuhan Pastoral",
+        "totalCredits": 12,
+        "lectures": [
+          {
+            "lectureName": "Konseling Krisis dan Trauma",
+            "credits": 3,
+            "description": "Pendampingan jemaat yang mengalami kedukaan atau pergumulan berat."
+          }
+        ]
+      }
+    ]
+  },
+  "magister-ministri-teologi-pelayanan-gerejawi": {
+    "programName": "Magister Ministri Teologi Pelayanan Gerejawi",
+    "programDescription": "Program komprehensif yang dirancang sebagai pembekalan teologi praktis bagi aktivis gereja, sekaligus berfungsi sebagai jalur matrikulasi bagi lulusan S1 Umum yang ingin melanjutkan ke jenjang M.Th.",
+    "programRequirements": [
+      "Lulusan S-1 program studi apa pun (Umum).",
+      "Memiliki keterlibatan pelayanan aktif di gereja lokal minimal 1 tahun.",
+      "Rekomendasi dari gembala sidang."
+    ],
+    "totalCredits": 36,
+    "duration": "4 Semester",
+    "notes": [
+      "Mata kuliah mencakup dasar-dasar eksegesis, doktrin, and sejarah gereja.",
+      "Bisa menjadi jembatan menuju program Master of Theology (M.Th)."
+    ],
+    "lecturingSystem": [
+      "Kelas hybrid dengan pendekatan praktis.",
+      "Pendampingan mentorship (pemuridan) terstruktur."
+    ],
+    "degree": "M.Min.",
+    "motto": "Faithful Servant of the Church",
+    "informedDescription": "Aktivis yang memiliki fondasi dogma Kristen yang lurus and pemahaman Alkitab yang bertanggung jawab.",
+    "transformedDescription": "Pelayan awam yang memiliki dedikasi penuh and sikap hati melayani.",
+    "transformativeDescription": "Pilar penting di gereja lokal yang mampu memuridkan and melatih jemaat lain dengan baik.",
+    "lectureCategory": [
+      {
+        "categoryName": "Doktrin Dasar",
+        "totalCredits": 12,
+        "lectures": [
+          {
+            "lectureName": "Pengantar Teologi Sistematika",
+            "credits": 3,
+            "description": "Pemahaman dasar mengenai kerangka kebenaran teologi Reformed."
+          },
+          {
+            "lectureName": "Survei Perjanjian Baru",
+            "credits": 3,
+            "description": "Latar belakang historis and teologis kitab-kitab Injil and surat para rasul."
+          }
+        ]
+      },
+      {
+        "categoryName": "Praktik Pelayanan",
+        "totalCredits": 12,
+        "lectures": [
+          {
+            "lectureName": "Metode Pemuridan Sel",
+            "credits": 3,
+            "description": "Cara merintis and memimpin kelompok tumbuh bersama (Care Group)."
+          },
+          {
+            "lectureName": "Dasar Pelayanan Ibadah",
+            "credits": 3,
+            "description": "Memahami esensi liturgi, pujian, and tata ibadah yang alkitabiah."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "slug": "wisuda-2026-berlangsung-khidmat",
+      "title": "Wisuda 2026 Berlangsung Khidmat",
+      "content": "Acara wisuda tahun 2026 berlangsung dengan tertib dan penuh sukacita. Para lulusan didorong untuk menjadi pribadi yang siap melayani masyarakat melalui kompetensi dan integritas.",
+      "publicationDate": "2026-01-20T03:00:00Z",
+      "imagePath": "/uploads/images/news/news-wisuda-cover.webp",
+      "category": "Institusi"
+    },
+    {
+      "id": 2,
+      "slug": "penandatanganan-mou-dengan-institusi-mitra",
+      "title": "Penandatanganan MoU dengan Institusi Mitra",
+      "content": "STTB menjalin kerja sama strategis dengan institusi mitra untuk mendukung pengembangan pendidikan, penelitian, dan pengabdian kepada masyarakat.",
+      "publicationDate": "2026-02-12T07:00:00Z",
+      "imagePath": "/uploads/images/news/news-mou-cover.webp",
+      "category": "Institusi"
+    },
+    {
+      "id": 3,
+      "slug": "pelatihan-kepemimpinan-mahasiswa",
+      "title": "Pelatihan Kepemimpinan Mahasiswa",
+      "content": "Kegiatan pelatihan kepemimpinan diselenggarakan untuk membentuk karakter, kemampuan komunikasi, dan kolaborasi mahasiswa.",
+      "publicationDate": "2026-03-05T02:30:00Z",
+      "imagePath": "",
+      "category": "Kemahasiswaan"
+    },
+    {
+      "id": 4,
+      "slug": "penerimaan-mahasiswa-baru-ta-2026",
+      "title": "Penerimaan Mahasiswa Baru TA 2026/2027 Resmi Dibuka",
+      "content": "Sekolah Tinggi Teologi Bandung (STTB) resmi membuka pendaftaran gelombang pertama bagi calon mahasiswa S1 dan S2. Berbagai beasiswa menarik juga telah disiapkan.",
+      "publicationDate": "2026-03-10T01:15:00Z",
+      "imagePath": "/uploads/images/news/news-pmb-2026.webp",
+      "category": "Institusi"
+    },
+    {
+      "id": 5,
+      "slug": "seminar-teologi-urban-tantangan-gereja-kota",
+      "title": "Seminar Teologi Urban: Tantangan Gereja di Tengah Kota",
+      "content": "LEAD Center STTB sukses menyelenggarakan seminar teologi urban yang dihadiri oleh ratusan peserta dari berbagai denominasi gereja dan lembaga pelayanan.",
+      "publicationDate": "2026-03-01T08:00:00Z",
+      "imagePath": "/uploads/images/news/news-seminar-urban.webp",
+      "category": "Kegiatan"
+    },
+    {
+      "id": 6,
+      "slug": "bakti-sosial-pengobatan-gratis-jemaat",
+      "title": "Bakti Sosial dan Pengobatan Gratis Bersama BEM STTB",
+      "content": "Sebagai bentuk nyata kepedulian sosial, BEM STTB menyelenggarakan pengobatan gratis dan pembagian sembako bagi masyarakat di sekitar lingkungan kampus.",
+      "publicationDate": "2026-02-25T04:00:00Z",
+      "imagePath": "/uploads/images/news/news-baksos-2026.webp",
+      "category": "Kegiatan"
+    },
+    {
+      "id": 7,
+      "slug": "ibadah-syukur-awal-tahun-2026",
+      "title": "Ibadah Syukur Awal Tahun Akademik",
+      "content": "Segenap civitas akademika STTB mengawali tahun dengan ibadah syukur bersama, merenungkan kebaikan Tuhan dan berkomitmen untuk melayani lebih sungguh.",
+      "publicationDate": "2026-01-05T02:00:00Z",
+      "imagePath": "/uploads/images/news/news-ibadah-syukur.webp",
+      "category": "Civitas"
+    },
+    {
+      "id": 8,
+      "slug": "sttb-raih-penghargaan-jurnal-terbaik",
+      "title": "Jurnal Stulos Raih Penghargaan Publikasi Teologi Terbaik",
+      "content": "Jurnal akademik kebanggaan STTB, Stulos, berhasil mendapatkan apresiasi sebagai salah satu jurnal teologi dengan tingkat literasi dan sitasi terbaik tahun ini.",
+      "publicationDate": "2026-02-05T06:45:00Z",
+      "imagePath": "",
+      "category": "Akademik"
+    },
+    {
+      "id": 9,
+      "slug": "kuliah-umum-strategi-misi-kontemporer",
+      "title": "Kuliah Umum: Strategi Misi Kontemporer",
+      "content": "STTB kedatangan dosen tamu internasional yang membagikan wawasan mendalam mengenai tantangan dan strategi penginjilan lintas budaya di era digital.",
+      "publicationDate": "2026-01-28T09:30:00Z",
+      "imagePath": "/uploads/images/news/news-kuliah-umum.webp",
+      "category": "Akademik"
+    },
+    {
+      "id": 10,
+      "slug": "lomba-paduan-suara-antar-angkatan-2026",
+      "title": "Gempita Lomba Paduan Suara Antar Angkatan STTB",
+      "content": "Untuk mempererat persaudaraan, STTB menggelar lomba paduan suara. Angkatan mahasiswa baru keluar sebagai juara umum dengan penampilan yang memukau.",
+      "publicationDate": "2026-02-18T10:00:00Z",
+      "imagePath": "/uploads/images/news/news-choir-2026.webp",
+      "category": "Kemahasiswaan"
+    }
+  ],
+  "pageNumber": 1,
+  "pageSize": 10,
+  "totalNews": 10,
+  "totalPages": 1,
+  "hasPreviousPage": false,
+  "hasNextPage": false
+}

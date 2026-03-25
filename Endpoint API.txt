@@ -1,0 +1,602 @@
+Endpoint API:
+api/v1/news/get-available-news
+
+Response JSON example:
+
+JSON
+{
+  "items": [
+    {
+      "id": 1,
+      "slug": "wisuda-2026-berlangsung-khidmat",
+      "title": "Wisuda 2026 Berlangsung Khidmat",
+      "content": "Acara wisuda tahun 2026 berlangsung dengan tertib dan penuh sukacita. Para lulusan didorong untuk menjadi pribadi yang siap melayani masyarakat melalui kompetensi dan integritas.",
+      "publicationDate": "2026-01-20T03:00:00Z",
+      "imagePath": "/uploads/images/news/news-wisuda-cover.webp",
+      "category": [
+        "Kampus",
+        "Akademik"
+      ]
+    },
+    {
+      "id": 2,
+      "slug": "penandatanganan-mou-dengan-institusi-mitra",
+      "title": "Penandatanganan MoU dengan Institusi Mitra",
+      "content": "STTB menjalin kerja sama strategis dengan institusi mitra untuk mendukung pengembangan pendidikan, penelitian, dan pengabdian kepada masyarakat.",
+      "publicationDate": "2026-02-12T07:00:00Z",
+      "imagePath": "/uploads/images/news/news-mou-cover.webp",
+      "category": [
+        "Kampus",
+        "Kerja Sama"
+      ]
+    },
+    {
+      "id": 3,
+      "slug": "pelatihan-kepemimpinan-mahasiswa",
+      "title": "Pelatihan Kepemimpinan Mahasiswa",
+      "content": "Kegiatan pelatihan kepemimpinan diselenggarakan untuk membentuk karakter, kemampuan komunikasi, dan kolaborasi mahasiswa.",
+      "publicationDate": "2026-03-05T02:30:00Z",
+      "imagePath": "",
+      "category": [
+        "Mahasiswa"
+      ]
+    }
+  ],
+  "pageNumber": 1,
+  "pageSize": 5,
+  "totalNews": 3,
+  "totalPages": 1,
+  "hasPreviousPage": false,
+  "hasNextPage": false
+}
+
+Endpoint API:
+api/v1/news/get-available-news/get-news/{slug}
+
+Response JSON example:
+
+JSON
+{
+  "id": 1,
+  "slug": "wisuda-2026-berlangsung-khidmat",
+  "title": "Wisuda 2026 Berlangsung Khidmat",
+  "content": "Acara wisuda tahun 2026 berlangsung dengan tertib dan penuh sukacita. Para lulusan didorong untuk menjadi pribadi yang siap melayani masyarakat melalui kompetensi dan integritas.",
+  "publicationDate": "2026-01-20T03:00:00Z",
+  "imagePath": "/uploads/images/news/news-wisuda-cover.webp",
+  "category": [
+    "Kampus",
+    "Akademik"
+  ]
+}
+
+Endpoint API:
+api/v1/events/get-available-events
+
+1. Response JSON example:
+
+JSON
+{
+  "items": [
+    {
+      "eventTitle": "Seminar Transformasi Digital dalam Pelayanan",
+      "slug": "seminar-transformasi-digital",
+      "startsAtDate": "2026-05-10T02:00:00Z",
+      "endsAtDate": "2026-05-10T05:00:00Z",
+      "description": "Kegiatan seminar membahas peluang transformasi digital untuk pendidikan dan pelayanan gerejawi.",
+      "organizerName": "STTB Academic Division",
+      "category": [
+        "Seminar",
+        "Webinar"
+      ],
+      "imagePath": "/uploads/images/events/event-seminar-banner.webp"
+    },
+    {
+      "eventTitle": "Workshop UI UX Dasar",
+      "slug": "workshop-ui-ux-dasar",
+      "startsAtDate": "2026-06-14T06:00:00Z",
+      "endsAtDate": "2026-06-14T09:30:00Z",
+      "description": "Workshop ini memperkenalkan prinsip desain antarmuka, wireframing, dan usability testing.",
+      "organizerName": "BEM STTB",
+      "category": [
+        "Workshop"
+      ],
+      "imagePath": "/uploads/images/events/event-workshop-banner.webp"
+    },
+    {
+      "eventTitle": "Ibadah Awal Semester",
+      "slug": "ibadah-awal-semester",
+      "startsAtDate": "2026-02-03T01:00:00Z",
+      "endsAtDate": "2026-02-03T13:00:00Z",
+      "description": "Ibadah kampus bersama seluruh sivitas akademika.",
+      "organizerName": "Pdt. Samuel Hartono",
+      "category": [
+        "Ibadah"
+      ],
+      "imagePath": ""
+    }
+  ],
+  "pageNumber": 1,
+  "pageSize": 5,
+  "totalEvents": 3,
+  "totalPages": 1,
+  "hasPreviousPage": false,
+  "hasNextPage": false
+}
+
+api/v1/events/get-available-events?OrganizerName=BEM
+
+JSON
+{
+  "items": [
+    {
+      "eventTitle": "Workshop UI UX Dasar",
+      "slug": "workshop-ui-ux-dasar",
+      "startsAtDate": "2026-06-14T06:00:00Z",
+      "endsAtDate": "2026-06-14T09:30:00Z",
+      "description": "Workshop ini memperkenalkan prinsip desain antarmuka, wireframing, dan usability testing.",
+      "organizerName": "BEM STTB",
+      "category": [
+        "Workshop"
+      ],
+      "imagePath": "/uploads/images/events/event-workshop-banner.webp"
+    }
+  ],
+  "pageNumber": 1,
+  "pageSize": 5,
+  "totalEvents": 1,
+  "totalPages": 1,
+  "hasPreviousPage": false,
+  "hasNextPage": false
+}
+
+api/v1/events/get-available-events?EventDate=2026-05-10
+
+{
+  "items": [
+    {
+      "eventTitle": "Seminar Transformasi Digital dalam Pelayanan",
+      "slug": "seminar-transformasi-digital",
+      "startsAtDate": "2026-05-10T02:00:00Z",
+      "endsAtDate": "2026-05-10T05:00:00Z",
+      "description": "Kegiatan seminar membahas peluang transformasi digital untuk pendidikan dan pelayanan gerejawi.",
+      "organizerName": "STTB Academic Division",
+      "category": [
+        "Seminar",
+        "Webinar"
+      ],
+      "imagePath": "/uploads/images/events/event-seminar-banner.webp"
+    }
+  ],
+  "pageNumber": 1,
+  "pageSize": 5,
+  "totalEvents": 1,
+  "totalPages": 1,
+  "hasPreviousPage": false,
+  "hasNextPage": false
+}
+
+Endpoint API:
+api/v1/events/get-event/{slug}
+
+Response JSON:
+
+JSON
+{
+  "eventName": "Seminar Transformasi Digital dalam Pelayanan",
+  "startAtDate": "2026-05-10T02:00:00Z",
+  "endsAtDate": "2026-05-10T05:00:00Z",
+  "location": "Auditorium lt 1",
+  "organizerName": "STTB Academic Division",
+  "category": [
+    "Seminar",
+    "Webinar"
+  ],
+  "description": "Kegiatan seminar membahas peluang transformasi digital untuk pendidikan dan pelayanan gerejawi.",
+  "imagePath": "/uploads/images/events/event-seminar-banner.webp"
+}
+
+
+Endpoint API:
+api/v1/academics/get-available-programs
+(Catatan: Berdasarkan gambar kedua, endpoint ini juga dapat menerima query parameter seperti ?FetchLimit=2 untuk membatasi jumlah data yang dikembalikan).
+
+Response JSON example:
+
+JSON
+{
+  "items": [
+    {
+      "programId": 1,
+      "slug": "teknik-informatika",
+      "programName": "Teknik Informatika",
+      "degree": "S.Kom.",
+      "duration": 8,
+      "totalCredit": 144
+    },
+    {
+      "programId": 2,
+      "slug": "sistem-informasi",
+      "programName": "Sistem Informasi",
+      "degree": "S.Kom.",
+      "duration": 8,
+      "totalCredit": 144
+    }
+  ]
+}
+
+Endpoint API:
+api/v1/academics/get-program/{slug}
+
+Response JSON:
+
+JSON
+{
+  "programName": "Teknik Informatika",
+  "programDescription": "Lulusan dipersiapkan untuk menguasai rekayasa perangkat lunak, data, dan sistem cerdas.",
+  "programRequirements": [
+    "Lulusan SMA/SMK atau sederajat.",
+    "Mengikuti proses seleksi penerimaan mahasiswa baru.",
+    "Melengkapi dokumen administrasi pendaftaran."
+  ],
+  "totalCredits": 144,
+  "duration": "8",
+  "notes": [
+    "Kurikulum dapat disesuaikan mengikuti perkembangan teknologi.",
+    "Beberapa mata kuliah memiliki prasyarat."
+  ],
+  "lecturingSystem": [
+    "Pembelajaran berbasis proyek perangkat lunak.",
+    "Praktikum laboratorium terjadwal setiap semester.",
+    "Kegiatan seminar dan kuliah tamu industri."
+  ],
+  "degree": "S.Kom.",
+  "motto": "Menjadi lulusan yang unggul dalam teknologi dan pelayanan",
+  "informedDescription": "Mahasiswa memahami dasar ilmu komputer, logika, algoritma, dan desain sistem.",
+  "transformedDescription": "Mahasiswa bertumbuh menjadi problem solver yang mampu merancang dan membangun solusi digital.",
+  "transformativeDescription": "Mahasiswa diperlengkapi untuk menghadirkan dampak transformasional melalui teknologi yang relevan dan masyarakat.",
+  "lectureCategory": [
+    {
+      "categoryName": "Mata Kuliah Umum",
+      "totalCredits": 18,
+      "lectures": [
+        {
+          "lectureName": "Bahasa Indonesia",
+          "credits": 2,
+          "description": "Penguatan komunikasi akademik dalam bahasa Indonesia."
+        },
+        {
+          "lectureName": "Pendidikan Agama",
+          "credits": 2,
+          "description": "Mata kuliah pembentukan karakter dan spiritualitas."
+        }
+      ]
+    },
+    {
+      "categoryName": "Mata Kuliah Inti Informatika",
+      "totalCredits": 90,
+      "lectures": [
+        {
+          "lectureName": "Rekayasa Perangkat Lunak",
+          "credits": 3,
+          "description": "Proses pengembangan perangkat lunak modern."
+        },
+        {
+          "lectureName": "Algoritma dan Pemrograman",
+          "credits": 3,
+          "description": "Dasar logika pemrograman dan implementasi program."
+        },
+        {
+          "lectureName": "Struktur Data",
+          "credits": 3,
+          "description": "Pengenalan struktur data linear dan non-linear."
+        },
+        {
+          "lectureName": "Basis Data",
+          "credits": 3,
+          "description": "Dasar perancangan dan implementasi basis data relasional."
+        }
+      ]
+    },
+    {
+      "categoryName": "Mata Kuliah Pilihan",
+      "totalCredits": 36,
+      "lectures": [
+        {
+          "lectureName": "Pengembangan Aplikasi Mobile",
+          "credits": 3,
+          "description": "Dasar pengembangan aplikasi mobile."
+        },
+        {
+          "lectureName": "Machine Learning Dasar",
+          "credits": 3,
+          "description": "Pengenalan konsep machine learning."
+        }
+      ]
+    }
+  ]
+}
+
+Endpoint API:
+/api/v1/profiles/get-all-lecturers
+
+Response JSON:
+
+JSON
+{
+  "items": [
+    {
+      "lecturerName": "Agus Santoso, M.Kom.",
+      "roles": [
+        "Dosen Tetap"
+      ],
+      "degrees": [
+        "M.Kom.",
+        "S.Kom."
+      ]
+    },
+    {
+      "lecturerName": "Dr. Maria Kristiana",
+      "roles": [
+        "Dosen Tetap",
+        "Wakil Kaprodi"
+      ],
+      "degrees": [
+        "M.Kom.",
+        "S.Kom.",
+        "Dr."
+      ]
+    },
+    {
+      "lecturerName": "Pdt. Dr. Samuel Hartono",
+      "roles": [
+        "Dosen Tetap",
+        "Kaprodi"
+      ],
+      "degrees": [
+        "S.Th.",
+        "M.Th.",
+        "Dr."
+      ]
+    }
+  ]
+}
+
+1. Endpoint: Daftar Administrator
+API Path: /api/v1/profiles/get-all-administrators
+
+Response JSON:
+
+JSON
+{
+  "items": [
+    {
+      "id": 3,
+      "name": "Benny Wijaya",
+      "division": "Dewan Pengurus",
+      "role": "Ketua"
+    },
+    {
+      "id": 7,
+      "name": "Daniel Sitorus",
+      "division": "Anggota",
+      "role": ""
+    },
+    {
+      "id": 2,
+      "name": "Dr. Elia Manurung",
+      "division": "Dewan Pembina",
+      "role": ""
+    },
+    {
+      "id": 8,
+      "name": "Martha Silalahi",
+      "division": "Anggota",
+      "role": ""
+    },
+    {
+      "id": 1,
+      "name": "Pdt. Yohanes Simanjuntak",
+      "division": "Dewan Pembina",
+      "role": ""
+    },
+    {
+      "id": 4,
+      "name": "Ruth Natalia",
+      "division": "Dewan Pengurus",
+      "role": "Wakil Ketua"
+    }
+  ]
+}
+
+2. Endpoint: Jadwal Penerimaan (Admissions)
+API Path: api/v1/admissions/get-admission-schedule
+
+Response JSON:
+
+JSON
+{
+  "firstBatchDeadline": "2025-03-31T16:59:59Z",
+  "secondBatchDeadline": "2025-06-30T16:59:59Z",
+  "thirdBatchDeadline": "2025-08-31T16:59:59Z"
+}
+
+3. Endpoint: Media yang Tersedia
+API Path: /api/v1/media/get-available-media/{media_format}
+
+Response JSON:
+
+JSON
+{
+  "items": [
+    {
+      "id": 3,
+      "slug": "artikel-peran-teknologi-dalam-pendidikan",
+      "mediaTitle": "Peran Teknologi dalam Pendidikan",
+      "authorName": "Maria Kristiana",
+      "mediaDescription": "Artikel mengenai pemanfaatan teknologi dalam pendidikan.",
+      "theme": "Transformasi Pendidikan",
+      "publicationDate": "2026-02-01T01:00:00Z",
+      "category": [
+        "Teknologi",
+        "Pendidikan"
+      ],
+      "thumbnailPath": ""
+    }
+  ],
+  "pageNumber": 1,
+  "pageSize": 5,
+  "totalMedia": 1,
+  "totalPages": 1,
+  "hasPreviousPage": false,
+  "hasNextPage": false
+}
+
+Endpoint API:
+/api/v1/media/get-available-media/{media_format}
+
+Response JSON (Contoh output ketika {media_format} diisi dengan journal):
+
+JSON
+{
+  "items": [
+    {
+      "id": 2,
+      "slug": "jurnal-teologi-kontekstual-vol-1",
+      "mediaTitle": "Jurnal Teologi Kontekstual Vol. 1",
+      "authorName": "Dr. Elia Manurung",
+      "mediaDescription": "Publikasi jurnal teologi kontekstual.",
+      "theme": "Teologi Kontekstual",
+      "publicationDate": "2026-01-15T02:00:00Z",
+      "category": [
+        "Teologi",
+        "Pelayanan"
+      ],
+      "thumbnailPath": ""
+    }
+  ],
+  "pageNumber": 1,
+  "pageSize": 5,
+  "totalMedia": 1,
+  "totalPages": 1,
+  "hasPreviousPage": false,
+  "hasNextPage": false
+}
+
+Endpoint API:
+
+/api/v1/academics/get-academic-requirements
+
+/api/v1/news/get-all-categories
+
+/api/v1/events/get-all-categories
+
+Response JSON:
+
+JSON
+{
+  "items": [
+    "Akademik",
+    "Kampus",
+    "Kerja Sama",
+    "Mahasiswa"
+  ]
+}
+
+Endpoint API:
+/api/v1/academics/get-academic-requirements
+
+Response JSON:
+
+JSON
+{
+  "items": [
+    {
+      "programName": "Sistem Informasi",
+      "degree": "S.Kom.",
+      "requirements": [
+        "Lulusan SMA/SMK atau sederajat.",
+        "Mengikuti proses seleksi penerimaan mahasiswa baru.",
+        "Melengkapi dokumen administrasi pendaftaran."
+      ]
+    },
+    {
+      "programName": "Sistem Informasi",
+      "degree": "S.Kom.",
+      "requirements": []
+    },
+    {
+      "programName": "Teknik Informatika",
+      "degree": "S.Kom.",
+      "requirements": [
+        "Lulusan SMA/SMK atau sederajat.",
+        "Mengikuti proses seleksi penerimaan mahasiswa baru.",
+        "Melengkapi dokumen administrasi pendaftaran."
+      ]
+    }
+  ]
+}
+
+1. Endpoint: Detail Video
+API Path: /api/v1/media/video/{slug}
+
+Response JSON:
+
+JSON
+{
+  "id": 1,
+  "videoTitle": "Video Profil Kampus 2026",
+  "authorName": "Tim Multimedia STTB",
+  "videoDescription": "Video singkat mengenai profil STTB.",
+  "theme": "Pengenalan Kampus",
+  "publicationDate": "2026-01-10T03:00:00Z",
+  "category": [
+    "Teknologi",
+    "Pendidikan"
+  ],
+  "videoUrl": "https://example.com/videos/video-profil-kampus-2026"
+}
+
+2. Endpoint: Detail Article
+API Path: /api/v1/media/article/{slug}
+
+Response JSON:
+
+JSON
+{
+  "id": 3,
+  "articleTitle": "Peran Teknologi dalam Pendidikan",
+  "authorName": "Maria Kristiana",
+  "authorPosition": "Dosen",
+  "authorImagePath": "",
+  "articleDescription": "Artikel mengenai pemanfaatan teknologi dalam pendidikan.",
+  "theme": "Transformasi Pendidikan",
+  "publicationDate": "2026-02-01T01:00:00Z",
+  "category": [
+    "Teknologi",
+    "Pendidikan"
+  ],
+  "articleContent": "Konten dummy artikel tentang peran teknologi dalam pendidikan modern.",
+  "thumbnailPath": ""
+}
+
+3. Endpoint: Detail Journal
+API Path: /api/v1/media/journal/{slug}
+
+Response JSON:
+
+JSON
+{
+  "id": 2,
+  "journalTitle": "Jurnal Teologi Kontekstual Vol. 1",
+  "authorName": "Dr. Elia Manurung",
+  "journalDescription": "Publikasi jurnal teologi kontekstual.",
+  "theme": "Teologi Kontekstual",
+  "publicationDate": "2026-01-15T02:00:00Z",
+  "category": [
+    "Teologi",
+    "Pelayanan"
+  ],
+  "journalPath": ""
+}
+
+

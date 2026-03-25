@@ -1,0 +1,66 @@
+[
+  {
+    "programId": 1,
+    "slug": "s-th",
+    "programName": "Sarjana Teologi",
+    "degree": "S.Th.",
+    "duration": 8,
+    "totalCredit": 148
+  },
+  {
+    "programId": 2,
+    "slug": "s-pd-k",
+    "programName": "Sarjana Pendidikan Kristen",
+    "degree": "S.Pd.K.",
+    "duration": 8,
+    "totalCredit": 148
+  },
+  {
+    "programId": 3,
+    "slug": "m-th-pastoral-urban",
+    "programName": "Magister Teologi Pelayanan Pastoral Gereja Urban",
+    "degree": "M.Th.",
+    "duration": 4,
+    "totalCredit": 48
+  },
+  {
+    "programId": 4,
+    "slug": "m-th-transformasi-budaya",
+    "programName": "Magister Teologi Transformasi Budaya & Masyarakat",
+    "degree": "M.Th.",
+    "duration": 4,
+    "totalCredit": 48
+  },
+  {
+    "programId": 5,
+    "slug": "m-pd",
+    "programName": "Magister Pendidikan Kristen",
+    "degree": "M.Pd.",
+    "duration": 4,
+    "totalCredit": 42
+  },
+  {
+    "programId": 6,
+    "slug": "m-min-marketplace",
+    "programName": "Magister Ministri Marketplace",
+    "degree": "M.Min.",
+    "duration": 4,
+    "totalCredit": 36
+  },
+  {
+    "programId": 7,
+    "slug": "m-min-kepemimpinan-pastoral",
+    "programName": "Magister Ministri Kepemimpinan Pastoral",
+    "degree": "M.Min.",
+    "duration": 4,
+    "totalCredit": 36
+  },
+  {
+    "programId": 8,
+    "slug": "m-min-pelayanan-gerejawi",
+    "programName": "Magister Ministri Teologi Pelayanan Gerejawi",
+    "degree": "M.Min.",
+    "duration": 4,
+    "totalCredit": 36
+  }
+]

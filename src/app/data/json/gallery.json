@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "title": "Wisuda Angkatan 2025",
+    "type": "image",
+    "url": "/images/gallery/grad2025.jpg",
+    "thumbnail": "/images/gallery/grad2025_thumb.jpg",
+    "category": "Event",
+    "date": "2025-11-20"
+  },
+  {
+    "id": "2",
+    "title": "Seminar Teologi Nasional",
+    "type": "video",
+    "url": "https://www.youtube.com/watch?v=example1",
+    "thumbnail": "/images/gallery/seminar.jpg",
+    "category": "Akademik",
+    "date": "2026-01-15"
+  },
+  {
+    "id": "3",
+    "title": "Pembangunan Kampus Baru",
+    "type": "image",
+    "url": "/images/gallery/campus.jpg",
+    "thumbnail": "/images/gallery/campus_thumb.jpg",
+    "category": "Fasilitas",
+    "date": "2025-08-10"
+  },
+  {
+    "id": "4",
+    "title": "Kebaktian Raya Paskah",
+    "type": "image",
+    "url": "/images/gallery/easter.jpg",
+    "thumbnail": "/images/gallery/easter_thumb.jpg",
+    "category": "Ibadah",
+    "date": "2026-04-05"
+  }
+]

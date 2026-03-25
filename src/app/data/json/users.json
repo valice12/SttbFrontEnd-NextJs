@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "name": "Prof. Dr. John Doe, M.Th.",
+    "role": "Rektor",
+    "image": "/images/users/user1.jpg",
+    "email": "john.doe@stulos.ac.id",
+    "department": "Kepemimpinan",
+    "bio": "Berpengalaman lebih dari 20 tahun dalam pelayanan dan pendidikan teologi."
+  },
+  {
+    "id": "2",
+    "name": "Dr. Jane Smith",
+    "role": "Dosen Tetap",
+    "image": "/images/users/user2.jpg",
+    "email": "jane.smith@stulos.ac.id",
+    "department": "Perjanjian Baru",
+    "bio": "Ahli dalam studi biblika dengan fokus pada surat-surat Paulus."
+  },
+  {
+    "id": "3",
+    "name": "Budi Santoso, M.Div.",
+    "role": "Mahasiswa Pascasarjana",
+    "image": "/images/users/user3.jpg",
+    "email": "budi.santoso@student.stulos.ac.id",
+    "department": "Magister Teologi",
+    "bio": "Aktif dalam pelayanan pemuda dan riset teologi kontekstual."
+  }
+]

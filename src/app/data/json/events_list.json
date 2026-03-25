@@ -1,0 +1,110 @@
+{
+  "items": [
+    {
+      "eventTitle": "Seminar Transformasi Digital dalam Pelayanan",
+      "slug": "seminar-transformasi-digital",
+      "startsAtDate": "2026-05-10T02:00:00Z",
+      "endsAtDate": "2026-05-10T05:00:00Z",
+      "description": "Kegiatan seminar membahas peluang transformasi digital untuk pendidikan dan pelayanan gerejawi.",
+      "organizerName": "STTB Academic Division",
+      "category": "Seminar",
+      "imagePath": "/uploads/events/seminar-digital.jpg"
+    },
+    {
+      "eventTitle": "Workshop Media Pelayanan Kreatif",
+      "slug": "workshop-media-pelayanan-kreatif",
+      "startsAtDate": "2026-06-14T06:00:00Z",
+      "endsAtDate": "2026-06-14T09:30:00Z",
+      "description": "Workshop ini memperkenalkan prinsip desain, manajemen media sosial gereja, dan komunikasi visual.",
+      "organizerName": "BEM STTB",
+      "category": "Workshop",
+      "imagePath": "/uploads/events/workshop-media.jpg"
+    },
+    {
+      "eventTitle": "Ibadah Awal Semester",
+      "slug": "ibadah-awal-semester",
+      "startsAtDate": "2026-02-03T01:00:00Z",
+      "endsAtDate": "0001-01-01T00:00:00Z",
+      "description": "Ibadah kampus bersama seluruh sivitas akademika untuk mensyukuri dan mendoakan semester yang baru.",
+      "organizerName": "Pdt. Samuel Hartono",
+      "category": "Ibadah Kampus",
+      "imagePath": ""
+    },
+    {
+      "eventTitle": "KKR Paskah STTB 2026",
+      "slug": "kkr-paskah-sttb-2026",
+      "startsAtDate": "2026-04-03T10:00:00Z",
+      "endsAtDate": "2026-04-03T13:00:00Z",
+      "description": "Ibadah dan perayaan Paskah bersama dengan tema 'Kebangkitan yang Memulihkan'. Terbuka untuk umum.",
+      "organizerName": "Panitia Hari Besar Kristen STTB",
+      "category": "Kebaktian",
+      "imagePath": "/uploads/events/kkr-paskah.jpg"
+    },
+    {
+      "eventTitle": "LEAD Center: Kursus Apologetika Urban",
+      "slug": "kursus-apologetika-urban-lead",
+      "startsAtDate": "2026-07-10T09:00:00Z",
+      "endsAtDate": "2026-07-12T15:00:00Z",
+      "description": "Kursus intensif selama tiga hari membahas tantangan dan pertanggungjawaban iman Kristen di tengah masyarakat perkotaan.",
+      "organizerName": "LEAD Center STTB",
+      "category": "Kursus Pendek",
+      "imagePath": ""
+    },
+    {
+      "eventTitle": "Retreat Formasi Spiritualitas Mahasiswa Baru",
+      "slug": "retreat-formasi-spiritualitas-maba-2026",
+      "startsAtDate": "2026-08-15T00:00:00Z",
+      "endsAtDate": "2026-08-17T07:00:00Z",
+      "description": "Kegiatan wajib bagi mahasiswa baru untuk membangun fondasi kerohanian dan pengenalan panggilan pelayanan.",
+      "organizerName": "Bidang Kemahasiswaan",
+      "category": "Retreat",
+      "imagePath": "/uploads/events/retreat-maba.jpg"
+    },
+    {
+      "eventTitle": "STTB Open House & Info Session",
+      "slug": "sttb-open-house-2026",
+      "startsAtDate": "2026-03-25T02:00:00Z",
+      "endsAtDate": "2026-03-25T06:00:00Z",
+      "description": "Sesi informasi bagi calon mahasiswa yang ingin mengenal program studi S1 dan S2 di STTB, lengkap dengan tur kampus.",
+      "organizerName": "Tim Admisi STTB",
+      "category": "Info Session",
+      "imagePath": "/uploads/events/open-house.jpg"
+    },
+    {
+      "eventTitle": "Seminar Misi: Merespon Tantangan Gen Z",
+      "slug": "seminar-misi-tantangan-gen-z",
+      "startsAtDate": "2026-09-05T01:30:00Z",
+      "endsAtDate": "2026-09-05T04:30:00Z",
+      "description": "Pemaparan strategi penginjilan dan pemuridan yang relevan dan efektif bagi generasi Z di era serba digital.",
+      "organizerName": "Departemen Misiologi",
+      "category": "Seminar",
+      "imagePath": ""
+    },
+    {
+      "eventTitle": "Bakti Sosial & Donor Darah Kampus",
+      "slug": "bakti-sosial-donor-darah-2026",
+      "startsAtDate": "2026-10-12T01:00:00Z",
+      "endsAtDate": "2026-10-12T05:00:00Z",
+      "description": "Wujud kepedulian sosial sivitas STTB yang bekerja sama dengan PMI kota Bandung. Terbuka untuk seluruh warga sekitar.",
+      "organizerName": "Senat Mahasiswa STTB",
+      "category": "Sosial",
+      "imagePath": "/uploads/events/donor-darah.jpg"
+    },
+    {
+      "eventTitle": "Kuliah Umum: Sejarah Gereja Indonesia",
+      "slug": "kuliah-umum-sejarah-gereja-indonesia",
+      "startsAtDate": "2026-11-20T02:00:00Z",
+      "endsAtDate": "2026-11-20T04:30:00Z",
+      "description": "Kuliah umum terbuka membahas jejak historis dan kontribusi kekristenan dalam pembentukan masyarakat Indonesia.",
+      "organizerName": "STTB Academic Division",
+      "category": "Kuliah Umum",
+      "imagePath": ""
+    }
+  ],
+  "pageNumber": 1,
+  "pageSize": 10,
+  "totalEvents": 10,
+  "totalPages": 1,
+  "hasPreviousPage": false,
+  "hasNextPage": false
+}

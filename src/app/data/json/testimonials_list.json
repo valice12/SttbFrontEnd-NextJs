@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "name": "Pdt. David Santoso, M.Th",
+    "role": "Senior Pastor",
+    "year": "Alumni 2018",
+    "message": "STT tidak hanya memberikan pengetahuan teologi yang solid, tetapi juga membentuk karakter dan hati untuk melayani. Pendidikan di sini mengubah hidup saya sepenuhnya.",
+    "image": "/assets/testimonial-1.webp"
+  },
+  {
+    "id": "2",
+    "name": "Ev. Maria Setiawan, S.Th",
+    "role": "Misionaris",
+    "year": "Alumni 2020",
+    "message": "Fokus pada misi dan penginjilan di STT ini sangat membekali saya untuk terjun langsung ke ladang pelayanan. Dosen-dosennya sangat berpengalaman dan membimbing dengan hati.",
+    "image": "/assets/testimonial-2.webp"
+  },
+  {
+    "id": "3",
+    "name": "Dr. Budi Gunawan, D.Th",
+    "role": "Dosen Teologi",
+    "year": "Alumni 2010",
+    "message": "Ketajaman akademis dan kedalaman spiritual yang saya dapatkan menjadi fondasi kuat dalam karir mengajar saya saat ini. Kurikulum yang ditawarkan sangat komprehensif.",
+    "image": "/assets/testimonial-3.webp"
+  },
+  {
+    "id": "4",
+    "name": "Sarah Angelina, S.Pd.K",
+    "role": "Guru Agama Kristen",
+    "year": "Alumni 2022",
+    "message": "Pendidikan agama Kristen di sini sangat praktis dan relevan dengan tantangan generasi muda saat ini. Saya merasa siap dan percaya diri untuk mengajar di sekolah.",
+    "image": "/assets/testimonial-4.webp"
+  },
+  {
+    "id": "5",
+    "name": "Pdt. Lukas Wijaya, M.A",
+    "role": "Gembala Sidang",
+    "year": "Alumni 2015",
+    "message": "Komunitas yang suportif dan ibadah kapel yang membangun sangat membantu pertumbuhan rohani saya selama masa studi. STT ini benar-benar menjadi rumah kedua bagi saya.",
+    "image": "/assets/testimonial-5.webp"
+  },
+  {
+    "id": "6",
+    "name": "Grace Natalie, S.Th",
+    "role": "Pemimpin Pemuda & Pujian",
+    "year": "Alumni 2023",
+    "message": "Saya belajar banyak tentang integritas dan kepemimpinan Kristen. Program praktek pelayanannya sangat luar biasa dalam membentuk mental dan karakter pelayan Tuhan.",
+    "image": "/assets/testimonial-6.webp"
+  }
+]
