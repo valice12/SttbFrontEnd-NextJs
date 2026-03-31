@@ -171,7 +171,15 @@ export const dataService = {
   },
 
   async getAdmissionSchedule() {
-    return this.fetchData<any>('admissions/get-admission-schedule', 'admission_schedule.json');
+    const data = await this.fetchData<any>('admissions/get-admission-schedule', 'admission_schedule.json');
+    // Backend returns { items: [...] }
+    return data?.items || data || [];
+  },
+
+  async getAdmissionCosts() {
+    const data = await this.fetchData<any>('admissions/get-all-admission-costs', 'admission_costs.json');
+    // Backend returns { items: [...] }
+    return data?.items || data || [];
   },
 
   async getMediaItems(mediaFormat?: string): Promise<any> {

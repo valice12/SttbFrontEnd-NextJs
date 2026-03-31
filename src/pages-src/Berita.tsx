@@ -189,7 +189,7 @@ export function Berita() {
                 className="relative h-96 rounded-2xl overflow-hidden shadow-2xl"
               >
                   <img
-                    src={getImageUrl(featuredNews[currentFeatured]?.imagePath || featuredNews[currentFeatured]?.image || '/assets/news-placeholder.webp', 'news')}
+                    src={getImageUrl(featuredNews[currentFeatured]?.imagePath || featuredNews[currentFeatured]?.image, 'news')}
                     alt={featuredNews[currentFeatured]?.title}
                     className="w-full h-full object-cover"
                   />
@@ -376,7 +376,7 @@ export function Berita() {
                     <div className={isGridView ? "w-full" : "md:col-span-1 flex items-center"}>
                       <div className={`${isGridView ? 'h-64' : 'h-48'} w-full bg-[#A69191] rounded-2xl overflow-hidden shrink-0`}>
                         <img
-                          src={getImageUrl(news.imagePath || news.image || '/assets/news-placeholder.webp', 'news')}
+                          src={getImageUrl(news.imagePath || news.image, 'news')}
                           alt={news.title}
                           className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                         />

@@ -6,6 +6,7 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import { DollarSign, Award, Heart, CheckCircle2, QrCode } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { dataService } from '@/lib/data-service';
 const bgHeader = "/assets/04-Beasiswa-Image-Header-scaled.jpg";
 const bgPatternPanjang = "/assets/Page-Panjang-1.webp";
 
@@ -14,8 +15,22 @@ export function Keuangan() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("tuition");
+  const [admissionCosts, setAdmissionCosts] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const fetchCosts = async () => {
+      try {
+        const data = await dataService.getAdmissionCosts();
+        setAdmissionCosts(data.items || []);
+      } catch (error) {
+        console.error('Error fetching admission costs:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchCosts();
+
     const tab = searchParams.get('tab');
     if (tab && ['tuition', 'scholarship', 'support'].includes(tab)) {
       setActiveTab(tab);
@@ -107,93 +122,55 @@ export function Keuangan() {
               </div>
 
               <div className="grid lg:grid-cols-2 gap-8">
-                {/* 1. Program Sarjana */}
-                <div className="bg-white border-2 border-gray-100 rounded-3xl p-8 hover:border-[#092C74] hover:shadow-xl transition-all h-full flex flex-col">
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="flex items-center justify-center size-8 rounded-full bg-[#092C74] text-white font-bold text-lg shrink-0">1</span>
-                    <h3 className="font-extrabold text-2xl text-[#092C74]">Program Sarjana (S.Th. & S.Pd.K.)</h3>
-                  </div>
-                  <div className="space-y-4 mb-6 flex-grow">
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Pendaftaran & Tes Masuk</span><span className="font-bold text-gray-900">Rp 500.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Administrasi / Semester</span><span className="font-bold text-gray-900">Rp 500.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100 bg-blue-50/50 -mx-4 px-4 rounded"><span className="text-gray-800 font-bold">Biaya Kuliah / Semester</span><span className="font-bold text-[#E31D1A]">Rp 9.000.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Bimbingan Tugas Akhir</span><span className="font-bold text-gray-900">Rp 1.500.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Wisuda</span><span className="font-bold text-gray-900">Rp 2.000.000</span></div>
-                    <div className="flex justify-between items-center py-2"><span className="text-gray-600 font-medium">Cuti Akademik / Semester</span><span className="font-bold text-gray-900">Rp 500.000</span></div>
-                  </div>
-                  <div className="bg-[#f8f9fa] rounded-xl p-4 text-sm text-gray-600 border border-gray-200 mt-auto">
-                    <strong className="text-gray-800 block mb-1">Catatan Khusus Sarjana:</strong>
-                    <ul className="list-disc pl-5 space-y-1">
-                      <li>Biaya pendidikan <strong className="text-gray-800">Rp 9.000.000/semester</strong> dapat dicicil 6 bulan (<strong className="text-gray-800">Rp 1.500.000/bulan</strong>).</li>
-                      <li>Biaya administrasi dibayarkan awal semester (Januari & Juli).</li>
-                      <li>STTB memberikan <strong className="text-[#E31D1A]">subsidi untuk akomodasi & konsumsi</strong>.</li>
-                    </ul>
-                  </div>
-                </div>
+                {admissionCosts.map((program, idx) => (
+                  <div key={program.id || idx} className="bg-white border-2 border-gray-100 rounded-3xl p-8 hover:border-[#092C74] hover:shadow-xl transition-all h-full flex flex-col relative overflow-hidden">
+                    {program.programName.includes('Magister') && (
+                      <div className="absolute top-0 right-0 bg-[#092C74] text-white px-4 py-1 rounded-bl-xl font-semibold text-sm">Pascasarjana</div>
+                    )}
+                    <div className="flex items-center gap-3 mb-6">
+                      <span className="flex items-center justify-center size-8 rounded-full bg-[#092C74] text-white font-bold text-lg shrink-0">{idx + 1}</span>
+                      <h3 className="font-extrabold text-2xl text-[#092C74]">{program.programName}</h3>
+                    </div>
+                    
+                    <div className="space-y-6 mb-6 flex-grow">
+                      {program.costCategory && program.costCategory.length > 0 ? (
+                        program.costCategory.map((category: any, catIdx: number) => (
+                          <div key={catIdx} className="space-y-2">
+                            <h4 className="text-sm font-black text-gray-400 uppercase tracking-widest mb-3">{category.categoryName}</h4>
+                            <div className="space-y-3">
+                              {category.costBreakdown.map((item: any, itemIdx: number) => (
+                                <div key={itemIdx} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
+                                  <span className="text-gray-600 font-medium">{item.costName}</span>
+                                  <span className="font-bold text-gray-900">Rp {item.cost.toLocaleString('id-ID')}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="text-center py-10 text-gray-400 italic">
+                          Data biaya belum tersedia untuk program ini.
+                        </div>
+                      )}
+                    </div>
 
-                {/* 2. Program Magister Teologi (M.Th.) */}
-                <div className="bg-white border-2 border-gray-100 rounded-3xl p-8 hover:border-[#092C74] hover:shadow-xl transition-all h-full flex flex-col relative overflow-hidden">
-                  <div className="absolute top-0 right-0 bg-[#092C74] text-white px-4 py-1 rounded-bl-xl font-semibold text-sm">Pascasarjana</div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="flex items-center justify-center size-8 rounded-full bg-[#092C74] text-white font-bold text-lg shrink-0">2</span>
-                    <h3 className="font-extrabold text-2xl text-[#092C74]">Magister Teologi (M.Th.)</h3>
+                    {program.programName.includes('Sarjana') && (
+                      <div className="bg-[#f8f9fa] rounded-xl p-4 text-sm text-gray-600 border border-gray-200 mt-auto">
+                        <strong className="text-gray-800 block mb-1">Catatan Khusus Sarjana:</strong>
+                        <ul className="list-disc pl-5 space-y-1">
+                          <li>Biaya pendidikan dapat dicicil per bulan.</li>
+                          <li>Tersedia subsidi akomodasi & konsumsi bagi mahasiswa asrama.</li>
+                        </ul>
+                      </div>
+                    )}
                   </div>
-                  <div className="space-y-4 mb-6">
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Pendaftaran & Tes Masuk</span><span className="font-bold text-gray-900">Rp 500.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Administrasi / Semester</span><span className="font-bold text-gray-900">Rp 500.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100 bg-blue-50/50 -mx-4 px-4 rounded"><span className="text-gray-800 font-bold">Biaya Kuliah / Mata Kuliah</span><span className="font-bold text-[#E31D1A]">Rp 1.500.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Bimb. & Ujian Prop. Tesis</span><span className="font-bold text-gray-900">Rp 2.000.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Bimb. & Sidang Tesis</span><span className="font-bold text-gray-900">Rp 5.000.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Wisuda</span><span className="font-bold text-gray-900">Rp 2.500.000</span></div>
-                    <div className="flex justify-between items-center py-2"><span className="text-gray-600 font-medium">Cuti Akademik / Semester</span><span className="font-bold text-gray-900">Rp 500.000</span></div>
-                  </div>
+                ))}
 
-                  <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 mt-auto">
-                    <h4 className="font-bold text-orange-900 border-b border-orange-200/50 pb-2 mb-2 text-sm flex items-center gap-2">
-                      <Award className="size-4" /> Program Matrikulasi M.Th.
-                    </h4>
-                    <p className="text-xs text-orange-800 mb-2 font-medium">Wajib bagi MABA M.Th. tanpa gelar S.Th. (Durasi: 4 semester / 2 tahun)</p>
-                    <div className="flex justify-between items-center text-sm py-1"><span className="text-orange-900">Kuliah Matrikulasi / Semester</span><span className="font-bold text-orange-900">Rp 7.800.000*</span></div>
-                    <div className="flex justify-between items-center text-sm py-1"><span className="text-orange-900">Admin Matrikulasi / Semester</span><span className="font-bold text-orange-900">Rp 500.000</span></div>
-                    <p className="text-xs text-orange-700 mt-2">*Dapat dicicil 6 bulan (Rp 1.300.000/bulan)</p>
+                {admissionCosts.length === 0 && !isLoading && (
+                  <div className="col-span-full text-center py-20 bg-white rounded-3xl border-2 border-dashed border-gray-100">
+                    <p className="text-gray-500 font-medium">Mohon maaf, informasi biaya studi saat ini sedang diperbarui.</p>
                   </div>
-                </div>
-
-                {/* 3. Program Magister Pendidikan (M.Pd.) */}
-                <div className="bg-white border-2 border-gray-100 rounded-3xl p-8 hover:border-[#092C74] hover:shadow-xl transition-all h-full flex flex-col relative overflow-hidden">
-                  <div className="absolute top-0 right-0 bg-[#092C74] text-white px-4 py-1 rounded-bl-xl font-semibold text-sm">Pascasarjana</div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="flex items-center justify-center size-8 rounded-full bg-[#092C74] text-white font-bold text-lg shrink-0">3</span>
-                    <h3 className="font-extrabold text-2xl text-[#092C74]">Magister Pendidikan (M.Pd.K.)</h3>
-                  </div>
-                  <div className="space-y-4 flex-grow">
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Pendaftaran & Tes Masuk</span><span className="font-bold text-gray-900">Rp 500.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Administrasi / Semester</span><span className="font-bold text-gray-900">Rp 500.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100 bg-blue-50/50 -mx-4 px-4 rounded"><span className="text-gray-800 font-bold">Biaya Kuliah / Mata Kuliah</span><span className="font-bold text-[#E31D1A]">Rp 1.500.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Bimb. & Ujian Prop. Tesis</span><span className="font-bold text-gray-900">Rp 2.000.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Bimb. & Sidang Tesis</span><span className="font-bold text-gray-900">Rp 5.000.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Wisuda</span><span className="font-bold text-gray-900">Rp 2.500.000</span></div>
-                    <div className="flex justify-between items-center py-2"><span className="text-gray-600 font-medium">Cuti Akademik / Semester</span><span className="font-bold text-gray-900">Rp 500.000</span></div>
-                  </div>
-                </div>
-
-                {/* 4. Program Magister Ministri (M.Min.) */}
-                <div className="bg-white border-2 border-gray-100 rounded-3xl p-8 hover:border-[#092C74] hover:shadow-xl transition-all h-full flex flex-col relative overflow-hidden">
-                  <div className="absolute top-0 right-0 bg-[#092C74] text-white px-4 py-1 rounded-bl-xl font-semibold text-sm">Pascasarjana</div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="flex items-center justify-center size-8 rounded-full bg-[#092C74] text-white font-bold text-lg shrink-0">4</span>
-                    <h3 className="font-extrabold text-2xl text-[#092C74]">Magister Ministri (M.Min.)</h3>
-                  </div>
-                  <p className="text-sm font-medium text-gray-500 mb-4 -mt-4 ml-11 border-l-2 pl-3 border-[#E31D1A]">Marketplace & Kepemimpinan Pastoral</p>
-                  <div className="space-y-4 flex-grow">
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Pendaftaran & Tes Masuk</span><span className="font-bold text-gray-900">Rp 500.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Administrasi / Semester</span><span className="font-bold text-gray-900">Rp 500.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100 bg-blue-50/50 -mx-4 px-4 rounded"><span className="text-gray-800 font-bold">Biaya Kuliah / Mata Kuliah</span><span className="font-bold text-[#E31D1A]">Rp 1.500.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Tugas Akhir / Proyek</span><span className="font-bold text-gray-900">Rp 2.500.000</span></div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-100"><span className="text-gray-600 font-medium">Wisuda</span><span className="font-bold text-gray-900">Rp 2.500.000</span></div>
-                    <div className="flex justify-between items-center py-2"><span className="text-gray-600 font-medium">Cuti Akademik / Semester</span><span className="font-bold text-gray-900">Rp 500.000</span></div>
-                  </div>
-                </div>
+                )}
               </div>
 
               <div className="mt-10 bg-[#092C74] text-white rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-8 shadow-xl">

@@ -1,15 +1,63 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import { FileText, Calendar, CheckCircle, HelpCircle, Phone, Mail, Info, Clock, UserCheck, BookOpen } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { dataService } from '@/lib/data-service';
 const bgHeader = "/assets/04-Beasiswa-Image-Header-scaled.jpg";
 const bgPattern = "/assets/background.webp";
 
 export function Admisi() {
+  const [admissionSchedule, setAdmissionSchedule] = useState<any>(null);
+  const [academicRequirements, setAcademicRequirements] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [schedule, requirements] = await Promise.all([
+          dataService.getAdmissionSchedule(),
+          dataService.getAcademicRequirements()
+        ]);
+        setAdmissionSchedule(schedule);
+        setAcademicRequirements(requirements.items || []);
+      } catch (error) {
+        console.error('Error fetching admission data:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return "-";
+    try {
+      return new Date(dateStr).toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+    } catch {
+      return dateStr;
+    }
+  };
+
+  const addDays = (dateStr: string, days: number) => {
+    if (!dateStr) return "-";
+    try {
+      const date = new Date(dateStr);
+      date.setDate(date.getDate() + days);
+      return date.toISOString();
+    } catch {
+      return "-";
+    }
+  };
+
   const faqCategories = [
     {
       name: 'Pertimbangan Sebelum Studi',
@@ -88,53 +136,8 @@ export function Admisi() {
     ]
   };
 
-  const schedules = [
-    {
-      title: "Gelombang I",
-      deadline: "31 Maret 2025",
-      tests: [
-        { label: "Psikotes", date: "17-18, 20, dan 27-29 Okt 2025" },
-        { label: "Tes Tertulis", date: "21 Oktober 2025" },
-        { label: "Wawancara", date: "20 November 2025" },
-      ],
-      activities: [
-        { activity: "Batas Pengembalian Formulir", time: "Oktober, Senin Minggu ke-3" },
-        { activity: "Seleksi Dokumen", time: "Oktober, Selasa Minggu ke-3" },
-        { activity: "Panggilan Tes", time: "Oktober, Rabu Minggu ke-3" },
-        { activity: "Pengumuman Hasil", time: "November, Rabu-Jumat Minggu ke-4" },
-      ]
-    },
-    {
-      title: "Gelombang II",
-      deadline: "30 Juni 2025",
-      tests: [
-        { label: "Psikotes", date: "6-7, 9, dan 16-18 Feb 2026" },
-        { label: "Tes Tertulis", date: "10 Februari 2026" },
-        { label: "Wawancara", date: "3 Maret 2026" },
-      ],
-      activities: [
-        { activity: "Batas Pengembalian Formulir", time: "Maret, Senin Minggu ke-3" },
-        { activity: "Seleksi Dokumen", time: "Maret, Selasa Minggu ke-3" },
-        { activity: "Panggilan Tes", time: "Maret, Rabu Minggu ke-3" },
-        { activity: "Pengumuman Hasil", time: "April, Rabu-Jumat Minggu ke-4" },
-      ]
-    },
-    {
-      title: "Gelombang III",
-      deadline: "31 Agustus 2025",
-      tests: [
-        { label: "Psikotes", date: "1-2, 4, dan 11-12 Mei 2026" },
-        { label: "Tes Tertulis", date: "5 Mei 2026" },
-        { label: "Wawancara", date: "26 & 28 Mei 2026" },
-      ],
-      activities: [
-        { activity: "Batas Pengembalian Formulir", time: "Mei, Senin Minggu ke-3" },
-        { activity: "Seleksi Dokumen", time: "Mei, Selasa Minggu ke-3" },
-        { activity: "Panggilan Tes", time: "Mei, Rabu Minggu ke-3" },
-        { activity: "Pengumuman Hasil", time: "Juni, Rabu-Jumat Minggu ke-4" },
-      ]
-    }
-  ];
+  const schedules = Array.isArray(admissionSchedule) ? admissionSchedule : [];
+  const defaultTab = schedules.length > 0 ? `Gelombang ${schedules[0].batchOrder}` : "Gelombang I";
 
   return (
     <div 
@@ -200,71 +203,88 @@ export function Admisi() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-[#092C74] mb-4">Jadwal Admisi Pendaftaran</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto italic">Tahun Akademik 2026-2027</p>
+            <p className="text-gray-600 max-w-2xl mx-auto italic">
+              Tahun Akademik {schedules.length > 0 ? schedules[0].academicYear : '2026-2027'}
+            </p>
           </motion.div>
 
-          <Tabs defaultValue="Gelombang I" className="max-w-5xl mx-auto">
-            <TabsList className="grid w-full grid-cols-3 mb-12 bg-[#F2ECF8] p-1 rounded-2xl h-16">
-              {schedules.map((s) => (
-                <TabsTrigger 
-                  key={s.title} 
-                  value={s.title}
-                  className="rounded-xl font-bold text-lg data-[state=active]:bg-[#092C74] data-[state=active]:text-white transition-all"
-                >
-                  {s.title}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-            {schedules.map((s) => (
-              <TabsContent key={s.title} value={s.title} className="focus-visible:outline-none">
-                <div className="grid lg:grid-cols-2 gap-8">
-                  <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 flex flex-col justify-between">
-                    <div>
+          {isLoading ? (
+            <div className="flex justify-center items-center py-20">
+               <div className="w-10 h-10 border-4 border-[#092C74] border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          ) : schedules.length > 0 ? (
+            <Tabs defaultValue={defaultTab} className="max-w-5xl mx-auto">
+              <TabsList className={`grid w-full mb-12 bg-[#F2ECF8] p-1 rounded-2xl h-16`} style={{ gridTemplateColumns: `repeat(${schedules.length}, minmax(0, 1fr))` }}>
+                {schedules.map((item) => (
+                  <TabsTrigger 
+                    key={item.batchOrder} 
+                    value={`Gelombang ${item.batchOrder}`}
+                    className="rounded-xl font-bold text-lg data-[state=active]:bg-[#092C74] data-[state=active]:text-white transition-all"
+                  >
+                    Gelombang {item.batchOrder}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+
+              {schedules.map((item) => (
+                <TabsContent key={item.batchOrder} value={`Gelombang ${item.batchOrder}`} className="focus-visible:outline-none">
+                  <div className="grid gap-8">
+                    <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
                       <div className="flex items-center gap-3 mb-6 bg-red-50 p-4 rounded-2xl border border-red-100">
                         <Calendar className="size-8 text-[#E31D1A]" />
                         <div>
-                          <p className="text-sm font-bold text-[#E31D1A] uppercase tracking-wider">Batas Akhir Pendaftaran</p>
-                          <p className="text-2xl font-black text-[#092C74]">{s.deadline}</p>
+                          <p className="text-sm font-bold text-[#E31D1A] uppercase tracking-wider italic">Status Pendaftaran</p>
+                          <p className="text-xl font-black text-[#092C74]">
+                            Pendaftaran ditutup pada <span className="text-[#E31D1A]">Gelombang {item.batchOrder}</span> pada tanggal <span className="underline decoration-wavy decoration-red-300">{formatDate(item.batchDeadlineAt)}</span>
+                          </p>
                         </div>
                       </div>
-                      <div className="space-y-6">
-                        {s.tests.map((test, idx) => (
-                          <div key={idx} className="flex items-start gap-4 p-4 hover:bg-gray-50 rounded-xl transition-colors group">
-                            <div className="p-2 bg-[#092C74]/10 rounded-lg group-hover:bg-[#092C74] transition-colors">
-                              <Clock className="size-5 text-[#092C74] group-hover:text-white" />
-                            </div>
-                            <div>
-                              <p className="font-bold text-gray-900">{test.label}</p>
-                              <p className="text-gray-600">{test.date}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
                     </div>
-                  </div>
 
-                  <div className="bg-[#092C74] p-8 rounded-3xl shadow-xl text-white">
-                    <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-                       <UserCheck className="size-6 text-[#6AACE6]" /> Detail Aktivitas {s.title}
-                    </h3>
-                    <div className="space-y-4">
-                      {s.activities.map((act, idx) => (
-                        <div key={idx} className="flex justify-between items-center py-3 border-b border-white/10 last:border-0 hover:bg-white/5 px-2 rounded-lg transition-colors">
-                          <span className="text-white/80 font-medium">{act.activity}</span>
-                          <span className="font-bold text-[#6AACE6] bg-white/10 px-3 py-1 rounded-lg text-sm">{act.time}</span>
+                    <div className="bg-[#092C74] p-8 rounded-3xl shadow-xl text-white">
+                      <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                          <UserCheck className="size-6 text-[#6AACE6]" /> Detail Aktivitas Gelombang {item.batchOrder}
+                      </h3>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="space-y-4">
+                          {[
+                            { activity: "Batas Pengembalian Formulir", time: formatDate(item.formReturnDeadlineAt) },
+                            { activity: "Seleksi Dokumen", time: formatDate(item.documentSelectionDeadlineAt) },
+                          ].map((act, idx) => (
+                            <div key={idx} className="flex justify-between items-center py-3 border-b border-white/10 last:border-0 hover:bg-white/5 px-2 rounded-lg transition-colors">
+                              <span className="text-white/80 font-medium">{act.activity}</span>
+                              <span className="font-bold text-[#6AACE6] bg-white/10 px-3 py-1 rounded-lg text-sm">{act.time}</span>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                    <div className="mt-8 p-4 bg-white/10 rounded-2xl border border-white/20">
-                      <p className="text-sm text-white/70 italic flex items-center gap-2">
-                        <Info className="size-4 shrink-0" /> Jadwal dapat berubah sesuai konfirmasi panitia.
-                      </p>
+                        <div className="space-y-4">
+                          {[
+                            { activity: "Panggilan Peserta", time: formatDate(item.participantCallAt) },
+                            { activity: "Pengumuman Hasil", time: formatDate(item.resultBroadcastAt) },
+                          ].map((act, idx) => (
+                            <div key={idx} className="flex justify-between items-center py-3 border-b border-white/10 last:border-0 hover:bg-white/5 px-2 rounded-lg transition-colors">
+                              <span className="text-white/80 font-medium">{act.activity}</span>
+                              <span className="font-bold text-[#6AACE6] bg-white/10 px-3 py-1 rounded-lg text-sm">{act.time}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="mt-8 p-4 bg-white/10 rounded-2xl border border-white/20">
+                        <p className="text-sm text-white/70 italic flex items-center gap-2">
+                          <Info className="size-4 shrink-0" /> Jadwal pendaftaran bersifat dinamis dari server.
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </TabsContent>
-            ))}
-          </Tabs>
+                </TabsContent>
+              ))}
+            </Tabs>
+          ) : (
+            <div className="text-center py-20 bg-gray-50 rounded-3xl border border-dashed border-gray-300">
+               <Calendar className="size-12 text-gray-400 mx-auto mb-4" />
+               <p className="text-gray-500 font-medium">Belum ada jadwal pendaftaran yang tersedia saat ini.</p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -285,7 +305,6 @@ export function Admisi() {
                   "Lulusan SMA/sederajat",
                   "Aktif dalam pelayanan gereja",
                   "Surat rekomendasi dari gembala/pemimpin gereja",
-                  "Mengikuti tes akademik, psikotes, dan wawancara",
                   "Panggilan pelayanan yang jelas dan teruji"
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-4 p-4 bg-[#F5F3FB] rounded-2xl border border-[#F2ECF8] group hover:border-[#092C74] transition-all">
@@ -407,11 +426,11 @@ export function Admisi() {
                   </TabsList>
                   
                   <TabsContent value="s1" className="bg-white p-8 rounded-[2rem] shadow-xl border border-gray-100">
-                    {requirements.s1.map((prog, idx) => (
+                    {academicRequirements.filter(r => r.programName.toLowerCase().includes('sarjana')).map((prog, idx) => (
                       <div key={idx} className="mb-12 last:mb-0">
-                        <h4 className="text-xl font-black text-[#092C74] mb-6 pb-2 border-b-2 border-red-500 inline-block">{prog.title}</h4>
+                        <h4 className="text-xl font-black text-[#092C74] mb-6 pb-2 border-b-2 border-red-500 inline-block">{prog.programName}</h4>
                         <ul className="grid sm:grid-cols-2 gap-4">
-                          {prog.items.map((item, i) => (
+                          {prog.requirements.map((item: string, i: number) => (
                             <li key={i} className="flex gap-3 p-4 bg-gray-50 rounded-2xl border border-gray-100 text-sm text-gray-700 font-medium">
                               <CheckCircle className="size-5 text-green-600 shrink-0" />
                               {item}
@@ -420,14 +439,17 @@ export function Admisi() {
                         </ul>
                       </div>
                     ))}
+                    {academicRequirements.filter(r => r.programName.toLowerCase().includes('sarjana')).length === 0 && (
+                      <p className="text-gray-500 italic">Tidak ada prasyarat khusus yang tercatat.</p>
+                    )}
                   </TabsContent>
 
                   <TabsContent value="s2" className="space-y-6">
-                    {requirements.s2.map((prog, idx) => (
+                    {academicRequirements.filter(r => !r.programName.toLowerCase().includes('sarjana')).map((prog, idx) => (
                       <div key={idx} className="bg-white p-8 rounded-[2rem] shadow-xl border border-gray-100">
-                        <h4 className="text-xl font-black text-[#092C74] mb-6 pb-2 border-b-2 border-red-500 inline-block">{prog.title}</h4>
+                        <h4 className="text-xl font-black text-[#092C74] mb-6 pb-2 border-b-2 border-red-500 inline-block">{prog.programName}</h4>
                         <ul className="grid sm:grid-cols-2 gap-4">
-                          {prog.items.map((item, i) => (
+                          {prog.requirements.map((item: string, i: number) => (
                             <li key={i} className="flex gap-3 p-4 bg-[#F2ECF8]/30 rounded-2xl border border-[#F2ECF8] text-sm text-gray-700 font-medium">
                               <CheckCircle className="size-5 text-[#E31D1A] shrink-0" />
                               {item}
