@@ -18,6 +18,8 @@ export function MediaCard({ item, download = false, isGridView = false }: MediaC
     ? `/media/artikel/${item.slug}` 
     : item.type === 'monograf'
     ? `/media/monograf/${item.slug}`
+    : item.type === 'buletin'
+    ? `/media/buletin/${item.slug}`
     : `/media/${item.slug}`;
 
   return (
@@ -45,7 +47,7 @@ export function MediaCard({ item, download = false, isGridView = false }: MediaC
             </div>
             {download && (
               <Button className="bg-[#E31D1A] hover:bg-[#C11815] shrink-0">
-                <Download className="size-4 mr-2" /> Detail {item.type === 'monograf' ? 'Monograf' : 'Jurnal'}
+                <Download className="size-4 mr-2" /> Detail {item.type === 'monograf' ? 'Monograf' : item.type === 'buletin' ? 'Buletin' : 'Jurnal'}
               </Button>
             )}
             {!download && item.duration && (

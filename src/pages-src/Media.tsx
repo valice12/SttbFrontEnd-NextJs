@@ -26,6 +26,7 @@ import { JurnalTab } from '@/components/media/JurnalTab';
 import { VideoTab } from '@/components/media/VideoTab';
 import { ArtikelTab } from '@/components/media/ArtikelTab';
 import { MonografTab } from '@/components/media/MonografTab';
+import { BuletinTab } from '@/components/media/BuletinTab';
 import { ELibraryTab } from '@/components/media/ELibraryTab';
 import { MembershipTab } from '@/components/media/MembershipTab';
 
@@ -36,7 +37,7 @@ const tabTitles: Record<string, string> = {
   jurnal: "Jurnal Stulos",
   video: "Video Pembelajaran",
   artikel: "Artikel",
-  monograf: "Monograf",
+  buletin: "Buletin Kampus",
   elibrary: "E-Library",
   keanggotaan: "Keanggotaan Perpustakaan"
 };
@@ -107,6 +108,11 @@ export function Media() {
             }`}>
               <FileText className={`size-5 ${activeTab === 'monograf' ? 'text-white' : 'text-[#E31D1A]'}`} /> Monograf
             </button>
+            <button onClick={() => handleTabChange('buletin')} className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5 border ${
+              activeTab === 'buletin' ? 'bg-[#092C74] text-white border-[#092C74] ring-2 ring-offset-2 ring-[#092C74] bg-opacity-100' : 'bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border-gray-200 text-gray-700 hover:border-[#092C74]'
+            }`}>
+              <Newspaper className={`size-5 ${activeTab === 'buletin' ? 'text-white' : 'text-[#E31D1A]'}`} /> Buletin Kampus
+            </button>
             <button onClick={() => handleTabChange('elibrary')} className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5 border ${
               activeTab === 'elibrary' ? 'bg-[#092C74] text-white border-[#092C74] ring-2 ring-offset-2 ring-[#092C74] bg-opacity-100' : 'bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border-gray-200 text-gray-700 hover:border-[#092C74]'
             }`}>
@@ -128,6 +134,7 @@ export function Media() {
           {activeTab === 'video' && <VideoTab />}
           {activeTab === 'artikel' && <ArtikelTab />}
           {activeTab === 'monograf' && <MonografTab />}
+          {activeTab === 'buletin' && <BuletinTab />}
           {activeTab === 'elibrary' && <ELibraryTab />}
           {activeTab === 'keanggotaan' && <MembershipTab />}
         </div>

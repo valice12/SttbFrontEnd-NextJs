@@ -185,7 +185,7 @@ export const dataService = {
   async getMediaItems(mediaFormat?: string): Promise<any> {
     const formats = mediaFormat
       ? [mediaFormat]
-      : ['jurnal', 'artikel', 'video', 'monograf', 'elibrary', 'keanggotaan'];
+      : ['jurnal', 'artikel', 'video', 'monograf', 'buletin', 'elibrary', 'keanggotaan'];
 
     const allItems: any[] = [];
 
@@ -282,6 +282,15 @@ export const dataService = {
       ...data,
       title: data.monografTitle || data.title,
       description: data.monografDescription || data.description
+    };
+  },
+
+  async getBuletinDetail(slug: string): Promise<any> {
+    const data = await this.fetchData<any>(`media/get-buletin/${slug}`, 'buletin_detail.json');
+    return {
+      ...data,
+      title: data.buletinTitle || data.title,
+      description: data.buletinDescription || data.description
     };
   },
 

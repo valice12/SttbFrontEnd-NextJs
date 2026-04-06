@@ -115,10 +115,6 @@ export function JurnalDetail() {
                   {journal.description}
                 </div>
                 
-                <h2 className="text-2xl font-black text-[#092C74] mb-6 uppercase tracking-tight">Summary</h2>
-                <div className="text-gray-800 space-y-6 whitespace-pre-wrap leading-loose">
-                  {journal.content || "Konten jurnal lengkap tersedia dalam format PDF melalui portal OJS (Open Journal System) STT Bandung. Jurnal ini melalui proses penelaahan sejawat untuk memastikan standar akademik yang tinggi."}
-                </div>
               </div>
               
               <div className="mt-16 pt-10 border-t border-gray-100">
