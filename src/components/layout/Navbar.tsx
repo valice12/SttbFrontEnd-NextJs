@@ -57,7 +57,8 @@ const navigationLinks: NavLink[] = [
       { label: 'Jurnal Stulos', href: '/media?tab=jurnal' },
       { label: 'Video Pembelajaran', href: '/media?tab=video' },
       { label: 'Artikel', href: '/media?tab=artikel' },
-      { label: 'Monograf', href: '/media?tab=monograf' },
+      { label: 'Monograf', href: '/media/monograf' },
+      { label: 'Buletin Kampus', href: '/media/buletin' },
       { label: 'E-Library', href: '/media?tab=elibrary' },
       { label: 'Keanggotaan Umum', href: '/media?tab=keanggotaan' }
     ]

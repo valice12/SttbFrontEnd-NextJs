@@ -2,6 +2,7 @@
  * Centralized Data Service
  * Utility for fetching data from either local JSON files or a remote API.
  */
+import { getFileUrl } from './file-utils';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
 const USE_MOCK_DATA = process.env.NEXT_PUBLIC_USE_MOCK_DATA === 'true';
@@ -200,6 +201,7 @@ export const dataService = {
         const mapped = items.map((item: any) => ({
           ...item,
           type: fmt,
+          slug: item.slug || item.id?.toString() || '',
           title: item.mediaTitle || item.title,
           author: (item.authors && item.authors.length > 0) ? item.authors.map((a: any) => a.authorName).join(', ') : (item.authorName || item.author),
           description: item.mediaDescription || item.description,
@@ -249,49 +251,94 @@ export const dataService = {
   },
 
   async getJournalDetail(slug: string): Promise<any> {
-    const data = await this.fetchData<any>(`media/get-journal/${slug}`, 'journal_detail.json');
-    return {
-      ...data,
-      title: data.journalTitle || data.title,
-      description: data.journalDescription || data.description
-    };
+    try {
+      const data = await this.fetchData<any>(`media/get-journal/${slug}`, 'journal_detail.json');
+      return {
+        ...data,
+        title: data.journalTitle || data.title,
+        description: data.journalDescription || data.description,
+        link: getFileUrl(data.journalPath || data.link || data.mediaPath, 'jurnal')
+      };
+    } catch {
+      // Fallback: search in media_list.json if journal_detail.json is missing
+      const allMedia = await this.getMediaItems('jurnal');
+      const item = allMedia.find((m: any) => m.slug === slug) || null;
+      if (item && item.link) item.link = getFileUrl(item.link, 'jurnal');
+      return item;
+    }
   },
 
   async getArticleDetail(slug: string): Promise<any> {
-    const data = await this.fetchData<any>(`media/get-article/${slug}`, 'article_detail.json');
-    return {
-      ...data,
-      title: data.articleTitle || data.title,
-      description: data.articleDescription || data.description,
-      content: data.articleContent || data.content
-    };
+    try {
+      const data = await this.fetchData<any>(`media/get-article/${slug}`, 'article_detail.json');
+      return {
+        ...data,
+        title: data.articleTitle || data.title,
+        description: data.articleDescription || data.description,
+        content: data.articleContent || data.content,
+        image: data.thumbnailPath || data.image,
+        link: getFileUrl(data.articlePath || data.link || data.mediaPath, 'artikel')
+      };
+    } catch {
+      const allMedia = await this.getMediaItems('artikel');
+      const item = allMedia.find((m: any) => m.slug === slug) || null;
+      if (item && item.link) item.link = getFileUrl(item.link, 'artikel');
+      return item;
+    }
   },
 
   async getVideoDetail(slug: string): Promise<any> {
-    const data = await this.fetchData<any>(`media/get-video/${slug}`, 'video_detail.json');
-    return {
-      ...data,
-      title: data.videoTitle || data.title,
-      description: data.videoDescription || data.description
-    };
+    try {
+      const data = await this.fetchData<any>(`media/get-video/${slug}`, 'video_detail.json');
+      return {
+        ...data,
+        title: data.videoTitle || data.title,
+        description: data.videoDescription || data.description,
+        link: data.videoUrl || data.link
+      };
+    } catch {
+      const allMedia = await this.getMediaItems('video');
+      return allMedia.find((m: any) => m.slug === slug) || null;
+    }
   },
 
   async getMonografDetail(slug: string): Promise<any> {
-    const data = await this.fetchData<any>(`media/get-monograf/${slug}`, 'monograf_detail.json');
-    return {
-      ...data,
-      title: data.monografTitle || data.title,
-      description: data.monografDescription || data.description
-    };
+    try {
+      const data = await this.fetchData<any>(`media/get-monograf/${slug}`, 'monograf_detail.json');
+      return {
+        ...data,
+        title: data.monografTitle || data.title,
+        description: data.synopsis || data.monografDescription || data.description,
+        synopsis: data.synopsis,
+        price: data.price,
+        isbn: data.isbn,
+        contact: data.contact,
+        image: data.thumbnailPath || data.image,
+        link: getFileUrl(data.monografPath || data.link || data.mediaPath, 'monograf')
+      };
+    } catch {
+      const allMedia = await this.getMediaItems('monograf');
+      const item = allMedia.find((m: any) => m.slug === slug) || null;
+      if (item && item.link) item.link = getFileUrl(item.link, 'monograf');
+      return item;
+    }
   },
 
   async getBuletinDetail(slug: string): Promise<any> {
-    const data = await this.fetchData<any>(`media/get-buletin/${slug}`, 'buletin_detail.json');
-    return {
-      ...data,
-      title: data.buletinTitle || data.title,
-      description: data.buletinDescription || data.description
-    };
+    try {
+      const data = await this.fetchData<any>(`media/get-buletin/${slug}`, 'buletin_detail.json');
+      return {
+        ...data,
+        title: data.buletinTitle || data.title,
+        description: data.buletinDescription || data.description,
+        link: getFileUrl(data.buletinPath || data.link || data.mediaPath, 'buletin')
+      };
+    } catch {
+      const allMedia = await this.getMediaItems('buletin');
+      const item = allMedia.find((m: any) => m.slug === slug) || null;
+      if (item && item.link) item.link = getFileUrl(item.link, 'buletin');
+      return item;
+    }
   },
 
 

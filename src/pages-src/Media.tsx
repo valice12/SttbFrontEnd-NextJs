@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import { Video, FileText, BookOpen, Newspaper, Users, Link as LinkIcon, Download, Search, Globe, ChevronRight, List, ArrowUpDown, SlidersHorizontal, Calendar as CalendarIcon } from 'lucide-react';
+import { Video, FileText, BookOpen, Newspaper, Users, Link as LinkIcon, Download, Search, Globe, ChevronRight, List, ArrowUpDown, SlidersHorizontal, Calendar as CalendarIcon, Layers } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -25,8 +25,6 @@ const bgPatternPanjang = "/assets/Page-Panjang-1.webp";
 import { JurnalTab } from '@/components/media/JurnalTab';
 import { VideoTab } from '@/components/media/VideoTab';
 import { ArtikelTab } from '@/components/media/ArtikelTab';
-import { MonografTab } from '@/components/media/MonografTab';
-import { BuletinTab } from '@/components/media/BuletinTab';
 import { ELibraryTab } from '@/components/media/ELibraryTab';
 import { MembershipTab } from '@/components/media/MembershipTab';
 
@@ -37,9 +35,48 @@ const tabTitles: Record<string, string> = {
   jurnal: "Jurnal Stulos",
   video: "Video Pembelajaran",
   artikel: "Artikel",
+  monograf: "Monograf",
   buletin: "Buletin Kampus",
   elibrary: "E-Library",
   keanggotaan: "Keanggotaan Perpustakaan"
+};
+
+const tabHeaders: Record<string, { icon: any, title: string, subtitle: string, color: string, heroColor: string }> = {
+  jurnal: { 
+    icon: FileText, 
+    title: "Arsip Jurnal", 
+    subtitle: "Koleksi Publikasi Ilmiah & Teologi STTB",
+    color: "bg-[#092C74]/5 text-[#092C74]",
+    heroColor: "bg-[#092C74]/80"
+  },
+  video: { 
+    icon: Video, 
+    title: "Galeri Video", 
+    subtitle: "Dokumentasi Kuliah, Seminar & Ibadah",
+    color: "bg-[#4F46E5]/10 text-[#4F46E5]",
+    heroColor: "bg-[#4338CA]/80"
+  },
+  artikel: { 
+    icon: Newspaper, 
+    title: "Kumpulan Artikel", 
+    subtitle: "Wawasan Teologi & Refleksi Kristiani",
+    color: "bg-[#334155]/10 text-[#334155]",
+    heroColor: "bg-[#334155]/80"
+  },
+  elibrary: { 
+    icon: BookOpen, 
+    title: "Perpustakaan Digital", 
+    subtitle: "Akses Literatur & Sumber Belajar Elektronik",
+    color: "bg-[#D97706]/10 text-[#D97706]",
+    heroColor: "bg-[#B45309]/80"
+  },
+  keanggotaan: { 
+    icon: Users, 
+    title: "Layanan Anggota", 
+    subtitle: "Fasilitas & Keanggotaan Perpustakaan Umum",
+    color: "bg-[#7F1D1B]/5 text-[#7F1D1B]",
+    heroColor: "bg-[#7F1D1B]/80"
+  }
 };
 
 export function Media() {
@@ -60,12 +97,12 @@ export function Media() {
       style={{ backgroundImage: `url(${bgPatternPanjang})` }}
     >
       {/* Hero Section */}
-      <section className="relative text-white py-20 overflow-hidden">
+      <section className="relative text-white py-16 overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none bg-white/80">
         </div>
         <div className="absolute inset-0">
           <img src={bgHeader} alt="Media & Perpustakaan" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#092C74]/80 mix-blend-multiply" />
+          <div className={`absolute inset-0 transition-colors duration-500 mix-blend-multiply ${tabHeaders[activeTab]?.heroColor || 'bg-[#092C74]/80'}`} />
         </div>
         <div className="relative container mx-auto px-4 text-center z-10">
           <motion.div
@@ -103,16 +140,12 @@ export function Media() {
             }`}>
               <Newspaper className={`size-5 ${activeTab === 'artikel' ? 'text-white' : 'text-[#E31D1A]'}`} /> Artikel
             </button>
-            <button onClick={() => handleTabChange('monograf')} className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5 border ${
-              activeTab === 'monograf' ? 'bg-[#092C74] text-white border-[#092C74] ring-2 ring-offset-2 ring-[#092C74] bg-opacity-100' : 'bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border-gray-200 text-gray-700 hover:border-[#092C74]'
-            }`}>
-              <FileText className={`size-5 ${activeTab === 'monograf' ? 'text-white' : 'text-[#E31D1A]'}`} /> Monograf
-            </button>
-            <button onClick={() => handleTabChange('buletin')} className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5 border ${
-              activeTab === 'buletin' ? 'bg-[#092C74] text-white border-[#092C74] ring-2 ring-offset-2 ring-[#092C74] bg-opacity-100' : 'bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border-gray-200 text-gray-700 hover:border-[#092C74]'
-            }`}>
-              <Newspaper className={`size-5 ${activeTab === 'buletin' ? 'text-white' : 'text-[#E31D1A]'}`} /> Buletin Kampus
-            </button>
+            <Link href="/media/monograf" className="flex items-center gap-2 px-6 py-3 bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border border-gray-200 hover:border-[#092C74] rounded-full transition-all font-semibold text-gray-700 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+              <FileText className="size-5 text-[#E31D1A]" /> Monograf
+            </Link>
+            <Link href="/media/buletin" className="flex items-center gap-2 px-6 py-3 bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border border-gray-100 hover:border-[#092C74] rounded-full transition-all font-semibold text-gray-700 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+              <Newspaper className="size-5 text-[#E31D1A]" /> Buletin Kampus
+            </Link>
             <button onClick={() => handleTabChange('elibrary')} className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5 border ${
               activeTab === 'elibrary' ? 'bg-[#092C74] text-white border-[#092C74] ring-2 ring-offset-2 ring-[#092C74] bg-opacity-100' : 'bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border-gray-200 text-gray-700 hover:border-[#092C74]'
             }`}>
@@ -130,11 +163,27 @@ export function Media() {
       {/* Content Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
+          {/* Dynamic Tab Header */}
+          {tabHeaders[activeTab] && (
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
+              <div className="flex items-center gap-4">
+                <div className={`size-14 rounded-2xl flex items-center justify-center ${tabHeaders[activeTab].color}`}>
+                  {(() => {
+                    const Icon = tabHeaders[activeTab].icon;
+                    return <Icon className="size-7" />;
+                  })()}
+                </div>
+                <div>
+                  <h2 className="text-2xl font-black text-[#092C74]">{tabHeaders[activeTab].title}</h2>
+                  <p className="text-sm text-gray-400 font-bold uppercase tracking-tighter">{tabHeaders[activeTab].subtitle}</p>
+                </div>
+              </div>
+            </div>
+          )}
+
           {activeTab === 'jurnal' && <JurnalTab />}
           {activeTab === 'video' && <VideoTab />}
           {activeTab === 'artikel' && <ArtikelTab />}
-          {activeTab === 'monograf' && <MonografTab />}
-          {activeTab === 'buletin' && <BuletinTab />}
           {activeTab === 'elibrary' && <ELibraryTab />}
           {activeTab === 'keanggotaan' && <MembershipTab />}
         </div>

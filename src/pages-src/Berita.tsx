@@ -106,7 +106,7 @@ export function Berita() {
       style={{ backgroundImage: `url(${img_Page_Panjang_1_webp})` }}
     >
       {/* Hero Section with Background */}
-      <section className="relative py-20 overflow-hidden">
+      <section className="relative py-16 overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none bg-white/80">
         </div>
 
@@ -155,10 +155,16 @@ export function Berita() {
               <Newspaper className="size-5 text-[#E31D1A]" /> Artikel
             </Link>
             <Link 
-              href="/media?tab=monograf" 
+              href="/media/monograf" 
               className="flex items-center gap-2 px-6 py-3 bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border border-gray-200 hover:border-[#092C74] rounded-full transition-all font-semibold text-gray-700 shadow-sm hover:shadow-md hover:-translate-y-0.5"
             >
               <FileText className="size-5 text-[#E31D1A]" /> Monograf
+            </Link>
+            <Link 
+              href="/media/buletin" 
+              className="flex items-center gap-2 px-6 py-3 bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border border-gray-200 hover:border-[#092C74] rounded-full transition-all font-semibold text-gray-700 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+            >
+              <Newspaper className="size-5 text-[#E31D1A]" /> Buletin Kampus
             </Link>
             <Link 
               href="/media?tab=elibrary" 

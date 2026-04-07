@@ -8,6 +8,7 @@ import { dataService } from '@/lib/data-service';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 import { getImageUrl } from '@/lib/image-utils';
+import { PDFViewer } from '@/components/media/PDFViewer';
 
 export function ArtikelDetail() {
   const { slug } = useParams();
@@ -120,14 +121,21 @@ export function ArtikelDetail() {
                    {article.description}
                 </p>
                 <div className="text-gray-800 leading-[2] space-y-8 text-lg font-medium whitespace-pre-wrap">
-                   {article.content || "Isi artikel lengkap akan segera dipublikasikan. Sekolah Tinggi Teologi Bandung berkomitmen menyebarkan pemikiran teologis yang sehat dan transformatif bagi masyarakat luas."}
-                   
-                   <p>
-                     Melalui literasi, kita memperluas wawasan dan memperkuat fondasi iman kita dalam menghadapi berbagai perubahan zaman. Tetap nantikan tulisan-tulisan inspiratif lainnya dari para akademisi dan staf STT Bandung.
-                   </p>
-                </div>
-             </div>
-          </div>
+                    {article.content || "Isi artikel lengkap akan segera dipublikasikan. Sekolah Tinggi Teologi Bandung berkomitmen menyebarkan pemikiran teologis yang sehat dan transformatif bagi masyarakat luas."}
+                    
+                    {article.link && (
+                      <div className="mt-16 pt-10 border-t border-gray-100">
+                        <h2 className="text-2xl font-black text-[#092C74] mb-8 uppercase tracking-tight text-center">Baca Dokumen Lengkap</h2>
+                        <PDFViewer url={article.link} title={article.title} />
+                      </div>
+                    )}
+
+                    <p>
+                      Melalui literasi, kita memperluas wawasan dan memperkuat fondasi iman kita dalam menghadapi berbagai perubahan zaman. Tetap nantikan tulisan-tulisan inspiratif lainnya dari para akademisi dan staf STT Bandung.
+                    </p>
+                 </div>
+              </div>
+           </div>
 
           {/* Author Bio Section */}
           <div className="mt-20 p-10 bg-gray-50 rounded-[40px] border border-gray-100 flex flex-col md:flex-row items-center gap-8 shadow-inner">

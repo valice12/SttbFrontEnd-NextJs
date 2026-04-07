@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { dataService } from '@/lib/data-service';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
+import { PDFViewer } from '@/components/media/PDFViewer';
 
 export function BuletinDetail() {
   const { slug } = useParams();
@@ -112,6 +113,13 @@ export function BuletinDetail() {
                 <div className="text-gray-700 leading-relaxed text-lg mb-10">
                   {buletin.description}
                 </div>
+                
+                {buletin.link && (
+                  <div className="mt-16 pt-10 border-t border-gray-100">
+                    <h2 className="text-2xl font-black text-[#092C74] mb-8 uppercase tracking-tight text-center">Preview Edisi Lengkap</h2>
+                    <PDFViewer url={buletin.link} title={buletin.title} />
+                  </div>
+                )}
               </div>
               
               {!buletin.link && (
