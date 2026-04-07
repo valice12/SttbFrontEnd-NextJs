@@ -15,17 +15,21 @@ import { id } from 'date-fns/locale';
 import { MediaCard } from './MediaCard';
 import { dataService } from '@/lib/data-service';
 import { useEffect } from 'react';
+import { useDebounce } from '@/lib/use-debounce';
 
 export function BuletinTab() {
   const [isGridView, setIsGridView] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
+  const debouncedSearchQuery = useDebounce(searchQuery, 700);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('date');
   const [date, setDate] = useState<Date | undefined>();
 
-  const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const [items, setItems] = useState<any[]>([]);
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<string[]>(['all']);
 
@@ -45,36 +49,35 @@ export function BuletinTab() {
   }, []);
 
   useEffect(() => {
-    async function fetchAllBuletins() {
+    async function fetchPaginatedBuletins() {
       try {
         setLoading(true);
-        const data = await dataService.getMediaItems('buletin');
-        setItems(data || []);
+        const data = await dataService.getMediaItems('buletin', {
+          page: currentPage,
+          pageSize: itemsPerPage,
+          search: debouncedSearchQuery || undefined,
+          category: selectedCategory === 'all' ? undefined : selectedCategory,
+          date: date || undefined,
+          orderBy: sortBy === 'date' ? undefined : (sortBy === 'title' ? 'Title' : 'Category')
+        });
+        setItems(data?.items || []);
+        setTotalItems(data?.totalItems || 0);
+        setTotalPages(data?.totalPages || 0);
       } catch (error) {
         console.error("Failed to fetch bulletins:", error);
       } finally {
         setLoading(false);
       }
     }
-    fetchAllBuletins();
-  }, []);
+    fetchPaginatedBuletins();
+  }, [currentPage, debouncedSearchQuery, selectedCategory, sortBy, date]);
 
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchQuery, selectedCategory, sortBy, date]);
+  }, [debouncedSearchQuery, selectedCategory, sortBy, date]);
 
-  const filteredItems = items.filter((item) => {
-    const matchesCategory = selectedCategory === 'all' || 
-       (Array.isArray(item.category) ? item.category.includes(selectedCategory) : item.category === selectedCategory);
-    const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesDate = !date || new Date(item.date).toDateString() === date.toDateString();
-    return matchesCategory && matchesSearch && matchesDate;
-  });
-
-  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedData = filteredItems.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedData = items;
 
 
   if (loading) {

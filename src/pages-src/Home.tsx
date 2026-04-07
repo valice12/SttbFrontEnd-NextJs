@@ -48,14 +48,14 @@ export function Home() {
       try {
         setLoading(true);
         const [newsRes, eventsRes, programsRes, testimonialsRes] = await Promise.all([
-          dataService.getNews(),
-          dataService.getEvents(),
+          dataService.getNews({ pageSize: 6 }),
+          dataService.getEvents({ pageSize: 6 }),
           dataService.getAcademicPrograms(),
           dataService.getTestimonials()
         ]);
         
-        setNews(newsRes || []);
-        setEvents(eventsRes || []);
+        setNews(newsRes?.items || []);
+        setEvents(eventsRes?.items || []);
         setPrograms(programsRes || []);
         setTestimonials(testimonialsRes || []);
       } catch (error) {

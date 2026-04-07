@@ -24,8 +24,8 @@ export function BeritaDetail() {
         setNewsItem(detail);
         
         // Fetch a few news for "other news" section
-        const otherData = await dataService.getNews();
-        const otherItems = otherData || [];
+        const otherData = await dataService.getNews({ pageSize: 10 });
+        const otherItems = otherData?.items || [];
         setOtherNews(otherItems.filter((n: any) => n.slug !== slug).slice(0, 3));
       } catch (error) {
         console.error("Failed to fetch news detail:", error);

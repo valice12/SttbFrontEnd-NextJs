@@ -20,11 +20,13 @@ import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
 import { dataService } from '@/lib/data-service';
 import { getImageUrl } from '@/lib/image-utils';
+import { useDebounce } from '@/lib/use-debounce';
 const img_Page_Panjang_1_webp = "/assets/Page-Panjang-1.webp";
 
 export function Berita() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
+  const debouncedSearchQuery = useDebounce(searchQuery, 700);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('date');
   const [date, setDate] = useState<Date | undefined>();
@@ -38,6 +40,7 @@ export function Berita() {
   const [news, setNews] = useState<any[]>([]);
   const [totalNews, setTotalNews] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [totalPages, setTotalPages] = useState(0);
 
   // Featured news (first 3)
   const [featuredNews, setFeaturedNews] = useState<any[]>([]);
@@ -59,37 +62,46 @@ export function Berita() {
   }, []);
 
   useEffect(() => {
-    async function fetchAllNews() {
+    async function loadFeatured() {
+      try {
+        const data = await dataService.getNews({ pageSize: 3 });
+        setFeaturedNews(data.items || []);
+      } catch (error) {
+        console.error("Failed to fetch featured news:", error);
+      }
+    }
+    loadFeatured();
+  }, []);
+
+  useEffect(() => {
+    async function fetchPaginatedNews() {
       try {
         setLoading(true);
-        const data = await dataService.getNews();
-        setNews(data || []);
-        setFeaturedNews((data || []).slice(0, 3));
+        const data = await dataService.getNews({
+          page: currentPage,
+          pageSize: itemsPerPage,
+          search: debouncedSearchQuery || undefined,
+          category: selectedCategory === 'all' ? undefined : selectedCategory,
+          orderBy: sortBy === 'date' ? undefined : (sortBy === 'title' ? 'NewsTitle' : 'CategoryName'),
+          orderState: sortBy === 'date' ? undefined : 'desc'
+        });
+        setNews(data.items || []);
+        setTotalPages(data.totalPages || 0);
+        setTotalNews(data.totalItems || 0);
       } catch (error) {
         console.error("Failed to fetch news:", error);
       } finally {
         setLoading(false);
       }
     }
-    fetchAllNews();
-  }, []);
+    fetchPaginatedNews();
+  }, [currentPage, debouncedSearchQuery, selectedCategory, sortBy, date]);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchQuery, selectedCategory, sortBy, date]);
+  }, [debouncedSearchQuery, selectedCategory, sortBy, date]);
 
-  // Generate array for pagination
-  const filteredNews = news.filter((n) => {
-    const matchesCategory = selectedCategory === 'all' || 
-       (Array.isArray(n.category) ? n.category.includes(selectedCategory) : n.category === selectedCategory);
-    const matchesSearch = n.title.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesDate = !date || new Date(n.date).toDateString() === date.toDateString();
-    return matchesCategory && matchesSearch && matchesDate;
-  });
-
-  const totalPages = Math.ceil(filteredNews.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentNews = filteredNews.slice(startIndex, startIndex + itemsPerPage);
+  const currentNews = news;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -408,25 +420,44 @@ export function Berita() {
           </div>
 
           {/* Pagination */}
-          <div className="flex justify-center items-center gap-4 mt-12">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
-                className={`w-14 h-14 flex items-center justify-center text-xl font-bold rounded-full transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 ${page === currentPage
-                  ? 'bg-[#092C74] text-white'
-                  : 'bg-[#f8f9fa] text-gray-700 hover:bg-[#F2ECF8] border border-gray-200 hover:border-[#092C74] select-none hover:text-[#092C74]'
-                  }`}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-4 mt-12">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                disabled={currentPage === 1}
+                className="w-14 h-14 rounded-full border-gray-200"
               >
-                {page}
-              </button>
-            ))}
-            {totalPages > 3 && (
-              <div className="w-14 h-14 flex items-center justify-center bg-[#f8f9fa] border border-gray-200 text-xl font-bold rounded-full text-gray-400">
-                ...
+                <ChevronLeft className="size-6" />
+              </Button>
+
+              <div className="flex items-center gap-2">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`w-14 h-14 flex items-center justify-center text-xl font-bold rounded-full transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 ${page === currentPage
+                      ? 'bg-[#092C74] text-white'
+                      : 'bg-[#f8f9fa] text-gray-700 hover:bg-[#F2ECF8] border border-gray-200 hover:border-[#092C74] select-none hover:text-[#092C74]'
+                      }`}
+                  >
+                    {page}
+                  </button>
+                ))}
               </div>
-            )}
-          </div>
+
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                disabled={currentPage === totalPages}
+                className="w-14 h-14 rounded-full border-gray-200"
+              >
+                <ChevronRight className="size-6" />
+              </Button>
+            </div>
+          )}
         </div>
       </section>
     </div>

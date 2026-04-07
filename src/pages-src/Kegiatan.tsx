@@ -30,6 +30,7 @@ import { id } from 'date-fns/locale';
 import { dataService } from '@/lib/data-service';
 import { MediaCard } from '@/components/MediaCard';
 import { getImageUrl } from '@/lib/image-utils';
+import { useDebounce } from '@/lib/use-debounce';
 
 const bgHeader = "/assets/sttb-2-BG.png";
 const bgPatternReversed = "/assets/background-reversed.webp";
@@ -37,6 +38,7 @@ const bgPatternReversed = "/assets/background-reversed.webp";
 export function Kegiatan() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
+  const debouncedSearchQuery = useDebounce(searchQuery, 700);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('date');
   const [date, setDate] = useState<Date | undefined>();
@@ -45,6 +47,7 @@ export function Kegiatan() {
   const [totalEvents, setTotalEvents] = useState(0);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<string[]>(['all']);
+  const [totalPages, setTotalPages] = useState(0);
 
   const itemsPerPage = 10;
 
@@ -52,9 +55,7 @@ export function Kegiatan() {
   useEffect(() => {
     async function loadInitialData() {
       try {
-        const cats = await dataService.getNewsCategories(); // Assuming same categories for now or use specific if available
-        // Deriving from data if specific category list not available
-        // But better to use getNewsCategories as a proxy or events-specific if exist
+        const cats = await dataService.getEventCategories();
         const extractedCats = (cats || []).map((cat: any) => 
           typeof cat === 'string' ? cat : (cat.categoryName || cat.name || cat.title)
         ).filter(Boolean);
@@ -67,36 +68,36 @@ export function Kegiatan() {
   }, []);
 
   useEffect(() => {
-    async function fetchAllEvents() {
+    async function fetchPaginatedEvents() {
       try {
         setLoading(true);
-        const data = await dataService.getEvents();
-        setEvents(data || []);
+        const data = await dataService.getEvents({
+          page: currentPage,
+          pageSize: itemsPerPage,
+          search: debouncedSearchQuery || undefined,
+          category: selectedCategory === 'all' ? undefined : selectedCategory,
+          date: date || undefined,
+          orderBy: sortBy === 'date' ? undefined : 'EventTitle',
+          orderState: sortBy === 'date' ? undefined : 'desc'
+        });
+        setEvents(data.items || []);
+        setTotalPages(data.totalPages || 0);
+        setTotalEvents(data.totalItems || 0);
       } catch (error) {
         console.error("Failed to fetch events:", error);
       } finally {
         setLoading(false);
       }
     }
-    fetchAllEvents();
-  }, []);
+    fetchPaginatedEvents();
+  }, [currentPage, debouncedSearchQuery, selectedCategory, sortBy, date]);
 
   // Filtering Logic
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchQuery, selectedCategory, sortBy, date]);
+  }, [debouncedSearchQuery, selectedCategory, sortBy, date]);
 
-  const filteredEvents = events.filter((e) => {
-    const matchesCategory = selectedCategory === 'all' || 
-       (Array.isArray(e.category) ? e.category.includes(selectedCategory) : e.category === selectedCategory);
-    const matchesSearch = e.title.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesDate = !date || new Date(e.date).toDateString() === date.toDateString();
-    return matchesCategory && matchesSearch && matchesDate;
-  });
-
-  const totalPages = Math.ceil(filteredEvents.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentEvents = filteredEvents.slice(startIndex, startIndex + itemsPerPage);
+  const currentEvents = events;
 
   return (
     <div 
@@ -323,12 +324,6 @@ export function Kegiatan() {
                     {page}
                   </button>
                 ))}
-
-                {totalPages > 5 && currentPage < totalPages - 2 && (
-                  <div className="size-14 flex items-center justify-center bg-gray-50 border border-gray-200 text-xl font-bold rounded-full text-gray-400">
-                    ...
-                  </div>
-                )}
               </div>
 
               <Button
