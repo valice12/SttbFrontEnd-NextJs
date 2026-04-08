@@ -92,81 +92,81 @@ export function JurnalTab() {
 
   return (
     <div className="space-y-12">
-      {/* Header & Filters */}
-      <div className="flex flex-col gap-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex w-full md:w-auto items-center">
-            <h2 className="text-4xl font-extrabold text-[#092C74] title-font uppercase">Jurnal Stulos</h2>
-            <a href="https://e-journal.sttb.ac.id/index.php/transformatio" target="_blank" rel="noopener noreferrer" className="ml-6 hidden sm:block">
-              <Button variant="outline" className="text-[#092C74] border-[#092C74] hover:bg-[#F2ECF8] rounded-full px-6">
-                Portal OJS <LinkIcon className="ml-2 size-4" />
+      {/* Header & Filters - Premium Glassmorphism */}
+      <div className="flex flex-col gap-10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex flex-wrap items-center gap-6"
+          >
+            <h2 className="text-[2.5rem] md:text-5xl font-black text-[#092C74] tracking-tighter leading-none">Jurnal <span className="text-[#E31D1A]">Stulos</span></h2>
+            <div className="h-10 w-px bg-gray-200 hidden md:block" />
+            <a href="https://e-journal.sttb.ac.id/index.php/transformatio" target="_blank" rel="noopener noreferrer">
+              <Button className="h-12 px-8 bg-[#092C74] hover:bg-[#E31D1A] text-white font-black text-xs uppercase tracking-widest rounded-full shadow-lg shadow-blue-900/10 transition-all duration-500">
+                PORTAL OJS <LinkIcon className="ml-2 size-4" />
               </Button>
             </a>
-          </div>
+          </motion.div>
 
           <div className="hidden md:block">
             <button
               onClick={() => setIsGridView(!isGridView)}
-              className="p-4 bg-white border border-[#092C74]/20 hover:border-[#092C74] shadow-sm rounded-full hover:bg-[#F2ECF8] transition-colors shrink-0 flex items-center justify-center w-[54px] h-[54px]"
+              className="size-14 bg-white border border-gray-100 shadow-sm rounded-2xl hover:bg-[#092C74] hover:text-white transition-all duration-500 flex items-center justify-center shrink-0 hover:-translate-y-1"
+              title={isGridView ? "Lihat List" : "Lihat Grid"}
             >
               {isGridView ? (
-                <List className="size-5 text-[#092C74]" />
+                <List className="size-6" />
               ) : (
-                <div className="grid grid-cols-3 gap-1">
-                  <div className="w-1.5 h-1.5 bg-[#092C74] rounded-sm" />
-                  <div className="w-1.5 h-1.5 bg-[#092C74] rounded-sm" />
-                  <div className="w-1.5 h-1.5 bg-[#092C74] rounded-sm" />
-                  <div className="w-1.5 h-1.5 bg-[#092C74] rounded-sm" />
-                  <div className="w-1.5 h-1.5 bg-[#092C74] rounded-sm" />
-                  <div className="w-1.5 h-1.5 bg-[#092C74] rounded-sm" />
+                <div className="grid grid-cols-2 gap-1">
+                  <div className="w-2 h-2 bg-current rounded-sm" />
+                  <div className="w-2 h-2 bg-current rounded-sm" />
+                  <div className="w-2 h-2 bg-current rounded-sm" />
+                  <div className="w-2 h-2 bg-current rounded-sm" />
                 </div>
               )}
             </button>
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-4 w-full md:w-auto">
-            <div className="flex items-center gap-3 bg-white hover:bg-[#F2ECF8] rounded-full px-6 py-2 shrink-0 w-full sm:w-[200px] border border-[#092C74] text-[#092C74] transition-colors">
-              <ArrowUpDown className="size-5 shrink-0" />
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-full bg-transparent border-none shadow-none focus:ring-0 font-semibold p-0 text-[#092C74]">
-                  <SelectValue placeholder="Urutkan..." />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="date">Terbaru</SelectItem>
-                  <SelectItem value="title">Judul</SelectItem>
-                  <SelectItem value="category">Kategori</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+        <div className="flex flex-col xl:flex-row items-center justify-between gap-8 bg-gray-50/50 backdrop-blur-md p-2 rounded-[2rem] border border-gray-100">
+          <div className="flex flex-wrap items-center gap-3 w-full xl:w-auto">
+            <Select value={sortBy} onValueChange={setSortBy}>
+              <SelectTrigger className="h-14 px-8 rounded-2xl border-none bg-white font-black text-[#092C74] min-w-[200px] shadow-sm hover:shadow-md transition-all">
+                <ArrowUpDown className="size-4 mr-3 text-[#E31D1A]" />
+                <SelectValue placeholder="Urutkan..." />
+              </SelectTrigger>
+              <SelectContent className="rounded-2xl border-gray-100 shadow-2xl">
+                <SelectItem value="date" className="font-bold py-3 uppercase text-[10px] tracking-widest">Terbaru</SelectItem>
+                <SelectItem value="title" className="font-bold py-3 uppercase text-[10px] tracking-widest">Judul</SelectItem>
+                <SelectItem value="category" className="font-bold py-3 uppercase text-[10px] tracking-widest">Kategori</SelectItem>
+              </SelectContent>
+            </Select>
 
-            <div className="flex items-center gap-3 bg-white hover:bg-[#F2ECF8] rounded-full px-6 py-2 shrink-0 w-full sm:w-[200px] border border-[#092C74] text-[#092C74] transition-colors">
-              <SlidersHorizontal className="size-5 shrink-0" />
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="w-full bg-transparent border-none shadow-none focus:ring-0 font-semibold p-0 text-[#092C74]">
-                  <SelectValue placeholder="Kategori..." />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((cat) => (
-                    <SelectItem key={cat} value={cat}>
-                      {cat === 'all' ? 'Semua Kategori' : cat}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
+            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              <SelectTrigger className="h-14 px-8 rounded-2xl border-none bg-white font-black text-[#092C74] min-w-[200px] shadow-sm hover:shadow-md transition-all">
+                <SlidersHorizontal className="size-4 mr-3 text-[#E31D1A]" />
+                <SelectValue placeholder="Kategori..." />
+              </SelectTrigger>
+              <SelectContent className="rounded-2xl border-gray-100 shadow-2xl overflow-hidden">
+                {categories.map((cat) => (
+                  <SelectItem key={cat} value={cat} className="font-bold py-3 uppercase text-[10px] tracking-widest">
+                    {cat === 'all' ? 'SEMUA KATEGORI' : cat.toUpperCase()}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+ 
             <Popover>
               <PopoverTrigger asChild>
                 <button
-                  className="flex items-center gap-3 bg-white hover:bg-[#F2ECF8] border border-[#092C74] rounded-full px-6 py-3 shrink-0 font-semibold z-10 relative cursor-pointer outline-none w-full sm:w-[200px] transition-colors text-[#092C74]"
+                  className="flex items-center gap-4 h-14 bg-white border-none rounded-2xl px-8 shadow-sm hover:shadow-md transition-all font-black text-[#092C74] text-[10px] uppercase tracking-widest"
                 >
-                  <CalendarIcon className="size-5 shrink-0" />
-                  <span className="flex-1 text-left truncate">{date ? format(date, "d MMMM yyyy", { locale: id }) : <span>Pilih Tanggal</span>}</span>
+                  <CalendarIcon className="size-4 text-[#E31D1A]" />
+                  <span className="truncate">{date ? format(date, "d MMMM yyyy", { locale: id }) : <span>FILTER TANGGAL</span>}</span>
                 </button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0 z-[100] bg-white" align="start">
+              <PopoverContent className="w-auto p-0 z-[100] bg-white rounded-[2rem] overflow-hidden shadow-2xl border-gray-100" align="start">
                 <Calendar
                   mode="single"
                   selected={date}
@@ -176,15 +176,15 @@ export function JurnalTab() {
               </PopoverContent>
             </Popover>
           </div>
-
-          <div className="relative w-full md:max-w-md shadow-sm rounded-full">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-[#092C74]" />
+ 
+          <div className="relative w-full xl:max-w-md group flex-1 xl:flex-none">
+            <Search className="absolute left-6 top-1/2 -translate-y-1/2 size-5 text-[#092C74] group-focus-within:text-[#E31D1A] transition-colors" />
             <input
               type="text"
-              placeholder="Cari Jurnal Stulos..."
+              placeholder="Cari Jurnal Stulos atau Peneliti..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-12 bg-gray-50 border border-[#092C74]/20 focus:border-[#092C74] text-[#092C74] placeholder:text-[#092C74]/60 rounded-full py-3.5 w-full focus:outline-none focus:ring-1 focus:ring-[#092C74]"
+              className="pl-16 h-14 bg-white border-none text-[#092C74] placeholder:text-gray-400 font-bold rounded-2xl w-full shadow-sm transition-all focus:ring-2 focus:ring-[#092C74]/20 focus:outline-none"
             />
           </div>
         </div>
@@ -217,14 +217,14 @@ export function JurnalTab() {
         )}
 
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-4 mt-12 col-span-full w-full">
+          <div className="flex justify-center items-center gap-4 mt-20 col-span-full w-full">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
                 key={page}
                 onClick={() => setCurrentPage(page)}
-                className={`w-12 h-12 flex items-center justify-center text-lg font-bold rounded-full transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 ${page === currentPage
-                  ? 'bg-[#092C74] text-white'
-                  : 'bg-[#f8f9fa] text-gray-700 hover:bg-[#F2ECF8] border border-gray-200 hover:border-[#092C74] select-none hover:text-[#092C74]'
+                className={`w-14 h-14 flex items-center justify-center text-xl font-black rounded-[1.25rem] transition-all duration-500 shadow-sm hover:shadow-xl hover:-translate-y-1 ${page === currentPage
+                  ? 'bg-[#092C74] text-white shadow-blue-900/20'
+                  : 'bg-white text-gray-400 hover:text-[#092C74] border border-gray-100 hover:border-[#092C74]'
                   }`}
               >
                 {page}

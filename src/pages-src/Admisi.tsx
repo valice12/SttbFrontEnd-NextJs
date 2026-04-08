@@ -3,11 +3,16 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
-import { FileText, Calendar, CheckCircle, HelpCircle, Phone, Mail, Info, Clock, UserCheck, BookOpen } from 'lucide-react';
+import { 
+  Calendar, CheckCircle, UserCheck, FileText, HelpCircle, 
+  Phone, Mail, Info, Clock, BookOpen 
+} from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { dataService } from '@/lib/data-service';
+import { FinanceNavbar } from '@/components/finance/FinanceNavbar';
+
 const bgHeader = "/assets/04-Beasiswa-Image-Header-scaled.jpg";
 const bgPattern = "/assets/background.webp";
 
@@ -144,66 +149,71 @@ export function Admisi() {
       className="min-h-screen bg-white bg-cover bg-center"
       style={{ backgroundImage: `url(${bgPattern})` }}
     >
-      <section className="relative text-white py-20 overflow-hidden">
+      {/* Modern Hero Section - Admissions */}
+      <section className="relative h-[550px] md:h-[650px] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={bgHeader} alt="Admisi" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#E31D1A]/80 mix-blend-multiply" />
+          <img src={bgHeader} alt="Admissions Hero" className="w-full h-full object-cover scale-105" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#061B46]/95 via-[#4C1D95]/45 to-transparent z-10" />
+          
+          {/* Decorative Mesh Blobs */}
+          <div className="absolute top-1/4 -right-20 size-[400px] bg-[#E31D1A]/20 blur-[100px] rounded-full animate-pulse" />
         </div>
-        <div className="relative container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Admisi & Pendaftaran</h1>
-            <p className="text-xl max-w-3xl mx-auto mb-8">
-              Bergabunglah dengan keluarga besar STTB
-            </p>
-            <a href="https://sis.sttb.ac.id/pmb" target="_blank" rel="noopener noreferrer">
-              <Button className="bg-white text-[#E31D1A] hover:bg-gray-100 px-8 py-6 text-lg font-bold">
-                Daftar Sekarang
-              </Button>
-            </a>
-          </motion.div>
-        </div>
-      </section>
-      <section className="bg-white border-b border-gray-200 py-6 relative z-10 shadow-sm">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-4">
-            <div className="flex items-center gap-2 px-6 py-3 bg-[#092C74] text-white border border-transparent rounded-full font-semibold shadow-md">
-              <CheckCircle className="size-5 text-white" /> Informasi Pendaftaran
-            </div>
-            <Link
-              href="/keuangan?tab=tuition"
-              className="flex items-center gap-2 px-6 py-3 bg-[#f8f9fa] hover:bg-[#F2ECF8] text-gray-700 hover:text-[#092C74] border border-gray-200 hover:border-[#092C74] rounded-full transition-all font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5"
+
+        <div className="relative container mx-auto px-4 h-full flex items-center z-20">
+          <div className="max-w-4xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              className="backdrop-blur-md bg-white/5 border border-white/10 p-8 md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden"
             >
-              <FileText className="size-5 text-[#E31D1A]" /> Informasi Biaya Studi
-            </Link>
-            <Link
-              href="/keuangan?tab=scholarship"
-              className="flex items-center gap-2 px-6 py-3 bg-[#f8f9fa] hover:bg-[#F2ECF8] text-gray-700 hover:text-[#092C74] border border-gray-200 hover:border-[#092C74] rounded-full transition-all font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5"
-            >
-              <FileText className="size-5 text-[#E31D1A]" /> Beasiswa STTB
-            </Link>
-            <Link
-              href="/dukungan"
-              className="flex items-center gap-2 px-6 py-3 bg-[#f8f9fa] hover:bg-[#F2ECF8] text-gray-700 hover:text-[#092C74] border border-gray-200 hover:border-[#092C74] rounded-full transition-all font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5"
-            >
-              <HelpCircle className="size-5 text-[#E31D1A]" /> Dukungan Pelayanan
-            </Link>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#E31D1A] rounded-full text-white text-xs font-black uppercase tracking-widest mb-6 shadow-lg shadow-red-500/30"
+              >
+                 <UserCheck className="size-3" /> Bergabunglah Bersama Kami
+              </motion.div>
+
+              <h1 className="text-5xl md:text-7xl font-black text-white mb-6 drop-shadow-2xl tracking-tight leading-tight">
+                Admisi & <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6AACE6] via-[#A855F7] to-[#E31D1A]">Pendaftaran</span>
+              </h1>
+              <p className="text-xl md:text-2xl text-white/90 font-medium mb-10 max-w-2xl leading-relaxed">
+                Mulai perjalanan transformatif Anda di STT Bandung. Kami mengundang calon pemimpin urban untuk dipersiapkan secara akademis dan spiritual.
+              </p>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+              >
+                <a href="https://sis.sttb.ac.id/pmb" target="_blank" rel="noopener noreferrer">
+                  <Button className="bg-white hover:bg-[#E31D1A] text-[#E31D1A] hover:text-white px-10 py-7 text-xl font-black rounded-2xl shadow-xl transition-all duration-500 hover:-translate-y-1">
+                    DAFTAR SEKARANG
+                  </Button>
+                </a>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
+      {/* Navigation Section - Centralized */}
+      <FinanceNavbar />
 
-      <section className="py-20">
+      {/* Schedule Section - Clean PHI Layout */}
+      <section className="py-32 bg-white relative">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-20"
           >
-            <h2 className="text-4xl font-bold text-[#092C74] mb-4">Jadwal Admisi Pendaftaran</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto italic">
+            <span className="text-[#6A0DAD] font-black tracking-widest text-sm uppercase mb-4 block underline underline-offset-8 decoration-[#092C74]">Admissions Guide</span>
+            <h2 className="text-5xl md:text-6xl font-black text-[#092C74] mb-6">Jadwal Gelombang Pendaftaran</h2>
+            <div className="w-24 h-2 bg-gradient-to-r from-[#092C74] via-[#6A0DAD] to-[#E31D1A] mx-auto rounded-full mb-8" />
+            <p className="text-xl text-gray-500 max-w-2xl mx-auto font-medium leading-relaxed italic">
               Tahun Akademik {schedules.length > 0 ? schedules[0].academicYear : '2026-2027'}
             </p>
           </motion.div>
@@ -214,14 +224,14 @@ export function Admisi() {
             </div>
           ) : schedules.length > 0 ? (
             <Tabs defaultValue={defaultTab} className="max-w-5xl mx-auto">
-              <TabsList className={`grid w-full mb-12 bg-[#F2ECF8] p-1 rounded-2xl h-16`} style={{ gridTemplateColumns: `repeat(${schedules.length}, minmax(0, 1fr))` }}>
+              <TabsList className={`grid w-full mb-16 bg-[#F5F3FB] p-2 rounded-[2rem] h-20 shadow-inner`} style={{ gridTemplateColumns: `repeat(${schedules.length}, minmax(0, 1fr))` }}>
                 {schedules.map((item) => (
                   <TabsTrigger 
                     key={item.batchOrder} 
                     value={`Gelombang ${item.batchOrder}`}
-                    className="rounded-xl font-bold text-lg data-[state=active]:bg-[#092C74] data-[state=active]:text-white transition-all"
+                    className="rounded-[1.5rem] font-black text-lg data-[state=active]:bg-[#092C74] data-[state=active]:text-white data-[state=active]:shadow-xl transition-all duration-500 uppercase tracking-widest"
                   >
-                    Gelombang {item.batchOrder}
+                    Batch {item.batchOrder}
                   </TabsTrigger>
                 ))}
               </TabsList>
@@ -229,13 +239,15 @@ export function Admisi() {
               {schedules.map((item) => (
                 <TabsContent key={item.batchOrder} value={`Gelombang ${item.batchOrder}`} className="focus-visible:outline-none">
                   <div className="grid gap-8">
-                    <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
-                      <div className="flex items-center gap-3 mb-6 bg-red-50 p-4 rounded-2xl border border-red-100">
-                        <Calendar className="size-8 text-[#E31D1A]" />
+                    <div className="bg-white p-10 rounded-[3rem] shadow-2xl border border-gray-100 group hover:border-[#092C74] transition-all duration-500">
+                      <div className="flex items-center gap-6 mb-8 bg-[#F5F3FB] p-6 rounded-[2rem] border border-gray-100">
+                        <div className="size-16 bg-gradient-to-br from-[#E31D1A] to-[#8B008B] rounded-2xl flex items-center justify-center shadow-lg">
+                           <Calendar className="size-8 text-white" />
+                        </div>
                         <div>
-                          <p className="text-sm font-bold text-[#E31D1A] uppercase tracking-wider italic">Status Pendaftaran</p>
-                          <p className="text-xl font-black text-[#092C74]">
-                            Pendaftaran ditutup pada <span className="text-[#E31D1A]">Gelombang {item.batchOrder}</span> pada tanggal <span className="underline decoration-wavy decoration-red-300">{formatDate(item.batchDeadlineAt)}</span>
+                          <p className="text-xs font-black text-[#E31D1A] uppercase tracking-[0.2em] mb-1">Status Batch</p>
+                          <p className="text-2xl font-black text-[#092C74] leading-tight">
+                            Batas Pendaftaran: <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#092C74] to-[#6A0DAD]">{formatDate(item.batchDeadlineAt)}</span>
                           </p>
                         </div>
                       </div>

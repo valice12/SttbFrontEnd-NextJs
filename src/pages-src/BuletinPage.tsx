@@ -1,134 +1,119 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Newspaper, ArrowLeft, Search, SlidersHorizontal, Mail, ExternalLink, FileText, Video, BookOpen, Users } from 'lucide-react';
+import { Newspaper, Mail, ExternalLink, FileText, Video, BookOpen, Layers, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { BuletinTab } from '@/components/media/BuletinTab';
+import { MediaNavbar } from '@/components/media/MediaNavbar';
 
 const bgHeader = "/assets/sttb-2-BG.png";
+const bgPattern = "/assets/background.webp";
 
 export function BuletinPage() {
   return (
-    <div className="min-h-screen bg-white pb-20">
-      {/* Hero Section */}
-      <section className="relative text-white py-16 overflow-hidden">
+    <div 
+      className="min-h-screen bg-white bg-cover bg-center"
+      style={{ backgroundImage: `url(${bgPattern})` }}
+    >
+      {/* Premium Hero Section - Buletin */}
+      <section className="relative h-[550px] md:h-[650px] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={bgHeader} alt="Buletin Kampus" className="size-full object-cover" />
-          <div className="absolute inset-0 bg-[#064E3B]/80 mix-blend-multiply" />
+          <img src={bgHeader} alt="Buletin Kampus" className="w-full h-full object-cover scale-105" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#134E4A]/95 via-[#064E3B]/45 to-transparent z-10" />
+          
+          <div className="absolute top-1/2 -right-20 size-[500px] bg-[#064E3B]/10 blur-[120px] rounded-full animate-pulse" />
         </div>
-        <div className="relative container mx-auto px-4 text-center z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="w-full"
-          >
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 drop-shadow-[6px_6px_4px_rgba(0,0,0,0.25)] text-white">Buletin Kampus</h1>
-            <div className="w-full max-w-4xl mx-auto h-1 bg-white rounded-full mb-8 opacity-20" />
-            <p className="text-2xl md:text-3xl drop-shadow-[6px_6px_4px_rgba(0,0,0,0.25)] text-white">
-              Berita terkini, liputan kegiatan, dan artikel inspirasi dari komunitas akademika Sekolah Tinggi Teologi Bandung.
-            </p>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Quick Links Navigation */}
-      <section className="bg-white border-b border-gray-200 py-6 relative z-10 shadow-sm">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link 
-              href="/berita" 
-              className="flex items-center gap-2 px-6 py-3 bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border border-gray-200 hover:border-[#092C74] rounded-full transition-all font-semibold text-gray-700 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+        <div className="relative container mx-auto px-4 h-full flex items-center z-20">
+          <div className="max-w-4xl">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 rounded-[40px] shadow-2xl relative overflow-hidden group"
             >
-              <Newspaper className="size-5 text-[#E31D1A]" /> Berita Terkini
-            </Link>
-            <Link 
-              href="/media?tab=jurnal" 
-              className="flex items-center gap-2 px-6 py-3 bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border border-gray-200 hover:border-[#092C74] rounded-full transition-all font-semibold text-gray-700 shadow-sm hover:shadow-md hover:-translate-y-0.5"
-            >
-              <FileText className="size-5 text-[#E31D1A]" /> Jurnal Stulos
-            </Link>
-            <Link 
-              href="/media?tab=video" 
-              className="flex items-center gap-2 px-6 py-3 bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border border-gray-200 hover:border-[#092C74] rounded-full transition-all font-semibold text-gray-700 shadow-sm hover:shadow-md hover:-translate-y-0.5"
-            >
-              <Video className="size-5 text-[#E31D1A]" /> Video Pembelajaran
-            </Link>
-            <Link 
-              href="/media?tab=artikel" 
-              className="flex items-center gap-2 px-6 py-3 bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border border-gray-200 hover:border-[#092C74] rounded-full transition-all font-semibold text-gray-700 shadow-sm hover:shadow-md hover:-translate-y-0.5"
-            >
-              <Newspaper className="size-5 text-[#E31D1A]" /> Artikel
-            </Link>
-            <Link 
-              href="/media/monograf" 
-              className="flex items-center gap-2 px-6 py-3 bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border border-gray-200 hover:border-[#092C74] rounded-full transition-all font-semibold text-gray-700 shadow-sm hover:shadow-md hover:-translate-y-0.5"
-            >
-              <FileText className="size-5 text-[#E31D1A]" /> Monograf
-            </Link>
-            <Link 
-              href="/media/buletin" 
-              className="flex items-center gap-2 px-6 py-3 bg-[#092C74] text-white border border-[#092C74] rounded-full transition-all font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5"
-            >
-              <Newspaper className="size-5 text-white" /> Buletin Kampus
-            </Link>
-            <Link 
-              href="/media?tab=elibrary" 
-              className="flex items-center gap-2 px-6 py-3 bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border border-gray-200 hover:border-[#092C74] rounded-full transition-all font-semibold text-gray-700 shadow-sm hover:shadow-md hover:-translate-y-0.5"
-            >
-              <BookOpen className="size-5 text-[#E31D1A]" /> E-Library & Keanggotaan
-            </Link>
+              <div className="relative z-10">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#064E3B] rounded-full text-white text-xs font-black uppercase tracking-widest mb-8 shadow-lg shadow-green-500/30"
+                >
+                   <Newspaper className="size-3" /> Campus Periodical
+                </motion.div>
+
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-[1.1] tracking-tighter drop-shadow-2xl">
+                  Buletin <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6AACE6] via-[#10B981] to-[#34D399]">Resmi Kampus</span>
+                </h1>
+                <p className="text-xl md:text-2xl text-white/90 font-medium max-w-2xl leading-relaxed">
+                  Informasi terkini mengenai kegiatan mahasiswa, inspirasi rohani, dan perkembangan ekosistem akademika Sekolah Tinggi Teologi Bandung.
+                </p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
-            <div className="flex items-center gap-4">
-              <div className="size-14 bg-[#064E3B]/10 rounded-2xl flex items-center justify-center">
-                <Newspaper className="size-7 text-[#064E3B]" />
+      {/* Synchronized Media Navbar */}
+      <MediaNavbar activeTab="buletin" />
+
+      {/* Content Section with Premium Header */}
+      <section className="py-24">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex flex-col md:flex-row justify-between items-center gap-8 mb-20 border-b border-gray-50 pb-12"
+          >
+            <div className="flex items-center gap-6">
+              <div className="size-20 rounded-[1.5rem] bg-[#064E3B]/10 text-[#064E3B] flex items-center justify-center shadow-inner">
+                <Newspaper className="size-10" />
               </div>
               <div>
-                <h2 className="text-2xl font-black text-[#003049]">Arsip Buletin</h2>
-                <p className="text-sm text-gray-400 font-bold uppercase tracking-tighter">Publikasi Bulanan & Periodik</p>
+                <h2 className="text-4xl font-black text-[#003049] tracking-tighter mb-2">Arsip Buletin</h2>
+                <p className="text-sm text-gray-400 font-black uppercase tracking-[0.2em]">Publikasi Bulanan & Dokumentasi Periodik</p>
               </div>
             </div>
-          </div>
+            <div className="h-1.5 w-24 bg-gradient-to-r from-[#064E3B] to-[#10B981] rounded-full hidden lg:block" />
+          </motion.div>
 
           <BuletinTab />
         </div>
       </section>
 
-      {/* Subscription CTA */}
-      <section className="container mx-auto px-4 mt-20">
-        <div className="bg-[#E31D1A] rounded-[40px] p-12 text-white flex flex-col md:flex-row items-center gap-12 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:scale-110 transition-transform duration-700 pointer-events-none">
-            <Mail className="size-64" />
+      {/* Subscription CTA - Modernized */}
+      <section className="container mx-auto px-4 mt-20 pb-32">
+        <div className="bg-[#E31D1A] rounded-[4rem] p-12 md:p-24 text-white flex flex-col md:flex-row items-center gap-20 relative overflow-hidden shadow-2xl group transition-all duration-[1.5s]">
+          <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:scale-110 transition-transform duration-[2s] pointer-events-none">
+            <Mail className="size-[500px]" />
           </div>
-          <div className="flex-1 relative z-10">
-            <div className="size-16 bg-white/20 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-md">
-              <Mail className="size-8" />
+          <div className="flex-1 relative z-10 space-y-10">
+            <div className="size-20 bg-white/10 rounded-3xl flex items-center justify-center backdrop-blur-md border border-white/20 shadow-2xl">
+              <Mail className="size-10" />
             </div>
-            <h3 className="text-3xl md:text-4xl font-black mb-4">Dapatkan Buletin di Email Anda</h3>
-            <p className="text-white/80 text-lg leading-relaxed mb-10 max-w-xl font-medium">
-              Jangan lewatkan setiap edisi terbaru. Berlangganan sekarang untuk menerima PDF buletin langsung di kotak masuk Anda.
+            <h3 className="text-4xl md:text-6xl font-black tracking-tighter leading-[0.95]">Dapatkan Buletin <br /> <span className="text-black/30">di Email Anda</span></h3>
+            <p className="text-white/80 text-xl leading-relaxed max-w-xl font-medium italic opacity-90">
+              "Jangan lewatkan setiap edisi terbaru. Berlangganan sekarang untuk menerima PDF buletin langsung di kotak masuk Anda."
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col xl:flex-row gap-6">
               <input 
                 type="email" 
-                placeholder="Alamat email Anda..." 
-                className="bg-white/10 border border-white/20 px-6 py-5 rounded-2xl flex-1 focus:bg-white focus:text-gray-900 transition-all outline-none placeholder:text-white/50 text-white font-bold"
+                placeholder="ISI ALAMAT EMAIL ANDA..." 
+                className="bg-white/10 border-2 border-white/20 px-8 py-6 rounded-[2rem] flex-1 focus:bg-white focus:text-gray-900 transition-all outline-none placeholder:text-white/40 text-white font-black uppercase text-xs tracking-widest shadow-inner"
               />
-              <Button className="bg-white text-[#E31D1A] hover:bg-[#092C74] hover:text-white px-10 py-5 h-auto rounded-2xl font-black transition-all shadow-xl shadow-black/10">
-                BERLANGGANAN
+              <Button className="h-20 px-12 bg-white text-[#E31D1A] hover:bg-[#003049] hover:text-white rounded-[2rem] font-black transition-all duration-500 shadow-2xl uppercase tracking-widest shrink-0">
+                LANGGANAN SEKARANG
               </Button>
             </div>
           </div>
-          <div className="w-full md:w-1/3 flex justify-center items-center relative z-10">
-             <div className="size-48 border-4 border-dashed border-white/20 rounded-full flex items-center justify-center animate-spin-slow">
-                <ExternalLink className="size-12 opacity-50" />
+          <div className="hidden lg:flex w-1/3 justify-center items-center relative z-10">
+             <div className="relative">
+                <div className="size-64 border-8 border-dashed border-white/10 rounded-full flex items-center justify-center animate-spin-slow" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                   <ExternalLink className="size-20 text-white/50" />
+                </div>
              </div>
           </div>
         </div>

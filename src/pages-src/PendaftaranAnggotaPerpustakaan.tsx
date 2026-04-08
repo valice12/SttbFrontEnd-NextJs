@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { BookOpen, Send, User, Calendar, Home, Phone, Mail, FileText, Camera, CheckCircle2 } from 'lucide-react';
+import { BookOpen, Send, User, Calendar, Home, Phone, Mail, FileText, Camera, CheckCircle2, Layers } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -93,121 +93,143 @@ export function PendaftaranAnggotaPerpustakaan() {
       className="min-h-screen bg-white bg-cover bg-center"
       style={{ backgroundImage: `url(${bgPattern})` }}
     >
-      {/* Hero Section */}
-      <section className="relative text-white py-24 overflow-hidden">
+      {/* Premium Hero Section - Registration */}
+      <section className="relative h-[550px] md:h-[650px] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={bgHeader} alt="Pendaftaran Anggota Perpustakaan" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#092C74]/85 mix-blend-multiply" />
+          <img src={bgHeader} alt="Pendaftaran Anggota Perpustakaan" className="w-full h-full object-cover scale-105" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#082F49]/95 via-[#075985]/45 to-transparent z-10" />
+          
+          <div className="absolute bottom-1/4 -right-20 size-[500px] bg-[#6AACE6]/10 blur-[120px] rounded-full animate-pulse" />
         </div>
-        <div className="relative container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-4xl mx-auto"
-          >
-            <BookOpen className="size-16 text-yellow-500 mx-auto mb-6 drop-shadow-lg" />
-            <h1 className="text-5xl md:text-6xl font-black mb-8 leading-tight text-white drop-shadow-md">
-                Pendaftaran Anggota Perpustakaan
-            </h1>
-            <p className="text-xl md:text-2xl font-medium text-white/90 leading-relaxed">
-              Bergabunglah sebagai anggota untuk mengakses koleksi literatur teologi terlengkap di STT Bandung.
-            </p>
-          </motion.div>
+
+        <div className="relative container mx-auto px-4 h-full flex items-center z-20">
+          <div className="max-w-4xl">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-20 rounded-[40px] shadow-2xl relative overflow-hidden group"
+            >
+              <div className="relative z-10">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#E31D1A] rounded-full text-white text-xs font-black uppercase tracking-widest mb-8 shadow-lg shadow-red-500/30"
+                >
+                   <BookOpen className="size-3" /> Library Access
+                </motion.div>
+
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 drop-shadow-2xl tracking-tighter leading-[0.95]">
+                  Registrasi <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6AACE6] via-[#A855F7] to-[#E31D1A]">Anggota Perpus</span>
+                </h1>
+                <p className="text-xl md:text-2xl text-white/90 font-medium max-w-2xl leading-relaxed">
+                  Bergabunglah sebagai anggota untuk mengakses koleksi literatur teologi terlengkap dan layanan riset akademik di STT Bandung.
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Main Form Section */}
-      <section className="py-20">
+      {/* Main Form Section with Modern PhI Spacing */}
+      <section className="py-32 relative">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto bg-white/80 backdrop-blur-xl rounded-[3rem] p-8 md:p-16 shadow-2xl border border-white/20">
-            <div className="mb-12 text-center">
-              <h2 className="text-3xl font-black text-[#092C74] mb-4">Formulir Pendaftaran</h2>
-              <div className="w-20 h-1.5 bg-[#E31D1A] mx-auto rounded-full mb-6" />
-              <p className="text-gray-600 max-w-md mx-auto">Lengkapi data diri Anda di bawah ini dengan benar untuk pengajuan keanggotaan.</p>
+          <div className="max-w-4xl mx-auto bg-white/80 backdrop-blur-3xl rounded-[4rem] p-8 md:p-24 shadow-[0_50px_100px_rgba(9,44,116,0.1)] border border-white/20 relative">
+            <div className="absolute top-0 right-0 p-12 opacity-[0.03] pointer-events-none">
+              <Layers className="size-96" />
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="mb-20 text-center relative z-10">
+              <span className="text-[#E31D1A] font-black tracking-widest text-sm uppercase mb-4 block">Application Form</span>
+              <h2 className="text-4xl md:text-5xl font-black text-[#092C74] mb-6 tracking-tight">Formulir Pendaftaran</h2>
+              <div className="w-24 h-2 bg-gradient-to-r from-[#092C74] via-[#6AACE6] to-[#E31D1A] mx-auto rounded-full mb-10" />
+              <p className="text-xl text-gray-500 font-medium max-w-md mx-auto leading-relaxed italic">Lengkapi data diri Anda di bawah ini dengan benar untuk pengajuan keanggotaan.</p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-12 relative z-10">
               {status.type && (
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className={`p-6 rounded-2xl flex items-center gap-4 text-lg font-bold shadow-sm ${
+                  className={`p-8 rounded-3xl flex items-center gap-6 text-xl font-bold shadow-2xl ${
                     status.type === 'success' 
-                      ? 'bg-green-50 text-green-700 border border-green-200' 
-                      : 'bg-red-50 text-red-700 border border-red-200'
+                      ? 'bg-green-50 text-green-700 border-2 border-green-200' 
+                      : 'bg-red-50 text-red-700 border-2 border-red-200'
                   }`}
                 >
-                  {status.type === 'success' ? <CheckCircle2 className="size-6 shrink-0" /> : <Send className="size-6 shrink-0" />}
+                  {status.type === 'success' ? <CheckCircle2 className="size-10 shrink-0" /> : <Send className="size-10 shrink-0" />}
                   {status.message}
                 </motion.div>
               )}
 
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-2 gap-10">
                 {/* Full Name */}
-                <div className="space-y-3">
-                  <label className="text-sm font-black text-gray-700 tracking-wider uppercase flex items-center gap-2">
-                    <User className="size-4 text-[#092C74]" /> Nama Lengkap
+                <div className="space-y-4">
+                  <label className="text-xs font-black text-[#092C74] tracking-[0.2em] uppercase flex items-center gap-3">
+                    <div className="size-2 bg-[#E31D1A] rounded-full" /> Nama Lengkap
                   </label>
                   <Input 
                     name="fullName" 
                     value={formData.fullName} 
                     onChange={handleChange} 
                     placeholder="Contoh: Dr. John Doe" 
-                    className="h-14 bg-gray-50/50 border-gray-200 focus:bg-white rounded-xl transition-all text-lg font-medium" 
+                    className="h-16 bg-gray-50/50 border-gray-100 focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 rounded-[1.5rem] transition-all text-lg font-bold px-8" 
                     required 
                   />
                 </div>
 
                 {/* DOB */}
-                <div className="space-y-3">
-                  <label className="text-sm font-black text-gray-700 tracking-wider uppercase flex items-center gap-2">
-                    <Calendar className="size-4 text-[#092C74]" /> Tanggal Lahir
+                <div className="space-y-4">
+                  <label className="text-xs font-black text-[#092C74] tracking-[0.2em] uppercase flex items-center gap-3">
+                    <div className="size-2 bg-[#E31D1A] rounded-full" /> Tanggal Lahir
                   </label>
                   <Input 
                     name="dob" 
                     type="date"
                     value={formData.dob} 
                     onChange={handleChange} 
-                    className="h-14 bg-gray-50/50 border-gray-200 focus:bg-white rounded-xl transition-all text-lg font-medium" 
+                    className="h-16 bg-gray-50/50 border-gray-100 focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 rounded-[1.5rem] transition-all text-lg font-bold px-8" 
                     required 
                   />
                 </div>
 
                 {/* Institution Name */}
-                <div className="space-y-3">
-                  <label className="text-sm font-black text-gray-700 tracking-wider uppercase flex items-center gap-2">
-                    <Home className="size-4 text-[#092C74]" /> Nama Institusi
+                <div className="space-y-4">
+                  <label className="text-xs font-black text-[#092C74] tracking-[0.2em] uppercase flex items-center gap-3">
+                    <div className="size-2 bg-[#E31D1A] rounded-full" /> Nama Institusi
                   </label>
                   <Input 
                     name="institutionName" 
                     value={formData.institutionName} 
                     onChange={handleChange} 
                     placeholder="Gereja / Sekolah / Universitas" 
-                    className="h-14 bg-gray-50/50 border-gray-200 focus:bg-white rounded-xl transition-all text-lg font-medium" 
+                    className="h-16 bg-gray-50/50 border-gray-100 focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 rounded-[1.5rem] transition-all text-lg font-bold px-8" 
                     required 
                   />
                 </div>
 
                 {/* Contact */}
-                <div className="space-y-3">
-                  <label className="text-sm font-black text-gray-700 tracking-wider uppercase flex items-center gap-2">
-                    <Phone className="size-4 text-[#092C74]" /> Nomor Telepon / WA
+                <div className="space-y-4">
+                  <label className="text-xs font-black text-[#092C74] tracking-[0.2em] uppercase flex items-center gap-3">
+                    <div className="size-2 bg-[#E31D1A] rounded-full" /> Nomor Telepon / WA
                   </label>
                   <Input 
                     name="contact" 
                     value={formData.contact} 
                     onChange={handleChange} 
                     placeholder="0812xxxxxxxx" 
-                    className="h-14 bg-gray-50/50 border-gray-200 focus:bg-white rounded-xl transition-all text-lg font-medium" 
+                    className="h-16 bg-gray-50/50 border-gray-100 focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 rounded-[1.5rem] transition-all text-lg font-bold px-8" 
                     required 
                   />
                 </div>
               </div>
 
               {/* Email */}
-              <div className="space-y-3">
-                <label className="text-sm font-black text-gray-700 tracking-wider uppercase flex items-center gap-2">
-                  <Mail className="size-4 text-[#092C74]" /> Alamat Email
+              <div className="space-y-4">
+                <label className="text-xs font-black text-[#092C74] tracking-[0.2em] uppercase flex items-center gap-3">
+                  <div className="size-2 bg-[#E31D1A] rounded-full" /> Alamat Email
                 </label>
                 <Input 
                   name="email" 
@@ -215,40 +237,42 @@ export function PendaftaranAnggotaPerpustakaan() {
                   value={formData.email} 
                   onChange={handleChange} 
                   placeholder="name@example.com" 
-                  className="h-14 bg-gray-50/50 border-gray-200 focus:bg-white rounded-xl transition-all text-lg font-medium" 
+                  className="h-16 bg-gray-50/50 border-gray-100 focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 rounded-[1.5rem] transition-all text-lg font-bold px-8" 
                   required 
                 />
               </div>
 
               {/* Address */}
-              <div className="space-y-3">
-                <label className="text-sm font-black text-gray-700 tracking-wider uppercase flex items-center gap-2">
-                  <FileText className="size-4 text-[#092C74]" /> Alamat Domisili
+              <div className="space-y-4">
+                <label className="text-xs font-black text-[#092C74] tracking-[0.2em] uppercase flex items-center gap-3">
+                  <div className="size-2 bg-[#E31D1A] rounded-full" /> Alamat Domisili
                 </label>
                 <Textarea 
                   name="address" 
                   value={formData.address} 
                   onChange={handleChange} 
                   placeholder="Jl. Nama Jalan No. XX, Kota, Provinsi" 
-                  className="min-h-[120px] bg-gray-50/50 border-gray-200 focus:bg-white rounded-xl transition-all text-lg font-medium p-6" 
+                  className="min-h-[160px] bg-gray-50/50 border-gray-100 focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 rounded-[2rem] transition-all text-lg font-bold p-8" 
                   required 
                 />
               </div>
 
-              {/* File Uploads */}
-              <div className="grid md:grid-cols-3 gap-6">
+              {/* File Uploads - Grid with PhI Balance */}
+              <div className="grid md:grid-cols-3 gap-8 pt-6">
                 {[
                   { name: 'passportImage', label: 'Foto Paspor (2x3/3x4)', icon: Camera },
                   { name: 'idImage', label: 'Scan KTP / Kartu Identitas', icon: Camera },
                   { name: 'proofOfDepositImage', label: 'Bukti Deposit (Opsional)', icon: Camera },
                 ].map((field) => (
-                  <div key={field.name} className="space-y-3">
-                    <label className="text-xs font-black text-gray-500 uppercase tracking-widest">{field.label}</label>
+                  <div key={field.name} className="space-y-4">
+                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">{field.label}</label>
                     <div className="relative group">
-                      <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-300 rounded-2xl cursor-pointer bg-gray-50/50 hover:bg-white hover:border-[#092C74] transition-all group-hover:shadow-lg">
+                      <label className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-200 rounded-[2rem] cursor-pointer bg-gray-50/50 hover:bg-white hover:border-[#092C74] transition-all duration-500 group-hover:shadow-2xl">
                         <div className="flex flex-col items-center justify-center pt-5 pb-6 text-center">
-                          <field.icon className="size-8 text-gray-400 group-hover:text-[#092C74] mb-3 transition-colors" />
-                          <p className="text-xs text-gray-500 font-bold px-4 leading-tight">
+                          <div className="size-14 bg-[#F5F3FB] group-hover:bg-[#092C74] rounded-2xl flex items-center justify-center mb-4 transition-colors duration-500 shadow-inner">
+                            <field.icon className="size-6 text-gray-400 group-hover:text-white transition-colors" />
+                          </div>
+                          <p className="text-[10px] text-gray-500 font-black uppercase px-6 leading-tight tracking-widest">
                             {(formData as any)[field.name] ? (formData as any)[field.name].name : 'Pilih File'}
                           </p>
                         </div>
@@ -259,21 +283,21 @@ export function PendaftaranAnggotaPerpustakaan() {
                 ))}
               </div>
 
-              <div className="pt-6">
+              <div className="pt-12">
                 <Button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full h-20 bg-[#092C74] hover:bg-[#E31D1A] text-white font-black text-2xl rounded-2xl shadow-2xl transition-all hover:-translate-y-2 flex items-center justify-center gap-4 disabled:opacity-50"
+                  className="w-full h-24 bg-[#092C74] hover:bg-[#E31D1A] text-white font-black text-2xl rounded-[2rem] shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center justify-center gap-6 disabled:opacity-50 uppercase tracking-widest"
                 >
                   {isSubmitting ? (
                     'Sedang Mengirim...'
                   ) : (
                     <>
-                      Kirim Pendaftaran <Send className="size-6" />
+                      Kirim Pendaftaran <Send className="size-8" />
                     </>
                   )}
                 </Button>
-                <p className="text-center text-gray-400 mt-6 text-sm font-medium italic">
+                <p className="text-center text-gray-400 mt-10 text-sm font-medium italic opacity-80">
                   *Dengan menekan tombol di atas, Anda menyetujui syarat & ketentuan keanggotaan Perpustakaan STT Bandung.
                 </p>
               </div>

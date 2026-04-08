@@ -66,34 +66,63 @@ export function TentangKami() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative text-white py-24 overflow-hidden">
+      {/* Modern Hero Section with Golden Ratio & Staggered Animation */}
+      <section className="relative h-[500px] md:h-[600px] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={bgHeader} alt="About Us" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#061C4A]/80 mix-blend-multiply" />
+          <img src={bgHeader} alt="About Us" className="w-full h-full object-cover scale-105" />
+          {/* Advanced Gradient Overlay (Blue -> Purple -> Transparent) */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#061B46]/95 via-[#4B0082]/45 to-transparent z-10" />
+          
+          {/* Animated Mesh Gradients */}
+          <div className="absolute top-1/4 -right-1/4 size-[500px] bg-[#E31D1A]/20 blur-[100px] rounded-full animate-pulse" />
+          <div className="absolute bottom-1/4 -left-1/4 size-[400px] bg-[#092C74]/30 blur-[100px] rounded-full" />
         </div>
-        <div className="relative container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tighter uppercase drop-shadow-2xl">
-              {TAB_TITLES[activeTab]}
-            </h1>
-            <p className="text-xl md:text-2xl max-w-2xl mx-auto opacity-90 font-medium">
-              Mengenal lebih dekat Sekolah Tinggi Teologi Bandung
-            </p>
-          </motion.div>
+
+        <div className="relative container mx-auto px-4 h-full flex items-center z-20">
+          <div className="max-w-4xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              className="backdrop-blur-md bg-white/5 border border-white/10 p-8 md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden"
+            >
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#E31D1A] rounded-full text-white text-xs font-black uppercase tracking-widest mb-6 shadow-lg shadow-red-500/30"
+              >
+                 <Info className="size-3" /> Mengenal STT Bandung
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, ease: "backOut" }}
+                className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight tracking-tight drop-shadow-2xl"
+              >
+                {TAB_TITLES[activeTab]}
+              </motion.h1>
+              
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+                className="text-xl md:text-2xl text-white/90 font-medium leading-relaxed"
+              >
+                Melayani dengan integritas, membentuk karakter Kristus, dan berdampak bagi masyarakat urban.
+              </motion.p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Unified Tabs Container */}
       <Tabs value={activeTab} className="w-full">
-        {/* Navigation Section */}
-        <section className="bg-white border-b border-gray-200 py-6 sticky top-[132px] md:top-[132px] z-40 shadow-sm backdrop-blur-md bg-white/95">
+        {/* Navigation Section - Premium Glassmorphism Tabs */}
+        <section className="bg-white/80 border-b border-gray-100 py-8 sticky top-[132px] md:top-[132px] z-40 shadow-sm backdrop-blur-xl">
           <div className="container mx-auto px-4">
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
               {Object.entries(TAB_TITLES).map(([key, title]) => {
                 const Icon = key === 'history' ? Users : 
                             key === 'vision' ? Target : 
@@ -105,14 +134,14 @@ export function TentangKami() {
                   <button
                     key={key}
                     onClick={() => handleTabChange(key)}
-                    className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5 border ${
+                    className={`flex items-center gap-3 px-8 py-4 rounded-2xl transition-all duration-500 font-black tracking-wide shadow-sm hover:shadow-xl hover:-translate-y-1 border-2 ${
                       isActive 
-                        ? 'bg-[#092C74] text-white border-[#092C74] ring-2 ring-offset-2 ring-[#092C74]' 
-                        : 'bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border-gray-200 text-gray-700 hover:border-[#092C74]'
+                        ? 'bg-[#092C74] text-white border-[#092C74] shadow-blue-900/20' 
+                        : 'bg-white hover:bg-[#F2ECF8] hover:text-[#092C74] border-gray-100 text-gray-500 hover:border-[#6A0DAD]'
                     }`}
                   >
                     <Icon className={`size-5 ${isActive ? 'text-white' : 'text-[#E31D1A]'}`} />
-                    {title}
+                    <span className="uppercase text-sm">{title}</span>
                   </button>
                 );
               })}

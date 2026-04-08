@@ -1,14 +1,20 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Heart, Award, BookOpen, Settings, Send, Phone, Mail, MapPin, CheckCircle2 } from 'lucide-react';
+import { 
+  Heart, Award, BookOpen, Settings, Send, Phone, Mail, 
+  MapPin, CheckCircle2, ShieldCheck, ChevronRight, QrCode, 
+  Landmark, FileText, DollarSign 
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useState } from 'react';
 import { dataService } from '@/lib/data-service';
+import Link from 'next/link';
+import { FinanceNavbar } from '@/components/finance/FinanceNavbar';
 
-const bgHeader = "/assets/header-faq.png";
+const bgHeader = "/assets/bg-dukungan.png";
 const bgPattern = "/assets/background.webp";
 
 export function Dukungan() {
@@ -55,8 +61,6 @@ export function Dukungan() {
       data.append('Address', formData.address);
       data.append('DonationType', formData.donationType);
       data.append('DonationArea', formData.donationArea);
-      
-      // Send both old and new naming conventions
       data.append('Amount', formData.donationAmount.toString());
       data.append('DonationAmount', formData.donationAmount.toString());
       
@@ -64,8 +68,6 @@ export function Dukungan() {
         data.append('ProofOfDonation', formData.file);
         data.append('ProofOfDonationImage', formData.file);
         data.append('ProofOfSupport', 'true');
-      } else {
-        data.append('ProofOfSupport', 'false');
       }
       
       if (formData.donationArea === 'beasiswa') {
@@ -75,10 +77,8 @@ export function Dukungan() {
 
       if (formData.message) {
         data.append('Message', formData.message);
-        data.append('message', formData.message); // Some APIs use lowercase
       }
 
-      console.log('Sending robust donation data:', Object.fromEntries((data as any).entries()));
       await dataService.addDonorMember(data);
       setStatus({ type: 'success', message: 'Terima kasih atas dukungan Anda! Data Anda telah berhasil dikirim.' });
       setFormData({
@@ -96,10 +96,7 @@ export function Dukungan() {
         file: null as File | null
       });
     } catch (error: any) {
-      const errorMessage = error.errors 
-        ? Object.values(error.errors).flat().join(', ') 
-        : (error.message || 'Terjadi kesalahan saat mengirim data. Silakan coba lagi.');
-      setStatus({ type: 'error', message: errorMessage });
+      setStatus({ type: 'error', message: error.message || 'Terjadi kesalahan saat mengirim data.' });
     } finally {
       setIsSubmitting(false);
     }
@@ -120,403 +117,332 @@ export function Dukungan() {
       className="min-h-screen bg-white bg-cover bg-center"
       style={{ backgroundImage: `url(${bgPattern})` }}
     >
-      {/* Hero Section */}
-      <section className="relative text-white py-24 overflow-hidden">
+      {/* Premium Hero Section - Support */}
+      <section className="relative h-[550px] md:h-[650px] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={bgHeader} alt="Dukungan STTB" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#092C74]/85 mix-blend-multiply" />
+          <img src={bgHeader} alt="Support Hero" className="w-full h-full object-cover scale-105" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#7F1D1D]/95 via-[#9A3412]/45 to-transparent z-10" />
+          
+          <div className="absolute top-1/2 -right-20 size-[500px] bg-[#E31D1A]/10 blur-[120px] rounded-full animate-pulse" />
         </div>
-        <div className="relative container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-4xl mx-auto"
-          >
-            <Heart className="size-16 text-[#E31D1A] mx-auto mb-6 drop-shadow-lg" />
-            <h1 className="text-5xl md:text-6xl font-black mb-8 leading-tight">Dukungan Pelayanan & Donasi</h1>
-            <p className="text-xl md:text-2xl font-medium text-white/90 leading-relaxed">
-              Bergabunglah bersama kami dalam mempersiapkan pelayan Tuhan yang berdampak bagi masyarakat dan kemuliaan Nama-Nya.
-            </p>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Goal Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto bg-white rounded-[3rem] shadow-2xl border border-gray-100 overflow-hidden flex flex-col md:flex-row shadow-blue-900/10">
-            <div className="md:w-2/3 p-10 lg:p-16">
-              <h2 className="text-3xl font-black text-[#092C74] mb-8 flex items-center gap-3">
-                <span className="w-2 h-10 bg-[#E31D1A] rounded-full inline-block"></span>
-                Tujuan Penggalangan Dana
-              </h2>
-              <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                Kontribusi donatur digunakan untuk menolong STTB melanjutkan amanat Kristus dalam mempersiapkan dan mendidik pelayan-pelayan Tuhan agar berdampak bagi masyarakat. Bantuan dana ditujukan untuk:
-              </p>
-              <ul className="space-y-6">
-                {[
-                  "Membantu biaya studi mahasiswa S1 dan S2 yang memiliki kendala finansial.",
-                  "Meningkatkan sumber daya dan kualitas pendidik/pendidikan.",
-                  "Menunjang dan mengembangkan fasilitas teknologi pembelajaran."
-                ].map((item, idx) => (
-                  <li key={idx} className="flex gap-4">
-                    <div className="size-8 rounded-full bg-blue-50 text-[#092C74] flex items-center justify-center shrink-0 mt-1">
-                      <CheckCircle2 className="size-5" />
-                    </div>
-                    <span className="text-gray-700 font-medium">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="md:w-1/3 bg-[#092C74] p-10 flex flex-col justify-center items-center text-center text-white relative">
-              <div className="absolute inset-0 opacity-10 bg-[url('/assets/background.webp')] bg-repeat" />
+        <div className="relative container mx-auto px-4 h-full flex items-center z-20">
+          <div className="max-w-4xl">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 rounded-[40px] shadow-2xl relative overflow-hidden"
+            >
               <div className="relative z-10">
-                <Heart className="size-20 mb-6 text-red-500 animate-pulse" />
-                <h3 className="text-2xl font-bold mb-4">Setiap Kontribusi Sangat Berarti</h3>
-                <p className="text-white/70 italic text-sm">"Hendaklah masing-masing memberikan menurut kerelaan hatinya..."</p>
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#E31D1A] rounded-full text-white text-xs font-black uppercase tracking-widest mb-8 shadow-lg shadow-red-500/30"
+                >
+                   <Heart className="size-3" /> Partner in Ministry
+                </motion.div>
+
+                <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black text-white mb-8 leading-[1.1] tracking-tight drop-shadow-2xl">
+                  Dukungan <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6AACE6] via-[#A855F7] to-[#E31D1A]">Pelayanan</span>
+                </h1>
+                <p className="text-xl md:text-2xl text-white/90 font-medium max-w-2xl leading-relaxed">
+                  Bermitra bersama STT Bandung dalam mempersiapkan pemimpin kristiani yang kompeten dan berdampak bagi transformasi peradaban.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Premium Navigation Tabs - Centralized */}
+      <FinanceNavbar />
+
+      {/* Goal & Mission Section - PHI Layout */}
+      <section className="py-32 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="max-w-7xl mx-auto bg-white rounded-[4rem] shadow-[0_60px_120px_rgba(9,44,116,0.06)] border border-gray-100 flex flex-col lg:flex-row relative">
+            <div className="absolute top-0 left-0 size-64 bg-[#E31D1A]/5 blur-[80px] rounded-full -ml-32 -mt-32" />
+            
+            <div className="lg:w-[61.8%] p-10 md:p-20 relative z-10">
+              <div className="inline-flex items-center gap-3 px-5 py-2 bg-[#F2ECF8] rounded-full text-[#092C74] text-[10px] font-black uppercase tracking-widest mb-10 border border-blue-50 shadow-sm">
+                <ShieldCheck className="size-3 text-[#E31D1A]" /> Misi Berkelanjutan
+              </div>
+              <h2 className="text-4xl md:text-6xl font-black text-[#092C74] mb-12 tracking-tighter leading-tight">
+                Tujuan Penggalangan <br /><span className="text-[#E31D1A]">Dana Pelayanan</span>
+              </h2>
+              <ul className="space-y-10">
+                {[
+                  "Subsidi Biaya Studi: Mendukung hamba Tuhan terpanggil dari berbagai penjuru tanah air.",
+                  "Pengembangan Kapasitas: Meningkatkan kualitas riset dan referensi pustaka teologis.",
+                  "Infrastruktur Modern: Menunjang sistem pembelajaran hybrid yang eksklusif."
+                ].map((item, idx) => {
+                  const [title, desc] = item.split(': ');
+                  return (
+                    <motion.li 
+                      key={idx} 
+                      whileHover={{ x: 10 }}
+                      className="flex gap-8 group"
+                    >
+                      <div className="size-14 rounded-[1.25rem] bg-[#092C74]/5 text-[#092C74] flex items-center justify-center shrink-0 border border-[#092C74]/10 shadow-inner group-hover:bg-[#092C74] group-hover:text-white transition-all duration-500">
+                        <CheckCircle2 className="size-6" />
+                      </div>
+                      <div>
+                        <h4 className="text-2xl font-black text-[#092C74] mb-2 tracking-tight">{title}</h4>
+                        <p className="text-gray-500 font-medium leading-relaxed text-lg italic">{desc}</p>
+                      </div>
+                    </motion.li>
+                  );
+                })}
+              </ul>
+            </div>
+            
+            <div className="lg:w-[38.2%] bg-gradient-to-br from-[#061B46] to-[#4B0082] p-10 md:p-16 flex flex-col justify-center items-center text-center text-white relative overflow-hidden">
+              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
+              <div className="absolute -bottom-24 -left-24 size-80 bg-white/5 blur-[80px] rounded-full" />
+              
+              <div className="relative z-10 space-y-10">
+                <div className="size-24 bg-white/10 backdrop-blur-xl rounded-[2.5rem] flex items-center justify-center mx-auto border border-white/20 shadow-2xl group transition-transform duration-700 hover:rotate-6">
+                   <Heart className="size-12 text-[#E31D1A] animate-pulse" />
+                </div>
+                <div>
+                  <h3 className="text-4xl font-black mb-6 tracking-tight leading-tight">Investasi Abadi</h3>
+                  <p className="text-white/60 font-medium leading-relaxed italic text-lg opacity-80">"Hendaklah masing-masing memberikan menurut kerelaan hatinya, jangan dengan sedih hati atau karena paksaan."</p>
+                </div>
+                <div className="pt-10 border-t border-white/10">
+                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#6AACE6]">Laporan Transparansi Tahunan</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Pillars Section */}
-      <section className="py-20 bg-gray-50/50">
+      {/* Pillars Section - 3D Glass Panels */}
+      <section className="py-24 bg-gray-50/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black text-[#092C74] mb-4">Prioritas Penggunaan Donasi</h2>
-            <div className="w-24 h-1.5 bg-[#E31D1A] mx-auto rounded-full" />
-            <p className="mt-6 text-gray-600 max-w-2xl mx-auto">STTB mengalokasikan dukungan dana ke dalam tiga pilar utama untuk keberlanjutan misi pendidikan teologi.</p>
+          <div className="text-center mb-24">
+            <h2 className="text-4xl md:text-5xl font-black text-[#092C74] mb-8 tracking-tighter">Fokus Dukungan <span className="text-[#E31D1A]">Finansial</span></h2>
+            <div className="w-24 h-1.5 bg-gradient-to-r from-[#092C74] via-[#6A0DAD] to-[#E31D1A] mx-auto rounded-full" />
           </div>
-
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* A. Beasiswa */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-[2rem] p-8 shadow-xl border border-gray-100 flex flex-col h-full hover:shadow-2xl transition-all duration-300"
-            >
-              <div className="size-16 bg-red-50 rounded-2xl flex items-center justify-center mb-6 border border-red-100 shadow-sm">
-                <Award className="size-8 text-[#E31D1A]" />
-              </div>
-              <h3 className="text-2xl font-black text-[#092C74] mb-4">A. Program Beasiswa</h3>
-              <p className="text-sm text-gray-500 mb-6 font-medium italic">STTB memiliki 5 jenis beasiswa bagi mahasiswa S1 maupun S2.</p>
-              
-              <div className="space-y-6 flex-grow">
-                <div>
-                  <h4 className="font-bold text-[#092C74] mb-2 uppercase text-xs tracking-widest border-l-4 border-[#E31D1A] pl-3">Syarat Penerima</h4>
-                  <p className="text-sm text-gray-600 leading-relaxed pl-4">Diberikan kepada mahasiswa yang sudah menjalani proses belajar hingga semester ke-2 dengan IPK minimal 3,0, serta telah lulus seleksi dan wawancara.</p>
+ 
+          <div className="grid lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+            {[
+              { title: "Program Beasiswa", icon: Award, desc: "Membiayai pendidikan mahasiwa pilihan.", color: "bg-red-50 text-[#E31D1A] border-red-100" },
+              { title: "Digital Library", icon: BookOpen, desc: "Akses literatur teologi global.", color: "bg-blue-50 text-[#092C74] border-blue-100" },
+              { title: "Institutional Dev", icon: Settings, desc: "Akselerasi fasilitas kampus.", color: "bg-indigo-50 text-[#4B0082] border-indigo-100" }
+            ].map((pilar, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10 }}
+                className="backdrop-blur-xl bg-white/40 border border-white p-12 rounded-[3.5rem] shadow-[0_30px_60px_rgba(0,0,0,0.03)] flex flex-col h-full group transition-all duration-700 hover:shadow-2xl"
+              >
+                <div className={`size-20 ${pilar.color} rounded-[1.5rem] flex items-center justify-center mb-10 border shadow-inner group-hover:rotate-6 transition-transform duration-500`}>
+                  <pilar.icon className="size-10" />
                 </div>
-                <div>
-                  <h4 className="font-bold text-[#092C74] mb-2 uppercase text-xs tracking-widest border-l-4 border-[#E31D1A] pl-3">Cakupan Biaya</h4>
-                  <p className="text-sm text-gray-600 leading-relaxed pl-4">Membiayai kebutuhan bulanan, administrasi, buku, serta biaya skripsi dan wisuda.</p>
+                <h3 className="text-3xl font-black text-[#092C74] mb-6 tracking-tight">{pilar.title}</h3>
+                <p className="text-lg text-gray-400 font-bold mb-10 leading-relaxed italic border-l-4 border-current pl-6">{pilar.desc}</p>
+                <div className="mt-auto flex items-center gap-4 text-[10px] font-black uppercase tracking-widest text-[#6A0DAD]">
+                   <CheckCircle2 className="size-4" /> Comprehensive Oversight
                 </div>
-              </div>
-              <div className="mt-8 p-4 bg-green-50 rounded-xl border border-green-100 flex items-center gap-3">
-                <CheckCircle2 className="size-5 text-green-600 shrink-0" />
-                <p className="text-xs font-bold text-green-700">Transparansi: Laporan tahunan diberikan kepada sponsor.</p>
-              </div>
-            </motion.div>
-
-            {/* B. Perpustakaan Digital */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="bg-white rounded-[2rem] p-8 shadow-xl border border-gray-100 flex flex-col h-full hover:shadow-2xl transition-all duration-300"
-            >
-              <div className="size-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 border border-blue-100 shadow-sm">
-                <BookOpen className="size-8 text-[#092C74]" />
-              </div>
-              <h3 className="text-2xl font-black text-[#092C74] mb-4">B. Perpustakaan Digital</h3>
-              <p className="text-sm text-gray-600 leading-relaxed mb-6">
-                Dana digunakan untuk menambah dan memperkaya koleksi buku serta e-book setiap tahun guna menjaga kualitas pendidikan teologi yang baik.
-              </p>
-              <ul className="space-y-4 text-sm text-gray-700 mb-6">
-                <li className="flex items-start gap-2">
-                  <div className="size-1.5 bg-[#092C74] rounded-full mt-1.5 shrink-0" />
-                  <span>Koleksi sekitar <strong>50.000 buku fisik</strong></span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <div className="size-1.5 bg-[#092C74] rounded-full mt-1.5 shrink-0" />
-                  <span>Akses layanan <strong>Ebscohost</strong> (E-book)</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <div className="size-1.5 bg-[#092C74] rounded-full mt-1.5 shrink-0" />
-                  <span>Langganan <strong>ATLA</strong> (E-journal)</span>
-                </li>
-              </ul>
-            </motion.div>
-
-            {/* C. Dukungan Lainnya */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="bg-white rounded-[2rem] p-8 shadow-xl border border-gray-100 flex flex-col h-full hover:shadow-2xl transition-all duration-300"
-            >
-              <div className="size-16 bg-purple-50 rounded-2xl flex items-center justify-center mb-6 border border-purple-100 shadow-sm">
-                <Settings className="size-8 text-purple-600" />
-              </div>
-              <h3 className="text-2xl font-black text-[#092C74] mb-4">C. Pengembangan Institusi</h3>
-              <p className="text-sm text-gray-600 leading-relaxed mb-6 italic">STTB berinovasi untuk menjawab kebutuhan zaman.</p>
-              <ul className="grid grid-cols-1 gap-3">
-                {[
-                  "Pembangunan infrastruktur.",
-                  "Digital ministry & studio rekaman.",
-                  "Pembinaan Hamba Tuhan di daerah.",
-                  "Seminar & perkuliahan eksternal."
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-3 p-3 bg-purple-50/50 rounded-lg text-sm font-medium text-purple-900 border border-purple-100/50">
-                    <CheckCircle2 className="size-4 shrink-0" />
-                    {item}
-                  </div>
-                ))}
-              </ul>
-            </motion.div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Donation Info & Form */}
-      <section className="py-20 relative overflow-hidden">
+      {/* Donation Flow & Form - Modern Glass Style */}
+      <section className="py-32 relative">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            {/* Left: Account Info */}
+          <div className="grid lg:grid-cols-2 gap-20 items-start max-w-7xl mx-auto">
+            {/* Left: Account Info - Premium Card */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-black text-[#092C74] mb-8">Cara Berdonasi</h2>
-              <p className="text-lg text-gray-600 mb-10 leading-relaxed">
-                Untuk menjadi donatur atau sponsor, silakan isi formulir di samping dan lakukan transfer ke rekening resmi STTB berikut.
+              <h2 className="text-4xl md:text-5xl font-black text-[#092C74] mb-10 tracking-tighter">Prosedur <span className="text-[#E31D1A]">Donasi</span></h2>
+              <p className="text-xl text-gray-500 font-medium mb-12 leading-relaxed">
+                Salurkan dukungan Anda melalui rekening resmi Yayasan Pendidikan Teologi Bandung untuk akuntabilitas yang terjamin.
               </p>
 
-              <div className="bg-[#092C74] rounded-3xl p-8 md:p-10 text-white shadow-2xl relative overflow-hidden mb-12 group">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 transition-transform group-hover:scale-110" />
-                <div className="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+              <div className="bg-gradient-to-br from-[#092C74] to-[#061B46] rounded-[4rem] p-12 lg:p-16 text-white shadow-2xl relative overflow-hidden mb-16 group border border-white/10 group">
+                <div className="absolute top-0 right-0 size-96 bg-white/5 blur-[100px] rounded-full -mr-32 -mt-32" />
+                
+                <div className="relative z-10 space-y-16">
+                  <div className="flex justify-between items-center">
+                    <div className="text-5xl font-black italic text-[#6AACE6] flex items-center gap-4">
+                      BCA <span className="text-xs not-italic font-black uppercase tracking-[0.4em] text-white/30 ml-4">Official</span>
+                    </div>
+                    <Landmark className="size-10 text-white/20" />
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <p className="text-[10px] text-white/30 uppercase tracking-[0.3em] font-black">Account Number</p>
+                    <div className="text-5xl md:text-6xl font-black tracking-widest text-white drop-shadow-2xl">282 300 5555</div>
+                  </div>
+                  
                   <div>
-                    <div className="flex items-center justify-between mb-8">
-                      <div className="text-3xl font-black tracking-widest italic opacity-60">BCA</div>
-                      <CheckCircle2 className="size-8 text-[#6AACE6]" />
-                    </div>
-                    <div className="mb-8">
-                      <p className="text-sm text-white/60 mb-1 uppercase tracking-widest font-bold">Nomor Rekening</p>
-                      <div className="text-2xl md:text-3xl font-black letter-spacing-[0.1em]">282 300 5555</div>
-                    </div>
-                    <div>
-                      <p className="text-sm text-white/60 mb-1 uppercase tracking-widest font-bold">Atas Nama</p>
-                      <p className="text-lg font-bold">Yayasan STT Bandung</p>
-                    </div>
+                    <p className="text-[10px] text-white/30 uppercase tracking-[0.3em] font-black mb-4">Account Holder</p>
+                    <p className="text-2xl font-black tracking-tight text-[#6AACE6]">Yayasan Pendidikan Teologi Bandung</p>
                   </div>
-                  <div className="bg-white p-4 rounded-2xl shadow-xl flex flex-col items-center">
-                    <img 
-                      src="/assets/QR-Code-Rek-STTB.jpeg" 
-                      alt="QR Code Rekening STTB" 
-                      className="w-full max-w-[180px] h-auto rounded-lg"
-                    />
-                    <p className="text-[#092C74] text-xs font-black mt-3 uppercase tracking-widest">Scan QR untuk Donasi</p>
+                  
+                  <div className="backdrop-blur-xl bg-white p-10 rounded-[3rem] shadow-2xl flex flex-col items-center group-hover:rotate-1 transition-transform duration-700">
+                    <div className="bg-gray-50 p-6 rounded-[2rem] border border-gray-100 mb-6 w-full max-w-[280px]">
+                      <img 
+                        src="/assets/QR-Code-Rek-STTB.jpeg" 
+                        alt="QR Code Rekening STTB" 
+                        className="w-full aspect-square object-cover rounded-xl transition-all duration-700"
+                      />
+                    </div>
+                    <p className="text-[#092C74] text-[10px] font-black uppercase tracking-[0.3em]">Quick Scan Donation</p>
                   </div>
-                </div>
-                <div className="mt-8 pt-8 border-t border-white/10 flex items-center gap-4 relative z-10">
-                  <MapPin className="size-5 text-red-400" />
-                  <span className="text-sm text-white/70">Cabang Surya Sumantri, Bandung</span>
                 </div>
               </div>
 
-              <div className="bg-red-50 p-6 rounded-2xl border-2 border-dashed border-red-200">
-                <p className="text-red-900 font-bold flex items-center gap-2 mb-2">
-                  <CheckCircle2 className="size-5" /> Catatan Penting
-                </p>
-                <p className="text-red-800/80 text-sm leading-relaxed">
-                  Setelah mengirimkan formulir, Unit Beasiswa/Keuangan STTB akan menghubungi Anda untuk proses tindak lanjut.
+              <div className="bg-[#F2ECF8] p-10 rounded-[2.5rem] border-2 border-dashed border-[#092C74]/20">
+                <div className="flex items-center gap-4 mb-4">
+                  <CheckCircle2 className="size-6 text-[#E31D1A]" />
+                  <span className="text-xl font-black text-[#092C74]">Konfirmasi Otomatis</span>
+                </div>
+                <p className="text-gray-500 font-medium leading-relaxed">
+                  Setelah melakukan transfer, silakan lampirkan bukti pembayaran melalui formulir di samping untuk pendataan administrasi yang rapi.
                 </p>
               </div>
             </motion.div>
 
-            {/* Right: Form */}
+            {/* Right: Modern Support Form */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-white rounded-[2.5rem] p-10 shadow-2xl border border-gray-100"
+              className="backdrop-blur-xl bg-white/40 border-2 border-white p-10 md:p-16 rounded-[4rem] shadow-[0_60px_120px_rgba(0,0,0,0.06)] h-full"
             >
-              <h3 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-3">
-                <Send className="size-6 text-[#1C64E8]" /> Formulir Dukungan
-              </h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {status.type && (
-                  <div className={`p-4 rounded-xl text-sm font-medium ${status.type === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
-                    {status.message}
-                  </div>
-                )}
-                <div className="grid sm:grid-cols-4 gap-6">
-                  <div className="space-y-2 col-span-1">
-                    <label className="text-sm font-bold text-gray-700 ml-1">Sapaan</label>
-                    <select 
-                      name="salutation" 
-                      value={formData.salutation} 
-                      onChange={handleChange}
-                      className="w-full h-12 bg-gray-50/50 border border-gray-200 rounded-md px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#1C64E8] focus:bg-white transition-all"
-                    >
-                      <option value="Sdr.">Sdr.</option>
-                      <option value="Bpk.">Bpk.</option>
-                      <option value="Ibu">Ibu</option>
-                      <option value="Pdt.">Pdt.</option>
-                    </select>
-                  </div>
-                  <div className="space-y-2 col-span-3">
-                    <label className="text-sm font-bold text-gray-700 ml-1">Nama Lengkap</label>
-                    <Input 
-                      name="fullName" 
-                      value={formData.fullName} 
-                      onChange={handleChange} 
-                      placeholder="Contoh: Budi Santoso" 
-                      className="bg-gray-50/50 border-gray-200 h-12 focus:bg-white transition-all" 
-                      required 
-                    />
-                  </div>
+              <div className="flex items-center gap-6 mb-16">
+                <div className="size-16 rounded-[1.5rem] bg-[#092C74] flex items-center justify-center shadow-xl text-white">
+                  <Send className="size-8" />
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-gray-700 ml-1">WhatsApp / Telepon</label>
+                <div>
+                   <h3 className="text-4xl font-black text-[#092C74] tracking-tighter">Formulir Dukungan</h3>
+                   <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-2">Digital Partnership Portal</p>
+                </div>
+              </div>
+              
+              <form onSubmit={handleSubmit} className="space-y-8">
+                {status.type && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: -10 }} 
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`p-6 rounded-2xl text-sm font-black uppercase tracking-widest ${status.type === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}
+                  >
+                    {status.message}
+                  </motion.div>
+                )}
+                
+                <div className="grid sm:grid-cols-4 gap-6">
+                  <select 
+                    name="salutation" 
+                    value={formData.salutation} 
+                    onChange={handleChange}
+                    className="col-span-1 h-16 bg-white border border-gray-100 rounded-2xl px-6 text-sm font-black text-[#092C74] focus:ring-2 focus:ring-[#092C74]/10 outline-none shadow-sm"
+                  >
+                    <option value="Sdr.">SDR.</option>
+                    <option value="Bpk.">BPK.</option>
+                    <option value="Ibu">IBU</option>
+                    <option value="Pdt.">PDT.</option>
+                  </select>
+                  <Input 
+                    name="fullName" 
+                    value={formData.fullName} 
+                    onChange={handleChange} 
+                    placeholder="NAMA LENGKAP DONATUR" 
+                    className="col-span-3 h-16 bg-white border-gray-100 rounded-2xl px-8 font-black text-[#092C74] placeholder:text-gray-300 focus:bg-white transition-all uppercase text-[11px] tracking-widest" 
+                    required 
+                  />
+                </div>
+                
+                <div className="grid sm:grid-cols-2 gap-6">
                   <Input 
                     name="phoneNumber" 
                     value={formData.phoneNumber} 
                     onChange={handleChange} 
-                    placeholder="0812xxxx" 
-                    className="bg-gray-50/50 border-gray-200 h-12 focus:bg-white transition-all" 
+                    placeholder="WHATSAPP / TELEPON" 
+                    className="h-16 bg-white border-gray-100 rounded-2xl px-8 font-black text-[#092C74] placeholder:text-gray-300 focus:bg-white transition-all uppercase text-[11px] tracking-widest" 
                     required 
                   />
-                </div>
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700 ml-1">Email</label>
-                    <Input 
-                      name="email" 
-                      type="email" 
-                      value={formData.email} 
-                      onChange={handleChange} 
-                      placeholder="nama@domain.com" 
-                      className="bg-gray-50/50 border-gray-200 h-12 focus:bg-white transition-all" 
-                      required 
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700 ml-1">Alamat</label>
-                    <Input 
-                      name="address" 
-                      value={formData.address} 
-                      onChange={handleChange} 
-                      placeholder="Jl. Raya No. 123" 
-                      className="bg-gray-50/50 border-gray-200 h-12 focus:bg-white transition-all" 
-                      required 
-                    />
-                  </div>
-                </div>
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700 ml-1">Jenis Dukungan</label>
-                    <select 
-                      name="donationType" 
-                      value={formData.donationType} 
-                      onChange={handleChange}
-                      className="w-full h-12 bg-gray-50/50 border border-gray-200 rounded-md px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#1C64E8] focus:bg-white transition-all"
-                    >
-                      <option value="sekali_pembayaran">Sekali Pembayaran</option>
-                      <option value="perbulan">Hamba Tuhan Commitment (Bulanan)</option>
-                    </select>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700 ml-1">Area Donasi</label>
-                    <select 
-                      name="donationArea" 
-                      value={formData.donationArea} 
-                      onChange={handleChange}
-                      className="w-full h-12 bg-gray-50/50 border border-gray-200 rounded-md px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#1C64E8] focus:bg-white transition-all"
-                    >
-                      <option value="beasiswa">Program Beasiswa</option>
-                      <option value="perpustakaan_digital">Perpustakaan Digital</option>
-                      <option value="dukungan_sttb">Dukungan Operasional STTB</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-gray-700 ml-1">Jumlah Donasi (Rupiah)</label>
                   <Input 
-                    name="donationAmount" 
-                    type="number"
-                    value={formData.donationAmount} 
+                    name="email" 
+                    type="email" 
+                    value={formData.email} 
                     onChange={handleChange} 
-                    placeholder="Contoh: 1000000" 
-                    className="bg-gray-50/50 border-gray-200 h-12 focus:bg-white transition-all" 
+                    placeholder="ALAMAT EMAIL RESMI" 
+                    className="h-16 bg-white border-gray-100 rounded-2xl px-8 font-black text-[#092C74] placeholder:text-gray-300 focus:bg-white transition-all uppercase text-[11px] tracking-widest" 
                     required 
-                    min="1"
                   />
                 </div>
-                {formData.donationArea === 'beasiswa' && (
-                  <motion.div 
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    className="grid sm:grid-cols-2 gap-6 pt-2"
+                
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <select 
+                    name="donationType" 
+                    value={formData.donationType} 
+                    onChange={handleChange}
+                    className="h-16 bg-white border border-gray-100 rounded-2xl px-8 text-[11px] font-black text-[#092C74] focus:ring-2 focus:ring-[#092C74]/10 outline-none shadow-sm uppercase tracking-widest"
                   >
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-gray-700 ml-1">Nama Mahasiswa (Opsional)</label>
-                      <Input 
-                        name="studentName" 
-                        value={formData.studentName} 
-                        onChange={handleChange} 
-                        placeholder="Nama mahasiswa penerima" 
-                        className="bg-gray-50/50 border-gray-200 h-12 focus:bg-white transition-all" 
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-gray-700 ml-1">Program Studi ID (Opsional)</label>
-                      <Input 
-                        name="academicProgramId" 
-                        type="number"
-                        value={formData.academicProgramId} 
-                        onChange={handleChange} 
-                        placeholder="ID Program" 
-                        className="bg-gray-50/50 border-gray-200 h-12 focus:bg-white transition-all" 
-                      />
-                    </div>
-                  </motion.div>
-                )}
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-gray-700 ml-1">Pesan (Opsional)</label>
-                  <Textarea 
-                    name="message" 
-                    value={formData.message} 
-                    onChange={handleChange} 
-                    placeholder="Tuliskan pesan atau pertanyaan Anda di sini..." 
-                    className="bg-gray-50/50 border-gray-200 min-h-[100px] focus:bg-white transition-all" 
-                  />
+                    <option value="sekali_pembayaran">SEKALI PEMBAYARAN</option>
+                    <option value="perbulan">H.T COMMITMENT (BULANAN)</option>
+                  </select>
+                  <select 
+                    name="donationArea" 
+                    value={formData.donationArea} 
+                    onChange={handleChange}
+                    className="h-16 bg-white border border-gray-100 rounded-2xl px-8 text-[11px] font-black text-[#092C74] focus:ring-2 focus:ring-[#092C74]/10 outline-none shadow-sm uppercase tracking-widest"
+                  >
+                    <option value="beasiswa">PROGRAM BEASISWA</option>
+                    <option value="perpustakaan_digital">LIBRARY DIGITAL</option>
+                    <option value="dukungan_sttb">OPERASIONAL STTB</option>
+                  </select>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-gray-700 ml-1">Upload Bukti Transfer / Dukungan</label>
-                  <div className="flex items-center justify-center w-full">
-                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 transition-all">
-                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                        <svg className="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                        </svg>
-                        <p className="mb-2 text-sm text-gray-500 font-semibold">{formData.file ? formData.file.name : 'Klik untuk upload bukti'}</p>
-                        <p className="text-xs text-gray-400">PNG, JPG atau PDF (Maks. 5MB)</p>
-                      </div>
-                      <input name="file" type="file" className="hidden" onChange={handleChange} accept="image/*,.pdf" />
-                    </label>
-                  </div>
+                
+                <Input 
+                  name="donationAmount" 
+                  type="number"
+                  value={formData.donationAmount} 
+                  onChange={handleChange} 
+                  placeholder="JUMLAH DONASI (CONTOH: 1000000)" 
+                  className="h-16 bg-white border-gray-100 rounded-2xl px-8 font-black text-[#092C74] placeholder:text-gray-300 focus:bg-white transition-all uppercase text-[11px] tracking-widest" 
+                  required 
+                />
+                
+                <Textarea 
+                  name="message" 
+                  value={formData.message} 
+                  onChange={handleChange} 
+                  placeholder="TULIS PESAN ATAU KERINDUAN PELAYANAN ANDA..." 
+                  className="bg-white border-gray-100 min-h-[120px] rounded-3xl p-8 font-black text-[#092C74] placeholder:text-gray-300 uppercase text-[11px] tracking-widest" 
+                />
+                
+                <div className="space-y-4">
+                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Bukti Transfer (Format Gambar/PDF)</label>
+                  <label className="flex flex-col items-center justify-center w-full h-40 border-4 border-gray-100 border-dashed rounded-[2.5rem] cursor-pointer bg-white/50 hover:bg-white transition-all group/upload">
+                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                      <QrCode className="size-10 mb-4 text-gray-300 group-hover/upload:text-[#E31D1A] transition-colors" />
+                      <p className="mb-2 text-xs text-gray-500 font-black uppercase tracking-widest">{formData.file ? formData.file.name : 'PILIH BUKTI TRANSFER'}</p>
+                    </div>
+                    <input name="file" type="file" className="hidden" onChange={handleChange} accept="image/*,.pdf" />
+                  </label>
                 </div>
+                
                 <Button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full h-14 bg-[#1C64E8] hover:bg-[#092C74] text-white font-bold text-lg rounded-xl shadow-lg shadow-blue-500/20 transition-all hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full h-20 bg-[#092C74] hover:bg-[#E31D1A] text-white font-black text-xl rounded-[2rem] shadow-2xl transition-all duration-500 hover:-translate-y-2 disabled:opacity-50 uppercase tracking-[0.2em]"
                 >
-                  {isSubmitting ? 'Mengirim...' : 'Kirim Formulir Dukungan'}
+                  {isSubmitting ? 'MEMPROSES...' : 'Kirim Dukungan'}
                 </Button>
               </form>
             </motion.div>
@@ -524,68 +450,35 @@ export function Dukungan() {
         </div>
       </section>
 
-      {/* Contacts Section */}
-      <section className="py-24 bg-[#092C74] text-white relative overflow-hidden">
+      {/* Modern Contacts Section */}
+      <section className="py-32 bg-[#061B46] text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4">Informasi Kontak & Pusat Bantuan</h2>
-            <p className="text-white/60 text-lg">Ada pertanyaan? Kami siap membantu mengarahkan dukungan Anda.</p>
+          <div className="text-center mb-24">
+            <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter">Hubungi Kami</h2>
+            <div className="w-20 h-1 bg-[#E31D1A] mx-auto rounded-full" />
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Email Box */}
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-3xl">
-              <Mail className="size-10 text-[#6AACE6] mb-6" />
-              <h3 className="text-xl font-bold mb-6 border-b border-white/10 pb-4">Hubungi via Email</h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-bold text-white/50 w-24 shrink-0 uppercase tracking-widest">Beasiswa</span>
-                  <a href="mailto:beasiswa@sttb.ac.id" className="text-sm font-bold hover:text-[#6AACE6] transition-colors">beasiswa@sttb.ac.id</a>
+          <div className="grid md:grid-cols-3 gap-12 max-w-7xl mx-auto">
+            {[
+              { icon: Mail, title: "Official Email", list: ["beasiswa@sttb.ac.id", "keuangan@sttb.ac.id"], color: "text-[#6AACE6]" },
+              { icon: Phone, title: "Direct Contact", list: ["(+62) 22 601-6454", "WA: +62 815 7336 0009"], color: "text-green-400" },
+              { icon: MapPin, title: "Campus Location", list: ["Jl. Dr. Djunjunan No. 105", "Bandung 40173, Indonesia"], color: "text-red-400" }
+            ].map((box, i) => (
+              <motion.div 
+                key={i}
+                whileHover={{ y: -10 }}
+                className="backdrop-blur-xl bg-white/5 border border-white/10 p-12 rounded-[3.5rem] group"
+              >
+                <box.icon className={`size-12 ${box.color} mb-10 group-hover:scale-110 transition-transform`} />
+                <h3 className="text-2xl font-black mb-8 pb-4 border-b border-white/5">{box.title}</h3>
+                <div className="space-y-4">
+                   {box.list.map((l, li) => (
+                     <p key={li} className="text-lg font-bold text-white/60 group-hover:text-white transition-colors">{l}</p>
+                   ))}
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-bold text-white/50 w-24 shrink-0 uppercase tracking-widest">Keuangan</span>
-                  <a href="mailto:keuangan@sttb.ac.id" className="text-sm font-bold hover:text-[#6AACE6] transition-colors">keuangan@sttb.ac.id</a>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-bold text-white/50 w-24 shrink-0 uppercase tracking-widest">Official</span>
-                  <a href="mailto:official@sttb.ac.id" className="text-sm font-bold hover:text-[#6AACE6] transition-colors">official@sttb.ac.id</a>
-                </div>
-              </div>
-            </div>
-
-            {/* Phone/WA Box */}
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-3xl">
-              <Phone className="size-10 text-green-400 mb-6" />
-              <h3 className="text-xl font-bold mb-6 border-b border-white/10 pb-4">Telepon & WhatsApp</h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-bold text-white/50 w-24 shrink-0 uppercase tracking-widest">Telepon</span>
-                  <p className="text-sm font-bold italic">(+62) 22 601-6454</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-bold text-white/50 w-24 shrink-0 uppercase tracking-widest">Marketing</span>
-                  <a href="https://wa.me/6281573360009" className="text-sm font-bold hover:text-green-400 transition-colors">+62 815 7336 0009</a>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-bold text-white/50 w-24 shrink-0 uppercase tracking-widest">Finance</span>
-                  <a href="https://wa.me/6285183026009" className="text-sm font-bold hover:text-green-400 transition-colors">+62 851-8302-6009</a>
-                </div>
-              </div>
-            </div>
-
-            {/* Address Box */}
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-3xl lg:col-span-1 md:col-span-2">
-              <MapPin className="size-10 text-red-400 mb-6" />
-              <h3 className="text-xl font-bold mb-6 border-b border-white/10 pb-4">Lokasi Kampus</h3>
-              <p className="text-base text-white/80 leading-relaxed font-medium">
-                Jl. Dr. Djunjunan No. 105,<br />
-                Bandung 40173,<br />
-                Jawa Barat, Indonesia.
-              </p>
-              <Button className="mt-6 bg-white/10 hover:bg-white/20 border-none px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest">
-                Buka di Google Maps
-              </Button>
-            </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
