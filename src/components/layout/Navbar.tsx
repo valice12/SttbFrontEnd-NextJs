@@ -59,8 +59,7 @@ const navigationLinks: NavLink[] = [
       { label: 'Artikel', href: '/media?tab=artikel' },
       { label: 'Monograf', href: '/media/monograf' },
       { label: 'Buletin Kampus', href: '/media/buletin' },
-      { label: 'E-Library', href: '/media?tab=elibrary' },
-      { label: 'Keanggotaan Umum', href: '/media?tab=keanggotaan' }
+      { label: 'E-Library & Keanggotaan', href: '/media?tab=elibrary' }
     ]
   }
 ];

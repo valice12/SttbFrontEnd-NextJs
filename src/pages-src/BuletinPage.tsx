@@ -76,13 +76,7 @@ export function BuletinPage() {
               href="/media?tab=elibrary" 
               className="flex items-center gap-2 px-6 py-3 bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border border-gray-200 hover:border-[#092C74] rounded-full transition-all font-semibold text-gray-700 shadow-sm hover:shadow-md hover:-translate-y-0.5"
             >
-              <BookOpen className="size-5 text-[#E31D1A]" /> E-Library
-            </Link>
-            <Link 
-              href="/media?tab=keanggotaan" 
-              className="flex items-center gap-2 px-6 py-3 bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border border-gray-200 hover:border-[#092C74] rounded-full transition-all font-semibold text-gray-700 shadow-sm hover:shadow-md hover:-translate-y-0.5"
-            >
-              <Users className="size-5 text-[#E31D1A]" /> Keanggotaan Umum
+              <BookOpen className="size-5 text-[#E31D1A]" /> E-Library & Keanggotaan
             </Link>
           </div>
         </div>

@@ -24,8 +24,7 @@ const MEDIA_FORMAT_MAP: Record<string, string> = {
   'video': 'video',
   'monograf': 'monograf',
   'buletin': 'buletin',
-  'elibrary': 'elibrary',
-  'keanggotaan': 'keanggotaan'
+  'elibrary': 'elibrary'
 };
 
 export const dataService = {
@@ -233,7 +232,7 @@ export const dataService = {
     const { page = 1, pageSize = 10, search, category, date, orderBy, orderState } = params;
     const formats = mediaFormat
       ? [mediaFormat]
-      : ['jurnal', 'artikel', 'video', 'monograf', 'buletin', 'elibrary', 'keanggotaan'];
+      : ['jurnal', 'artikel', 'video', 'monograf', 'buletin', 'elibrary'];
 
     const allItems: any[] = [];
     let totalItems = 0;

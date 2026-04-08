@@ -26,7 +26,6 @@ import { JurnalTab } from '@/components/media/JurnalTab';
 import { VideoTab } from '@/components/media/VideoTab';
 import { ArtikelTab } from '@/components/media/ArtikelTab';
 import { ELibraryTab } from '@/components/media/ELibraryTab';
-import { MembershipTab } from '@/components/media/MembershipTab';
 
 import { dataService } from '@/lib/data-service';
 
@@ -37,8 +36,7 @@ const tabTitles: Record<string, string> = {
   artikel: "Artikel",
   monograf: "Monograf",
   buletin: "Buletin Kampus",
-  elibrary: "E-Library",
-  keanggotaan: "Keanggotaan Perpustakaan"
+  elibrary: "E-Library & Keanggotaan"
 };
 
 const tabHeaders: Record<string, { icon: any, title: string, subtitle: string, color: string, heroColor: string }> = {
@@ -65,17 +63,10 @@ const tabHeaders: Record<string, { icon: any, title: string, subtitle: string, c
   },
   elibrary: { 
     icon: BookOpen, 
-    title: "Perpustakaan Digital", 
-    subtitle: "Akses Literatur & Sumber Belajar Elektronik",
+    title: "E-Library & Keanggotaan", 
+    subtitle: "Akses Literatur Digital & Layanan Umum",
     color: "bg-[#D97706]/10 text-[#D97706]",
     heroColor: "bg-[#B45309]/80"
-  },
-  keanggotaan: { 
-    icon: Users, 
-    title: "Layanan Anggota", 
-    subtitle: "Fasilitas & Keanggotaan Perpustakaan Umum",
-    color: "bg-[#7F1D1B]/5 text-[#7F1D1B]",
-    heroColor: "bg-[#7F1D1B]/80"
   }
 };
 
@@ -149,12 +140,7 @@ export function Media() {
             <button onClick={() => handleTabChange('elibrary')} className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5 border ${
               activeTab === 'elibrary' ? 'bg-[#092C74] text-white border-[#092C74] ring-2 ring-offset-2 ring-[#092C74] bg-opacity-100' : 'bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border-gray-200 text-gray-700 hover:border-[#092C74]'
             }`}>
-              <BookOpen className={`size-5 ${activeTab === 'elibrary' ? 'text-white' : 'text-[#E31D1A]'}`} /> E-Library
-            </button>
-            <button onClick={() => handleTabChange('keanggotaan')} className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5 border ${
-              activeTab === 'keanggotaan' ? 'bg-[#092C74] text-white border-[#092C74] ring-2 ring-offset-2 ring-[#092C74] bg-opacity-100' : 'bg-[#f8f9fa] hover:bg-[#F2ECF8] hover:text-[#092C74] border-gray-200 text-gray-700 hover:border-[#092C74]'
-            }`}>
-              <Users className={`size-5 ${activeTab === 'keanggotaan' ? 'text-white' : 'text-[#E31D1A]'}`} /> Keanggotaan Umum
+              <BookOpen className={`size-5 ${activeTab === 'elibrary' ? 'text-white' : 'text-[#E31D1A]'}`} /> E-Library & Keanggotaan
             </button>
           </div>
         </div>
@@ -185,7 +171,6 @@ export function Media() {
           {activeTab === 'video' && <VideoTab />}
           {activeTab === 'artikel' && <ArtikelTab />}
           {activeTab === 'elibrary' && <ELibraryTab />}
-          {activeTab === 'keanggotaan' && <MembershipTab />}
         </div>
       </section>
     </div>
