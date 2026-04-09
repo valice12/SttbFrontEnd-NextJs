@@ -1,3 +1,3 @@
 'use client';
 
-export { Lead as default } from '@/pages-src/Lead';
+export { Lead as default } from '@/components/features/lead/Lead';

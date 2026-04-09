@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# STT Bandung - Public Frontend V2
 
-## Getting Started
+Website utama interaktif untuk STT Bandung, dibangun dengan **Next.js 14** dan **React 18**. Project ini menyajikan informasi akademik, biografi pengurus, pendaftaran mahasiswa baru, dan akses perpustakaan digital (Media).
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Panduan Instalasi Lokal
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 1. Prasyarat
+- **Node.js v18.17+**
+- **npm v9+**
+- **Backend Running**: Pastikan API Backend (.NET) sudah aktif di `http://localhost:5066`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2. Langkah Instalasi
+1.  **Instal Dependensi**:
+    ```bash
+    npm install
+    ```
+2.  **Konfigurasi Environment**:
+    Buat file `.env.local` di folder utama project ini:
+    ```env
+    NEXT_PUBLIC_API_BASE_URL=http://localhost:5066/api/v1
+    NEXT_PUBLIC_USE_MOCK_DATA=false
+    ```
+    - `true`: Menggunakan data JSON statis (untuk demo offline).
+    - `false`: Menghubungkan langsung ke API Backend.
+3.  **Menjalankan Mode Pengembangan**:
+    ```bash
+    npm run dev
+    ```
+    Buka [http://localhost:3000](http://localhost:3000) di browser Anda.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📚 Fitur Unggulan Media
+Website ini memiliki integrasi mendalam dengan sistem perpustakaan digital STTB:
+- **Jurnal Stulos**: Preview PDF secara langsung di aplikasi untuk kenyamanan membaca.
+- **Biaya Kuliah**: Kalkulator biaya dinamis yang mengambil data dari backend.
+- **Pendaftaran**: Formulir pendaftaran mahasiswa baru (Admisi) yang terintegrasi dengan API.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Catatan Teknis & Pemecahan Masalah
+- **React 18**: Project ini dipatok pada React 18 untuk mendukung library animasi dan UI lama yang belum siap untuk React 19.
+- **Performance**: Menggunakan **Motion (Framer Motion)** untuk animasi transisi halaman yang halus.
+- **Next.js Config**: Konfigurasi `next.config.mjs` diatur untuk mengabaikan direktori build tertentu dan error linting saat deployment untuk mempercepat iterasi.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+**STT Bandung Development &copy; 2026**

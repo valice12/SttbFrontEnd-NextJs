@@ -1,3 +1,3 @@
 'use client';
 
-export { AkademikDetail as default } from '@/pages-src/AkademikDetail';
+export { AkademikDetail as default } from '@/components/features/akademik/AkademikDetail';

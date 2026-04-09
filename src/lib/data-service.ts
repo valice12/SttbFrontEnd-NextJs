@@ -2,6 +2,7 @@
  * Centralized Data Service
  * Utility for fetching data from either local JSON files or a remote API.
  */
+import { getFileUrl } from './file-utils';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
 const USE_MOCK_DATA = process.env.NEXT_PUBLIC_USE_MOCK_DATA === 'true';
@@ -21,7 +22,9 @@ const MEDIA_FORMAT_MAP: Record<string, string> = {
   'jurnal': 'journal',
   'artikel': 'article',
   'video': 'video',
-  'monograf': 'monograf'
+  'monograf': 'monograf',
+  'buletin': 'buletin',
+  'elibrary': 'elibrary'
 };
 
 export const dataService = {
@@ -59,14 +62,35 @@ export const dataService = {
   /**
    * Specialized methods for all data entities
    */
-  async getNews(): Promise<any> {
-    const data = await this.fetchData<any>('news/get-available-news?PageSize=100', 'news_list.json');
+  async getNews(params: { page?: number, pageSize?: number, search?: string, category?: string, orderBy?: string, orderState?: string } = {}): Promise<any> {
+    const { page = 1, pageSize = 10, search, category, orderBy, orderState } = params;
+    
+    const query = new URLSearchParams({
+      PageNumber: page.toString(),
+      PageSize: pageSize.toString(),
+    });
+
+    if (search) query.append('NewsTitle', search);
+    if (category && category !== 'all') query.append('CategoryName', category);
+    // Backend requires OrderState when OrderBy is provided
+    if (orderBy) {
+      query.append('OrderBy', orderBy);
+      query.append('OrderState', orderState || 'desc');
+    }
+
+    const data = await this.fetchData<any>(`news/get-available-news?${query.toString()}`, 'news_list.json');
     const items = Array.isArray(data) ? data : (data?.items || []);
-    return items.map((item: any) => ({
-      ...item,
-      image: item.imagePath || item.image,
-      date: item.publicationDate || item.date
-    }));
+    
+    return {
+      items: items.map((item: any) => ({
+        ...item,
+        image: item.imagePath || item.image,
+        date: item.publicationDate || item.date
+      })),
+      totalItems: data?.totalNews || data?.TotalNews || data?.totalItems || items.length,
+      totalPages: data?.totalPages || data?.TotalPages || 1,
+      currentPage: data?.pageNumber || data?.PageNumber || page
+    };
   },
 
   async getNewsDetail(slug: string): Promise<any> {
@@ -83,16 +107,38 @@ export const dataService = {
     return Array.isArray(data) ? data : (data?.items || []);
   },
 
-  async getEvents(): Promise<any> {
-    const data = await this.fetchData<any>('events/get-available-events?PageSize=100', 'events_list.json');
+  async getEvents(params: { page?: number, pageSize?: number, search?: string, category?: string, date?: Date, orderBy?: string, orderState?: string } = {}): Promise<any> {
+    const { page = 1, pageSize = 10, search, category, date, orderBy, orderState } = params;
+    
+    const query = new URLSearchParams({
+      PageNumber: page.toString(),
+      PageSize: pageSize.toString(),
+    });
+    
+    if (search) query.append('EventTitle', search);
+    if (category && category !== 'all') query.append('CategoryName', category);
+    // Backend requires OrderState when OrderBy is provided
+    if (orderBy) {
+      query.append('OrderBy', orderBy);
+      query.append('OrderState', orderState || 'desc');
+    }
+    if (date) query.append('EventDate', date.toISOString());
+
+    const data = await this.fetchData<any>(`events/get-available-events?${query.toString()}`, 'events_list.json');
     const items = Array.isArray(data) ? data : (data?.items || []);
-    return items.map((item: any) => ({
-      ...item,
-      title: item.eventTitle || item.title,
-      image: item.imagePath || item.image,
-      date: item.eventDate || item.startsAtDate || item.date,
-      time: item.eventDate ? new Date(item.eventDate).toLocaleTimeString() : (item.startsAtDate ? new Date(item.startsAtDate).toLocaleTimeString() : item.time)
-    }));
+
+    return {
+      items: items.map((item: any) => ({
+        ...item,
+        title: item.eventTitle || item.EventTitle || item.title,
+        image: item.imagePath || item.ImagePath || item.image,
+        date: item.startsAtDate || item.StartsAtDate || item.eventDate || item.date,
+        time: (item.startsAtDate || item.StartsAtDate) ? new Date(item.startsAtDate || item.StartsAtDate).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) : item.time
+      })),
+      totalItems: data?.totalEvents || data?.TotalEvents || data?.totalItems || items.length,
+      totalPages: data?.totalPages || data?.TotalPages || 1,
+      currentPage: data?.pageNumber || data?.PageNumber || page
+    };
   },
 
   async getEventDetail(slug: string): Promise<any> {
@@ -182,38 +228,71 @@ export const dataService = {
     return data?.items || data || [];
   },
 
-  async getMediaItems(mediaFormat?: string): Promise<any> {
+  async getMediaItems(mediaFormat?: string, params: { page?: number, pageSize?: number, search?: string, category?: string, date?: Date, orderBy?: string, orderState?: string } = {}): Promise<any> {
+    const { page = 1, pageSize = 10, search, category, date, orderBy, orderState } = params;
     const formats = mediaFormat
       ? [mediaFormat]
-      : ['jurnal', 'artikel', 'video', 'monograf', 'elibrary', 'keanggotaan'];
+      : ['jurnal', 'artikel', 'video', 'monograf', 'buletin', 'elibrary'];
 
     const allItems: any[] = [];
+    let totalItems = 0;
+    let totalPages = 0;
 
     for (const fmt of formats) {
       try {
         const apiFormat = MEDIA_FORMAT_MAP[fmt] || fmt;
-        const endpoint = `media/get-available-media/${apiFormat}?PageSize=100`;
+        // Backend uses route param: /get-available-media/{media_format}
+        const query = new URLSearchParams({
+          PageNumber: page.toString(),
+          PageSize: pageSize.toString(),
+        });
+        
+        if (search) query.append('MediaTitle', search);
+        if (category && category !== 'all') query.append('CategoryName', category);
+        // Backend requires OrderState when OrderBy is provided
+        if (orderBy) {
+          query.append('OrderBy', orderBy);
+          query.append('OrderState', orderState || 'desc');
+        }
+        if (date) query.append('PublicationDate', date.toISOString());
+
+        // Correct URL: route param, not query param
+        const endpoint = `media/get-available-media/${apiFormat}?${query.toString()}`;
         const data = await this.fetchData<any>(endpoint, 'media_list.json');
         
-        const items = Array.isArray(data) ? data : (data?.items || []);
+        const items = Array.isArray(data) ? data : (data?.Items || data?.items || []);
 
         const mapped = items.map((item: any) => ({
           ...item,
           type: fmt,
-          title: item.mediaTitle || item.title,
-          author: (item.authors && item.authors.length > 0) ? item.authors.map((a: any) => a.authorName).join(', ') : (item.authorName || item.author),
-          description: item.mediaDescription || item.description,
-          image: item.thumbnailPath || item.image,
-          date: item.publicationDate || item.date,
-          category: Array.isArray(item.category) ? item.category[0] : (item.category || fmt)
+          slug: item.Slug || item.slug || item.id?.toString() || '',
+          title: item.MediaTitle || item.mediaTitle || item.title,
+          author: (item.Authors && item.Authors.length > 0)
+            ? item.Authors.map((a: any) => a.AuthorName || a.authorName).join(', ')
+            : (item.authors && item.authors.length > 0)
+              ? item.authors.map((a: any) => a.authorName || a.AuthorName).join(', ')
+              : (item.authorName || item.author || ''),
+          description: item.MediaDescription || item.mediaDescription || item.description || '',
+          image: item.ThumbnailPath || item.thumbnailPath || item.image || '',
+          date: item.PublicationDate || item.publicationDate || item.date || item.createdAt || item.updatedAt,
+          category: Array.isArray(item.Category)
+            ? item.Category[0]
+            : (Array.isArray(item.category) ? item.category[0] : (item.category || fmt))
         }));
         allItems.push(...mapped);
+        totalItems = data?.TotalMedia || data?.totalMedia || data?.totalItems || items.length;
+        totalPages = data?.TotalPages || data?.totalPages || 1;
       } catch (e) {
-        // Skip failed format, continue with others
+        console.warn(`Failed to fetch media format [${fmt}]:`, e);
       }
     }
 
-    return allItems;
+    return {
+      items: allItems,
+      totalItems,
+      totalPages,
+      currentPage: page
+    };
   },
 
   async getMediaCategories() {
@@ -249,40 +328,94 @@ export const dataService = {
   },
 
   async getJournalDetail(slug: string): Promise<any> {
-    const data = await this.fetchData<any>(`media/get-journal/${slug}`, 'journal_detail.json');
-    return {
-      ...data,
-      title: data.journalTitle || data.title,
-      description: data.journalDescription || data.description
-    };
+    try {
+      const data = await this.fetchData<any>(`media/get-journal/${slug}`, 'journal_detail.json');
+      return {
+        ...data,
+        title: data.journalTitle || data.title,
+        description: data.journalDescription || data.description,
+        link: getFileUrl(data.journalPath || data.link || data.mediaPath, 'jurnal')
+      };
+    } catch {
+      // Fallback: search in media_list.json if journal_detail.json is missing
+      const allMedia = await this.getMediaItems('jurnal');
+      const item = allMedia.find((m: any) => m.slug === slug) || null;
+      if (item && item.link) item.link = getFileUrl(item.link, 'jurnal');
+      return item;
+    }
   },
 
   async getArticleDetail(slug: string): Promise<any> {
-    const data = await this.fetchData<any>(`media/get-article/${slug}`, 'article_detail.json');
-    return {
-      ...data,
-      title: data.articleTitle || data.title,
-      description: data.articleDescription || data.description,
-      content: data.articleContent || data.content
-    };
+    try {
+      const data = await this.fetchData<any>(`media/get-article/${slug}`, 'article_detail.json');
+      return {
+        ...data,
+        title: data.articleTitle || data.title,
+        description: data.articleDescription || data.description,
+        content: data.articleContent || data.content,
+        image: data.thumbnailPath || data.image,
+        link: getFileUrl(data.articlePath || data.link || data.mediaPath, 'artikel')
+      };
+    } catch {
+      const allMedia = await this.getMediaItems('artikel');
+      const item = allMedia.find((m: any) => m.slug === slug) || null;
+      if (item && item.link) item.link = getFileUrl(item.link, 'artikel');
+      return item;
+    }
   },
 
   async getVideoDetail(slug: string): Promise<any> {
-    const data = await this.fetchData<any>(`media/get-video/${slug}`, 'video_detail.json');
-    return {
-      ...data,
-      title: data.videoTitle || data.title,
-      description: data.videoDescription || data.description
-    };
+    try {
+      const data = await this.fetchData<any>(`media/get-video/${slug}`, 'video_detail.json');
+      return {
+        ...data,
+        title: data.videoTitle || data.title,
+        description: data.videoDescription || data.description,
+        link: data.videoUrl || data.link
+      };
+    } catch {
+      const allMedia = await this.getMediaItems('video');
+      return allMedia.find((m: any) => m.slug === slug) || null;
+    }
   },
 
   async getMonografDetail(slug: string): Promise<any> {
-    const data = await this.fetchData<any>(`media/get-monograf/${slug}`, 'monograf_detail.json');
-    return {
-      ...data,
-      title: data.monografTitle || data.title,
-      description: data.monografDescription || data.description
-    };
+    try {
+      const data = await this.fetchData<any>(`media/get-monograf/${slug}`, 'monograf_detail.json');
+      return {
+        ...data,
+        title: data.monografTitle || data.title,
+        description: data.synopsis || data.monografDescription || data.description,
+        synopsis: data.synopsis,
+        price: data.price,
+        isbn: data.isbn,
+        contact: data.contact,
+        image: data.thumbnailPath || data.image,
+        link: getFileUrl(data.monografPath || data.link || data.mediaPath, 'monograf')
+      };
+    } catch {
+      const allMedia = await this.getMediaItems('monograf');
+      const item = allMedia.find((m: any) => m.slug === slug) || null;
+      if (item && item.link) item.link = getFileUrl(item.link, 'monograf');
+      return item;
+    }
+  },
+
+  async getBuletinDetail(slug: string): Promise<any> {
+    try {
+      const data = await this.fetchData<any>(`media/get-buletin/${slug}`, 'buletin_detail.json');
+      return {
+        ...data,
+        title: data.buletinTitle || data.title,
+        description: data.buletinDescription || data.description,
+        link: getFileUrl(data.buletinPath || data.link || data.mediaPath, 'buletin')
+      };
+    } catch {
+      const allMedia = await this.getMediaItems('buletin');
+      const item = allMedia.find((m: any) => m.slug === slug) || null;
+      if (item && item.link) item.link = getFileUrl(item.link, 'buletin');
+      return item;
+    }
   },
 
 
@@ -311,12 +444,17 @@ export const dataService = {
    * The TentangKami template accesses foundation?.items?.filter(...),
    * so we keep the full response shape here.
    */
-  async getFoundationMembers(): Promise<any> {
+  async getFoundationMembers(page = 1, pageSize = 10): Promise<any> {
     if (!USE_MOCK_DATA && API_BASE_URL) {
       try {
-        const response = await fetch(`${API_BASE_URL}/profiles/get-all-administrators`);
+        const response = await fetch(`${API_BASE_URL}/profiles/get-all-administrators?PageNumber=${page}&PageSize=${pageSize}`);
         if (!response.ok) throw new Error(`API error: ${response.statusText}`);
-        return await response.json(); // Returns { items: [...] }
+        const data = await response.json();
+        return {
+          items: data.items || [],
+          totalItems: data.totalItems || 0,
+          totalPages: data.totalPages || 0
+        };
       } catch (error) {
         console.warn('Failed to fetch administrators, falling back to mock data:', error);
         return this.getLocalData<any>('foundation_list.json');
@@ -325,21 +463,33 @@ export const dataService = {
     return this.getLocalData<any>('foundation_list.json');
   },
 
-  async getLecturers(): Promise<any[]> {
+  async getLecturers(page = 1, pageSize = 10): Promise<any> {
     if (!USE_MOCK_DATA && API_BASE_URL) {
       try {
-        const response = await fetch(`${API_BASE_URL}/profiles/get-all-lecturers`);
+        const response = await fetch(`${API_BASE_URL}/profiles/get-all-lecturers?PageNumber=${page}&PageSize=${pageSize}`);
         if (!response.ok) throw new Error(`API error: ${response.statusText}`);
         const data = await response.json();
-        return Array.isArray(data) ? data : (data?.items || []);
+        return {
+          items: data.items || [],
+          totalItems: data.totalItems || 0,
+          totalPages: data.totalPages || 0
+        };
       } catch (error) {
         console.warn('Failed to fetch lecturers, falling back to mock data:', error);
         const fallback = await this.getLocalData<any>('lecturers_list.json');
-        return Array.isArray(fallback) ? fallback : (fallback?.items || []);
+        return { 
+          items: Array.isArray(fallback) ? fallback : (fallback?.items || []),
+          totalItems: fallback?.totalItems || 0,
+          totalPages: fallback?.totalPages || 0
+        };
       }
     }
     const fallback = await this.getLocalData<any>('lecturers_list.json');
-    return Array.isArray(fallback) ? fallback : (fallback?.items || []);
+    return { 
+      items: Array.isArray(fallback) ? fallback : (fallback?.items || []),
+      totalItems: fallback?.totalItems || 0,
+      totalPages: fallback?.totalPages || 0
+    };
   },
   async addDonorMember(donation: FormData): Promise<any> {
     if (!USE_MOCK_DATA && API_BASE_URL) {

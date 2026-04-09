@@ -1,3 +1,3 @@
 'use client';
 
-export { MediaDetail as default } from '@/pages-src/MediaDetail';
+export { MediaDetail as default } from '@/components/features/media/shared/MediaDetail';

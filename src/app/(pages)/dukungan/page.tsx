@@ -1,4 +1,4 @@
-import { Dukungan } from "@/pages-src/Dukungan";
+import { Dukungan } from '@/components/features/dukungan/Dukungan';
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

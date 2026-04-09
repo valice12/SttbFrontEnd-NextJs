@@ -1,4 +1,4 @@
-import { MediaItem, ProgramItem, TestimonialItem, NewsItem, EventItem } from '@/types';
+import { MediaItem, ProgramItem, TestimonialItem, NewsItem, EventItem } from '@/lib/types';
 import newsList from './json/news_list.json';
 import eventsList from './json/events_list.json';
 

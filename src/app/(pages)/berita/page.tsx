@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Berita as BeritaComponent } from '@/pages-src/Berita';
+import { Berita as BeritaComponent } from '@/components/features/berita/Berita';
 
 export default function BeritaPage() {
   return (

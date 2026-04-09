@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { TentangKami as TentangKamiComponent } from '@/pages-src/TentangKami';
+import { TentangKami as TentangKamiComponent } from '@/components/features/tentangkami/TentangKami';
 
 export default function TentangKami() {
   return (

@@ -1,3 +1,3 @@
 'use client';
 
-export { KegiatanDetail as default } from '@/pages-src/KegiatanDetail';
+export { KegiatanDetail as default } from '@/components/features/kegiatan/KegiatanDetail';
