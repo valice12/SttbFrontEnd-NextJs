@@ -1,4 +1,4 @@
-import { PendaftaranAnggotaPerpustakaan } from "@/pages-src/PendaftaranAnggotaPerpustakaan";
+import { PendaftaranAnggotaPerpustakaan } from '@/components/features/perpustakaan/PendaftaranAnggotaPerpustakaan';
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

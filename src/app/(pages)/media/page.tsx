@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Media as MediaComponent } from '@/pages-src/Media';
+import { Media as MediaComponent } from '@/components/features/media/Media';
 
 export default function Media() {
   return (

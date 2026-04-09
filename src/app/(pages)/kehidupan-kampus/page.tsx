@@ -1,3 +1,3 @@
 'use client';
 
-export { KehidupanKampus as default } from '@/pages-src/KehidupanKampus';
+export { KehidupanKampus as default } from '@/components/features/kehidupankampus/KehidupanKampus';

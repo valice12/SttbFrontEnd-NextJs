@@ -1,3 +1,3 @@
 'use client';
 
-export { BuletinDetail as default } from '@/pages-src/BuletinDetail';
+export { BuletinDetail as default } from '@/components/features/media/buletin/BuletinDetail';

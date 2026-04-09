@@ -1,3 +1,3 @@
 'use client';
 
-export { Admisi as default } from '@/pages-src/Admisi';
+export { Admisi as default } from '@/components/features/admisi/Admisi';

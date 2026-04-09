@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense } from 'react';
-import { BuletinPage } from '@/pages-src/BuletinPage';
+import { BuletinPage } from '@/components/features/media/buletin/BuletinPage';
 
 export default function Page() {
   return (
