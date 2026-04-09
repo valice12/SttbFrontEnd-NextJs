@@ -13,7 +13,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
-import { MediaCard } from '../shared/PublicationCard';
+import { PublicationCard } from '../shared/PublicationCard';
 import { dataService } from '@/lib/data-service';
 import { useEffect } from 'react';
 import { useDebounce } from '@/lib/use-debounce';
@@ -98,25 +98,6 @@ export function ArtikelTab() {
             <h2 className="text-4xl font-extrabold text-[#092C74] title-font uppercase">Artikel</h2>
           </div>
 
-          <div className="hidden md:block">
-            <button
-              onClick={() => setIsGridView(!isGridView)}
-              className="p-4 bg-white border border-[#092C74]/20 hover:border-[#092C74] shadow-sm rounded-full hover:bg-[#F2ECF8] transition-colors shrink-0 flex items-center justify-center w-[54px] h-[54px]"
-            >
-              {isGridView ? (
-                <List className="size-5 text-[#092C74]" />
-              ) : (
-                <div className="grid grid-cols-3 gap-1">
-                  <div className="w-1.5 h-1.5 bg-[#092C74] rounded-sm" />
-                  <div className="w-1.5 h-1.5 bg-[#092C74] rounded-sm" />
-                  <div className="w-1.5 h-1.5 bg-[#092C74] rounded-sm" />
-                  <div className="w-1.5 h-1.5 bg-[#092C74] rounded-sm" />
-                  <div className="w-1.5 h-1.5 bg-[#092C74] rounded-sm" />
-                  <div className="w-1.5 h-1.5 bg-[#092C74] rounded-sm" />
-                </div>
-              )}
-            </button>
-          </div>
         </div>
 
         <div className="flex flex-col xl:flex-row items-center justify-between gap-8 bg-white/70 backdrop-blur-2xl p-4 rounded-[2.5rem] border border-gray-100 shadow-sm sticky lg:static top-[112px] z-30 transition-all duration-500">
@@ -166,15 +147,34 @@ export function ArtikelTab() {
             </Popover>
           </div>
  
-          <div className="relative w-full xl:max-w-md group flex-1 xl:flex-none">
-            <Search className="absolute left-6 top-1/2 -translate-y-1/2 size-5 text-gray-400 group-focus-within:text-[#092C74] transition-colors" />
-            <input
-              type="text"
-              placeholder="CARI ARTIKEL WAWASAN..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-16 h-14 bg-gray-50 focus:bg-white border-2 border-gray-50 rounded-2xl w-full text-sm font-black uppercase tracking-widest transition-all shadow-sm focus:ring-4 focus:ring-[#092C74]/5 focus:outline-none"
-            />
+          <div className="flex items-center gap-4 w-full xl:w-auto flex-1 xl:justify-end">
+            <div className="relative w-full xl:max-w-md group">
+              <Search className="absolute left-6 top-1/2 -translate-y-1/2 size-5 text-gray-400 group-hover:text-[#092C74] transition-colors" />
+              <input
+                type="text"
+                placeholder="CARI ARTIKEL WAWASAN..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-16 h-14 bg-gray-50 focus:bg-white border-2 border-gray-50 rounded-2xl w-full text-sm font-black uppercase tracking-widest transition-all shadow-sm focus:ring-4 focus:ring-[#092C74]/5 focus:outline-none"
+              />
+            </div>
+
+            <button
+              onClick={() => setIsGridView(!isGridView)}
+              className={`size-14 rounded-2xl border-2 transition-all shadow-sm flex items-center justify-center shrink-0 ${isGridView ? 'bg-[#092C74] text-white border-[#092C74]' : 'bg-white text-[#092C74] border-gray-50'}`}
+              title={isGridView ? "Lihat List" : "Lihat Grid"}
+            >
+              {isGridView ? (
+                <List className="size-6" />
+              ) : (
+                <div className="grid grid-cols-2 gap-1">
+                  <div className="w-2 h-2 bg-current rounded-sm" />
+                  <div className="w-2 h-2 bg-current rounded-sm" />
+                  <div className="w-2 h-2 bg-current rounded-sm" />
+                  <div className="w-2 h-2 bg-current rounded-sm" />
+                </div>
+              )}
+            </button>
           </div>
         </div>
       </div>
@@ -190,7 +190,7 @@ export function ArtikelTab() {
             transition={{ delay: index * 0.1 }}
             className={isGridView ? 'flex flex-col h-full' : ''}
           >
-            <MediaCard 
+            <PublicationCard 
               item={item} 
               isGridView={isGridView} 
             />
