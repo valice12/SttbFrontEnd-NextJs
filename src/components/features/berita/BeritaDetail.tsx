@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { useState, useEffect } from 'react';
 import { getImageUrl } from '@/lib/image-utils';
+const bgPattern = "/assets/Page-Panjang-1.webp";
 
 export function BeritaDetail() {
   const { slug } = useParams();
@@ -72,7 +73,10 @@ export function BeritaDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-white pb-20">
+    <div 
+      className="min-h-screen bg-white pb-20 bg-cover bg-center"
+      style={{ backgroundImage: `url(${bgPattern})` }}
+    >
       {/* Breadcrumb */}
       <div className="bg-gray-50 border-b">
         <div className="container mx-auto px-4 py-4">

@@ -23,7 +23,7 @@ import { getImageUrl } from '@/lib/image-utils';
 import { useDebounce } from '@/lib/use-debounce';
 import { MediaNavbar } from '@/components/features/media/shared/MediaNavbar';
 
-const img_Page_Panjang_1_webp = "/assets/Page-Panjang-1.webp";
+const bgPattern = "/assets/Page-Panjang-1.webp";
 
 export function Berita() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -107,11 +107,14 @@ export function Berita() {
   }, [featuredNews.length]);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div 
+      className="min-h-screen bg-white bg-cover bg-center"
+      style={{ backgroundImage: `url(${bgPattern})` }}
+    >
       {/* Premium Hero Section */}
       <section className="relative h-[650px] md:h-[650px] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={img_Page_Panjang_1_webp} alt="News Hero" className="w-full h-full object-cover scale-105" />
+          <img src={bgPattern} alt="News Hero" className="w-full h-full object-cover scale-105" />
           <div className="absolute inset-0 bg-gradient-to-br from-[#0F172A]/95 via-[#1E1B4B]/45 to-transparent z-10" />
           
           <div className="absolute top-1/4 -right-20 size-[500px] bg-[#E31D1A]/10 blur-[120px] rounded-full animate-pulse" />
@@ -154,9 +157,9 @@ export function Berita() {
       {/* Synchronized Media Navbar */}
       <MediaNavbar activeTab="berita" />
 
-      {/* Featured News Carousel */}
+      {/* Featured News Carousel - Tightened spacing */}
       {featuredNews.length > 0 && (
-        <section className="py-12 lg:py-24 bg-gradient-to-b from-white via-[#F5F3FB] to-white relative overflow-hidden">
+        <section className="pt-6 lg:pt-12 pb-12 lg:pb-24 bg-gradient-to-b from-white via-[#F5F3FB] to-white relative overflow-hidden">
           <div className="absolute top-0 right-0 size-96 bg-[#E31D1A]/5 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-7xl mx-auto">
@@ -235,8 +238,8 @@ export function Berita() {
         </section>
       )}
 
-      {/* Filters and Search - Premium Unified Design */}
-      <section className="py-12">
+      {/* Filters and Search - Tightened spacing */}
+      <section className="py-6 lg:py-12">
         <div className="container mx-auto px-4">
           <div className="flex flex-col xl:flex-row items-center justify-between gap-8 bg-white/70 backdrop-blur-2xl p-4 rounded-[2.5rem] border border-gray-100 shadow-sm sticky lg:static top-[112px] z-30 transition-all duration-500">
             <div className="flex flex-wrap items-center gap-3 w-full xl:w-auto">
@@ -313,8 +316,8 @@ export function Berita() {
         </div>
       </section>
 
-      {/* News List Section */}
-      <section className="py-24">
+      {/* News List Section - Optimized gap */}
+      <section className="py-10 lg:py-20">
         <div className="container mx-auto px-4">
           {loading ? (
              <div className="flex justify-center items-center h-64">

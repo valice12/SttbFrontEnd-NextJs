@@ -13,7 +13,7 @@ import { ELibraryTab } from '@/components/features/media/shared/ELibraryTab';
 import { MediaNavbar } from '@/components/features/media/shared/MediaNavbar';
 
 const bgHeader = "/assets/sttb-2-BG.png";
-const bgPatternPanjang = "/assets/Page-Panjang-1.webp";
+const bgPattern = "/assets/Page-Panjang-1.webp";
 
 const tabTitles: Record<string, string> = {
   jurnal: "Jurnal Stulos",
@@ -98,44 +98,44 @@ export function Media() {
   return (
     <div 
       className="min-h-screen bg-white bg-cover bg-center"
-      style={{ backgroundImage: `url(${bgPatternPanjang})` }}
+      style={{ backgroundImage: `url(${bgPattern})` }}
     >
       {/* Premium Hero Section - Dynamic Content */}
-      <section className="relative h-[650px] md:h-[650px] overflow-hidden">
+      <section className="relative h-[450px] md:h-[500px] overflow-hidden">
         <div className="absolute inset-0">
           <img src={bgHeader} alt="Media & Library" className="w-full h-full object-cover scale-105" />
           <div className={`absolute inset-0 bg-gradient-to-br ${currentHero.bg} to-transparent z-10 transition-colors duration-1000`} />
           
-          <div className="absolute bottom-1/4 -right-20 size-[500px] bg-[#E31D1A]/10 blur-[120px] rounded-full animate-pulse" />
-          <div className="absolute top-0 -left-20 size-[400px] bg-[#092C74]/40 blur-[100px] rounded-full" />
+          <div className="absolute bottom-1/4 -right-20 size-[400px] bg-[#E31D1A]/10 blur-[120px] rounded-full animate-pulse" />
+          <div className="absolute top-0 -left-20 size-[300px] bg-[#092C74]/40 blur-[100px] rounded-full" />
         </div>
 
         <div className="relative container mx-auto px-4 h-full flex items-center z-20">
-          <div className="max-w-4xl">
+          <div className="max-w-3xl">
             <motion.div
               key={activeTab} // Re-animate on tab change
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-20 rounded-[40px] shadow-2xl relative overflow-hidden group"
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="backdrop-blur-md bg-white/5 border border-white/10 p-8 md:p-12 rounded-[30px] shadow-2xl relative overflow-hidden group"
             >
               <div className="relative z-10">
                 <motion.div
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#E31D1A] rounded-full text-white text-xs font-black uppercase tracking-widest mb-8 shadow-lg shadow-red-500/30"
+                  transition={{ delay: 0.2 }}
+                  className="inline-flex items-center gap-2 px-3 py-1 bg-[#E31D1A] rounded-full text-white text-[10px] font-black uppercase tracking-widest mb-6 shadow-lg shadow-red-500/30"
                 >
                    <Layers className="size-3" /> Digital Knowledge Hub
                 </motion.div>
 
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 drop-shadow-2xl tracking-tighter leading-[0.95]">
+                <h1 className="text-4xl md:text-6xl font-black text-white mb-4 drop-shadow-2xl tracking-tighter leading-[0.95]">
                   {currentHero.top} <br />
                   <span className={currentHero.grad}>
                     {currentHero.bottom}
                   </span>
                 </h1>
-                <p className="text-xl md:text-2xl text-white/90 font-medium max-w-2xl leading-relaxed">
+                <p className="text-lg md:text-xl text-white/90 font-medium max-w-xl leading-relaxed">
                   Akses repositori pengetahuan teologi terlengkap, publikasi ilmiah terbaru, serta sistem perpustakaan digital terintegrasi STT Bandung.
                 </p>
               </div>
@@ -146,15 +146,15 @@ export function Media() {
 
       {/* Synchronized Media Navbar */}
       <MediaNavbar activeTab={activeTab} />
-
-      {/* Content Section with Premium Header */}
-      <section className="py-24">
+      
+      {/* Content Section - Tightened spacing for better rhythm */}
+      <section className="pt-6 lg:pt-10 pb-10 lg:pb-16">
         <div className="container mx-auto px-4 max-w-7xl">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.4 }}
           >
             {activeTab === 'jurnal' && <JurnalTab />}
             {activeTab === 'video' && <VideoTab />}

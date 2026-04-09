@@ -112,10 +112,9 @@ export function Navbar() {
   return (
     <>
       <nav className="relative lg:fixed top-0 left-0 right-0 z-[80] bg-white shadow-md">
-        {/* Top Bar - Hides on scroll down */}
+        {/* Top Bar - Persistent on Desktop, Pull-to-reveal on Mobile */}
         <div
-          className={`bg-[#092C74] text-white transition-all duration-300 ${isTopBarVisible ? 'h-12' : 'h-0 overflow-hidden'
-            }`}
+          className={`bg-[#092C74] text-white transition-all duration-300 ${isTopBarVisible ? 'h-12' : 'h-0 overflow-hidden'} lg:h-12 lg:overflow-visible`}
         >
           <div className="container mx-auto px-4 h-12 flex items-center justify-end">
             <Link href="/kontak" className="text-sm font-medium hover:text-[#6AACE6] transition-colors">

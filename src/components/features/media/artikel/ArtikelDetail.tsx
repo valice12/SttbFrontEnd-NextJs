@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 import { getImageUrl } from '@/lib/image-utils';
 import { PDFViewer } from '@/components/features/media/shared/PDFViewer';
+const bgPattern = "/assets/Page-Panjang-1.webp";
 
 export function ArtikelDetail() {
   const { slug } = useParams();
@@ -54,7 +55,10 @@ export function ArtikelDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-white pb-20">
+    <div 
+      className="min-h-screen bg-white pb-20 bg-cover bg-center"
+      style={{ backgroundImage: `url(${bgPattern})` }}
+    >
       {/* Decorative Top Banner */}
       <div className="h-2 bg-gradient-to-r from-[#092C74] via-[#E31D1A] to-[#092C74]" />
       

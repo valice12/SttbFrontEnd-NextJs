@@ -92,10 +92,10 @@ export function ArtikelTab() {
   return (
     <div className="space-y-12">
       {/* Header & Filters */}
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6 lg:gap-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex w-full md:w-auto items-center">
-            <h2 className="text-4xl font-extrabold text-[#092C74] title-font uppercase">Artikel</h2>
+            <h2 className="text-[2.2rem] md:text-5xl font-black text-[#092C74] tracking-tighter leading-none">Artikel <span className="text-[#E31D1A]">Populer</span></h2>
           </div>
 
         </div>

@@ -93,14 +93,14 @@ export function JurnalTab() {
   return (
     <div className="space-y-12">
       {/* Header & Filters - Premium Glassmorphism */}
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-6 lg:gap-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="flex flex-wrap items-center gap-6"
           >
-            <h2 className="text-[2.5rem] md:text-5xl font-black text-[#092C74] tracking-tighter leading-none">Jurnal <span className="text-[#E31D1A]">Stulos</span></h2>
+            <h2 className="text-[2.2rem] md:text-5xl font-black text-[#092C74] tracking-tighter leading-none">Jurnal <span className="text-[#E31D1A]">Stulos</span></h2>
             <div className="h-10 w-px bg-gray-200 hidden md:block" />
             <a href="https://e-journal.sttb.ac.id/index.php/transformatio" target="_blank" rel="noopener noreferrer">
               <Button className="h-12 px-8 bg-[#092C74] hover:bg-[#E31D1A] text-white font-black text-xs uppercase tracking-widest rounded-full shadow-lg shadow-blue-900/10 transition-all duration-500">
@@ -217,7 +217,7 @@ export function JurnalTab() {
         )}
 
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-4 mt-20 col-span-full w-full">
+          <div className="flex justify-center items-center gap-4 mt-12 col-span-full w-full">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
                 key={page}

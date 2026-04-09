@@ -17,13 +17,13 @@ Website utama interaktif untuk STT Bandung, dibangun dengan **Next.js 14** dan *
     npm install
     ```
 2.  **Konfigurasi Environment**:
-    Buat file `.env.local` di folder utama project ini:
+    Buat file `.env.local` di folder utama project ini (lihat `.env.local.example`):
     ```env
-    NEXT_PUBLIC_API_BASE_URL=http://localhost:5066/api/v1
+    NEXT_PUBLIC_API_BASE_URL= http://[IPv4-ADDRESS]:[PORT]/api/v1
     NEXT_PUBLIC_USE_MOCK_DATA=false
     ```
-    - `true`: Menggunakan data JSON statis (untuk demo offline).
-    - `false`: Menghubungkan langsung ke API Backend.
+    - Ganti `[IPv4-ADDRESS]` dengan IP komputer Anda.
+    - Hal ini diperlukan agar website dapat diakses dari device lain (mobile) dalam satu network.
 3.  **Menjalankan Mode Pengembangan**:
     ```bash
     npm run dev

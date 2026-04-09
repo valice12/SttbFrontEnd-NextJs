@@ -13,7 +13,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
-import { MediaCard } from './PublicationCard';
+import { PublicationCard } from './PublicationCard';
 import { dataService } from '@/lib/data-service';
 import { useEffect } from 'react';
 import { useDebounce } from '@/lib/use-debounce';
@@ -92,10 +92,10 @@ export function VideoTab() {
   return (
     <div className="space-y-12">
       {/* Header & Filters */}
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6 lg:gap-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex w-full md:w-auto items-center">
-            <h2 className="text-4xl font-extrabold text-[#092C74] title-font uppercase">Video Pembelajaran</h2>
+            <h2 className="text-[2.2rem] md:text-5xl font-black text-[#092C74] tracking-tighter leading-none">Video <span className="text-[#E31D1A]">Pembelajaran</span></h2>
           </div>
 
           <div className="hidden md:block">
@@ -190,7 +190,7 @@ export function VideoTab() {
             transition={{ delay: index * 0.1 }}
             className={isGridView ? 'flex flex-col h-full' : ''}
           >
-            <MediaCard 
+            <PublicationCard 
               item={item} 
               isGridView={isGridView} 
             />
@@ -205,7 +205,7 @@ export function VideoTab() {
         )}
 
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-4 mt-12 col-span-full w-full">
+          <div className="flex justify-center items-center gap-4 mt-8 col-span-full w-full">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
                 key={page}

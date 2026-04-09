@@ -8,6 +8,7 @@ import { dataService } from '@/lib/data-service';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 import { getImageUrl } from '@/lib/image-utils';
+const bgPattern = "/assets/Page-Panjang-1.webp";
 
 export function MediaDetail() {
   const { slug } = useParams();
@@ -58,7 +59,10 @@ export function MediaDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-white pb-20">
+    <div 
+      className="min-h-screen bg-white pb-20 bg-cover bg-center"
+      style={{ backgroundImage: `url(${bgPattern})` }}
+    >
        {/* Responsive Header */}
        <div className="relative h-[50vh] min-h-[400px] bg-gray-900 overflow-hidden">
           <img src={getImageUrl(mediaItem.image, mediaItem.type)} alt={mediaItem.title} className="w-full h-full object-cover opacity-60 scale-105 blur-sm" />

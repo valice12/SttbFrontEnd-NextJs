@@ -8,7 +8,7 @@ import { BuletinTab } from '@/components/features/media/buletin/BuletinTab';
 import { MediaNavbar } from '@/components/features/media/shared/MediaNavbar';
 
 const bgHeader = "/assets/sttb-2-BG.png";
-const bgPattern = "/assets/background.webp";
+const bgPattern = "/assets/Page-Panjang-1.webp";
 
 export function BuletinPage() {
   return (
@@ -59,15 +59,15 @@ export function BuletinPage() {
       {/* Synchronized Media Navbar */}
       <MediaNavbar activeTab="buletin" />
 
-      {/* Content Section with Premium Header */}
-      <section className="py-24">
+      {/* Content Section - Tightened gap */}
+      <section className="pt-8 lg:pt-16 pb-12 lg:pb-24">
         <div className="container mx-auto px-4 max-w-7xl">
           <BuletinTab />
         </div>
       </section>
 
-      {/* Subscription CTA - Modernized */}
-      <section className="container mx-auto px-4 mt-20 pb-32">
+      {/* Subscription CTA - Tightened gap */}
+      <section className="container mx-auto px-4 mt-10 lg:mt-20 pb-20 lg:pb-32">
         <div className="bg-[#E31D1A] rounded-[4rem] p-12 md:p-24 text-white flex flex-col md:flex-row items-center gap-20 relative overflow-hidden shadow-2xl group transition-all duration-[1.5s]">
           <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:scale-110 transition-transform duration-[2s] pointer-events-none">
             <Mail className="size-[500px]" />

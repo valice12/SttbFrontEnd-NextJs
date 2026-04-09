@@ -11,7 +11,7 @@ export function ELibraryTab() {
       initial={{ opacity: 0, y: 30 }} 
       animate={{ opacity: 1, y: 0 }} 
       transition={{ duration: 0.8 }}
-      className="space-y-20 max-w-7xl mx-auto"
+      className="space-y-12 lg:space-y-16 max-w-7xl mx-auto"
     >
       {/* E-Library Section - Premium Glass Panel */}
       <div className="backdrop-blur-xl bg-white/40 border border-white/60 p-10 md:p-16 rounded-[3rem] shadow-[0_40px_80px_rgba(9,44,116,0.05)] relative overflow-hidden">

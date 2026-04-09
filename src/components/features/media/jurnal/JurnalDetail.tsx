@@ -8,6 +8,7 @@ import { dataService } from '@/lib/data-service';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 import { PDFViewer } from '@/components/features/media/shared/PDFViewer';
+const bgPattern = "/assets/Page-Panjang-1.webp";
 
 export function JurnalDetail() {
   const { slug } = useParams();
@@ -53,7 +54,10 @@ export function JurnalDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB] pb-20">
+    <div 
+      className="min-h-screen bg-[#F8F9FB] pb-20 bg-cover bg-center"
+      style={{ backgroundImage: `url(${bgPattern})` }}
+    >
       {/* Upper Bar */}
       <div className="bg-white border-b sticky top-20 sm:top-32 z-30 shadow-sm">
         <div className="container mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3">

@@ -12,6 +12,7 @@ import { MonografShowcase } from './components/MonografShowcase';
 import { MonografMetadata } from './components/MonografMetadata';
 import { MonografPreviewSection } from './components/MonografPreviewSection';
 import { MonografHighlights } from './components/MonografHighlights';
+const bgPattern = "/assets/Page-Panjang-1.webp";
 
 export function MonografDetail() {
   const { slug } = useParams();
@@ -57,7 +58,10 @@ export function MonografDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FDFDFD] pb-32">
+    <div 
+      className="min-h-screen bg-[#FDFDFD] pb-32 bg-cover bg-center"
+      style={{ backgroundImage: `url(${bgPattern})` }}
+    >
       {/* Premium Header / Breadcrumb */}
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center gap-2 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-8">
