@@ -34,7 +34,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       <Navbar />
-      <main className="lg:pt-[132px] pt-0 pb-0 lg:pb-0 overflow-x-hidden">{children}</main>
+      <main className="lg:pt-[132px] pt-16 pb-0 lg:pb-0 overflow-x-hidden">{children}</main>
       <Footer />
       <FloatingActionButton />
       <BottomNavbar />
