@@ -16,7 +16,9 @@ export function BottomNavbar() {
   const pathname = usePathname();
 
   const isActive = (href: string) => {
-    if (href === '/' && pathname !== '/') return false;
+    if (href === '/' && pathname !== '/') {
+      return false;
+    }
     return pathname.startsWith(href);
   };
 

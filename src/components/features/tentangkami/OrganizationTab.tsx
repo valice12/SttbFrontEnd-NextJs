@@ -159,7 +159,9 @@ export function OrganizationTab() {
             const wakilKetua = safeLecturers.filter(l =>
               l.roles?.some((r: string) => r.toLowerCase().startsWith('wakil ketua'))
             );
-            if (wakilKetua.length === 0) return null;
+            if (wakilKetua.length === 0) {
+              return null;
+            }
             return (
               <div className="flex flex-col items-center w-full relative">
                 <div className="hidden lg:block absolute top-0 left-[20%] right-[20%] h-[2px] bg-gray-100 -z-10" />
@@ -191,7 +193,9 @@ export function OrganizationTab() {
             const kaprodi = safeLecturers.filter(l =>
               l.roles?.some((r: string) => r.toLowerCase().startsWith('kaprodi'))
             );
-            if (kaprodi.length === 0) return null;
+            if (kaprodi.length === 0) {
+              return null;
+            }
             return (
               <div className="flex flex-col items-center w-full">
                 <div className="flex flex-wrap justify-center gap-6 relative px-4 z-10">

@@ -37,9 +37,15 @@ export function LibraryForm() {
       data.append('Address', formData.address);
       data.append('Email', formData.email);
       
-      if (formData.passportImage) data.append('PassportImage', formData.passportImage);
-      if (formData.idImage) data.append('IdImage', formData.idImage);
-      if (formData.proofOfDepositImage) data.append('ProofOfDepositImage', formData.proofOfDepositImage);
+      if (formData.passportImage) {
+        data.append('PassportImage', formData.passportImage);
+      }
+      if (formData.idImage) {
+        data.append('IdImage', formData.idImage);
+      }
+      if (formData.proofOfDepositImage) {
+        data.append('ProofOfDepositImage', formData.proofOfDepositImage);
+      }
 
       await dataService.addLibraryMember(data);
       setStatus({ 

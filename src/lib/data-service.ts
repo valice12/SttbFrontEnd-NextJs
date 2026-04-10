@@ -70,8 +70,12 @@ export const dataService = {
       PageSize: pageSize.toString(),
     });
 
-    if (search) query.append('NewsTitle', search);
-    if (category && category !== 'all') query.append('CategoryName', category);
+    if (search) {
+      query.append('NewsTitle', search);
+    }
+    if (category && category !== 'all') {
+      query.append('CategoryName', category);
+    }
     // Backend requires OrderState when OrderBy is provided
     if (orderBy) {
       query.append('OrderBy', orderBy);
@@ -115,14 +119,20 @@ export const dataService = {
       PageSize: pageSize.toString(),
     });
     
-    if (search) query.append('EventTitle', search);
-    if (category && category !== 'all') query.append('CategoryName', category);
+    if (search) {
+      query.append('EventTitle', search);
+    }
+    if (category && category !== 'all') {
+      query.append('CategoryName', category);
+    }
     // Backend requires OrderState when OrderBy is provided
     if (orderBy) {
       query.append('OrderBy', orderBy);
       query.append('OrderState', orderState || 'desc');
     }
-    if (date) query.append('EventDate', date.toISOString());
+    if (date) {
+      query.append('EventDate', date.toISOString());
+    }
 
     const data = await this.fetchData<any>(`events/get-available-events?${query.toString()}`, 'events_list.json');
     const items = Array.isArray(data) ? data : (data?.items || []);
@@ -181,7 +191,9 @@ export const dataService = {
     if (!USE_MOCK_DATA && API_BASE_URL) {
       try {
         const response = await fetch(`${API_BASE_URL}/academics/get-program/${slug}`);
-        if (!response.ok) throw new Error(`API error: ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status}`);
+        }
         const data = await response.json();
         return {
           ...data,
@@ -247,14 +259,20 @@ export const dataService = {
           PageSize: pageSize.toString(),
         });
         
-        if (search) query.append('MediaTitle', search);
-        if (category && category !== 'all') query.append('CategoryName', category);
+        if (search) {
+          query.append('MediaTitle', search);
+        }
+        if (category && category !== 'all') {
+          query.append('CategoryName', category);
+        }
         // Backend requires OrderState when OrderBy is provided
         if (orderBy) {
           query.append('OrderBy', orderBy);
           query.append('OrderState', orderState || 'desc');
         }
-        if (date) query.append('PublicationDate', date.toISOString());
+        if (date) {
+          query.append('PublicationDate', date.toISOString());
+        }
 
         // Correct URL: route param, not query param
         const endpoint = `media/get-available-media/${apiFormat}?${query.toString()}`;
@@ -311,7 +329,9 @@ export const dataService = {
     const endpointType = typeToEndpointMap[mediaType] || mediaType;
     try {
       const data = await this.fetchData<any>(`media/get-${endpointType}/${slug}`, `${mediaType}_detail.json`);
-      if (!data) return null;
+      if (!data) {
+        return null;
+      }
       return {
         ...data,
         type: mediaType,
@@ -340,7 +360,9 @@ export const dataService = {
       // Fallback: search in media_list.json if journal_detail.json is missing
       const allMedia = await this.getMediaItems('jurnal');
       const item = allMedia.find((m: any) => m.slug === slug) || null;
-      if (item && item.link) item.link = getFileUrl(item.link, 'jurnal');
+      if (item && item.link) {
+        item.link = getFileUrl(item.link, 'jurnal');
+      }
       return item;
     }
   },
@@ -359,7 +381,9 @@ export const dataService = {
     } catch {
       const allMedia = await this.getMediaItems('artikel');
       const item = allMedia.find((m: any) => m.slug === slug) || null;
-      if (item && item.link) item.link = getFileUrl(item.link, 'artikel');
+      if (item && item.link) {
+        item.link = getFileUrl(item.link, 'artikel');
+      }
       return item;
     }
   },
@@ -396,7 +420,9 @@ export const dataService = {
     } catch {
       const allMedia = await this.getMediaItems('monograf');
       const item = allMedia.find((m: any) => m.slug === slug) || null;
-      if (item && item.link) item.link = getFileUrl(item.link, 'monograf');
+      if (item && item.link) {
+        item.link = getFileUrl(item.link, 'monograf');
+      }
       return item;
     }
   },
@@ -413,7 +439,9 @@ export const dataService = {
     } catch {
       const allMedia = await this.getMediaItems('buletin');
       const item = allMedia.find((m: any) => m.slug === slug) || null;
-      if (item && item.link) item.link = getFileUrl(item.link, 'buletin');
+      if (item && item.link) {
+        item.link = getFileUrl(item.link, 'buletin');
+      }
       return item;
     }
   },
@@ -554,7 +582,7 @@ export const dataService = {
         console.error("Status:", error?.status);
         console.error("Message:", error?.message || error?.title || error?.toString());
         if (error?.errors) {
-            console.error("Validation Errors:", error.errors);
+          console.error("Validation Errors:", error.errors);
         }
         console.group("Full Error Details");
         console.log(error);

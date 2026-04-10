@@ -99,7 +99,9 @@ export function Berita() {
   }, [debouncedSearchQuery, selectedCategory, sortBy, date]);
 
   useEffect(() => {
-    if (featuredNews.length === 0) return;
+    if (featuredNews.length === 0) {
+      return;
+    }
     const timer = setInterval(() => {
       setCurrentFeatured((prev) => (prev === featuredNews.length - 1 ? 0 : prev + 1));
     }, 5000);

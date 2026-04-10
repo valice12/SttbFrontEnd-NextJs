@@ -37,7 +37,9 @@ export function Admisi() {
   }, []);
 
   const formatDate = (dateStr: string) => {
-    if (!dateStr) return "-";
+    if (!dateStr) {
+      return "-";
+    }
     try {
       return new Date(dateStr).toLocaleDateString('id-ID', {
         day: 'numeric',

@@ -7,7 +7,9 @@
  * @returns The fully qualified file URL
  */
 export function getFileUrl(path: string | null | undefined, module: string = 'general'): string {
-  if (!path || path === '#') return '';
+  if (!path || path === '#') {
+    return '';
+  }
 
   // Handle full external URLs (like OJS links)
   if (path.startsWith('http')) {

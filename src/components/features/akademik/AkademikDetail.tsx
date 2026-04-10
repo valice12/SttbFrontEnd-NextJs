@@ -17,7 +17,9 @@ export function AkademikDetail() {
 
   useEffect(() => {
     async function fetchData() {
-      if (!slug) return;
+      if (!slug) {
+        return;
+      }
       try {
         setLoading(true);
         const [data, curr] = await Promise.all([

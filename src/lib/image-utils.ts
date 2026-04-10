@@ -8,7 +8,9 @@
  * @returns The fully qualified image URL format
  */
 export function getImageUrl(path: string | null | undefined, module: string = 'general'): string {
-  if (!path) return '/assets/logo.png'; // Fallback to an existing local asset if null
+  if (!path) {
+    return '/assets/logo.png'; // Fallback to an existing local asset if null
+  }
 
   // For hardcoded local images taking priority
   if (path.startsWith('/assets/')) {

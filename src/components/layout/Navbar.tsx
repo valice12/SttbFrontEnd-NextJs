@@ -75,11 +75,27 @@ export function Navbar() {
 
   const pathname = usePathname();
 
-  const isActive = (path: string) => {
-    if (path === '/' && pathname !== '/') {
+  const isActive = (link: NavLink) => {
+    // If it's home, only active if path is exact home
+    if (link.href === '/' && pathname !== '/') {
       return false;
     }
-    return pathname.startsWith(path);
+    
+    const isBaseMatch = (href: string) => {
+      const basePath = href.split('?')[0];
+      if (basePath === '/') {
+        return pathname === '/';
+      }
+      return pathname === basePath || pathname.startsWith(basePath + '/');
+    };
+
+    // Check primary link
+    if (isBaseMatch(link.href)) {
+      return true;
+    }
+
+    // Check all submenu items recursively
+    return link.submenu?.some(sublink => isBaseMatch(sublink.href)) || false;
   };
 
   useEffect(() => {
@@ -148,7 +164,7 @@ export function Navbar() {
                   >
                     <Link
                       href={link.href}
-                      className={`px-4 py-2 text-sm font-medium transition-colors flex items-center gap-1 ${link.label === 'Beranda' ? 'pr-8' : ''} ${isActive(link.href)
+                      className={`px-4 py-2 text-sm font-medium transition-colors flex items-center gap-1 ${link.label === 'Beranda' ? 'pr-8' : ''} ${isActive(link)
                         ? 'text-[#1C64E8] border-b-2 border-[#1C64E8]'
                         : 'text-gray-700 hover:text-[#1C64E8]'
                         }`}

@@ -27,7 +27,9 @@ export function PDFViewer({ url, title = "Document Preview" }: PDFViewerProps) {
     window.open(url, '_blank', 'noreferrer');
   };
 
-  if (!url) return null;
+  if (!url) {
+    return null;
+  }
 
   return (
     <div className="w-full space-y-6">

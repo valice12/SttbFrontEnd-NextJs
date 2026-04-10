@@ -33,7 +33,9 @@ export const fileService = {
    * Helper to format file size
    */
   formatBytes(bytes: number, decimals: number = 2): string {
-    if (bytes === 0) return '0 Bytes';
+    if (bytes === 0) {
+      return '0 Bytes';
+    }
 
     const k = 1024;
     const dm = decimals < 0 ? 0 : decimals;

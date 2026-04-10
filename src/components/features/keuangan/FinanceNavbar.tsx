@@ -18,10 +18,18 @@ export function FinanceNavbar() {
   const activeTab = searchParams.get('tab');
 
   const getIsActive = (item: typeof navItems[0]) => {
-    if (item.key === 'admisi') return pathname === '/admisi';
-    if (item.key === 'support') return pathname === '/dukungan';
-    if (item.key === 'tuition') return pathname === '/keuangan' && activeTab === 'tuition';
-    if (item.key === 'scholarship') return pathname === '/keuangan' && activeTab === 'scholarship';
+    if (item.key === 'admisi') {
+      return pathname === '/admisi';
+    }
+    if (item.key === 'support') {
+      return pathname === '/dukungan';
+    }
+    if (item.key === 'tuition') {
+      return pathname === '/keuangan' && activeTab === 'tuition';
+    }
+    if (item.key === 'scholarship') {
+      return pathname === '/keuangan' && activeTab === 'scholarship';
+    }
     return false;
   };
 

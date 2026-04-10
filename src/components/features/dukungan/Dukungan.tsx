@@ -71,8 +71,12 @@ export function Dukungan() {
       }
       
       if (formData.donationArea === 'beasiswa') {
-        if (formData.studentName) data.append('StudentName', formData.studentName);
-        if (formData.academicProgramId) data.append('AcademicProgramId', formData.academicProgramId);
+        if (formData.studentName) {
+          data.append('StudentName', formData.studentName);
+        }
+        if (formData.academicProgramId) {
+          data.append('AcademicProgramId', formData.academicProgramId);
+        }
       }
 
       if (formData.message) {

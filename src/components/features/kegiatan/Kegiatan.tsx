@@ -35,7 +35,7 @@ import { getImageUrl } from '@/lib/image-utils';
 import { useDebounce } from '@/lib/use-debounce';
 
 const bgHeader = "/assets/sttb-2-BG.png";
-const bgPatternReversed = "/assets/background-reversed.webp";
+const bgPattern = "/assets/Page-Panjang-1.webp";
 
 export function Kegiatan() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -102,7 +102,7 @@ export function Kegiatan() {
   return (
     <div 
       className="min-h-screen bg-white bg-cover bg-center"
-      style={{ backgroundImage: `url(${bgPatternReversed})` }}
+      style={{ backgroundImage: `url(${bgPattern})` }}
     >
       {/* Premium Hero Section - Synchronized with Home */}
       <section className="relative h-[550px] md:h-[650px] overflow-hidden">
