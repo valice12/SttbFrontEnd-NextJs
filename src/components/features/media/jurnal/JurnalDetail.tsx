@@ -115,10 +115,23 @@ export function JurnalDetail() {
 
               {/* Abstract / Content */}
               <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">
-                <h2 className="text-xl sm:text-2xl font-black text-[#092C74] mb-6 uppercase tracking-tight">Abstract</h2>
-                <div className="text-gray-700 leading-relaxed text-base sm:text-lg bg-gray-50 p-6 sm:p-8 rounded-2xl italic mb-10 border-l-4 border-[#092C74]">
-                  {journal.description}
-                </div>
+                {journal.abstract && (
+                  <>
+                    <h2 className="text-xl sm:text-2xl font-black text-[#092C74] mb-6 uppercase tracking-tight">Abstract</h2>
+                    <div className="text-gray-700 leading-relaxed text-base sm:text-lg bg-gray-50 p-6 sm:p-8 rounded-2xl italic mb-10 border-l-4 border-[#092C74] whitespace-pre-wrap">
+                      {journal.abstract}
+                    </div>
+                  </>
+                )}
+
+                {journal.description && (
+                  <div className="mb-10">
+                    <h2 className="text-xl sm:text-2xl font-black text-[#092C74] mb-6 uppercase tracking-tight">Synopsis</h2>
+                    <div className="text-gray-700 leading-relaxed text-base sm:text-lg">
+                      {journal.description}
+                    </div>
+                  </div>
+                )}
                 
                 {journal.link && (
                   <div className="mt-16 pt-10 border-t border-gray-100">

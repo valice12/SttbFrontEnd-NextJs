@@ -365,6 +365,7 @@ export const dataService = {
         ...data,
         title: data.journalTitle || data.title,
         description: data.journalDescription || data.description,
+        abstract: data.abstract || '',
         link: getFileUrl(data.journalPath || data.link || data.mediaPath, 'jurnal')
       };
     } catch {

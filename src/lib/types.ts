@@ -56,6 +56,7 @@ export interface ArticleDetail extends MediaItem {
 export interface JournalDetail extends MediaItem {
   journalTitle: string;
   journalDescription: string;
+  abstract: string;
   journalPath: string;
 }
 
