@@ -14,7 +14,7 @@ import { dataService } from '@/lib/data-service';
 import Link from 'next/link';
 import { FinanceNavbar } from '@/components/features/keuangan/FinanceNavbar';
 
-const bgHeader = "/assets/bg-dukungan.png";
+const bgHeader = "/assets/sttb-2-BG.png";
 const bgPattern = "/assets/background.webp";
 
 export function Dukungan() {
@@ -121,13 +121,14 @@ export function Dukungan() {
       className="min-h-screen bg-white bg-cover bg-center"
       style={{ backgroundImage: `url(${bgPattern})` }}
     >
-      {/* Premium Hero Section - Support */}
+      {/* Premium Hero Section - Synchronized with Global Standard */}
       <section className="relative h-[550px] md:h-[650px] overflow-hidden">
         <div className="absolute inset-0">
           <img src={bgHeader} alt="Support Hero" className="w-full h-full object-cover scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#7F1D1D]/95 via-[#9A3412]/45 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#061B46]/95 via-[#4B0082]/40 to-transparent z-10" />
           
           <div className="absolute top-1/2 -right-20 size-[500px] bg-[#E31D1A]/10 blur-[120px] rounded-full animate-pulse" />
+          <div className="absolute bottom-0 -left-20 size-[400px] bg-[#092C74]/40 blur-[100px] rounded-full" />
         </div>
 
         <div className="relative container mx-auto px-4 h-full flex items-center z-20">
@@ -136,7 +137,7 @@ export function Dukungan() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 rounded-[40px] shadow-2xl relative overflow-hidden"
+              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 lg:p-16 rounded-[40px] shadow-2xl relative overflow-hidden"
             >
               <div className="relative z-10">
                 <motion.div
@@ -148,7 +149,7 @@ export function Dukungan() {
                    <Heart className="size-3" /> Partner in Ministry
                 </motion.div>
 
-                <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black text-white mb-8 leading-[1.1] tracking-tight drop-shadow-2xl">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-[1.1] tracking-tighter drop-shadow-2xl">
                   Dukungan <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6AACE6] via-[#A855F7] to-[#E31D1A]">Pelayanan</span>
                 </h1>
@@ -364,8 +365,8 @@ export function Dukungan() {
                     name="fullName" 
                     value={formData.fullName} 
                     onChange={handleChange} 
-                    placeholder="NAMA LENGKAP DONATUR" 
-                    className="col-span-3 h-16 bg-white border-gray-100 rounded-2xl px-8 font-black text-[#092C74] placeholder:text-gray-300 focus:bg-white transition-all uppercase text-[11px] tracking-widest" 
+                    placeholder="Nama Lengkap Donatur" 
+                    className="col-span-3 h-16 bg-white border-gray-100 rounded-2xl px-8 font-black text-[#092C74] placeholder:text-gray-300 focus:bg-white transition-all text-sm" 
                     required 
                   />
                 </div>
@@ -375,8 +376,8 @@ export function Dukungan() {
                     name="phoneNumber" 
                     value={formData.phoneNumber} 
                     onChange={handleChange} 
-                    placeholder="WHATSAPP / TELEPON" 
-                    className="h-16 bg-white border-gray-100 rounded-2xl px-8 font-black text-[#092C74] placeholder:text-gray-300 focus:bg-white transition-all uppercase text-[11px] tracking-widest" 
+                    placeholder="WhatsApp / Telepon" 
+                    className="h-16 bg-white border-gray-100 rounded-2xl px-8 font-black text-[#092C74] placeholder:text-gray-300 focus:bg-white transition-all text-sm" 
                     required 
                   />
                   <Input 
@@ -384,8 +385,19 @@ export function Dukungan() {
                     type="email" 
                     value={formData.email} 
                     onChange={handleChange} 
-                    placeholder="ALAMAT EMAIL RESMI" 
-                    className="h-16 bg-white border-gray-100 rounded-2xl px-8 font-black text-[#092C74] placeholder:text-gray-300 focus:bg-white transition-all uppercase text-[11px] tracking-widest" 
+                    placeholder="Alamat Email Resmi" 
+                    className="h-16 bg-white border-gray-100 rounded-2xl px-8 font-black text-[#092C74] placeholder:text-gray-300 focus:bg-white transition-all text-sm" 
+                    required 
+                  />
+                </div>
+                
+                <div className="grid sm:grid-cols-1">
+                  <Textarea 
+                    name="address" 
+                    value={formData.address} 
+                    onChange={handleChange} 
+                    placeholder="Alamat Lengkap" 
+                    className="bg-white border-gray-100 min-h-[80px] rounded-3xl p-8 font-black text-[#092C74] placeholder:text-gray-300 text-sm" 
                     required 
                   />
                 </div>
@@ -417,8 +429,8 @@ export function Dukungan() {
                   type="number"
                   value={formData.donationAmount} 
                   onChange={handleChange} 
-                  placeholder="JUMLAH DONASI (CONTOH: 1000000)" 
-                  className="h-16 bg-white border-gray-100 rounded-2xl px-8 font-black text-[#092C74] placeholder:text-gray-300 focus:bg-white transition-all uppercase text-[11px] tracking-widest" 
+                  placeholder="Jumlah Donasi (Contoh: 1000000)" 
+                  className="h-16 bg-white border-gray-100 rounded-2xl px-8 font-black text-[#092C74] placeholder:text-gray-300 focus:bg-white transition-all text-sm" 
                   required 
                 />
                 
@@ -426,8 +438,8 @@ export function Dukungan() {
                   name="message" 
                   value={formData.message} 
                   onChange={handleChange} 
-                  placeholder="TULIS PESAN ATAU KERINDUAN PELAYANAN ANDA..." 
-                  className="bg-white border-gray-100 min-h-[120px] rounded-3xl p-8 font-black text-[#092C74] placeholder:text-gray-300 uppercase text-[11px] tracking-widest" 
+                  placeholder="Tulis pesan atau kerinduan pelayanan Anda..." 
+                  className="bg-white border-gray-100 min-h-[120px] rounded-3xl p-8 font-black text-[#092C74] placeholder:text-gray-300 text-sm" 
                 />
                 
                 <div className="space-y-4">

@@ -104,11 +104,11 @@ export function Kegiatan() {
       className="min-h-screen bg-white bg-cover bg-center"
       style={{ backgroundImage: `url(${bgPattern})` }}
     >
-      {/* Premium Hero Section - Synchronized with Home */}
+      {/* Premium Hero Section - Synchronized with Global Standard */}
       <section className="relative h-[550px] md:h-[650px] overflow-hidden">
         <div className="absolute inset-0">
           <img src={bgHeader} alt="Events Hero" className="w-full h-full object-cover scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1E3A8A]/95 via-[#0F172A]/45 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#061B46]/95 via-[#4B0082]/40 to-transparent z-10" />
           
           <div className="absolute bottom-1/4 -right-20 size-[500px] bg-[#E31D1A]/10 blur-[120px] rounded-full animate-pulse" />
           <div className="absolute top-0 -left-20 size-[400px] bg-[#092C74]/40 blur-[100px] rounded-full" />
@@ -120,7 +120,7 @@ export function Kegiatan() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-20 rounded-[40px] shadow-2xl relative overflow-hidden group"
+              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 lg:p-16 rounded-[40px] shadow-2xl relative overflow-hidden group"
             >
               <div className="relative z-10">
                 <motion.div
@@ -146,35 +146,35 @@ export function Kegiatan() {
       </section>
 
       {/* Modern Filter Section - Premium Unified Design */}
-      <section className="bg-white/70 backdrop-blur-2xl border-b border-gray-100 py-8 sticky lg:static top-[112px] z-30 shadow-sm transition-all duration-500">
+      <section className="bg-white/95 backdrop-blur-2xl border-b border-gray-100 py-6 md:py-8 sticky top-[80px] md:top-[132px] z-40 shadow-md transition-all duration-500">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col xl:flex-row items-center justify-between gap-8">
-            <div className="flex flex-wrap items-center gap-4 w-full xl:w-auto">
+          <div className="flex flex-col xl:flex-row items-center justify-between gap-4 md:gap-8">
+            <div className="flex flex-wrap items-center gap-2 md:gap-4 w-full xl:w-auto">
               {/* Sort */}
-              <div className="flex items-center gap-3 bg-white hover:bg-[#F2ECF8] rounded-2xl px-6 h-14 shrink-0 w-full sm:w-[220px] border-2 border-gray-50 text-[#092C74] transition-all shadow-sm hover:shadow-md">
-                <ArrowUpDown className="size-4 shrink-0 text-[#E31D1A]" />
+              <div className="flex items-center gap-3 bg-white hover:bg-[#F2ECF8] rounded-xl md:rounded-2xl px-4 md:px-6 h-12 md:h-14 shrink-0 w-[calc(50%-4px)] sm:w-[200px] border-2 border-gray-50 text-[#092C74] transition-all shadow-sm">
+                <ArrowUpDown className="size-3 md:size-4 shrink-0 text-[#E31D1A]" />
                 <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="w-full bg-transparent border-none shadow-none focus:ring-0 font-black uppercase text-xs tracking-widest p-0 text-[#092C74]">
-                    <SelectValue placeholder="SORT BY" />
+                  <SelectTrigger className="w-full bg-transparent border-none shadow-none focus:ring-0 font-black uppercase text-[10px] tracking-widest p-0 text-[#092C74]">
+                    <SelectValue placeholder="SORT" />
                   </SelectTrigger>
                   <SelectContent className="rounded-2xl border-none shadow-2xl">
-                    <SelectItem value="date" className="font-bold py-3 uppercase text-[10px] tracking-widest">TERDEKAT</SelectItem>
-                    <SelectItem value="title" className="font-bold py-3 uppercase text-[10px] tracking-widest">NAMA ACARA</SelectItem>
+                    <SelectItem value="date" className="font-bold py-3 uppercase text-[10px] tracking-widest">Terdekat</SelectItem>
+                    <SelectItem value="title" className="font-bold py-3 uppercase text-[10px] tracking-widest">Nama acara</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               {/* Category */}
-              <div className="flex items-center gap-3 bg-white hover:bg-[#F2ECF8] rounded-2xl px-6 h-14 shrink-0 w-full sm:w-[220px] border-2 border-gray-50 text-[#092C74] transition-all shadow-sm hover:shadow-md">
-                <SlidersHorizontal className="size-4 shrink-0 text-[#E31D1A]" />
+              <div className="flex items-center gap-3 bg-white hover:bg-[#F2ECF8] rounded-xl md:rounded-2xl px-4 md:px-6 h-12 md:h-14 shrink-0 w-[calc(50%-4px)] sm:w-[200px] border-2 border-gray-50 text-[#092C74] transition-all shadow-sm">
+                <SlidersHorizontal className="size-3 md:size-4 shrink-0 text-[#E31D1A]" />
                 <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                  <SelectTrigger className="w-full bg-transparent border-none shadow-none focus:ring-0 font-black uppercase text-xs tracking-widest p-0 text-[#092C74]">
+                  <SelectTrigger className="w-full bg-transparent border-none shadow-none focus:ring-0 font-black uppercase text-[10px] tracking-widest p-0 text-[#092C74]">
                     <SelectValue placeholder="CATEGORY" />
                   </SelectTrigger>
                   <SelectContent className="rounded-2xl border-none shadow-2xl">
                     {categories.map((cat) => (
                       <SelectItem key={cat} value={cat} className="font-bold py-3 uppercase text-[10px] tracking-widest">
-                        {cat === 'all' ? 'SEMUA KATEGORI' : cat.toUpperCase()}
+                        {cat === 'all' ? 'SEMUA' : cat.toUpperCase()}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -184,45 +184,45 @@ export function Kegiatan() {
               {/* Date */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className="flex items-center gap-3 bg-white hover:bg-[#F2ECF8] border-2 border-gray-50 rounded-2xl px-6 h-14 shrink-0 font-black uppercase text-xs tracking-widest w-full sm:w-[220px] transition-all shadow-sm hover:shadow-md text-[#092C74]">
-                    <CalendarIcon className="size-4 shrink-0 text-[#E31D1A]" />
-                    <span className="flex-1 text-left truncate">{date ? format(date, "d MMMM yyyy", { locale: id }) : 'DATE'}</span>
+                  <button className="flex items-center gap-3 bg-white hover:bg-[#F2ECF8] border-2 border-gray-50 rounded-xl md:rounded-2xl px-4 md:px-6 h-12 md:h-14 shrink-0 font-black uppercase text-[10px] tracking-widest w-full sm:w-[200px] transition-all shadow-sm text-[#092C74]">
+                    <CalendarIcon className="size-3 md:size-4 shrink-0 text-[#E31D1A]" />
+                    <span className="flex-1 text-left truncate">{date ? format(date, "d MMM yy", { locale: id }) : 'DATE'}</span>
                   </button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0 z-[100] bg-white rounded-3xl shadow-2xl border-none overflow-hidden" align="start">
                   <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
                   {date && (
                     <div className="p-4 border-t text-center">
-                      <Button variant="ghost" size="sm" onClick={() => setDate(undefined)} className="text-xs font-black text-[#E31D1A] uppercase tracking-widest">HAPUS FILTER</Button>
+                      <Button variant="ghost" size="sm" onClick={() => setDate(undefined)} className="text-xs font-black text-[#E31D1A] uppercase tracking-widest">Hapus filter</Button>
                     </div>
                   )}
                 </PopoverContent>
               </Popover>
             </div>
 
-            <div className="flex items-center gap-4 w-full xl:w-auto flex-1 xl:justify-end">
+            <div className="flex items-center gap-2 md:gap-4 w-full xl:w-auto flex-1 xl:justify-end">
               <div className="relative w-full xl:max-w-md group">
-                <Search className="absolute left-6 top-1/2 -translate-y-1/2 size-5 text-gray-400 group-hover:text-[#092C74] transition-colors" />
+                <Search className="absolute left-5 top-1/2 -translate-y-1/2 size-4 text-gray-400 group-hover:text-[#092C74] transition-colors" />
                 <Input
                   type="text"
-                  placeholder="CARI KEGIATAN STTB..."
+                  placeholder="Cari kegiatan..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-14 h-14 rounded-2xl border-2 border-gray-50 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 text-sm font-black uppercase tracking-widest transition-all shadow-sm"
+                  className="pl-12 h-12 rounded-xl border-2 border-gray-50 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 text-[10px] font-black uppercase tracking-widest transition-all shadow-sm"
                 />
               </div>
 
               <Button
                 variant="outline"
                 onClick={() => setIsGridView(!isGridView)}
-                className={`h-14 w-14 rounded-2xl border-2 transition-all shadow-sm ${isGridView ? 'bg-[#092C74] text-white border-[#092C74]' : 'bg-white text-[#092C74] border-gray-50'}`}
+                className={`h-12 w-12 rounded-xl border-2 transition-all shadow-sm shrink-0 ${isGridView ? 'bg-[#092C74] text-white border-[#092C74]' : 'bg-white text-[#092C74] border-gray-50'}`}
               >
-                {isGridView ? <List className="size-6" /> : (
+                {isGridView ? <List className="size-5" /> : (
                   <div className="grid grid-cols-2 gap-1">
-                    <div className="w-2 h-2 bg-current rounded-sm" />
-                    <div className="w-2 h-2 bg-current rounded-sm" />
-                    <div className="w-2 h-2 bg-current rounded-sm" />
-                    <div className="w-2 h-2 bg-current rounded-sm" />
+                    <div className="w-1.5 h-1.5 bg-current rounded-sm" />
+                    <div className="w-1.5 h-1.5 bg-current rounded-sm" />
+                    <div className="w-1.5 h-1.5 bg-current rounded-sm" />
+                    <div className="w-1.5 h-1.5 bg-current rounded-sm" />
                   </div>
                 )}
               </Button>
@@ -232,9 +232,9 @@ export function Kegiatan() {
       </section>
 
       {/* Events Display */}
-      <section className="py-24 relative z-10">
+      <section className="py-12 md:py-24 relative z-10">
         <div className="container mx-auto px-4">
-          <div className={isGridView ? "grid md:grid-cols-2 lg:grid-cols-3 gap-10" : "space-y-10 max-w-6xl mx-auto"}>
+          <div className={isGridView ? "grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10" : "space-y-6 md:space-y-10 max-w-6xl mx-auto"}>
             {currentEvents.length > 0 ? (
               currentEvents.map((event, index) => (
                 <motion.div
@@ -259,30 +259,30 @@ export function Kegiatan() {
                     />
                   ) : (
                     <Link href={`/kegiatan/${event.slug}`} className="block group">
-                      <div className="flex flex-col md:flex-row gap-10 backdrop-blur-md bg-white/40 p-10 rounded-[3.5rem] hover:shadow-[0_60px_100px_rgba(9,44,116,0.1)] border-2 border-white transition-all duration-700 relative overflow-hidden">
-                         <div className="w-full md:w-80 h-60 rounded-[2.5rem] overflow-hidden shrink-0 shadow-2xl relative">
+                      <div className="flex flex-col md:flex-row gap-6 md:gap-10 backdrop-blur-md bg-white/60 p-6 md:p-10 rounded-3xl md:rounded-[3.5rem] hover:shadow-2xl border border-gray-200 md:border-2 md:border-[#092C74]/15 transition-all duration-700 relative overflow-hidden shadow-xl shadow-blue-900/5">
+                         <div className="w-full md:w-80 h-52 md:h-60 rounded-2xl md:rounded-[2.5rem] overflow-hidden shrink-0 shadow-xl relative">
                             <img src={getImageUrl(event.imagePath || event.image, 'events')} alt={event.name || event.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                          </div>
                          <div className="flex flex-col flex-1 justify-center relative z-10">
-                            <div className="flex items-center gap-4 mb-6">
-                               <span className="px-5 py-2 bg-[#E31D1A] text-white rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg shadow-red-500/20">{event.category}</span>
-                               <span className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] flex items-center gap-2"><MapPin className="size-4 text-[#092C74]" /> {event.location || 'STT BANDUNG'}</span>
+                            <div className="flex items-center gap-3 mb-4 md:mb-6">
+                               <span className="px-4 py-1.5 md:px-5 md:py-2 bg-[#E31D1A] text-white rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-widest shadow-lg shadow-red-500/20">{event.category}</span>
+                               <span className="text-[9px] md:text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] flex items-center gap-2"><MapPin className="size-3 md:size-4 text-[#092C74]" /> {event.location || 'STT BANDUNG'}</span>
                             </div>
-                            <h3 className="text-3xl md:text-4xl font-black text-[#092C74] group-hover:text-[#E31D1A] transition-colors mb-6 tracking-tighter leading-tight uppercase">{event.name || event.title}</h3>
-                            <p className="text-gray-500 line-clamp-2 mb-10 text-lg font-medium leading-relaxed italic">{event.description}</p>
-                            <div className="flex flex-wrap items-center gap-8">
-                               <div className="flex items-center gap-3 bg-white/60 backdrop-blur-sm px-6 py-3 rounded-2xl border border-white shadow-sm">
-                                  <CalendarIcon className="size-5 text-[#E31D1A]" />
-                                  <span className="text-sm font-black text-[#092C74] uppercase tracking-widest">{new Date(event.eventDate || event.date || '').toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                            <h3 className="text-2xl md:text-4xl font-black text-[#092C74] group-hover:text-[#E31D1A] transition-colors mb-3 md:mb-6 tracking-tighter leading-tight uppercase">{event.name || event.title}</h3>
+                            <p className="text-gray-500 line-clamp-2 mb-6 md:mb-10 text-sm md:text-lg font-medium leading-relaxed italic">{event.description}</p>
+                            <div className="flex flex-wrap items-center gap-3 md:gap-8">
+                               <div className="flex items-center gap-2 md:gap-3 bg-white/60 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 rounded-xl md:rounded-2xl border border-white shadow-sm">
+                                  <CalendarIcon className="size-4 md:size-5 text-[#E31D1A]" />
+                                  <span className="text-[10px] md:text-sm font-black text-[#092C74] uppercase tracking-widest">{new Date(event.eventDate || event.date || '').toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                                 </div>
-                                <div className="flex items-center gap-3 bg-white/60 backdrop-blur-sm px-6 py-3 rounded-2xl border border-white shadow-sm">
-                                  <Clock className="size-5 text-[#E31D1A]" />
-                                  <span className="text-sm font-black text-[#092C74] uppercase tracking-widest">{event.time || '09:00 - SELESAI'}</span>
+                                <div className="flex items-center gap-2 md:gap-3 bg-white/60 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 rounded-xl md:rounded-2xl border border-white shadow-sm">
+                                  <Clock className="size-4 md:size-5 text-[#E31D1A]" />
+                                  <span className="text-[10px] md:text-sm font-black text-[#092C74] uppercase tracking-widest">{event.time || '09:00 - SLS'}</span>
                                </div>
                                <div className="ml-auto opacity-0 group-hover:opacity-100 transition-all translate-x-4 group-hover:translate-x-0 hidden md:block">
-                                  <div className="size-14 bg-[#092C74] rounded-full flex items-center justify-center text-white shadow-xl">
-                                     <ChevronRightIcon className="size-8" />
+                                  <div className="size-12 md:size-14 bg-[#092C74] rounded-full flex items-center justify-center text-white shadow-xl">
+                                     <ChevronRightIcon className="size-6 md:size-8" />
                                   </div>
                                </div>
                             </div>

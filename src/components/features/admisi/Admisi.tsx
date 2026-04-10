@@ -11,7 +11,7 @@ import { AdmissionRequirements } from './components/AdmissionRequirements';
 import { AdmissionFAQ } from './components/AdmissionFAQ';
 import { AdmissionHelp } from './components/AdmissionHelp';
 
-const bgHeader = "/assets/04-Beasiswa-Image-Header-scaled.jpg";
+const bgHeader = "/assets/gedung1.png";
 
 export function Admisi() {
   const [admissionSchedule, setAdmissionSchedule] = useState<any>(null);

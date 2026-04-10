@@ -9,13 +9,13 @@ interface MediaNavbarProps {
 }
 
 const navItems = [
-  { href: "/berita", icon: Newspaper, label: "NEWS UPDATE", key: "berita" },
-  { href: "/media?tab=jurnal", icon: FileText, label: "JURNAL STULOS", key: "jurnal" },
-  { href: "/media?tab=video", icon: Video, label: "VIDEO", key: "video" },
-  { href: "/media?tab=artikel", icon: Newspaper, label: "ARTIKEL", key: "artikel" },
-  { href: "/media/monograf", icon: Layers, label: "MONOGRAF", key: "monograf" },
-  { href: "/media/buletin", icon: Newspaper, label: "BULETIN", key: "buletin" },
-  { href: "/media?tab=elibrary", icon: BookOpen, label: "DIGITAL LIBRARY", key: "elibrary" },
+  { href: "/berita", icon: Newspaper, label: "News update", key: "berita" },
+  { href: "/media?tab=jurnal", icon: FileText, label: "Jurnal stulos", key: "jurnal" },
+  { href: "/media?tab=video", icon: Video, label: "Video", key: "video" },
+  { href: "/media?tab=artikel", icon: Newspaper, label: "Artikel", key: "artikel" },
+  { href: "/media?tab=monograf", icon: Layers, label: "Monograf", key: "monograf" },
+  { href: "/media?tab=buletin", icon: Newspaper, label: "Buletin", key: "buletin" },
+  { href: "/media?tab=elibrary", icon: BookOpen, label: "Digital library", key: "elibrary" },
 ];
 
 export function MediaNavbar({ activeTab }: MediaNavbarProps) {
@@ -38,7 +38,7 @@ export function MediaNavbar({ activeTab }: MediaNavbarProps) {
                 }`}
               >
                 <Icon className={`size-5 ${isActive ? 'text-white' : 'text-[#E31D1A]'}`} />
-                <span className="uppercase text-[9px] md:text-xs tracking-widest text-center md:text-left leading-tight">{item.label}</span>
+                <span className="text-[9px] md:text-xs tracking-widest text-center md:text-left leading-tight">{item.label}</span>
               </Link>
             );
           })}

@@ -10,22 +10,23 @@ interface AdmissionHeroProps {
 
 export function AdmissionHero({ bgHeader }: AdmissionHeroProps) {
   return (
-    <section className="relative h-[600px] lg:h-[650px] overflow-hidden">
+    <section className="relative h-[550px] md:h-[650px] overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
         <img src={bgHeader} alt="Admissions Hero" className="w-full h-full object-cover scale-105" />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#061B46]/95 via-[#4C1D95]/45 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#061B46]/95 via-[#4B0082]/40 to-transparent z-10" />
         
         {/* Decorative Mesh Blobs */}
-        <div className="absolute top-1/4 -right-20 size-[400px] bg-[#E31D1A]/20 blur-[100px] rounded-full animate-pulse" />
+        <div className="absolute top-1/2 -right-20 size-[500px] bg-[#E31D1A]/10 blur-[120px] rounded-full animate-pulse" />
+        <div className="absolute bottom-0 -left-20 size-[400px] bg-[#092C74]/40 blur-[100px] rounded-full" />
       </div>
 
       <div className="relative container mx-auto px-4 h-full flex items-center z-20">
         <div className="max-w-4xl">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="backdrop-blur-md bg-white/5 border border-white/10 p-8 md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden"
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 lg:p-16 rounded-[40px] shadow-2xl relative overflow-hidden"
           >
             <div className="relative z-10">
               <motion.div
@@ -37,7 +38,7 @@ export function AdmissionHero({ bgHeader }: AdmissionHeroProps) {
                  <UserCheck className="size-3" /> Bergabunglah Bersama Kami
               </motion.div>
 
-              <h1 className="text-4xl md:text-7xl font-black text-white mb-6 drop-shadow-2xl tracking-tight leading-[1.1]">
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 drop-shadow-2xl tracking-tighter leading-[1.1]">
                 Admisi & <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6AACE6] via-[#A855F7] to-[#E31D1A]">Pendaftaran</span>
               </h1>
               <p className="text-lg md:text-2xl text-white/90 font-medium mb-10 max-w-2xl leading-relaxed">

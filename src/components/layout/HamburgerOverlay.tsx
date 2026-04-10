@@ -53,12 +53,12 @@ const navigationLinks = [
     href: '/berita',
     icon: Layers,
     submenu: [
-      { label: 'Berita Terkini', href: '/berita' },
-      { label: 'Jurnal Stulos', href: '/media?tab=jurnal' },
-      { label: 'Video Pembelajaran', href: '/media?tab=video' },
+      { label: 'Berita terkini', href: '/berita' },
+      { label: 'Jurnal stulos', href: '/media?tab=jurnal' },
+      { label: 'Video pembelajaran', href: '/media?tab=video' },
       { label: 'Artikel', href: '/media?tab=artikel' },
-      { label: 'Monograf', href: '/media/monograf' },
-      { label: 'Buletin Kampus', href: '/media/buletin' }
+      { label: 'Monograf', href: '/media?tab=monograf' },
+      { label: 'Buletin kampus', href: '/media?tab=buletin' }
     ]
   }
 ];

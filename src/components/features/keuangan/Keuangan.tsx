@@ -74,13 +74,13 @@ export function Keuangan() {
       className="min-h-screen bg-white bg-cover bg-center"
       style={{ backgroundImage: `url(${bgPatternPanjang})` }}
     >
-      {/* Premium Hero Section - Financial Info */}
+      {/* Premium Hero Section - Synchronized with Global Standard */}
       <section className="relative h-[550px] md:h-[650px] overflow-hidden">
         <div className="absolute inset-0">
           <img src={bgHeader} alt="Financial Info" className="w-full h-full object-cover scale-105" />
           <div className={`absolute inset-0 bg-gradient-to-br ${currentHero.bg} to-transparent z-10 transition-colors duration-1000`} />
           
-          <div className="absolute top-1/4 -right-20 size-[500px] bg-[#E31D1A]/10 blur-[120px] rounded-full animate-pulse" />
+          <div className="absolute top-1/2 -right-20 size-[500px] bg-[#E31D1A]/10 blur-[120px] rounded-full animate-pulse" />
           <div className="absolute bottom-0 -left-20 size-[400px] bg-[#092C74]/40 blur-[100px] rounded-full" />
         </div>
 
@@ -91,7 +91,7 @@ export function Keuangan() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 rounded-[40px] shadow-2xl relative overflow-hidden"
+              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 lg:p-16 rounded-[40px] shadow-2xl relative overflow-hidden"
             >
               <div className="relative z-10">
                 <motion.div
@@ -103,7 +103,7 @@ export function Keuangan() {
                    <DollarSign className="size-3" /> {currentHero.tag}
                 </motion.div>
 
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-[1.1] tracking-tight drop-shadow-2xl">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-[1.1] tracking-tighter drop-shadow-2xl">
                   {currentHero.top} <br />
                   <span className={currentHero.grad}>{currentHero.bottom}</span>
                 </h1>
@@ -244,16 +244,16 @@ export function Keuangan() {
 
               <div className="grid lg:grid-cols-3 gap-10 mb-32">
                 {[
-                  { title: "Pastor Scholar", cat: "Entry Level", c1: "Biaya Pendidikan Penuh", req: ["Rapor min. 8.5", "Rekomendasi Gereja"], color: "from-[#092C74] to-blue-900" },
-                  { title: "Beasiswa Formatio", cat: "Active Student", c1: "Tahun ke-2 Full Coverage", req: ["IPK Minimal 3.2", "Wawancara Institusi"], color: "from-[#4B0082] to-indigo-900" },
-                  { title: "Leadership Grant", cat: "Elite Program", c1: "Potongan Hingga 50%", req: ["Prestasi Non-Akademik", "Aktif Organisasi"], color: "from-[#E31D1A] to-red-900" }
+                  { title: "Pastor Scholar", cat: "Entry Level", c1: "Biaya Pendidikan Penuh", req: ["Rapor min. 8.5", "Rekomendasi Gereja"], color: "from-[#092C74] to-blue-900", bgColor: "bg-blue-50" },
+                  { title: "Beasiswa Formatio", cat: "Active Student", c1: "Tahun ke-2 Full Coverage", req: ["IPK Minimal 3.2", "Wawancara Institusi"], color: "from-[#4B0082] to-indigo-900", bgColor: "bg-indigo-50" },
+                  { title: "Leadership Grant", cat: "Elite Program", c1: "Potongan Hingga 50%", req: ["Prestasi Non-Akademik", "Aktif Organisasi"], color: "from-[#E31D1A] to-red-900", bgColor: "bg-red-50" }
                 ].map((item, i) => (
                   <motion.div 
                     key={i}
                     whileHover={{ y: -10 }}
-                    className="backdrop-blur-xl bg-white/40 border border-white p-10 lg:p-14 rounded-[3.5rem] shadow-[0_40px_80px_rgba(0,0,0,0.05)] relative overflow-hidden group h-full flex flex-col"
+                    className={`backdrop-blur-xl ${item.bgColor} border border-white p-10 lg:p-14 rounded-[3.5rem] shadow-[0_40px_80px_rgba(0,0,0,0.05)] relative overflow-hidden group h-full flex flex-col`}
                   >
-                    <div className={`absolute top-0 right-0 size-32 bg-gradient-to-br ${item.color} rounded-full -mr-16 -mt-16 opacity-5 group-hover:opacity-10 transition-opacity`} />
+                    <div className={`absolute top-0 right-0 size-32 bg-gradient-to-br ${item.color} rounded-full -mr-16 -mt-16 opacity-10 group-hover:opacity-20 transition-opacity`} />
                     <div className="mb-12">
                       <span className="text-[10px] font-black text-[#E31D1A] uppercase tracking-[0.3em] block mb-4">{item.cat}</span>
                       <h3 className="text-3xl font-black text-[#092C74] tracking-tight leading-tight">{item.title}</h3>

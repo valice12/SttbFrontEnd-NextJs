@@ -153,33 +153,42 @@ export function HistoryTab({ isMounted, images }: HistoryTabProps) {
               <h2 className="text-3xl font-bold text-[#092C74]">Para Pendiri STTB</h2>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center group">
-                <div className="relative mb-6 mx-auto w-full aspect-[4/5] overflow-hidden rounded-xl shadow-lg group-hover:shadow-2xl transition-all duration-300">
-                  <img src={images.imgCaleb} alt="Rev. DR. Caleb Tong" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-105" />
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 pt-12">
-                    <p className="text-white font-bold text-lg leading-tight">Rev. DR. Caleb Tong (Alm.)</p>
+            <div className="flex flex-col md:grid md:grid-cols-3 gap-4 md:gap-8">
+              {[
+                { name: "Rev. DR. Caleb Tong (Alm.)", img: images.imgCaleb, alt: "Rev. DR. Caleb Tong" },
+                { name: "Rev. DR. Joseph Tong, Ph.D.", img: images.imgJoseph, alt: "Rev. DR. Joseph Tong, Ph.D." },
+                { name: "Rev. Dorothy I. Marx (Alm.)", img: images.imgDorothy, alt: "Rev. Dorothy I. Marx" }
+              ].map((pendiri, i) => (
+                <div key={i} className="group">
+                  <div className="flex flex-row md:flex-col items-center gap-6 md:gap-0 bg-gray-50/50 md:bg-transparent p-4 md:p-0 rounded-2xl md:rounded-none">
+                    <div className="relative shrink-0 w-32 md:w-full aspect-square md:aspect-[4/5] overflow-hidden rounded-xl shadow-md bg-white border border-gray-100 transition-all duration-300">
+                      <img 
+                        src={pendiri.img} 
+                        alt={pendiri.alt} 
+                        className={`w-full h-full object-contain p-1 transition-all duration-500 scale-100 group-hover:scale-105 ${
+                          pendiri.name.includes('(Alm.)') ? 'grayscale group-hover:grayscale-0' : ''
+                        }`} 
+                      />
+                      {/* Desktop Only Overlay - Adjusted for object-contain */}
+                      <div className="hidden md:block absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#092C74]/90 via-[#092C74]/40 to-transparent p-6 pt-12">
+                        <p className="text-white font-bold text-lg leading-tight">
+                          {pendiri.name}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Mobile Only Text */}
+                    <div className="md:hidden flex-1 py-2">
+                      <p className="text-[#092C74] font-black text-base leading-tight uppercase tracking-wider mb-2">
+                        {pendiri.name}
+                      </p>
+                      <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">
+                        Pendiri STT Bandung
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="text-center group">
-                <div className="relative mb-6 mx-auto w-full aspect-[4/5] overflow-hidden rounded-xl shadow-lg group-hover:shadow-2xl transition-all duration-300">
-                  <img src={images.imgJoseph} alt="Rev. DR. Joseph Tong, Ph.D." className="w-full h-full object-cover transition-all duration-500 scale-100 group-hover:scale-105" />
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 pt-12">
-                    <p className="text-white font-bold text-lg leading-tight">Rev. DR. Joseph Tong, Ph.D.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-center group">
-                <div className="relative mb-6 mx-auto w-full aspect-[4/5] overflow-hidden rounded-xl shadow-lg group-hover:shadow-2xl transition-all duration-300">
-                  <img src={images.imgDorothy} alt="Rev. Dorothy I. Marx" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-105" />
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 pt-12">
-                    <p className="text-white font-bold text-lg leading-tight">Rev. Dorothy I. Marx (Alm.)</p>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
 
             <div className="mt-12 p-8 bg-[#F5F3FB] rounded-xl border-l-4 border-[#092C74]">

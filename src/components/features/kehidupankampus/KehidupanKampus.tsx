@@ -9,7 +9,7 @@ const fasilitasKelas = "/assets/fasilitas-8-480x480.png";
 const fasilitasKapel = "/assets/fasilitas-2.png";
 const fasilitasKantin = "/assets/fasilitas-19-480x480.png";
 const fasilitasOlahraga = "/assets/fasilitas-16.png";
-const bgHeader = "/assets/kehidupan-komunitas.png";
+const bgHeader = "/assets/sttb-2-BG.png";
 const bgPattern = "/assets/background.webp";
 
 const facilities = [
@@ -27,11 +27,11 @@ export function KehidupanKampus() {
       className="min-h-screen bg-white bg-cover bg-center"
       style={{ backgroundImage: `url(${bgPattern})` }}
     >
-      {/* Premium Hero Section - Campus Life */}
+      {/* Premium Hero Section - Synchronized with Global Standard */}
       <section className="relative h-[550px] md:h-[650px] overflow-hidden">
         <div className="absolute inset-0">
           <img src={bgHeader} alt="Campus Life Hero" className="w-full h-full object-cover scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1E1B4B]/95 via-[#701A75]/45 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#061B46]/95 via-[#4B0082]/40 to-transparent z-10" />
           
           <div className="absolute top-1/2 -right-20 size-[500px] bg-[#E31D1A]/10 blur-[120px] rounded-full animate-pulse" />
           <div className="absolute bottom-0 -left-20 size-[400px] bg-[#092C74]/40 blur-[100px] rounded-full" />
@@ -43,7 +43,7 @@ export function KehidupanKampus() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 rounded-[40px] shadow-2xl relative overflow-hidden"
+              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 lg:p-16 rounded-[40px] shadow-2xl relative overflow-hidden"
             >
               <div className="relative z-10">
                 <motion.div
@@ -55,7 +55,7 @@ export function KehidupanKampus() {
                    <Users className="size-3" /> Vibrant Community
                 </motion.div>
 
-                <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black text-white mb-8 leading-[1.1] tracking-tight drop-shadow-2xl">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-[1.1] tracking-tighter drop-shadow-2xl">
                   Kehidupan <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6AACE6] via-[#A855F7] to-[#E31D1A]">Kampus</span>
                 </h1>

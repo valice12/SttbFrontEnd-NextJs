@@ -23,6 +23,7 @@ import { getImageUrl } from '@/lib/image-utils';
 import { useDebounce } from '@/lib/use-debounce';
 import { MediaNavbar } from '@/components/features/media/shared/MediaNavbar';
 
+const bgHeader = "/assets/sttb-2-BG.png";
 const bgPattern = "/assets/Page-Panjang-1.webp";
 
 export function Berita() {
@@ -114,10 +115,10 @@ export function Berita() {
       style={{ backgroundImage: `url(${bgPattern})` }}
     >
       {/* Premium Hero Section */}
-      <section className="relative h-[650px] md:h-[650px] overflow-hidden">
+      <section className="relative h-[550px] md:h-[650px] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={bgPattern} alt="News Hero" className="w-full h-full object-cover scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0F172A]/95 via-[#1E1B4B]/45 to-transparent z-10" />
+          <img src={bgHeader} alt="News Hero" className="w-full h-full object-cover scale-105" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#061B46]/95 via-[#4B0082]/40 to-transparent z-10" />
           
           <div className="absolute top-1/4 -right-20 size-[500px] bg-[#E31D1A]/10 blur-[120px] rounded-full animate-pulse" />
           <div className="absolute bottom-0 -left-20 size-[400px] bg-[#092C74]/40 blur-[100px] rounded-full" />
@@ -129,7 +130,7 @@ export function Berita() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 rounded-[40px] shadow-2xl relative overflow-hidden"
+              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 lg:p-16 rounded-[40px] shadow-2xl relative overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
               
@@ -142,10 +143,10 @@ export function Berita() {
                  <Newspaper className="size-3" /> Wawasan & Kabar Terbaru
               </motion.div>
  
-              <h1 className="text-5xl md:text-7xl lg:text-[5rem] font-black text-white mb-8 leading-[1.1] tracking-tight drop-shadow-2xl">
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-[1.1] tracking-tighter drop-shadow-2xl">
                 Berita <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6AACE6] via-[#A855F7] to-[#E31D1A]">
-                  STT BANDUNG
+                  STT Bandung
                 </span>
               </h1>
               <p className="text-xl md:text-2xl text-white/90 font-medium max-w-2xl leading-relaxed">
@@ -220,7 +221,7 @@ export function Berita() {
                   <div className="pt-4 lg:pt-6 flex flex-col sm:flex-row items-start sm:items-center gap-6 lg:gap-8">
                     <Link href={`/berita/${featuredNews[currentFeatured]?.slug}`} className="w-full sm:w-auto">
                       <Button className="w-full sm:w-auto h-14 lg:h-16 px-8 lg:px-10 bg-[#092C74] hover:bg-[#E31D1A] text-white font-black text-base lg:text-lg rounded-2xl shadow-xl shadow-blue-900/20 transition-all duration-500 hover:-translate-y-1">
-                        BACA SELENGKAPNYA
+                        Baca selengkapnya
                       </Button>
                     </Link>
                     <div className="flex gap-2 mx-auto sm:mx-0">
@@ -249,7 +250,7 @@ export function Berita() {
                 <ArrowUpDown className="size-4 shrink-0 text-[#E31D1A]" />
                 <Select value={sortBy} onValueChange={setSortBy}>
                   <SelectTrigger className="w-full bg-transparent border-none shadow-none focus:ring-0 font-black uppercase text-xs tracking-widest p-0 text-[#092C74]">
-                    <SelectValue placeholder="SORT BY" />
+                    <SelectValue placeholder="Urutkan" />
                   </SelectTrigger>
                   <SelectContent className="rounded-2xl border-none shadow-2xl">
                     <SelectItem value="date" className="font-bold py-3 uppercase text-[10px] tracking-widest">Terbaru</SelectItem>
@@ -262,12 +263,12 @@ export function Berita() {
                 <SlidersHorizontal className="size-4 shrink-0 text-[#E31D1A]" />
                 <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                   <SelectTrigger className="w-full bg-transparent border-none shadow-none focus:ring-0 font-black uppercase text-xs tracking-widest p-0 text-[#092C74]">
-                    <SelectValue placeholder="CATEGORY" />
+                    <SelectValue placeholder="Kategori" />
                   </SelectTrigger>
                   <SelectContent className="rounded-2xl border-none shadow-2xl">
                     {categories.map((cat) => (
                       <SelectItem key={cat} value={cat} className="font-bold py-3 uppercase text-[10px] tracking-widest">
-                        {cat === 'all' ? 'SEMUA KATEGORI' : cat.toUpperCase()}
+                        {cat === 'all' ? 'Semua kategori' : cat}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -278,7 +279,7 @@ export function Berita() {
                 <PopoverTrigger asChild>
                   <button className="flex items-center gap-3 bg-white hover:bg-[#F2ECF8] border-2 border-gray-50 rounded-2xl px-6 h-14 shrink-0 font-black uppercase text-xs tracking-widest w-full sm:w-[220px] transition-all shadow-sm hover:shadow-md text-[#092C74]">
                     <CalendarIcon className="size-4 shrink-0 text-[#E31D1A]" />
-                    <span className="flex-1 text-left truncate">{date ? format(date, "d MMMM yyyy", { locale: id }) : 'DATE'}</span>
+                    <span className="flex-1 text-left truncate">{date ? format(date, "d MMMM yyyy", { locale: id }) : 'Tanggal'}</span>
                   </button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0 z-[100] bg-white rounded-3xl shadow-2xl border-none overflow-hidden" align="start">
@@ -292,7 +293,7 @@ export function Berita() {
                 <Search className="absolute left-6 top-1/2 -translate-y-1/2 size-5 text-gray-400 group-hover:text-[#092C74] transition-colors" />
                 <Input
                   type="text"
-                  placeholder="CARI BERITA..."
+                  placeholder="Cari berita..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pl-14 h-14 rounded-2xl border-2 border-gray-50 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 text-sm font-black uppercase tracking-widest transition-all shadow-sm"
@@ -327,7 +328,7 @@ export function Berita() {
              </div>
           ) : (
             <>
-              <div className={isGridView ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12" : "space-y-10"}>
+              <div className={isGridView ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12" : "space-y-10"}>
                 {news.map((item, index) => (
                   <motion.div
                     key={item.id}

@@ -24,7 +24,7 @@ export function NewsSection({ latestNews }: NewsSectionProps) {
             </p>
           </div>
           <Link href="/berita">
-            <Button variant="outline" className="border-2 border-[#092C74] text-[#092C74] hover:bg-[#092C74] hover:text-white px-6 py-4 md:px-10 md:py-7 text-sm md:text-xl font-black rounded-xl md:rounded-2xl transition-all duration-500">
+            <Button variant="outline" className="border-2 border-[#092C74] text-[#092C74] hover:bg-[#092C74] hover:text-white px-8 py-5 md:px-12 md:py-8 text-sm md:text-xl font-black rounded-xl md:rounded-2xl transition-all duration-500">
               LIHAT SEMUA
             </Button>
           </Link>

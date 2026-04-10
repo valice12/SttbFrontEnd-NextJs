@@ -19,7 +19,7 @@ import { useEffect } from 'react';
 import { useDebounce } from '@/lib/use-debounce';
 
 export function ArtikelTab() {
-  const [isGridView, setIsGridView] = useState(false);
+  const [isGridView, setIsGridView] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedSearchQuery = useDebounce(searchQuery, 700);

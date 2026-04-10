@@ -46,11 +46,11 @@ export function KegiatanDetail() {
   if (!event) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Kegiatan tidak ditemukan</h2>
+        <div className="text-center p-10 backdrop-blur-md bg-white/40 border border-white/20 rounded-[30px] shadow-xl">
+          <h2 className="text-2xl font-black text-[#092C74] mb-4 uppercase tracking-tight">Kegiatan tidak ditemukan</h2>
           <Link href="/kegiatan">
-            <Button variant="outline" className="gap-2">
-              <ArrowLeft className="size-4" /> Kembali ke Kegiatan
+            <Button variant="outline" className="gap-2 font-black uppercase text-xs tracking-widest rounded-xl">
+              <ArrowLeft className="size-4" /> Kembali ke kegiatan
             </Button>
           </Link>
         </div>
@@ -60,87 +60,98 @@ export function KegiatanDetail() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Breadcrumb */}
-      <div className="bg-gray-50 border-b">
-        <div className="container mx-auto px-4 py-4 uppercase tracking-tighter">
-          <div className="flex items-center gap-2 text-xs text-gray-500 font-bold">
-            <Link href="/" className="hover:text-[#092C74] transition-colors">Beranda</Link>
+      {/* Breadcrumb - Overlaid on Hero */}
+      <div className="absolute top-0 left-0 w-full z-30 pt-10">
+        <div className="container mx-auto px-4 uppercase tracking-tighter">
+          <div className="flex items-center gap-2 text-[10px] text-white/60 font-black">
+            <Link href="/" className="hover:text-white transition-colors">Beranda</Link>
             <ChevronRight className="size-3" />
-            <Link href="/kegiatan" className="hover:text-[#092C74] transition-colors">Kegiatan</Link>
+            <Link href="/kegiatan" className="hover:text-white transition-colors">Kegiatan</Link>
             <ChevronRight className="size-3" />
-            <span className="text-gray-900 truncate max-w-[200px] md:max-w-md">
-              {event.name || event.title}
+            <span className="text-white truncate max-w-[200px] md:max-w-md">
+              Detail Agenda
             </span>
           </div>
         </div>
       </div>
 
-      {/* Hero Section */}
-      {/* Hero Section */}
-      <section className="relative h-[50vh] sm:h-[65vh] min-h-[400px] sm:min-h-[500px] overflow-hidden">
+      {/* Premium Hero Section - Standardized Glassmorphism Card */}
+      <section className="relative h-[550px] md:h-[650px] overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={getImageUrl(event.imagePath || event.image, 'events')}
             alt={event.name || event.title}
             className="w-full h-full object-cover scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#092C74] via-[#092C74]/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#061B46]/95 via-[#1E1B4B]/45 to-transparent z-10" />
+          
+          <div className="absolute top-1/2 -right-20 size-[500px] bg-[#E31D1A]/10 blur-[120px] rounded-full animate-pulse" />
+          <div className="absolute bottom-0 -left-20 size-[400px] bg-[#092C74]/40 blur-[100px] rounded-full" />
         </div>
 
-        <div className="absolute bottom-0 left-0 w-full">
-          <div className="container mx-auto px-4 pb-12 sm:pb-16 md:pb-24">
+        <div className="relative container mx-auto px-4 h-full flex items-center z-20">
+          <div className="max-w-5xl w-full">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 lg:p-16 rounded-[40px] shadow-2xl relative overflow-hidden group"
             >
-              <div className="flex flex-wrap gap-2 md:gap-3 mb-4 md:mb-6">
-                <span className="bg-[#E31D1A] text-white px-3 md:px-4 py-1.5 rounded-full text-[9px] md:text-xs font-black uppercase tracking-widest shadow-lg">
-                  {event.category}
-                </span>
-                <span className="bg-white/10 backdrop-blur-md text-white px-3 md:px-4 py-1.5 rounded-full text-[9px] md:text-xs font-bold uppercase tracking-widest">
-                  STTB Event
-                </span>
-              </div>
-              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-white mb-6 md:mb-8 leading-[1.1] max-w-5xl drop-shadow-2xl tracking-tight">
-                {event.name || event.title}
-              </h1>
-
-              <div className="hidden sm:flex flex-wrap gap-8 text-white/90 bg-black/10 backdrop-blur-sm p-6 rounded-2xl border border-white/10 w-fit">
-                <div className="flex items-center gap-3">
-                  <div className="size-10 bg-[#E31D1A] rounded-full flex items-center justify-center shadow-inner">
-                    <CalendarIcon className="size-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] text-white/60 font-black uppercase tracking-tighter">Tanggal</p>
-                    <p className="font-bold">{new Date(event.eventDate || event.date).toLocaleDateString('id-ID', {
-                      weekday: 'long',
-                      day: 'numeric',
-                      month: 'long',
-                      year: 'numeric'
-                    })}</p>
-                  </div>
+              <div className="relative z-10">
+                <div className="flex flex-wrap gap-2 md:gap-3 mb-8">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#E31D1A] rounded-full text-white text-xs font-black uppercase tracking-widest shadow-lg shadow-red-500/30"
+                  >
+                     <Users className="size-3" /> Agenda Komunitas
+                  </motion.div>
+                  <span className="bg-white/10 backdrop-blur-md text-white/50 px-4 py-1.5 border border-white/10 rounded-full text-[10px] font-black uppercase tracking-widest">
+                    #{event.category}
+                  </span>
                 </div>
 
-                {event.time && (
-                  <div className="flex items-center gap-3 border-l border-white/20 pl-8">
-                    <div className="size-10 bg-[#E31D1A] rounded-full flex items-center justify-center shadow-inner">
-                      <Clock className="size-5 text-white" />
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-10 leading-[1.1] max-w-5xl drop-shadow-2xl tracking-tighter">
+                  {event.name || event.title}
+                </h1>
+
+                <div className="flex flex-wrap gap-10 text-white/80 pt-10 border-t border-white/10">
+                  <div className="flex items-center gap-4">
+                    <div className="size-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg border border-white/10">
+                      <CalendarIcon className="size-6 text-white" />
                     </div>
                     <div>
-                      <p className="text-[10px] text-white/60 font-black uppercase tracking-tighter">Waktu</p>
-                      <p className="font-bold">{event.time}</p>
+                      <p className="text-[10px] text-white/40 font-black uppercase tracking-widest mb-0.5">Tanggal Pelaksanaan</p>
+                      <p className="font-black text-white">{new Date(event.eventDate || event.date).toLocaleDateString('id-ID', {
+                        weekday: 'long',
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                      })}</p>
                     </div>
                   </div>
-                )}
 
-                <div className="flex items-center gap-3 border-l border-white/20 pl-8">
-                  <div className="size-10 bg-[#E31D1A] rounded-full flex items-center justify-center shadow-inner">
-                    <MapPin className="size-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] text-white/60 font-black uppercase tracking-tighter">Lokasi</p>
-                    <p className="font-bold">{event.location}</p>
+                  {event.time && (
+                    <div className="flex items-center gap-4 md:border-l md:border-white/10 md:pl-10">
+                      <div className="size-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg border border-white/10">
+                        <Clock className="size-6 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-white/40 font-black uppercase tracking-widest mb-0.5">Waktu</p>
+                        <p className="font-black text-white">{event.time}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="flex items-center gap-4 md:border-l md:border-white/10 md:pl-10">
+                    <div className="size-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg border border-white/10">
+                      <MapPin className="size-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-white/40 font-black uppercase tracking-widest mb-0.5">Lokasi</p>
+                      <p className="font-black text-white">{event.location}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -256,13 +267,12 @@ export function KegiatanDetail() {
       </section>
 
       {/* Trust Banner */}
-      <section className="container mx-auto px-4 py-12">
-        <div className="bg-[#092C74]/5 rounded-3xl p-12 text-center border border-[#092C74]/10">
-          <img src="/assets/Logo-STT-Bdg.jpg" alt="STTB Logo" className="h-16 mx-auto mb-8 grayscale opacity-50" />
-          <p className="text-gray-500 font-bold uppercase tracking-[0.2em] text-sm">Sekolah Tinggi Teologi Bandung &copy; 2026</p>
+      <section className="container mx-auto px-4 py-20">
+        <div className="bg-[#061B46]/5 rounded-[40px] p-16 text-center border border-[#092C74]/10 backdrop-blur-sm">
+          <img src="/assets/Logo-STT-Bdg.jpg" alt="STTB Logo" className="h-16 mx-auto mb-8 grayscale opacity-30 group-hover:opacity-100 transition-opacity" />
+          <p className="text-gray-400 font-black uppercase tracking-[0.4em] text-[10px]">Sekolah Tinggi Teologi Bandung &copy; 2026</p>
         </div>
       </section>
     </div>
   );
 }
-

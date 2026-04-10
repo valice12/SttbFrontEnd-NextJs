@@ -66,13 +66,13 @@ export function Contact() {
         <div className="absolute inset-0 bg-white/40 backdrop-blur-sm pointer-events-none" />
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-16 items-stretch">
             {/* Contact Info - Modernized Cards */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="space-y-8"
+              className="space-y-8 h-full flex flex-col"
             >
               <div className="mb-12">
                 <h2 className="text-4xl md:text-6xl font-black text-[#092C74] mb-6 tracking-tighter">Informasi <span className="text-[#E31D1A]">Kontak</span></h2>
@@ -100,7 +100,7 @@ export function Contact() {
                 ))}
               </div>
 
-              <div className="p-8 md:p-10 bg-[#092C74] rounded-[2.5rem] text-white relative overflow-hidden mt-8 shadow-2xl">
+              <div className="p-8 md:p-10 bg-[#092C74] rounded-[2.5rem] text-white relative overflow-hidden mt-8 shadow-2xl flex-grow flex flex-col justify-center">
                  <div className="absolute top-0 right-0 p-8 opacity-5">
                     <Globe className="size-48" />
                  </div>
@@ -116,8 +116,9 @@ export function Contact() {
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              className="h-full"
             >
-              <div className="bg-[#092C74] p-8 md:p-14 rounded-[3rem] md:rounded-[4rem] shadow-2xl relative overflow-hidden group">
+              <div className="bg-[#092C74] p-8 md:p-14 rounded-[3rem] md:rounded-[4rem] shadow-2xl relative overflow-hidden group h-full flex flex-col justify-center">
                 <div className="absolute top-0 right-0 size-[500px] bg-white/5 blur-[100px] rounded-full -mr-32 -mt-32" />
                 
                 <h2 className="text-2xl md:text-5xl font-black text-white mb-10 tracking-tighter relative z-10">Kirim <span className="text-[#6AACE6]">Pesan</span></h2>

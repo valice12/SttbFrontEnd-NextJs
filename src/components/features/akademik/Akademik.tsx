@@ -17,7 +17,7 @@ const iconMap: Record<string, any> = {
   'sparkles': Sparkles
 };
 
-const bgHeader = "/assets/header-faq.png";
+const bgHeader = "/assets/06-Academic-Image-Header-scaled.jpg";
 const bgPatternReversed = "/assets/background-reversed.webp";
 
 export function Akademik() {
@@ -53,22 +53,23 @@ export function Akademik() {
       className="min-h-screen bg-white bg-cover bg-center"
       style={{ backgroundImage: `url(${bgPatternReversed})` }}
     >
-      {/* Premium Hero Section - Academic Programs */}
+      {/* Premium Hero Section - Synchronized with Global Standard */}
       <section className="relative h-[550px] md:h-[650px] overflow-hidden">
         <div className="absolute inset-0">
           <img src={bgHeader} alt="Academic Programs" className="w-full h-full object-cover scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#061B46]/95 via-[#2563EB]/45 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#061B46]/95 via-[#4B0082]/40 to-transparent z-10" />
           
-          <div className="absolute top-1/4 -right-1/4 size-[450px] bg-[#E31D1A]/10 blur-[100px] rounded-full animate-pulse" />
+          <div className="absolute top-1/2 -right-20 size-[500px] bg-[#E31D1A]/10 blur-[120px] rounded-full animate-pulse" />
+          <div className="absolute bottom-0 -left-20 size-[400px] bg-[#092C74]/40 blur-[100px] rounded-full" />
         </div>
 
         <div className="relative container mx-auto px-4 h-full flex items-center z-20">
           <div className="max-w-4xl">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 rounded-[40px] shadow-2xl relative overflow-hidden group"
+              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 lg:p-16 rounded-[40px] shadow-2xl relative overflow-hidden group"
             >
               <div className="relative z-10">
                 <motion.div
@@ -80,7 +81,7 @@ export function Akademik() {
                    <GraduationCap className="size-3" /> Keunggulan Akademis
                 </motion.div>
 
-                <h1 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter leading-[0.95] drop-shadow-2xl">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 tracking-tighter leading-[1.1] drop-shadow-2xl">
                   Program <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6AACE6] via-[#A855F7] to-[#E31D1A]">Akademik</span>
                 </h1>

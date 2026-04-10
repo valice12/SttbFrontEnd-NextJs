@@ -13,13 +13,13 @@ interface AdmissionScheduleProps {
 
 export function AdmissionSchedule({ schedules, defaultTab, isLoading, formatDate }: AdmissionScheduleProps) {
   return (
-    <section className="py-16 md:py-32 bg-white relative">
+    <section className="py-10 md:py-20 bg-white relative">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12 md:mb-20"
+          className="text-center mb-8 md:mb-12"
         >
           <span className="text-[#6A0DAD] font-black tracking-[0.2em] text-[10px] md:text-sm uppercase mb-4 block underline underline-offset-8 decoration-[#092C74]">Admissions Guide</span>
           <h2 className="text-3xl md:text-6xl font-black text-[#092C74] mb-6 px-4">Jadwal Gelombang Pendaftaran</h2>
@@ -35,19 +35,20 @@ export function AdmissionSchedule({ schedules, defaultTab, isLoading, formatDate
           </div>
         ) : schedules.length > 0 ? (
           <Tabs defaultValue={defaultTab} className="max-w-5xl mx-auto">
-            {/* Standardized Grid Navigation for Mobile Batches */}
-            <div className="mb-10">
-              <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 bg-transparent h-auto p-0 border-0 shadow-none">
-                {schedules.map((item) => (
-                  <TabsTrigger 
-                    key={item.batchOrder} 
-                    value={`Gelombang ${item.batchOrder}`}
-                    className="h-14 md:h-16 rounded-2xl md:rounded-[2rem] font-black text-xs md:text-lg bg-[#F5F3FB] text-gray-400 border-2 border-transparent data-[state=active]:bg-[#092C74] data-[state=active]:text-white data-[state=active]:border-[#092C74] data-[state=active]:shadow-xl transition-all duration-500 uppercase tracking-widest whitespace-normal px-4 text-center leading-tight hover:bg-white hover:border-[#6A0DAD] hover:text-[#092C74]"
-                  >
-                    Batch {item.batchOrder}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
+            <div className="mb-10 w-full overflow-hidden">
+              <div className="overflow-x-auto pb-4 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
+                <TabsList className="flex flex-nowrap gap-3 bg-transparent h-auto p-0 border-0 shadow-none justify-start w-max md:w-full md:grid md:grid-cols-3 lg:grid-cols-4">
+                  {schedules.map((item) => (
+                    <TabsTrigger 
+                      key={item.batchOrder} 
+                      value={`Gelombang ${item.batchOrder}`}
+                      className="h-14 md:h-16 rounded-2xl md:rounded-[2rem] font-black text-xs md:text-lg bg-[#F5F3FB] text-gray-400 border-2 border-transparent data-[state=active]:bg-[#092C74] data-[state=active]:text-white data-[state=active]:border-[#092C74] data-[state=active]:shadow-xl transition-all duration-500 uppercase tracking-widest whitespace-nowrap px-8 md:whitespace-normal md:px-4 text-center leading-tight hover:bg-white hover:border-[#6A0DAD] hover:text-[#092C74] shrink-0"
+                    >
+                      Batch {item.batchOrder}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </div>
             </div>
 
             {schedules.map((item) => (

@@ -49,9 +49,9 @@ export function HeroSection({ imgHeroImage }: HeroSectionProps) {
                 transition={{ delay: 0.6, duration: 0.8, ease: "backOut" }}
                 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black text-white mb-6 leading-[1.1] tracking-tight drop-shadow-2xl"
               >
-                SEKOLAH TINGGI<br />
+                Sekolah Tinggi<br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6AACE6] via-[#A855F7] to-[#E31D1A]">
-                  TEOLOGI BANDUNG
+                  Teologi Bandung
                 </span>
               </motion.h1>
 
@@ -71,8 +71,8 @@ export function HeroSection({ imgHeroImage }: HeroSectionProps) {
                 className="flex flex-wrap gap-6 pt-4"
               >
                   <Link href="/admisi">
-                    <Button className="bg-[#E31D1A] hover:bg-white !text-white hover:!text-[#E31D1A] px-10 py-7 text-xl font-black rounded-2xl shadow-2xl transition-all duration-500 hover:-translate-y-1 border-0">
-                      DAFTAR SEKARANG
+                    <Button className="bg-[#E31D1A] hover:bg-white !text-white hover:!text-[#E31D1A] px-8 py-5 md:px-12 md:py-8 text-sm md:text-xl font-black rounded-2xl shadow-2xl transition-all duration-500 hover:-translate-y-1 border-0">
+                      Info pendaftaran
                     </Button>
                   </Link>
               </motion.div>

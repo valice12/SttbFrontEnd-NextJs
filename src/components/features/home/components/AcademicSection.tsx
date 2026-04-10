@@ -136,9 +136,8 @@ export function AcademicSection({ programs }: AcademicSectionProps) {
           className="text-center mt-20"
         >
           <Link href="/akademik">
-            <Button className="bg-[#092C74] hover:bg-[#E31D1A] text-white px-6 py-4 md:px-12 md:py-8 text-sm md:text-xl font-black rounded-xl md:rounded-2xl shadow-xl transition-all duration-500 hover:-translate-y-1">
+            <Button className="bg-[#092C74] hover:bg-[#E31D1A] text-white px-8 py-5 md:px-12 md:py-8 text-sm md:text-xl font-black rounded-xl md:rounded-2xl shadow-xl transition-all duration-500 hover:-translate-y-1">
               LIHAT SEMUA PROGRAM
-              <ArrowRight className="ml-2 md:ml-3 size-4 md:size-6" />
             </Button>
           </Link>
         </motion.div>

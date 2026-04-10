@@ -22,9 +22,9 @@ const TAB_TITLES: Record<string, string> = {
   organization: "Struktur Organisasi"
 };
 
-const bgHeader = "/assets/header-tentang-kami.png";
-const bgPattern = "/assets/background.webp";
-const logoSttb = "/assets/logo.png";
+const bgHeader = "/assets/sttb-2-BG.png";
+const bgPattern = "/assets/Page-Panjang-1.webp";
+const logoSttb = "/assets/Logo-STT-Bdg.jpg";
 const marsSTTB = "/assets/mars-sttb.webp";
 
 // Images for HistoryTab
@@ -66,49 +66,42 @@ export function TentangKami() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Modern Hero Section with Golden Ratio & Staggered Animation */}
-      <section className="relative h-[600px] md:h-[600px] overflow-hidden">
+      {/* Modern Hero Section - Synchronized with Global Standard */}
+      <section className="relative h-[550px] md:h-[650px] overflow-hidden">
         <div className="absolute inset-0">
           <img src={bgHeader} alt="About Us" className="w-full h-full object-cover scale-105" />
-          {/* Advanced Gradient Overlay (Blue -> Purple -> Transparent) */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#061B46]/95 via-[#4B0082]/45 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#061B46]/95 via-[#4B0082]/40 to-transparent z-10" />
           
-          {/* Animated Mesh Gradients */}
-          <div className="absolute top-1/4 -right-1/4 size-[500px] bg-[#E31D1A]/20 blur-[100px] rounded-full animate-pulse" />
-          <div className="absolute bottom-1/4 -left-1/4 size-[400px] bg-[#092C74]/30 blur-[100px] rounded-full" />
+          <div className="absolute top-1/2 -right-20 size-[500px] bg-[#E31D1A]/10 blur-[120px] rounded-full animate-pulse" />
+          <div className="absolute bottom-0 -left-20 size-[400px] bg-[#092C74]/40 blur-[100px] rounded-full" />
         </div>
 
         <div className="relative container mx-auto px-4 h-full flex items-center z-20">
           <div className="max-w-4xl">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="backdrop-blur-md bg-white/5 border border-white/10 p-8 md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden"
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="backdrop-blur-md bg-white/5 border border-white/10 p-10 md:p-14 lg:p-16 rounded-[40px] shadow-2xl relative overflow-hidden"
             >
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#E31D1A] rounded-full text-white text-xs font-black uppercase tracking-widest mb-6 shadow-lg shadow-red-500/30"
+                transition={{ delay: 0.4 }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#E31D1A] rounded-full text-white text-xs font-black uppercase tracking-widest mb-8 shadow-lg shadow-red-500/30"
               >
                  <Info className="size-3" /> Mengenal STT Bandung
               </motion.div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, ease: "backOut" }}
-                className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight tracking-tight drop-shadow-2xl"
-              >
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 tracking-tighter leading-[1.1] drop-shadow-2xl">
                 {TAB_TITLES[activeTab]}
-              </motion.h1>
+              </h1>
               
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 }}
-                className="text-xl md:text-2xl text-white/90 font-medium leading-relaxed"
+                className="text-xl md:text-2xl text-white/90 font-medium max-w-2xl leading-relaxed"
               >
                 Melayani dengan integritas, membentuk karakter Kristus, dan berdampak bagi masyarakat urban.
               </motion.p>

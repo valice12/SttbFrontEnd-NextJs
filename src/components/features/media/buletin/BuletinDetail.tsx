@@ -42,10 +42,10 @@ export function BuletinDetail() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Buletin tidak ditemukan</h2>
+          <h2 className="text-2xl font-black text-[#092C74] mb-4 uppercase tracking-tighter">Buletin tidak ditemukan</h2>
           <Link href="/media?tab=buletin">
-            <Button variant="outline" className="gap-2">
-              <ArrowLeft className="size-4" /> Kembali ke Buletin
+            <Button variant="outline" className="gap-2 font-black uppercase tracking-widest text-[10px] rounded-xl px-6">
+              <ArrowLeft className="size-4" /> Kembali ke buletin
             </Button>
           </Link>
         </div>
@@ -61,8 +61,8 @@ export function BuletinDetail() {
       {/* Upper Bar */}
       <div className="bg-white border-b sticky top-20 sm:top-32 z-30 shadow-sm">
         <div className="container mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3">
-          <div className="flex items-center gap-2 text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-widest truncate w-full sm:w-auto">
-            <Link href="/media?tab=buletin" className="hover:text-[#092C74] shrink-0">Buletin Kampus</Link>
+          <div className="flex items-center gap-2 text-[10px] sm:text-xs font-black text-gray-500 uppercase tracking-widest truncate w-full sm:w-auto">
+            <Link href="/media?tab=buletin" className="hover:text-[#092C74] shrink-0">Buletin kampus</Link>
             <ChevronRight className="size-3 shrink-0" />
             <span className="text-[#092C74] truncate">{buletin.title}</span>
           </div>

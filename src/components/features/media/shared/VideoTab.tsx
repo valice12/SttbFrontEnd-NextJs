@@ -19,7 +19,7 @@ import { useEffect } from 'react';
 import { useDebounce } from '@/lib/use-debounce';
 
 export function VideoTab() {
-  const [isGridView, setIsGridView] = useState(false);
+  const [isGridView, setIsGridView] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedSearchQuery = useDebounce(searchQuery, 700);
@@ -124,9 +124,9 @@ export function VideoTab() {
             <div className="flex items-center gap-3 bg-white hover:bg-[#F2ECF8] rounded-2xl px-6 h-14 shrink-0 w-full sm:w-[200px] border-2 border-gray-50 text-[#092C74] transition-all shadow-sm hover:shadow-md">
               <ArrowUpDown className="size-4 shrink-0 text-[#E31D1A]" />
               <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-full bg-transparent border-none shadow-none focus:ring-0 font-black uppercase text-xs tracking-widest p-0 text-[#092C74]">
-                  <SelectValue placeholder="SORT BY" />
-                </SelectTrigger>
+                  <SelectTrigger className="w-full bg-transparent border-none shadow-none focus:ring-0 font-black uppercase text-xs tracking-widest p-0 text-[#092C74]">
+                    <SelectValue placeholder="Urutkan" />
+                  </SelectTrigger>
                 <SelectContent className="rounded-2xl border-none shadow-2xl">
                   <SelectItem value="date" className="font-bold py-3 uppercase text-[10px] tracking-widest">Terbaru</SelectItem>
                   <SelectItem value="title" className="font-bold py-3 uppercase text-[10px] tracking-widest">Judul</SelectItem>
@@ -138,9 +138,9 @@ export function VideoTab() {
             <div className="flex items-center gap-3 bg-white hover:bg-[#F2ECF8] rounded-2xl px-6 h-14 shrink-0 w-full sm:w-[200px] border-2 border-gray-50 text-[#092C74] transition-all shadow-sm hover:shadow-md">
               <SlidersHorizontal className="size-4 shrink-0 text-[#E31D1A]" />
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="w-full bg-transparent border-none shadow-none focus:ring-0 font-black uppercase text-xs tracking-widest p-0 text-[#092C74]">
-                  <SelectValue placeholder="CATEGORY" />
-                </SelectTrigger>
+                  <SelectTrigger className="w-full bg-transparent border-none shadow-none focus:ring-0 font-black uppercase text-xs tracking-widest p-0 text-[#092C74]">
+                    <SelectValue placeholder="Kategori" />
+                  </SelectTrigger>
                 <SelectContent className="rounded-2xl border-none shadow-2xl overflow-hidden">
                   {categories.map((cat) => (
                     <SelectItem key={cat} value={cat} className="font-bold py-3 uppercase text-[10px] tracking-widest">
@@ -170,7 +170,7 @@ export function VideoTab() {
             <Search className="absolute left-6 top-1/2 -translate-y-1/2 size-5 text-gray-400 group-focus-within:text-[#092C74] transition-colors" />
             <input
               type="text"
-              placeholder="CARI VIDEO PEMBELAJARAN..."
+              placeholder="Cari video pembelajaran..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-16 h-14 bg-gray-50 focus:bg-white border-2 border-gray-50 rounded-2xl w-full text-sm font-black uppercase tracking-widest transition-all shadow-sm focus:ring-4 focus:ring-[#092C74]/5 focus:outline-none"

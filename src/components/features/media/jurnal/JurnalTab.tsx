@@ -19,7 +19,7 @@ import { useEffect } from 'react';
 import { useDebounce } from '@/lib/use-debounce';
 
 export function JurnalTab() {
-  const [isGridView, setIsGridView] = useState(false);
+  const [isGridView, setIsGridView] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedSearchQuery = useDebounce(searchQuery, 700);
@@ -104,7 +104,7 @@ export function JurnalTab() {
             <div className="h-10 w-px bg-gray-200 hidden md:block" />
             <a href="https://e-journal.sttb.ac.id/index.php/transformatio" target="_blank" rel="noopener noreferrer">
               <Button className="h-12 px-8 bg-[#092C74] hover:bg-[#E31D1A] text-white font-black text-xs uppercase tracking-widest rounded-full shadow-lg shadow-blue-900/10 transition-all duration-500">
-                PORTAL OJS <LinkIcon className="ml-2 size-4" />
+                Portal OJS <LinkIcon className="ml-2 size-4" />
               </Button>
             </a>
           </motion.div>
@@ -117,7 +117,7 @@ export function JurnalTab() {
               <ArrowUpDown className="size-4 shrink-0 text-[#E31D1A]" />
               <Select value={sortBy} onValueChange={setSortBy}>
                 <SelectTrigger className="w-full bg-transparent border-none shadow-none focus:ring-0 font-black uppercase text-xs tracking-widest p-0 text-[#092C74]">
-                  <SelectValue placeholder="SORT BY" />
+                  <SelectValue placeholder="Urutkan" />
                 </SelectTrigger>
                 <SelectContent className="rounded-2xl border-none shadow-2xl">
                   <SelectItem value="date" className="font-bold py-3 uppercase text-[10px] tracking-widest">Terbaru</SelectItem>
@@ -131,12 +131,12 @@ export function JurnalTab() {
               <SlidersHorizontal className="size-4 shrink-0 text-[#E31D1A]" />
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                 <SelectTrigger className="w-full bg-transparent border-none shadow-none focus:ring-0 font-black uppercase text-xs tracking-widest p-0 text-[#092C74]">
-                  <SelectValue placeholder="CATEGORY" />
+                  <SelectValue placeholder="Kategori" />
                 </SelectTrigger>
                 <SelectContent className="rounded-2xl border-none shadow-2xl overflow-hidden">
                   {categories.map((cat) => (
                     <SelectItem key={cat} value={cat} className="font-bold py-3 uppercase text-[10px] tracking-widest">
-                      {cat === 'all' ? 'SEMUA KATEGORI' : cat.toUpperCase()}
+                      {cat === 'all' ? 'Semua kategori' : cat}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -149,7 +149,7 @@ export function JurnalTab() {
                   className="flex items-center gap-3 bg-white hover:bg-[#F2ECF8] border-2 border-gray-50 rounded-2xl px-6 h-14 shrink-0 font-black uppercase text-xs tracking-widest w-full sm:w-[200px] transition-all shadow-sm hover:shadow-md text-[#092C74]"
                 >
                   <CalendarIcon className="size-4 text-[#E31D1A]" />
-                  <span className="truncate">{date ? format(date, "d MMMM yyyy", { locale: id }) : 'DATE'}</span>
+                  <span className="truncate">{date ? format(date, "d MMMM yyyy", { locale: id }) : 'Tanggal'}</span>
                 </button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0 z-[100] bg-white rounded-3xl shadow-2xl border-none overflow-hidden" align="start">
@@ -163,7 +163,7 @@ export function JurnalTab() {
               <Search className="absolute left-6 top-1/2 -translate-y-1/2 size-5 text-gray-400 group-hover:text-[#092C74] transition-colors" />
               <input
                 type="text"
-                placeholder="CARI JURNAL ATAU PENELITI..."
+                placeholder="Cari jurnal atau peneliti..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-16 h-14 bg-gray-50 focus:bg-white border-2 border-gray-50 rounded-2xl w-full text-sm font-black uppercase tracking-widest transition-all shadow-sm focus:ring-4 focus:ring-[#092C74]/5 focus:outline-none"

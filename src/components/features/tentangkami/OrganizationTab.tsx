@@ -19,7 +19,7 @@ export function OrganizationTab() {
           dataService.getLecturers()
         ]);
         setFoundation(foundationData);
-        setLecturers(Array.isArray(lecturersData) ? lecturersData : []);
+        setLecturers(lecturersData?.items || (Array.isArray(lecturersData) ? lecturersData : []));
       } catch (error) {
         console.error("Failed to fetch organization data:", error);
         setLecturers([]);

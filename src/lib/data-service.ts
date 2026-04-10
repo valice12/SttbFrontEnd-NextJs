@@ -199,7 +199,8 @@ export const dataService = {
           ...data,
           title: data.programName || data.title,
           description: data.programDescription || data.description,
-          totalCredits: data.totalCredit || data.totalCredits
+          totalCredits: data.totalCredits || data.totalCredit,
+          curriculum: data.programCategory || data.lectureCategory || []
         };
       } catch (error) {
         console.error(`Failed to fetch academic program [${slug}]:`, error);
@@ -210,7 +211,15 @@ export const dataService = {
     if (USE_MOCK_DATA) {
       try {
         const config = await this.getLocalData<any>('academic_programs_config.json');
-        return config[slug] || null;
+        const data = config[slug] || null;
+        if (!data) return null;
+        return {
+          ...data,
+          title: data.programName || data.title,
+          description: data.programDescription || data.description,
+          totalCredits: data.totalCredits || data.totalCredit,
+          curriculum: data.programCategory || data.lectureCategory || []
+        };
       } catch {
         return null;
       }
@@ -222,7 +231,7 @@ export const dataService = {
   async getAcademicCurriculum(slug: string) {
     try {
       const program = await this.getAcademicProgram(slug);
-      return program?.programCategory || [];
+      return program?.curriculum || program?.programCategory || program?.lectureCategory || [];
     } catch {
       return [];
     }
@@ -230,14 +239,16 @@ export const dataService = {
 
   async getAdmissionSchedule() {
     const data = await this.fetchData<any>('admissions/get-admission-schedule', 'admission_schedule.json');
-    // Backend returns { items: [...] }
-    return data?.items || data || [];
+    // Backend returns { items: [...] } or { Items: [...] }
+    return data?.items || data?.Items || (Array.isArray(data) ? data : []);
   },
 
   async getAdmissionCosts() {
     const data = await this.fetchData<any>('admissions/get-all-admission-costs', 'admission_costs.json');
-    // Backend returns { items: [...] }
-    return data?.items || data || [];
+    // Backend returns { items: [...] } or { Items: [...] }
+    return {
+      items: data?.items || data?.Items || (Array.isArray(data) ? data : [])
+    };
   },
 
   async getMediaItems(mediaFormat?: string, params: { page?: number, pageSize?: number, search?: string, category?: string, date?: Date, orderBy?: string, orderState?: string } = {}): Promise<any> {
@@ -478,17 +489,27 @@ export const dataService = {
         const response = await fetch(`${API_BASE_URL}/profiles/get-all-administrators?PageNumber=${page}&PageSize=${pageSize}`);
         if (!response.ok) throw new Error(`API error: ${response.statusText}`);
         const data = await response.json();
+        const itemsList = data.items || data.Items || [];
+        const normalizedItems = itemsList.map((item: any) => ({
+          ...item,
+          name: item.name || item.Name || item.AdministratorName || item.administratorName || '',
+          division: item.division || item.Division || '',
+          role: item.role || item.Role || ''
+        }));
+        
         return {
-          items: data.items || [],
-          totalItems: data.totalItems || 0,
-          totalPages: data.totalPages || 0
+          items: normalizedItems,
+          totalItems: data.totalItems || data.TotalItems || 0,
+          totalPages: data.totalPages || data.TotalPages || 0
         };
       } catch (error) {
         console.warn('Failed to fetch administrators, falling back to mock data:', error);
-        return this.getLocalData<any>('foundation_list.json');
       }
     }
-    return this.getLocalData<any>('foundation_list.json');
+    const fallback = await this.getLocalData<any>('foundation_list.json');
+    return {
+      items: fallback?.items || fallback?.Items || (Array.isArray(fallback) ? fallback : []),
+    };
   },
 
   async getLecturers(page = 1, pageSize = 10): Promise<any> {
@@ -497,26 +518,29 @@ export const dataService = {
         const response = await fetch(`${API_BASE_URL}/profiles/get-all-lecturers?PageNumber=${page}&PageSize=${pageSize}`);
         if (!response.ok) throw new Error(`API error: ${response.statusText}`);
         const data = await response.json();
+        const itemsList = data.items || data.Items || [];
+        const normalizedItems = itemsList.map((item: any) => ({
+          ...item,
+          lecturerName: item.lecturerName || item.LecturerName || item.name || '',
+          roles: item.roles || item.Roles || item.OrganizationalRole ? [item.OrganizationalRole] : [],
+          degrees: item.degrees || item.Degrees || []
+        }));
+
         return {
-          items: data.items || [],
-          totalItems: data.totalItems || 0,
-          totalPages: data.totalPages || 0
+          items: normalizedItems,
+          totalItems: data.totalItems || data.TotalItems || 0,
+          totalPages: data.totalPages || data.TotalPages || 0
         };
       } catch (error) {
         console.warn('Failed to fetch lecturers, falling back to mock data:', error);
-        const fallback = await this.getLocalData<any>('lecturers_list.json');
-        return { 
-          items: Array.isArray(fallback) ? fallback : (fallback?.items || []),
-          totalItems: fallback?.totalItems || 0,
-          totalPages: fallback?.totalPages || 0
-        };
       }
     }
     const fallback = await this.getLocalData<any>('lecturers_list.json');
+    const itemsList = Array.isArray(fallback) ? fallback : (fallback?.items || fallback?.Items || []);
     return { 
-      items: Array.isArray(fallback) ? fallback : (fallback?.items || []),
-      totalItems: fallback?.totalItems || 0,
-      totalPages: fallback?.totalPages || 0
+      items: itemsList,
+      totalItems: fallback?.totalItems || fallback?.TotalItems || 0,
+      totalPages: fallback?.totalPages || fallback?.TotalPages || 0
     };
   },
   async addDonorMember(donation: FormData): Promise<any> {

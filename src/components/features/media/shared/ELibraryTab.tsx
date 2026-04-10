@@ -23,7 +23,7 @@ export function ELibraryTab() {
             animate={{ opacity: 1, x: 0 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#092C74] rounded-full text-white text-[10px] font-black uppercase tracking-widest mb-8"
           >
-             <BookOpen className="size-3" /> RESOURCES DIGITAL
+             <BookOpen className="size-3" /> Resources digital
           </motion.div>
 
           <h3 className="text-4xl md:text-6xl font-black mb-8 text-[#092C74] tracking-tighter leading-tight max-w-3xl">
@@ -46,7 +46,7 @@ export function ELibraryTab() {
               </div>
               <a href="https://library.sttb.ac.id/" target="_blank" rel="noopener noreferrer" className="shrink-0 w-full lg:w-auto">
                 <Button className="w-full lg:w-auto h-20 px-12 bg-white hover:bg-[#E31D1A] text-[#092C74] hover:text-white font-black text-lg rounded-[1.5rem] shadow-2xl transition-all duration-500 hover:-translate-y-2 uppercase tracking-widest">
-                  AKSES SEKARANG <LinkIcon className="ml-3 size-6" />
+                  Akses sekarang <LinkIcon className="ml-3 size-6" />
                 </Button>
               </a>
             </div>
@@ -88,7 +88,7 @@ export function ELibraryTab() {
                 animate={{ opacity: 1, x: 0 }}
                 className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#E31D1A] rounded-full text-white text-[10px] font-black uppercase tracking-widest"
               >
-                 <Users className="size-3" /> ACADEMIC PASSPORT
+                 <Users className="size-3" /> Academic passport
               </motion.div>
               
               <h3 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tighter">
@@ -139,7 +139,7 @@ export function ELibraryTab() {
                <div className="mt-12 space-y-6">
                   <Link href="/pendaftaran-anggota-perpustakaan" className="block">
                     <Button className="w-full h-20 bg-[#E31D1A] hover:bg-white hover:text-[#092C74] text-white font-black text-lg rounded-[1.5rem] shadow-2xl transition-all duration-500 uppercase tracking-widest">
-                      ISI FORMULIR SEKARANG
+                      Isi formulir sekarang
                     </Button>
                   </Link>
                   <div className="flex items-center gap-3 justify-center pb-2">

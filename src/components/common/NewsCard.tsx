@@ -64,7 +64,7 @@ export function MediaCard({
               <Calendar className="size-3 text-[#E31D1A]" />
               <span>{formatDate(date)}</span>
             </div>
-            <h3 className="font-black text-[#092C74] leading-tight group-hover:text-[#E31D1A] transition-colors line-clamp-2 text-xs md:text-sm">
+            <h3 className="font-black text-[#092C74] leading-tight group-hover:text-[#E31D1A] transition-colors line-clamp-2 text-sm md:text-base">
               {title}
             </h3>
             <Badge className="w-fit bg-[#1C64E8]/10 text-[#1C64E8] px-2 py-0.5 rounded-md text-[8px] font-black uppercase tracking-wider border-0 shadow-none mt-1">
@@ -78,8 +78,8 @@ export function MediaCard({
 
   return (
     <Link href={`${baseUrl}/${slug}`} className="block h-full group">
-      <Card className={`h-full flex overflow-hidden border-0 bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_40px_-10px_rgba(9,44,116,0.15)] transition-all duration-500 rounded-[1.5rem] md:rounded-[2.5rem] relative ${variant === 'list' ? 'flex-row items-center p-3 md:p-0 md:items-stretch gap-4 md:gap-0' : 'flex-col'}`}>
-        <div className={`relative overflow-hidden shrink-0 ${variant === 'list' ? 'size-20 rounded-xl md:rounded-none md:size-auto md:w-[40%] aspect-square md:aspect-auto' : 'aspect-[16/10]'}`}>
+      <Card className={`h-full flex overflow-hidden border border-gray-100 shadow-[0_4px_20px_-4px_rgba(9,44,116,0.05)] hover:border-[#092C74]/20 hover:shadow-[0_20px_40px_-10px_rgba(9,44,116,0.15)] transition-all duration-500 rounded-[1.5rem] md:rounded-[2rem] relative ${variant === 'list' ? 'flex-row items-center p-4 md:p-6 md:grid md:grid-cols-4 gap-4 md:gap-6' : 'flex-col'}`}>
+        <div className={`relative overflow-hidden shrink-0 ${variant === 'list' ? 'size-24 rounded-[1.5rem] md:rounded-2xl md:size-auto md:col-span-1 md:h-48 aspect-square md:aspect-auto' : 'aspect-[16/10]'}`}>
           <ImageWithFallback
             src={getImageUrl(image, type)}
             alt={title}
@@ -94,8 +94,8 @@ export function MediaCard({
           </div>
         </div>
         
-        <CardContent className={`flex flex-col grow ${variant === 'list' ? 'p-0 md:p-10 md:justify-center' : 'p-8'}`}>
-          <div className={`flex items-center gap-4 text-gray-400 uppercase tracking-widest ${variant === 'list' ? 'text-[8px] md:text-xs font-bold mb-1 md:mb-4' : 'text-xs font-bold mb-4'}`}>
+        <CardContent className={`flex flex-col grow ${variant === 'list' ? 'p-0 md:p-0 md:col-span-3 md:justify-center' : 'p-8'}`}>
+          <div className={`flex items-center gap-4 text-gray-500 uppercase tracking-widest ${variant === 'list' ? 'text-[8px] md:text-sm font-bold mb-1 md:mb-6' : 'text-xs font-bold mb-4'}`}>
             <div className="flex items-center gap-1.5">
               <Calendar className={`text-[#E31D1A] ${variant === 'list' ? 'size-3 md:size-4' : 'size-4'}`} />
               <span>{formatDate(date)}</span>
@@ -108,16 +108,16 @@ export function MediaCard({
             )}
           </div>
           
-          <h3 className={`font-black text-[#092C74] leading-tight group-hover:text-[#E31D1A] transition-colors line-clamp-2 ${variant === 'list' ? 'text-xs md:text-3xl mb-1 md:mb-4' : 'text-2xl mb-4'}`}>
+          <h3 className={`font-black text-[#092C74] leading-tight group-hover:text-[#E31D1A] transition-colors line-clamp-2 ${variant === 'list' ? 'text-base md:text-xl lg:text-2xl mb-1 md:mb-4' : 'text-2xl mb-4'}`}>
             {title}
           </h3>
           
           <div className={variant === 'list' ? 'hidden md:block' : 'block'}>
-            <p className="text-gray-600 line-clamp-3 leading-relaxed mb-6 font-medium">
+            <p className="text-gray-600 line-clamp-3 leading-relaxed mb-6 font-medium italic">
               {description}
             </p>
             
-            <div className="mt-auto flex items-center gap-2 text-sm font-black text-[#1C64E8] group-hover:text-[#E31D1A] transition-all tracking-widest uppercase">
+            <div className="mt-auto flex items-center gap-2 text-sm font-black text-[#1C64E8] group-hover:text-[#E31D1A] transition-all tracking-widest">
               Selengkapnya 
               <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
             </div>
