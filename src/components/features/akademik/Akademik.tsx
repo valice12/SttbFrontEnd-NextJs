@@ -93,17 +93,17 @@ export function Akademik() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-12">
         <div className="container mx-auto px-4">
 
-          <div className="mb-24">
-            <div className="mb-12">
-              <span className="text-[#6A0DAD] font-black tracking-widest text-xs uppercase mb-2 block">Undergraduate Programs</span>
-              <h2 className="text-4xl md:text-5xl font-black text-[#092C74] flex items-center gap-4 text-center md:text-left">
-                <GraduationCap className="text-[#E31D1A] size-10" />
+          <div className="mb-16">
+            <div className="mb-10">
+              <span className="text-[#6A0DAD] font-black tracking-widest text-[10px] uppercase mb-2 block">Undergraduate Programs</span>
+              <h2 className="text-3xl md:text-4xl font-black text-[#092C74] flex items-center gap-4 text-center md:text-left">
+                <GraduationCap className="text-[#E31D1A] size-8" />
                 Program Sarjana
               </h2>
-              <div className="w-20 h-1.5 bg-gradient-to-r from-[#092C74] to-[#E31D1A] mt-4 rounded-full mx-auto md:mx-0" />
+              <div className="w-16 h-1.5 bg-gradient-to-r from-[#092C74] to-[#E31D1A] mt-3 rounded-full mx-auto md:mx-0" />
             </div>
             {/* Desktop Grid Layout */}
             <div className="hidden lg:grid grid-cols-2 lg:grid-cols-3 gap-8">
@@ -118,24 +118,24 @@ export function Akademik() {
                     transition={{ delay: index * 0.1 }}
                   >
                     <Link href={`/akademik/${program.slug}`}>
-                      <div className="bg-white p-10 rounded-[2.5rem] border border-gray-100 hover:border-[#092C74] hover:shadow-[0_20px_50px_rgba(9,44,116,0.1)] transition-all duration-500 group h-full flex flex-col relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-[#F2ECF8] rounded-full -mr-16 -mt-16 group-hover:bg-[#092C74]/10 transition-colors" />
-                        <div className="flex items-center justify-between mb-8 relative z-10">
-                          <div className="size-16 bg-[#F5F3FB] rounded-2xl flex items-center justify-center group-hover:bg-[#092C74] transition-all duration-500 shadow-sm group-hover:shadow-blue-900/20 group-hover:-translate-y-1">
-                            <IconComponent className="size-8 text-[#092C74] group-hover:text-white transition-colors" />
+                      <div className="bg-white p-8 rounded-[2rem] border border-gray-100 hover:border-[#092C74] hover:shadow-[0_20px_50px_rgba(9,44,116,0.08)] transition-all duration-500 group h-full flex flex-col relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-24 h-24 bg-[#F2ECF8] rounded-full -mr-12 -mt-12 group-hover:bg-[#092C74]/10 transition-colors" />
+                        <div className="flex items-center justify-between mb-6 relative z-10">
+                          <div className="size-14 bg-[#F5F3FB] rounded-xl flex items-center justify-center group-hover:bg-[#092C74] transition-all duration-500 shadow-sm group-hover:shadow-blue-900/20 group-hover:-translate-y-1">
+                            <IconComponent className="size-7 text-[#092C74] group-hover:text-white transition-colors" />
                           </div>
-                          <span className="px-5 py-2 bg-[#E31D1A] text-white rounded-full font-black text-[10px] uppercase tracking-widest shadow-lg shadow-red-500/20">
+                          <span className="px-4 py-1.5 bg-[#E31D1A] text-white rounded-full font-black text-[9px] uppercase tracking-widest shadow-lg shadow-red-500/20">
                             {program.degree}
                           </span>
                         </div>
-                        <h3 className="text-2xl font-black text-[#092C74] mb-3 group-hover:text-[#E31D1A] transition-colors leading-tight">{program.title}</h3>
-                        <p className="text-gray-500 mb-8 text-sm font-bold uppercase tracking-wide">Lulusan {program.level || 'Sarjana'}</p>
-                        <div className="mt-auto pt-6 border-t border-gray-50 flex justify-between items-center relative z-10">
+                        <h3 className="text-xl font-black text-[#092C74] mb-2 group-hover:text-[#E31D1A] transition-colors leading-tight">{program.title}</h3>
+                        <p className="text-gray-400 mb-6 text-[10px] font-bold uppercase tracking-wide">Lulusan {program.level || 'Sarjana'}</p>
+                        <div className="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center relative z-10">
                           <div className="flex items-center gap-2">
-                             <div className="size-2 bg-[#6A0DAD] rounded-full group-hover:animate-ping" />
-                             <span className="text-[#092C74] font-black text-sm">{program.duration} Semester</span>
+                             <div className="size-1.5 bg-[#6A0DAD] rounded-full group-hover:animate-ping" />
+                             <span className="text-[#092C74] font-black text-xs">{program.duration} Semester</span>
                           </div>
-                          <span className="text-xs font-black text-gray-400 uppercase tracking-widest">{program.totalCredit} SKS</span>
+                          <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{program.totalCredit} SKS</span>
                         </div>
                       </div>
                     </Link>
@@ -182,14 +182,14 @@ export function Akademik() {
             </div>
           </div>
 
-          <div className="mb-24">
-            <div className="mb-12">
-              <span className="text-[#6A0DAD] font-black tracking-widest text-xs uppercase mb-2 block">Graduate Programs</span>
-              <h2 className="text-4xl md:text-5xl font-black text-[#092C74] flex items-center gap-4 text-center md:text-left">
-                <Award className="text-[#E31D1A] size-10" />
+          <div className="mb-16">
+            <div className="mb-10">
+              <span className="text-[#6A0DAD] font-black tracking-widest text-[10px] uppercase mb-2 block">Graduate Programs</span>
+              <h2 className="text-3xl md:text-4xl font-black text-[#092C74] flex items-center gap-4 text-center md:text-left">
+                <Award className="text-[#E31D1A] size-8" />
                 Program Magister
               </h2>
-              <div className="w-20 h-1.5 bg-gradient-to-r from-[#092C74] to-[#E31D1A] mt-4 rounded-full mx-auto md:mx-0" />
+              <div className="w-16 h-1.5 bg-gradient-to-r from-[#092C74] to-[#E31D1A] mt-3 rounded-full mx-auto md:mx-0" />
             </div>
             {/* Desktop Grid Layout */}
             <div className="hidden lg:grid grid-cols-2 lg:grid-cols-3 gap-8">
@@ -204,24 +204,24 @@ export function Akademik() {
                     transition={{ delay: index * 0.1 }}
                   >
                     <Link href={`/akademik/${program.slug}`}>
-                      <div className="bg-white p-10 rounded-[2.5rem] border border-gray-100 hover:border-[#092C74] hover:shadow-[0_20px_50px_rgba(9,44,116,0.1)] transition-all duration-500 group h-full flex flex-col relative overflow-hidden">
-                         <div className="absolute top-0 right-0 w-32 h-32 bg-[#F2ECF8] rounded-full -mr-16 -mt-16 group-hover:bg-[#092C74]/10 transition-colors" />
-                        <div className="flex items-center justify-between mb-8 relative z-10">
-                          <div className="size-16 bg-[#F5F3FB] rounded-2xl flex items-center justify-center group-hover:bg-[#092C74] transition-all duration-500 shadow-sm group-hover:shadow-blue-900/20 group-hover:-translate-y-1">
-                            <IconComponent className="size-8 text-[#092C74] group-hover:text-white transition-colors" />
+                      <div className="bg-white p-8 rounded-[2rem] border border-gray-100 hover:border-[#092C74] hover:shadow-[0_20px_50px_rgba(9,44,116,0.08)] transition-all duration-500 group h-full flex flex-col relative overflow-hidden">
+                         <div className="absolute top-0 right-0 w-24 h-24 bg-[#F2ECF8] rounded-full -mr-12 -mt-12 group-hover:bg-[#092C74]/10 transition-colors" />
+                        <div className="flex items-center justify-between mb-6 relative z-10">
+                          <div className="size-14 bg-[#F5F3FB] rounded-xl flex items-center justify-center group-hover:bg-[#092C74] transition-all duration-500 shadow-sm group-hover:shadow-blue-900/20 group-hover:-translate-y-1">
+                            <IconComponent className="size-7 text-[#092C74] group-hover:text-white transition-colors" />
                           </div>
-                          <span className="px-5 py-2 bg-[#E31D1A] text-white rounded-full font-black text-[10px] uppercase tracking-widest shadow-lg shadow-red-500/20">
+                          <span className="px-4 py-1.5 bg-[#E31D1A] text-white rounded-full font-black text-[9px] uppercase tracking-widest shadow-lg shadow-red-500/20">
                             {program.degree}
                           </span>
                         </div>
-                        <h3 className="text-2xl font-black text-[#092C74] mb-3 group-hover:text-[#E31D1A] transition-colors leading-tight">{program.title}</h3>
-                        <p className="text-gray-500 mb-8 text-sm font-bold uppercase tracking-wide">Lulusan {program.level || 'Magister'}</p>
-                        <div className="mt-auto pt-6 border-t border-gray-50 flex justify-between items-center relative z-10">
+                        <h3 className="text-xl font-black text-[#092C74] mb-2 group-hover:text-[#E31D1A] transition-colors leading-tight">{program.title}</h3>
+                        <p className="text-gray-400 mb-6 text-[10px] font-bold uppercase tracking-wide">Lulusan {program.level || 'Magister'}</p>
+                        <div className="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center relative z-10">
                           <div className="flex items-center gap-2">
-                             <div className="size-2 bg-[#6A0DAD] rounded-full group-hover:animate-ping" />
-                             <span className="text-[#092C74] font-black text-sm">{program.duration} Semester</span>
+                             <div className="size-1.5 bg-[#6A0DAD] rounded-full group-hover:animate-ping" />
+                             <span className="text-[#092C74] font-black text-xs">{program.duration} Semester</span>
                           </div>
-                          <span className="text-xs font-black text-gray-400 uppercase tracking-widest">{program.totalCredit} SKS</span>
+                          <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{program.totalCredit} SKS</span>
                         </div>
                       </div>
                     </Link>

@@ -210,7 +210,7 @@ export const dataService = {
   async getAcademicCurriculum(slug: string) {
     try {
       const program = await this.getAcademicProgram(slug);
-      return program?.lectureCategory || [];
+      return program?.programCategory || [];
     } catch {
       return [];
     }

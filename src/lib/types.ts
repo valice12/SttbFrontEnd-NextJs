@@ -83,8 +83,8 @@ export interface NavLink {
   submenu?: NavLink[];
 }
 
-export interface Lecture {
-  lectureName: string;
+export interface CourseItem {
+  courseName: string;
   credits: number;
   description: string;
 }
@@ -92,7 +92,7 @@ export interface Lecture {
 export interface CurriculumCategory {
   categoryName: string;
   totalCredits: number;
-  lectures: Lecture[];
+  courses: CourseItem[];
 }
 
 export interface AcademicDto {
@@ -109,7 +109,7 @@ export interface AcademicDto {
   transformedDescription: string;
   transformativeDescription: string;
   slug?: string; // Added for routing
-  lectureCategory?: CurriculumCategory[];
+  programCategory?: CurriculumCategory[];
 }
 export interface DonationRequest {
   DonorMemberId: number;
