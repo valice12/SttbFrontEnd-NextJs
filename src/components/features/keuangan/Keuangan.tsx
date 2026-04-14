@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'motion/react';
 import Link from 'next/link';
-import { DollarSign, Award, Heart, CheckCircle2, ChevronRight, FileText, PieChart, Landmark, Sparkles } from 'lucide-react';
+import { DollarSign, Award, Heart, CheckCircle2, ChevronRight, FileText, Landmark, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { dataService } from '@/lib/data-service';
 import { FinanceNavbar } from '@/components/features/keuangan/FinanceNavbar';
@@ -182,23 +182,7 @@ export function Keuangan() {
                       ))}
                     </div>
 
-                    <div className="bg-[#092C74] p-8 rounded-[2rem] text-white relative z-10 overflow-hidden shadow-2xl">
-                      <div className="absolute top-0 right-0 p-6 opacity-10">
-                        <PieChart className="size-16" />
-                      </div>
-                      <h5 className="font-black text-[10px] uppercase tracking-widest mb-4 text-[#6AACE6]">Kebijakan Finansial</h5>
-                      <ul className="space-y-4">
-                        <li className="flex items-center gap-4">
-                          <CheckCircle2 className="size-4 text-[#E31D1A]" />
-                          <span className="font-bold text-xs text-white/90">Instalment Plan Bulanan Tersedia</span>
-                        </li>
-...
-                        <li className="flex items-center gap-4">
-                          <CheckCircle2 className="size-5 text-[#E31D1A]" />
-                          <span className="font-bold text-sm text-white/90">Subsidi Akomodasi Khusus</span>
-                        </li>
-                      </ul>
-                    </div>
+
                   </motion.div>
                 ))}
               </div>

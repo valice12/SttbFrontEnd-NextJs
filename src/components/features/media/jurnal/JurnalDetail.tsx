@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { motion } from 'motion/react';
-import { FileText, User, ChevronRight, ArrowLeft, Download, Bookmark, Scale } from 'lucide-react';
+import { FileText, User, ChevronRight, ArrowLeft, Download, Bookmark, Scale, Link as LinkIcon } from 'lucide-react';
 import Link from 'next/link';
 import { dataService } from '@/lib/data-service';
 import { Button } from '@/components/ui/button';
@@ -104,12 +104,22 @@ export function JurnalDetail() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Bookmark className="size-4 text-[#E31D1A]" />
-                    <span className="text-xs sm:text-sm font-bold text-gray-900">Volume 22 • STT Bandung</span>
+                    <span className="text-xs sm:text-sm font-bold text-gray-900">
+                      Volume 22 • STT Bandung
+                    </span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Scale className="size-4 text-[#E31D1A]" />
-                    <span className="text-xs sm:text-sm font-bold text-gray-900">ISSN: 2085-3394</span>
-                  </div>
+                  {(journal.issn || journal.Issn) && (
+                    <div className="flex items-center gap-2">
+                      <Scale className="size-4 text-[#E31D1A]" />
+                      <span className="text-xs sm:text-sm font-bold text-gray-900">ISSN: {journal.issn || journal.Issn}</span>
+                    </div>
+                  )}
+                  {(journal.doi || journal.Doi) && (
+                    <div className="flex items-center gap-2">
+                      <LinkIcon className="size-4 text-[#E31D1A]" />
+                      <span className="text-xs sm:text-sm font-bold text-gray-900">DOI: {journal.doi || journal.Doi}</span>
+                    </div>
+                  )}
                 </div>
               </div>
 
