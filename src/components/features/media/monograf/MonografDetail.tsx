@@ -10,7 +10,6 @@ import { useState, useEffect } from 'react';
 // Sub-components
 import { MonografShowcase } from './components/MonografShowcase';
 import { MonografMetadata } from './components/MonografMetadata';
-import { MonografPreviewSection } from './components/MonografPreviewSection';
 import { MonografHighlights } from './components/MonografHighlights';
 const bgPattern = "/assets/Page-Panjang-1.webp";
 
@@ -74,25 +73,24 @@ export function MonografDetail() {
       </div>
 
       <div className="container mx-auto px-4">
-        {/* Main Book Showcase Card */}
-        <MonografShowcase monograf={monograf} />
-
-        {/* Extended Data Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 max-w-6xl mx-auto mb-32">
-          {/* Metadata Sidebar */}
-          <div className="lg:col-span-1">
-            <MonografMetadata monograf={monograf} />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start max-w-7xl mx-auto">
+          {/* Main Content Area */}
+          <div className="lg:col-span-8 space-y-12">
+            <MonografShowcase monograf={monograf} />
+            
+            {/* Section: Why Read This? / Highlights */}
+            <div className="animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-300">
+              <MonografHighlights />
+            </div>
           </div>
 
-          {/* PDF Viewer Section */}
-          <MonografPreviewSection monograf={monograf} />
-        </div>
-
-        {/* Section: Why Read This? / Highlights */}
-        <div className="max-w-6xl mx-auto">
-          <MonografHighlights />
+          {/* Sidebar Metadata */}
+          <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
+            <MonografMetadata monograf={monograf} />
+          </div>
         </div>
       </div>
+
     </div>
   );
 }

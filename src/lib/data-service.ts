@@ -518,7 +518,8 @@ export const dataService = {
             roles: (item.roles && item.roles.length > 0) ? item.roles :
               (item.Roles && item.Roles.length > 0) ? item.Roles :
                 (item.organizationalRole || item.OrganizationalRole) ? [item.organizationalRole || item.OrganizationalRole] : [],
-            degrees: item.degrees || item.Degrees || []
+            degrees: item.degrees || item.Degrees || [],
+            imagePath: item.lecturerImagePath || item.imagePath || item.image || ''
           }));
 
         return {

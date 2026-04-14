@@ -1,10 +1,12 @@
 {
   "items": [
     {
-      "lecturerName": "Pdt. Dr. Andreas Surya",
+      "id": 1,
+      "lecturerName": "Sutrisna Harjanto II",
+      "organizationalRole": "Ketua",
+      "lecturerImagePath": "/Uploads/images/lecturers/c77f3779-7cdc-4409-9bbd-afbfd15f6bf5_sutrisna-1.png",
       "roles": [
-        "Ketua STT",
-        "Dosen Tetap"
+        "Ketua STTB"
       ],
       "degrees": [
         "S.Th.",

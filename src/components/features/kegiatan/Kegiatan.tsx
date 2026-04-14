@@ -208,7 +208,7 @@ export function Kegiatan() {
                   placeholder="Cari kegiatan..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 h-12 rounded-xl border-2 border-gray-50 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 text-[10px] font-black uppercase tracking-widest transition-all shadow-sm"
+                  className="pl-12 h-12 rounded-xl border-2 border-gray-50 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 text-sm font-bold transition-all shadow-sm"
                 />
               </div>
 

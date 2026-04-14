@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Building, Users, ShieldCheck, GraduationCap, ChevronRight } from 'lucide-react';
+import { Building, Users, ShieldCheck, GraduationCap, ChevronRight, User as UserIcon } from 'lucide-react';
 import { dataService } from '@/lib/data-service';
+import { getFileUrl } from '@/lib/file-utils';
+
+const DEFAULT_AVATAR = "https://ui-avatars.com/api/?name=STTB&background=092C74&color=fff&size=200";
 
 export function OrganizationTab() {
   const [foundation, setFoundation] = useState<any>(null);
@@ -34,7 +37,7 @@ export function OrganizationTab() {
   const safeLecturers = Array.isArray(lecturers) ? lecturers : [];
 
   // 1. Level 1: Ketua
-  const ketua = safeLecturers.find(l => 
+  const ketua = safeLecturers.find(l =>
     l.roles?.some((r: any) => {
       const rl = typeof r === 'string' ? r.toLowerCase() : '';
       return (rl === 'ketua sttb' || rl === 'ketua') && !rl.includes('wakil');
@@ -42,7 +45,7 @@ export function OrganizationTab() {
   );
 
   // 2. Level 2: Executives (Wakil Ketua, Sekretaris, Bendahara)
-  const executives = safeLecturers.filter(l => 
+  const executives = safeLecturers.filter(l =>
     l.roles?.some((r: any) => {
       const rl = typeof r === 'string' ? r.toLowerCase() : '';
       return rl.includes('wakil ketua') || rl.includes('sekretaris') || rl.includes('bendahara');
@@ -50,7 +53,7 @@ export function OrganizationTab() {
   );
 
   // 3. Level 3: Kaprodi
-  const kaprodi = safeLecturers.filter(l => 
+  const kaprodi = safeLecturers.filter(l =>
     l.roles?.some((r: any) => typeof r === 'string' && r.toLowerCase().includes('kaprodi'))
   );
 
@@ -171,13 +174,26 @@ export function OrganizationTab() {
             return (
               <div className="flex flex-col items-center w-full">
                 <motion.div
-                  whileHover={{ y: -5 }}
-                  className="bg-gradient-to-br from-[#092C74] via-[#4B0082] to-[#092C74] text-white p-12 rounded-[2.50rem] shadow-[0_50px_100px_rgba(9,44,116,0.2)] w-full max-w-[450px] text-center relative z-10 overflow-hidden border border-white/10"
+                  whileHover={{ y: -10 }}
+                  className="bg-gradient-to-br from-[#092C74] via-[#4B0082] to-[#092C74] text-white p-10 md:p-14 rounded-[3rem] shadow-[0_50px_100px_rgba(9,44,116,0.25)] w-full max-w-[550px] text-center relative z-10 overflow-hidden border border-white/10"
                 >
                   <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
-                  <span className="text-[10px] block bg-white text-[#092C74] px-5 py-1.5 rounded-full font-black uppercase tracking-widest mb-6 w-fit mx-auto shadow-xl">Ketua STTB</span>
-                  <h4 className="font-black text-3xl md:text-4xl leading-tight mb-4 tracking-tighter">{ketua?.lecturerName || 'Pdt. Dr. Senior'}</h4>
-                  <p className="text-[#6AACE6] text-xs font-black uppercase tracking-[0.2em]">{ketua?.degrees?.join(', ') || 'Th.M., Ph.D.'}</p>
+
+                  {/* Premium Avatar with Glow */}
+                  <div className="relative w-40 md:w-56 mx-auto mb-8">
+                    <div className="absolute inset-0 bg-white/10 rounded-3xl blur-2xl animate-pulse" />
+                    <div className="relative w-full rounded-2xl border-4 border-white/20 overflow-hidden shadow-2xl p-1 bg-white/5 backdrop-blur-sm ring-1 ring-white/10">
+                      <img
+                        src={getFileUrl(ketua?.imagePath || ketua?.image, 'lecturers') || DEFAULT_AVATAR}
+                        alt={ketua?.lecturerName}
+                        className="w-full h-auto block rounded-2xl"
+                      />
+                    </div>
+                  </div>
+
+                  <span className="text-[10px] block bg-white text-[#092C74] px-5 py-1.5 rounded-full font-black uppercase tracking-widest mb-6 w-fit mx-auto shadow-xl ring-4 ring-white/10">Ketua STTB</span>
+                  <h4 className="font-black text-3xl md:text-4xl leading-tight mb-4 tracking-tighter">{ketua?.lecturerName || 'Sutrisna Harjanto II'}</h4>
+                  <p className="text-[#6AACE6] text-sm font-black uppercase tracking-[0.2em]">{ketua?.degrees?.join(', ') || 'Th.M., Ph.D.'}</p>
                 </motion.div>
                 <div className="h-20 w-[2px] bg-gradient-to-b from-[#092C74] to-transparent" />
               </div>
@@ -195,22 +211,29 @@ export function OrganizationTab() {
                 <div className="flex flex-wrap justify-center gap-12 w-full">
                   {executives.map((item: any, i: number) => {
                     // Priority order for role label
-                    const roleLabel = 
-                      item.roles?.find((r: any) => typeof r === 'string' && r.toLowerCase().includes('wakil ketua')) || 
-                      item.roles?.find((r: any) => typeof r === 'string' && r.toLowerCase().includes('sekretaris')) || 
-                      item.roles?.find((r: any) => typeof r === 'string' && r.toLowerCase().includes('bendahara')) || 
+                    const roleLabel =
+                      item.roles?.find((r: any) => typeof r === 'string' && r.toLowerCase().includes('wakil ketua')) ||
+                      item.roles?.find((r: any) => typeof r === 'string' && r.toLowerCase().includes('sekretaris')) ||
+                      item.roles?.find((r: any) => typeof r === 'string' && r.toLowerCase().includes('bendahara')) ||
                       'Eksekutif';
 
                     return (
                       <div key={i} className="flex flex-col items-center">
                         <div className="hidden lg:block h-10 w-[2px] bg-gray-100" />
                         <motion.div
-                          whileHover={{ scale: 1.05 }}
-                          className="backdrop-blur-xl bg-white/70 border-2 border-gray-50 text-[#092C74] p-8 rounded-[2rem] shadow-xl w-[320px] text-center"
+                          whileHover={{ y: -5 }}
+                          className="backdrop-blur-xl bg-white/80 border-2 border-white/50 text-[#092C74] p-10 rounded-[2.5rem] shadow-xl w-[320px] text-center relative group"
                         >
-                          <span className="text-[10px] block text-[#E31D1A] font-black uppercase mb-4 tracking-widest">{roleLabel}</span>
-                          <h5 className="font-black text-xl mb-4 tracking-tight">{item.lecturerName}</h5>
-                          <div className="h-1 w-10 bg-gray-100 mx-auto rounded-full" />
+                          <div className="w-32 mx-auto mb-6 rounded-2xl overflow-hidden border-2 border-gray-100 shadow-md group-hover:scale-105 transition-transform duration-500 bg-white">
+                            <img
+                              src={getFileUrl(item.imagePath || item.image, 'lecturers') || DEFAULT_AVATAR}
+                              alt={item.lecturerName}
+                              className="w-full h-auto block"
+                            />
+                          </div>
+                          <span className="text-[10px] block text-[#E31D1A] font-black uppercase mb-3 tracking-widest leading-none">{roleLabel}</span>
+                          <h5 className="font-black text-lg mb-4 tracking-tight leading-tight px-4">{item.lecturerName}</h5>
+                          <div className="h-1 w-8 bg-gray-100 mx-auto rounded-full" />
                         </motion.div>
                       </div>
                     );
@@ -228,17 +251,27 @@ export function OrganizationTab() {
             }
             return (
               <div className="flex flex-col items-center w-full">
-                <div className="flex flex-wrap justify-center gap-6 relative px-4 z-10">
+                <div className="flex flex-wrap justify-center gap-8 relative px-4 z-10 max-w-7xl">
                   {kaprodi.map((item: any, i: number) => {
                     const roleLabel = item.roles?.find((r: any) => typeof r === 'string' && r.toLowerCase().includes('kaprodi')) || 'Kaprodi';
                     return (
                       <motion.div
                         key={i}
-                        whileHover={{ y: -5 }}
-                        className="bg-white/80 border border-gray-100 p-6 rounded-3xl shadow-md w-52 text-center flex flex-col items-center justify-center hover:shadow-xl transition-all duration-500"
+                        whileHover={{ x: 10 }}
+                        className="bg-white border-l-4 border-l-[#E31D1A] p-6 rounded-2xl shadow-sm w-full md:w-[380px] flex items-center gap-6 hover:shadow-xl hover:bg-gray-50 transition-all duration-300 group"
                       >
-                        <span className="text-[9px] block text-[#092C74] font-black uppercase mb-3 tracking-widest">{roleLabel}</span>
-                        <h5 className="font-bold text-sm text-gray-800 leading-tight">{item.lecturerName}</h5>
+                        <div className="w-20 bg-white rounded-xl overflow-hidden shrink-0 border border-gray-100">
+                          <img
+                            src={getFileUrl(item.imagePath || item.image, 'lecturers') || DEFAULT_AVATAR}
+                            alt={item.lecturerName}
+                            className="w-full h-auto block group-hover:scale-110 transition-transform duration-500"
+                          />
+                        </div>
+                        <div className="flex flex-col text-left">
+                          <span className="text-[8px] font-black text-[#E31D1A] uppercase tracking-[0.2em] mb-1">{roleLabel}</span>
+                          <h5 className="font-black text-base text-[#092C74] leading-tight tracking-tight">{item.lecturerName}</h5>
+                        </div>
+                        <ChevronRight className="size-4 text-gray-200 ml-auto group-hover:text-[#092C74] transition-colors" />
                       </motion.div>
                     );
                   })}
@@ -252,7 +285,7 @@ export function OrganizationTab() {
             <div className="backdrop-blur-md bg-gray-50/30 p-12 md:p-16 rounded-[4rem] border border-white/50">
               <div className="text-center mb-16">
                 <span className="px-5 py-2 bg-[#092C74] text-white rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-xl">Jajaran Dosen</span>
-                <h4 className="font-black text-3xl text-[#092C74] mt-6 tracking-tight">Dosen Tetap & Luar Biasa</h4>
+                <h4 className="font-black text-3xl text-[#092C74] mt-6 tracking-tight">Dosen Tetap</h4>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {filteredLecturers.map((lecturer, i) => (

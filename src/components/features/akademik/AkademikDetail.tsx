@@ -67,7 +67,7 @@ export function AkademikDetail() {
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
       {/* Premium Hero Section - Synchronized with Global Standard */}
-      <section className="relative h-[550px] md:h-[650px] overflow-hidden">
+      <section className="relative min-h-[600px] md:min-h-[750px] flex items-center pt-32 pb-48 overflow-hidden">
         <div className="absolute inset-0">
           <img src={bgHeader} alt={programData.programName} className="w-full h-full object-cover scale-105" />
           <div className="absolute inset-0 bg-gradient-to-br from-[#061B46]/95 via-[#4B0082]/40 to-transparent z-10" />
@@ -76,7 +76,7 @@ export function AkademikDetail() {
           <div className="absolute bottom-0 -left-20 size-[400px] bg-[#092C74]/40 blur-[100px] rounded-full" />
         </div>
 
-        <div className="relative container mx-auto px-4 h-full flex items-center z-20">
+        <div className="relative container mx-auto px-4 z-20">
           <div className="max-w-4xl">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}

@@ -51,8 +51,8 @@ export function Akademik() {
   const filteredPrograms = useMemo(() => {
     if (!searchTerm) return programs;
     const lowerSearch = searchTerm.toLowerCase();
-    return programs.filter(p => 
-      p.programName.toLowerCase().includes(lowerSearch) || 
+    return programs.filter(p =>
+      p.programName.toLowerCase().includes(lowerSearch) ||
       p.title.toLowerCase().includes(lowerSearch) ||
       (p.degree && p.degree.toLowerCase().includes(lowerSearch))
     );
@@ -77,7 +77,7 @@ export function Akademik() {
         <div className="absolute inset-0">
           <img src={bgHeader} alt="Academic Programs" className="w-full h-full object-cover scale-105" />
           <div className="absolute inset-0 bg-gradient-to-br from-[#061B46]/95 via-[#4B0082]/40 to-transparent z-10" />
-          
+
           <div className="absolute top-1/2 -right-20 size-[500px] bg-[#E31D1A]/10 blur-[120px] rounded-full animate-pulse" />
           <div className="absolute bottom-0 -left-20 size-[400px] bg-[#092C74]/40 blur-[100px] rounded-full" />
         </div>
@@ -97,7 +97,7 @@ export function Akademik() {
                   transition={{ delay: 0.4 }}
                   className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#E31D1A] rounded-full text-white text-xs font-black uppercase tracking-widest mb-8 shadow-lg shadow-red-500/30"
                 >
-                   <GraduationCap className="size-3" /> Keunggulan Akademis
+                  <GraduationCap className="size-3" /> Keunggulan Akademis
                 </motion.div>
 
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 tracking-tighter leading-[1.1] drop-shadow-2xl">
@@ -115,21 +115,8 @@ export function Akademik() {
 
       <section className="py-12">
         <div className="container mx-auto px-4">
-          
+
           {/* Search Bar Standardized */}
-          <div className="mb-12 flex justify-center">
-            <div className="relative w-full max-w-2xl group">
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 size-5 text-gray-400 group-hover:text-[#092C74] transition-colors" />
-              <Input
-                type="text"
-                placeholder="Cari program studi (Tekan Enter)..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={handleSearchKeyDown}
-                className="pl-14 h-16 rounded-3xl border-2 border-white/50 bg-white/50 backdrop-blur-xl focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 text-sm font-black tracking-widest transition-all shadow-xl"
-              />
-            </div>
-          </div>
 
           <div className="mb-16">
             <div className="mb-10">
@@ -167,8 +154,8 @@ export function Akademik() {
                         <p className="text-gray-400 mb-6 text-[10px] font-bold uppercase tracking-wide">Lulusan {program.level || 'Sarjana'}</p>
                         <div className="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center relative z-10">
                           <div className="flex items-center gap-2">
-                             <div className="size-1.5 bg-[#6A0DAD] rounded-full group-hover:animate-ping" />
-                             <span className="text-[#092C74] font-black text-xs">{program.duration} Semester</span>
+                            <div className="size-1.5 bg-[#6A0DAD] rounded-full group-hover:animate-ping" />
+                            <span className="text-[#092C74] font-black text-xs">{program.duration} Semester</span>
                           </div>
                           <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{program.totalCredit} SKS</span>
                         </div>
@@ -240,7 +227,7 @@ export function Akademik() {
                   >
                     <Link href={`/akademik/${program.slug}`}>
                       <div className="bg-white p-8 rounded-[2rem] border border-gray-100 hover:border-[#092C74] hover:shadow-[0_20px_50px_rgba(9,44,116,0.08)] transition-all duration-500 group h-full flex flex-col relative overflow-hidden">
-                         <div className="absolute top-0 right-0 w-24 h-24 bg-[#F2ECF8] rounded-full -mr-12 -mt-12 group-hover:bg-[#092C74]/10 transition-colors" />
+                        <div className="absolute top-0 right-0 w-24 h-24 bg-[#F2ECF8] rounded-full -mr-12 -mt-12 group-hover:bg-[#092C74]/10 transition-colors" />
                         <div className="flex items-center justify-between mb-6 relative z-10">
                           <div className="size-14 bg-[#F5F3FB] rounded-xl flex items-center justify-center group-hover:bg-[#092C74] transition-all duration-500 shadow-sm group-hover:shadow-blue-900/20 group-hover:-translate-y-1">
                             <IconComponent className="size-7 text-[#092C74] group-hover:text-white transition-colors" />
@@ -253,8 +240,8 @@ export function Akademik() {
                         <p className="text-gray-400 mb-6 text-[10px] font-bold uppercase tracking-wide">Lulusan {program.level || 'Magister'}</p>
                         <div className="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center relative z-10">
                           <div className="flex items-center gap-2">
-                             <div className="size-1.5 bg-[#6A0DAD] rounded-full group-hover:animate-ping" />
-                             <span className="text-[#092C74] font-black text-xs">{program.duration} Semester</span>
+                            <div className="size-1.5 bg-[#6A0DAD] rounded-full group-hover:animate-ping" />
+                            <span className="text-[#092C74] font-black text-xs">{program.duration} Semester</span>
                           </div>
                           <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{program.totalCredit} SKS</span>
                         </div>

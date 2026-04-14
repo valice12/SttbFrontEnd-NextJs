@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Tag, Download, Share2, Bookmark } from 'lucide-react';
+import { Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getImageUrl } from '@/lib/image-utils';
 
@@ -15,7 +15,7 @@ export function MonografShowcase({ monograf }: MonografShowcaseProps) {
       <motion.div 
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-12 bg-white rounded-[2.5rem] md:rounded-[48px] p-6 sm:p-8 md:p-16 shadow-2xl shadow-gray-200/60 border border-gray-100 overflow-hidden relative"
+        className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-12 bg-white rounded-[2.5rem] md:rounded-[48px] p-6 sm:p-8 md:p-12 shadow-2xl shadow-gray-200/60 border border-gray-100 overflow-hidden relative"
       >
         {/* Background Accent */}
         <div className="absolute top-0 right-0 w-full lg:w-1/2 h-1/2 lg:h-full bg-gradient-to-b lg:bg-gradient-to-l from-gray-50/50 to-transparent pointer-events-none" />
@@ -29,12 +29,6 @@ export function MonografShowcase({ monograf }: MonografShowcaseProps) {
                 alt={monograf.title} 
                 className="w-full h-full object-cover"
               />
-            </div>
-            <div className="absolute -top-3 -right-3 md:-top-4 md:-right-4 bg-[#E31D1A] text-white p-3 md:p-4 rounded-xl md:rounded-2xl shadow-xl transform rotate-12 flex flex-col items-center justify-center min-w-[70px] md:min-w-[80px] z-10">
-              <span className="text-[8px] md:text-[10px] font-black uppercase tracking-widest leading-none">Price</span>
-              <span className="text-sm md:text-lg font-black leading-tight">
-                {monograf.price > 0 ? `Rp ${monograf.price.toLocaleString()}` : 'Free'}
-              </span>
             </div>
           </div>
         </div>
@@ -67,22 +61,6 @@ export function MonografShowcase({ monograf }: MonografShowcaseProps) {
             <h4 className="text-[10px] md:text-xs font-black text-[#E31D1A] uppercase tracking-[0.3em] mb-4">Sinopsis Monograf</h4>
             <div className="text-gray-700 leading-relaxed md:leading-[1.8] text-base md:text-lg font-medium italic border-l-4 border-[#092C74] pl-5 md:pl-8 py-2 max-w-2xl bg-gray-50/50 rounded-r-2xl pr-4">
               "{monograf.description || monograf.synopsis || "Belum ada sinopsis untuk karya monograf ini."}"
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 items-center">
-            <a href={monograf.link} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-              <Button className="w-full bg-[#E31D1A] hover:bg-[#003049] text-white px-8 py-6 md:py-7 h-auto rounded-2xl font-black uppercase tracking-widest text-[10px] md:text-xs shadow-2xl shadow-red-500/20 gap-3 group transition-all">
-                <Download className="size-5 group-hover:translate-y-1 transition-transform" /> Download Full Version
-              </Button>
-            </a>
-            <div className="flex gap-2 w-full sm:w-auto justify-end">
-               <Button variant="ghost" size="icon" className="size-12 rounded-full bg-gray-50 hover:bg-white shadow-sm border border-transparent hover:border-gray-100 transition-all">
-                 <Share2 className="size-4" />
-               </Button>
-               <Button variant="ghost" size="icon" className="size-12 rounded-full bg-gray-50 hover:bg-white shadow-sm border border-transparent hover:border-gray-100 transition-all">
-                 <Bookmark className="size-4" />
-               </Button>
             </div>
           </div>
         </div>
