@@ -119,7 +119,7 @@ export function Keuangan() {
       {/* Premium Navigation Tabs - Centralized */}
       <FinanceNavbar />
 
-      <section className="py-24">
+      <section className="py-16">
         <div className="container mx-auto px-4">
           {activeTab === 'tuition' && (
             <motion.div
@@ -128,52 +128,52 @@ export function Keuangan() {
               transition={{ duration: 0.8 }}
               className="max-w-7xl mx-auto"
             >
-              <div className="flex flex-col items-center mb-24 text-center">
-                <div className="size-20 bg-[#F2ECF8] rounded-[1.5rem] flex justify-center items-center mb-8 border border-blue-50 shadow-inner">
-                  <Landmark className="size-10 text-[#092C74]" />
+              <div className="flex flex-col items-center mb-16 text-center">
+                <div className="size-16 bg-[#F2ECF8] rounded-2xl flex justify-center items-center mb-6 border border-blue-50 shadow-inner">
+                  <Landmark className="size-8 text-[#092C74]" />
                 </div>
-                <h2 className="text-4xl md:text-6xl font-black text-[#092C74] mb-8 tracking-tighter">Biaya Studi <span className="text-[#E31D1A]">&</span> Investasi Akademik</h2>
-                <div className="w-24 h-1.5 bg-gradient-to-r from-[#092C74] via-[#6A0DAD] to-[#E31D1A] rounded-full" />
+                <h2 className="text-3xl md:text-5xl font-black text-[#092C74] mb-6 tracking-tighter text-center">Biaya Studi <span className="text-[#E31D1A]">&</span> Investasi Akademik</h2>
+                <div className="w-20 h-1.5 bg-gradient-to-r from-[#092C74] via-[#6A0DAD] to-[#E31D1A] rounded-full" />
               </div>
 
-              <div className="grid lg:grid-cols-2 gap-12">
+              <div className="grid lg:grid-cols-2 gap-10">
                 {admissionCosts.map((program, idx) => (
                   <motion.div 
                     key={program.id || idx}
                     whileHover={{ y: -10 }}
-                    className="backdrop-blur-xl bg-white/40 border border-white p-10 md:p-14 rounded-[3.5rem] shadow-[0_40px_80px_rgba(9,44,116,0.05)] relative overflow-hidden group transition-all duration-700 h-full flex flex-col"
+                    className="backdrop-blur-xl bg-white/40 border border-white p-8 md:p-10 rounded-[2.5rem] shadow-[0_40px_80px_rgba(9,44,116,0.05)] relative overflow-hidden group transition-all duration-700 h-full flex flex-col"
                   >
                     <div className="absolute top-0 right-0 size-64 bg-[#092C74]/5 blur-[60px] rounded-full -mr-32 -mt-32 group-hover:bg-[#E31D1A]/5 transition-colors duration-700" />
                     
-                    <div className="flex justify-between items-start mb-12 relative z-10">
-                      <div className="space-y-4">
+                    <div className="flex justify-between items-start mb-10 relative z-10">
+                      <div className="space-y-3">
                         <div className="flex items-center gap-4">
-                          <div className="size-12 bg-[#092C74] text-white rounded-2xl flex items-center justify-center font-black text-xl shadow-xl shadow-blue-900/20">
+                          <div className="size-10 bg-[#092C74] text-white rounded-xl flex items-center justify-center font-black text-lg shadow-xl shadow-blue-900/20">
                             {idx + 1}
                           </div>
-                          <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">Program Akademik</span>
+                          <span className="text-[9px] font-black text-gray-400 uppercase tracking-[0.3em]">Program Akademik</span>
                         </div>
-                        <h3 className="font-black text-3xl md:text-4xl text-[#092C74] tracking-tighter max-w-sm">{program.programName}</h3>
+                        <h3 className="font-black text-2xl md:text-3xl text-[#092C74] tracking-tighter max-w-sm">{program.programName}</h3>
                       </div>
                       {program.programName.includes('Magister') && (
-                        <div className="bg-[#4B0082] text-white px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-widest shadow-xl">Postgraduate</div>
+                        <div className="bg-[#4B0082] text-white px-5 py-1.5 rounded-full font-black text-[9px] uppercase tracking-widest shadow-xl">Postgraduate</div>
                       )}
                     </div>
                     
-                    <div className="space-y-12 mb-16 flex-grow relative z-10">
+                    <div className="space-y-8 mb-10 flex-grow relative z-10">
                       {program.costCategory?.map((category: any, catIdx: number) => (
-                        <div key={catIdx} className="space-y-6">
-                          <h4 className="text-[10px] font-black text-[#E31D1A] uppercase tracking-[0.4em] flex items-center gap-4">
-                            <div className="h-px w-8 bg-[#E31D1A]" />
+                        <div key={catIdx} className="space-y-4">
+                          <h4 className="text-[9px] font-black text-[#E31D1A] uppercase tracking-[0.4em] flex items-center gap-4">
+                            <div className="h-px w-6 bg-[#E31D1A]" />
                             {category.categoryName}
                           </h4>
-                          <div className="space-y-1">
+                          <div className="space-y-0.5">
                             {category.costBreakdown.map((item: any, itemIdx: number) => (
-                              <div key={itemIdx} className="flex justify-between items-center py-5 border-b border-gray-100/50 group/item hover:bg-white/40 rounded-xl px-4 transition-all">
-                                <span className="text-gray-500 font-bold text-base group-hover/item:text-[#092C74] transition-colors">{item.costName}</span>
+                              <div key={itemIdx} className="flex justify-between items-center py-4 border-b border-gray-100/50 group/item hover:bg-white/40 rounded-xl px-4 transition-all">
+                                <span className="text-gray-500 font-bold text-sm group-hover/item:text-[#092C74] transition-colors">{item.costName}</span>
                                 <div className="text-right">
-                                  <span className="block font-black text-[#092C74] text-xl tracking-tight">Rp {item.cost.toLocaleString('id-ID')}</span>
-                                  <span className="text-[9px] font-black text-gray-300 uppercase tracking-widest">Net Amount</span>
+                                  <span className="block font-black text-[#092C74] text-lg tracking-tight">Rp {item.cost.toLocaleString('id-ID')}</span>
+                                  <span className="text-[8px] font-black text-gray-300 uppercase tracking-widest">Net Amount</span>
                                 </div>
                               </div>
                             ))}
@@ -182,16 +182,17 @@ export function Keuangan() {
                       ))}
                     </div>
 
-                    <div className="bg-[#092C74] p-10 rounded-[2.5rem] text-white relative z-10 overflow-hidden shadow-2xl">
+                    <div className="bg-[#092C74] p-8 rounded-[2rem] text-white relative z-10 overflow-hidden shadow-2xl">
                       <div className="absolute top-0 right-0 p-6 opacity-10">
-                        <PieChart className="size-20" />
+                        <PieChart className="size-16" />
                       </div>
-                      <h5 className="font-black text-xs uppercase tracking-widest mb-6 text-[#6AACE6]">Kebijakan Finansial</h5>
-                      <ul className="space-y-5">
+                      <h5 className="font-black text-[10px] uppercase tracking-widest mb-4 text-[#6AACE6]">Kebijakan Finansial</h5>
+                      <ul className="space-y-4">
                         <li className="flex items-center gap-4">
-                          <CheckCircle2 className="size-5 text-[#E31D1A]" />
-                          <span className="font-bold text-sm text-white/90">Instalment Plan Bulanan Tersedia</span>
+                          <CheckCircle2 className="size-4 text-[#E31D1A]" />
+                          <span className="font-bold text-xs text-white/90">Instalment Plan Bulanan Tersedia</span>
                         </li>
+...
                         <li className="flex items-center gap-4">
                           <CheckCircle2 className="size-5 text-[#E31D1A]" />
                           <span className="font-bold text-sm text-white/90">Subsidi Akomodasi Khusus</span>
@@ -202,26 +203,26 @@ export function Keuangan() {
                 ))}
               </div>
 
-              <div className="mt-20 backdrop-blur-xl bg-[#092C74] p-10 md:p-14 rounded-[4rem] text-white shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center gap-12">
+              <div className="mt-16 backdrop-blur-xl bg-[#092C74] p-8 md:p-10 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center gap-10">
                  <div className="absolute top-0 right-0 size-96 bg-white/5 blur-[100px] rounded-full" />
-                 <div className="size-24 bg-white/10 rounded-[2.5rem] flex items-center justify-center border border-white/20 shrink-0">
-                    <Award className="size-12 text-yellow-400" />
+                 <div className="size-20 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20 shrink-0">
+                    <Award className="size-10 text-yellow-400" />
                  </div>
-                 <div className="flex-1 space-y-6">
-                    <h4 className="text-3xl font-black tracking-tight">Catatan Transparansi</h4>
-                    <ul className="space-y-4">
+                 <div className="flex-1 space-y-4 text-center lg:text-left">
+                    <h4 className="text-2xl font-black tracking-tight">Catatan Transparansi</h4>
+                    <ul className="space-y-3">
                        <li className="flex items-start gap-4 text-white/70 font-medium">
-                          <div className="size-2 bg-[#E31D1A] rounded-full mt-2 lg:mt-3 shrink-0" />
-                          <p>Pembayaran selambat-lambatnya <strong className="text-white">14 hari</strong> sebelum perkuliahan dimulai.</p>
+                          <div className="size-2 bg-[#E31D1A] rounded-full mt-2 shrink-0" />
+                          <p className="text-sm">Pembayaran selambat-lambatnya <strong className="text-white">14 hari</strong> sebelum perkuliahan dimulai.</p>
                        </li>
                        <li className="flex items-start gap-4 text-white/70 font-medium">
-                          <div className="size-2 bg-[#E31D1A] rounded-full mt-2 lg:mt-3 shrink-0" />
-                          <p>Biaya administrasi semester wajib diselesaikan di <strong className="text-white">awal periode akademik</strong>.</p>
+                          <div className="size-2 bg-[#E31D1A] rounded-full mt-2 shrink-0" />
+                          <p className="text-sm">Biaya administrasi semester wajib diselesaikan di <strong className="text-white">awal periode akademik</strong>.</p>
                        </li>
                     </ul>
                  </div>
-                 <Button className="h-20 px-12 bg-white hover:bg-[#E31D1A] text-[#092C74] hover:text-white font-black text-lg rounded-[1.5rem] shadow-2xl transition-all duration-500 uppercase tracking-widest">
-                    Unduh Katalog PDF <ChevronRight className="ml-2 size-5" />
+                 <Button className="h-16 px-10 bg-white hover:bg-[#E31D1A] text-[#092C74] hover:text-white font-black text-base rounded-2xl shadow-2xl transition-all duration-500 uppercase tracking-widest">
+                    Unduh Katalog PDF <ChevronRight className="ml-2 size-4" />
                  </Button>
               </div>
             </motion.div>
@@ -234,15 +235,15 @@ export function Keuangan() {
               transition={{ duration: 0.8 }}
               className="max-w-7xl mx-auto"
             >
-              <div className="flex flex-col items-center mb-24 text-center">
-                <div className="size-20 bg-[#F2ECF8] rounded-[1.5rem] flex justify-center items-center mb-8 border border-blue-50 shadow-inner">
-                  <Award className="size-10 text-[#092C74]" />
+              <div className="flex flex-col items-center mb-16 text-center">
+                <div className="size-16 bg-[#F2ECF8] rounded-2xl flex justify-center items-center mb-6 border border-blue-50 shadow-inner">
+                  <Award className="size-8 text-[#092C74]" />
                 </div>
-                <h2 className="text-4xl md:text-6xl font-black text-[#092C74] mb-8 tracking-tighter">Program <span className="text-[#E31D1A]">Beasiswa</span> Unggulan</h2>
-                <div className="w-24 h-1.5 bg-gradient-to-r from-[#092C74] via-[#6A0DAD] to-[#E31D1A] rounded-full" />
+                <h2 className="text-3xl md:text-5xl font-black text-[#092C74] mb-6 tracking-tighter">Program <span className="text-[#E31D1A]">Beasiswa</span> Unggulan</h2>
+                <div className="w-20 h-1.5 bg-gradient-to-r from-[#092C74] via-[#6A0DAD] to-[#E31D1A] rounded-full" />
               </div>
 
-              <div className="grid lg:grid-cols-3 gap-10 mb-32">
+              <div className="grid lg:grid-cols-3 gap-8 mb-20">
                 {[
                   { title: "Pastor Scholar", cat: "Entry Level", c1: "Biaya Pendidikan Penuh", req: ["Rapor min. 8.5", "Rekomendasi Gereja"], color: "from-[#092C74] to-blue-900", bgColor: "bg-blue-50" },
                   { title: "Beasiswa Formatio", cat: "Active Student", c1: "Tahun ke-2 Full Coverage", req: ["IPK Minimal 3.2", "Wawancara Institusi"], color: "from-[#4B0082] to-indigo-900", bgColor: "bg-indigo-50" },
@@ -251,25 +252,25 @@ export function Keuangan() {
                   <motion.div 
                     key={i}
                     whileHover={{ y: -10 }}
-                    className={`backdrop-blur-xl ${item.bgColor} border border-white p-10 lg:p-14 rounded-[3.5rem] shadow-[0_40px_80px_rgba(0,0,0,0.05)] relative overflow-hidden group h-full flex flex-col`}
+                    className={`backdrop-blur-xl ${item.bgColor} border border-white p-8 lg:p-10 rounded-[2.5rem] shadow-[0_40px_80px_rgba(0,0,0,0.05)] relative overflow-hidden group h-full flex flex-col`}
                   >
                     <div className={`absolute top-0 right-0 size-32 bg-gradient-to-br ${item.color} rounded-full -mr-16 -mt-16 opacity-10 group-hover:opacity-20 transition-opacity`} />
-                    <div className="mb-12">
-                      <span className="text-[10px] font-black text-[#E31D1A] uppercase tracking-[0.3em] block mb-4">{item.cat}</span>
-                      <h3 className="text-3xl font-black text-[#092C74] tracking-tight leading-tight">{item.title}</h3>
+                    <div className="mb-10">
+                      <span className="text-[9px] font-black text-[#E31D1A] uppercase tracking-[0.3em] block mb-3">{item.cat}</span>
+                      <h3 className="text-2xl font-black text-[#092C74] tracking-tight leading-tight">{item.title}</h3>
                     </div>
                     
-                    <div className="p-8 bg-[#092C74] rounded-[2rem] text-white shadow-xl mb-10 relative overflow-hidden">
+                    <div className="p-6 bg-[#092C74] rounded-2xl text-white shadow-xl mb-8 relative overflow-hidden">
                        <div className="absolute inset-0 bg-white/5 opacity-10" />
-                       <p className="text-[9px] font-black uppercase tracking-widest text-blue-300 mb-3 relative z-10">Cakupan Beasiswa</p>
-                       <p className="text-lg font-black italic relative z-10">{item.c1}</p>
+                       <p className="text-[8px] font-black uppercase tracking-widest text-blue-300 mb-2 relative z-10">Cakupan Beasiswa</p>
+                       <p className="text-base font-black italic relative z-10">{item.c1}</p>
                     </div>
 
-                    <div className="space-y-4 mb-12 flex-grow">
+                    <div className="space-y-3 mb-10 flex-grow">
                        {item.req.map((r, ri) => (
                          <div key={ri} className="flex items-center gap-3">
-                            <CheckCircle2 className="size-4 text-[#092C74]" />
-                            <span className="text-sm font-bold text-gray-500">{r}</span>
+                            <CheckCircle2 className="size-3.5 text-[#092C74]" />
+                            <span className="text-xs font-bold text-gray-500">{r}</span>
                          </div>
                        ))}
                     </div>
@@ -282,18 +283,18 @@ export function Keuangan() {
                 ))}
               </div>
 
-              <div className="bg-[#092C74] rounded-[4rem] p-12 md:p-24 text-white shadow-2xl relative overflow-hidden">
+              <div className="bg-[#092C74] rounded-[2.5rem] p-10 md:p-16 text-white shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 size-[600px] bg-white/5 blur-[120px] rounded-full -mr-48 -mt-48" />
                 
                 <div className="relative z-10">
-                   <div className="flex flex-col lg:flex-row justify-between items-center gap-16 mb-20">
+                   <div className="flex flex-col lg:flex-row justify-between items-center gap-12 mb-16">
                       <div className="max-w-2xl text-center lg:text-left">
-                         <h3 className="text-4xl md:text-5xl font-black mb-8 leading-tight tracking-tighter">Syarat, Ketentuan <br /> <span className="text-[#6AACE6]">& Regulasi Beasiswa</span></h3>
-                         <div className="w-20 h-2 bg-[#E31D1A] rounded-full mx-auto lg:mx-0" />
+                         <h3 className="text-3xl md:text-4xl font-black mb-6 leading-tight tracking-tighter text-center lg:text-left">Syarat, Ketentuan <br /> <span className="text-[#6AACE6]">& Regulasi Beasiswa</span></h3>
+                         <div className="w-16 h-1.5 bg-[#E31D1A] rounded-full mx-auto lg:mx-0" />
                       </div>
-                      <div className="flex-1 max-w-lg p-10 bg-white/5 border border-white/10 rounded-[3rem] backdrop-blur-md">
-                         <h4 className="text-[#E31D1A] font-black text-xs uppercase tracking-[0.3em] mb-6">Pelanggaran Etika</h4>
-                         <p className="text-lg font-medium leading-relaxed text-white/80">Kecurangan akademik atau pelanggaran kode etik STTB akan berakibat pada penghentian total dana beasiswa.</p>
+                      <div className="flex-1 max-w-lg p-8 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md">
+                         <h4 className="text-[#E31D1A] font-black text-[10px] uppercase tracking-[0.3em] mb-4 text-center lg:text-left">Pelanggaran Etika</h4>
+                         <p className="text-base font-medium leading-relaxed text-white/80 text-center lg:text-left">Kecurangan akademik atau pelanggaran kode etik STTB akan berakibat pada penghentian total dana beasiswa.</p>
                       </div>
                    </div>
 
@@ -323,24 +324,24 @@ export function Keuangan() {
               transition={{ duration: 0.8 }}
               className="max-w-5xl mx-auto text-center"
             >
-              <div className="size-24 bg-[#F2ECF8] rounded-[2.5rem] flex items-center justify-center mx-auto mb-12 border border-blue-50 shadow-xl">
-                 <Heart className="size-12 text-[#E31D1A] animate-pulse" />
+              <div className="size-20 bg-[#F2ECF8] rounded-2xl flex items-center justify-center mx-auto mb-10 border border-blue-50 shadow-xl">
+                 <Heart className="size-10 text-[#E31D1A] animate-pulse" />
               </div>
-              <h2 className="text-4xl md:text-6xl font-black text-[#092C74] mb-10 tracking-tighter leading-tight">Membangun Masa Depan <br /> Melalui <span className="text-[#E31D1A]">Dukungan Anda.</span></h2>
-              <p className="text-2xl text-gray-500 font-medium mb-16 max-w-3xl mx-auto leading-relaxed italic">
+              <h2 className="text-3xl md:text-5xl font-black text-[#092C74] mb-8 tracking-tighter leading-tight text-center">Membangun Masa Depan <br /> Melalui <span className="text-[#E31D1A]">Dukungan Anda.</span></h2>
+              <p className="text-xl text-gray-500 font-medium mb-12 max-w-2xl mx-auto leading-relaxed italic text-center text-center">
                 Setiap kontribusi Anda merupakan investasi abadi bagi pertumbuhan Kerajaan Allah melalui pendidikan teologi yang holistik.
               </p>
               
-              <div className="backdrop-blur-2xl bg-white/40 p-12 md:p-20 rounded-[4rem] border border-white shadow-[0_50px_100px_rgba(9,44,116,0.08)] relative overflow-hidden group">
+              <div className="backdrop-blur-2xl bg-white/40 p-10 md:p-14 rounded-[2.5rem] border border-white shadow-[0_50px_100px_rgba(9,44,116,0.08)] relative overflow-hidden group">
                 <div className="absolute top-0 right-0 size-80 bg-[#092C74]/5 blur-[80px] rounded-full group-hover:scale-110 transition-transform duration-1000" />
                 
-                <h3 className="font-black text-4xl mb-8 text-[#092C74] relative z-10 tracking-tight">Menjadi Mitra Pelayanan</h3>
-                <p className="text-gray-500 mb-12 leading-relaxed font-bold text-lg relative z-10 max-w-2xl mx-auto">
+                <h3 className="font-black text-3xl mb-6 text-[#092C74] relative z-10 tracking-tight text-center">Menjadi Mitra Pelayanan</h3>
+                <p className="text-gray-500 mb-10 leading-relaxed font-bold text-base relative z-10 max-w-2xl mx-auto text-center">
                   Dukungan Anda akan dikelola secara transparan untuk memfasilitasi beasiswa, riset teologi, dan pengembangan infrastruktur kampus modern.
                 </p>
                 <Link href="/dukungan">
-                  <Button className="h-20 px-16 bg-[#092C74] hover:bg-[#E31D1A] text-white font-black text-xl rounded-[1.5rem] shadow-2xl transition-all duration-500 hover:-translate-y-2 relative z-10 uppercase tracking-widest">
-                    SAYA INGIN BERKONTRIBUSI <ChevronRight className="ml-3 size-6" />
+                  <Button className="h-16 px-12 bg-[#092C74] hover:bg-[#E31D1A] text-white font-black text-lg rounded-2xl shadow-2xl transition-all duration-500 hover:-translate-y-2 relative z-10 uppercase tracking-widest">
+                    SAYA INGIN BERKONTRIBUSI <ChevronRight className="ml-3 size-5" />
                   </Button>
                 </Link>
               </div>
