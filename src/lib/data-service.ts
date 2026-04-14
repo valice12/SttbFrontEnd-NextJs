@@ -7,16 +7,6 @@ import { getFileUrl } from './file-utils';
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
 const USE_MOCK_DATA = process.env.NEXT_PUBLIC_USE_MOCK_DATA === 'true';
 
-const ACADEMIC_SLUG_MAP: Record<string, string> = {
-  'sarjana-teologi': 's-th',
-  'sarjana-pendidikan-kristen': 's-pd-k',
-  'magister-teologi-pelayanan-pastoral-gereja-urban': 'm-th-pastoral-urban',
-  'magister-teologi-transformasi-budaya-masyarakat': 'm-th-transformasi-budaya',
-  'magister-pendidikan-kristen': 'm-pd',
-  'magister-ministri-marketplace': 'm-min-marketplace',
-  'magister-ministri-kepemimpinan-pastoral': 'm-min-kepemimpinan-pastoral',
-  'magister-ministri-teologi-pelayanan-gerejawi': 'm-min-pelayanan-gerejawi'
-};
 
 const MEDIA_FORMAT_MAP: Record<string, string> = {
   'jurnal': 'journal',
@@ -178,7 +168,7 @@ export const dataService = {
     return items.map((program: any) => ({
       ...program,
       title: program.programName || program.title,
-      slug: ACADEMIC_SLUG_MAP[program.slug] || program.slug
+      slug: program.slug
     }));
   },
 
@@ -186,8 +176,7 @@ export const dataService = {
     return this.fetchData<any>('academics/get-academic-requirements', 'academic_requirements.json');
   },
 
-  async getAcademicProgram(lookupSlug: string): Promise<any> {
-    const slug = ACADEMIC_SLUG_MAP[lookupSlug] || lookupSlug;
+  async getAcademicProgram(slug: string): Promise<any> {
     if (!USE_MOCK_DATA && API_BASE_URL) {
       try {
         const response = await fetch(`${API_BASE_URL}/academics/get-program/${slug}`);

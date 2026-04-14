@@ -8,6 +8,7 @@ import { AcademicSection } from './components/AcademicSection';
 import { NewsSection } from './components/NewsSection';
 import { EventsSection } from './components/EventsSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
+import { VideoSection } from './components/VideoSection';
 import { CTASection } from './components/CTASection';
 
 const imgHeroImage = "/assets/gedung1.png";
@@ -34,6 +35,8 @@ export function Home() {
       <HeroSection imgHeroImage={imgHeroImage} />
       
       <VisionMissionSection />
+
+      <VideoSection />
 
       <AcademicSection programs={programs} />
 

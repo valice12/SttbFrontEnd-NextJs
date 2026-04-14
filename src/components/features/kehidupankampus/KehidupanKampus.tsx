@@ -2,6 +2,7 @@
 
 import { motion } from 'motion/react';
 import { Building, Users, Heart, ShieldCheck, ChevronRight, MapPin, Zap } from 'lucide-react';
+import { VideoSection } from '../home/components/VideoSection';
 
 const fasilitasPerpustakaan = "/assets/fasilitas-1-2-480x480.png";
 const fasilitasAsrama = "/assets/fasilitas-4-480x480.png";
@@ -115,6 +116,13 @@ export function KehidupanKampus() {
           </div>
         </div>
       </section>
+
+      {/* Video Experience Section */}
+      <VideoSection 
+        tag="Campus Tour"
+        title="Jelajahi Fasilitas STT Bandung"
+        description="Mari berkeliling dan melihat langsung fasilitas modern serta lingkungan asri yang mendukung perjalanan studi dan pertumbuhan rohani Anda."
+      />
 
       {/* Community Experience Section */}
       <section className="py-32 bg-[#061B46] relative overflow-hidden">
