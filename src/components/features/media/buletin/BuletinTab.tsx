@@ -15,13 +15,12 @@ import { id } from 'date-fns/locale';
 import { PublicationCard } from '../shared/PublicationCard';
 import { dataService } from '@/lib/data-service';
 import { useEffect } from 'react';
-import { useDebounce } from '@/lib/use-debounce';
 
 export function BuletinTab() {
   const [isGridView, setIsGridView] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
-  const debouncedSearchQuery = useDebounce(searchQuery, 700);
+  const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('date');
   const [date, setDate] = useState<Date | undefined>();
@@ -48,6 +47,13 @@ export function BuletinTab() {
     loadCategories();
   }, []);
 
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setSearchTerm(searchQuery);
+      setCurrentPage(1);
+    }
+  };
+
   useEffect(() => {
     async function fetchPaginatedBuletins() {
       try {
@@ -55,7 +61,7 @@ export function BuletinTab() {
         const data = await dataService.getMediaItems('buletin', {
           page: currentPage,
           pageSize: itemsPerPage,
-          search: debouncedSearchQuery || undefined,
+          search: searchTerm || undefined,
           category: selectedCategory === 'all' ? undefined : selectedCategory,
           date: date || undefined,
           orderBy: sortBy === 'date' ? undefined : (sortBy === 'title' ? 'Title' : 'Category')
@@ -70,12 +76,12 @@ export function BuletinTab() {
       }
     }
     fetchPaginatedBuletins();
-  }, [currentPage, debouncedSearchQuery, selectedCategory, sortBy, date]);
+  }, [currentPage, searchTerm, selectedCategory, sortBy, date]);
 
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [debouncedSearchQuery, selectedCategory, sortBy, date]);
+  }, [searchTerm, selectedCategory, sortBy, date]);
 
   const paginatedData = items;
 
@@ -151,10 +157,11 @@ export function BuletinTab() {
               <Search className="absolute left-6 top-1/2 -translate-y-1/2 size-5 text-gray-400 group-hover:text-[#092C74] transition-colors" />
               <input
                 type="text"
-                placeholder="CARI BULETIN KAMPUS..."
+                placeholder="Tekan Enter untuk cari..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-16 h-14 bg-gray-50 focus:bg-white border-2 border-gray-50 rounded-2xl w-full text-sm font-black uppercase tracking-widest transition-all shadow-sm focus:ring-4 focus:ring-[#092C74]/5 focus:outline-none"
+                onKeyDown={handleSearchKeyDown}
+                className="pl-16 h-14 bg-gray-50 focus:bg-white border-2 border-gray-50 rounded-2xl w-full text-sm font-black tracking-widest transition-all shadow-sm focus:ring-4 focus:ring-[#092C74]/5 focus:outline-none"
               />
             </div>
 

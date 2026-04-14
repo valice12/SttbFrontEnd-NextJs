@@ -2,13 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Building, Users, ShieldCheck, GraduationCap, ChevronRight } from 'lucide-react';
+import { Building, Users, ShieldCheck, GraduationCap, ChevronRight, Search } from 'lucide-react';
+import { useMemo } from 'react';
+import { Input } from '@/components/ui/input';
 import { dataService } from '@/lib/data-service';
 
 export function OrganizationTab() {
   const [foundation, setFoundation] = useState<any>(null);
   const [lecturers, setLecturers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     async function fetchData() {
@@ -30,6 +34,37 @@ export function OrganizationTab() {
     fetchData();
   }, []);
 
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setSearchTerm(searchQuery);
+    }
+  };
+
+  const safeLecturers = Array.isArray(lecturers) ? lecturers : [];
+
+  const filteredFoundation = useMemo(() => {
+    if (!searchTerm || !foundation?.items) return foundation;
+    const lowerSearch = searchTerm.toLowerCase();
+    return {
+      ...foundation,
+      items: foundation.items.filter((m: any) => 
+        m.name.toLowerCase().includes(lowerSearch) || 
+        (m.role && m.role.toLowerCase().includes(lowerSearch)) ||
+        (m.division && m.division.toLowerCase().includes(lowerSearch))
+      )
+    };
+  }, [foundation, searchTerm]);
+
+  const filteredLecturers = useMemo(() => {
+    if (!searchTerm) return safeLecturers;
+    const lowerSearch = searchTerm.toLowerCase();
+    return safeLecturers.filter(l => 
+      l.lecturerName.toLowerCase().includes(lowerSearch) || 
+      l.roles?.some((r: string) => r.toLowerCase().includes(lowerSearch)) ||
+      l.degrees?.some((d: string) => d.toLowerCase().includes(lowerSearch))
+    );
+  }, [safeLecturers, searchTerm]);
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
@@ -38,8 +73,6 @@ export function OrganizationTab() {
     );
   }
 
-  const safeLecturers = Array.isArray(lecturers) ? lecturers : [];
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -47,6 +80,20 @@ export function OrganizationTab() {
       transition={{ duration: 0.8 }}
       className="space-y-32 mb-20"
     >
+      {/* Search Bar Standardized */}
+      <div className="flex justify-center -mb-20 relative z-50">
+        <div className="relative w-full max-w-2xl group">
+          <Search className="absolute left-6 top-1/2 -translate-y-1/2 size-5 text-gray-400 group-hover:text-[#092C74] transition-colors" />
+          <Input
+            type="text"
+            placeholder="Cari Pengurus atau Dosen (Tekan Enter)..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleSearchKeyDown}
+            className="pl-14 h-16 rounded-3xl border-2 border-white/50 bg-white/50 backdrop-blur-xl focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 text-sm font-black tracking-widest transition-all shadow-xl"
+          />
+        </div>
+      </div>
       {/* Foundation Section - Premium Management */}
       <section className="relative">
         <div className="flex flex-col items-center text-center mb-16">
@@ -67,7 +114,7 @@ export function OrganizationTab() {
             <div className="h-px w-12 bg-gray-200" />
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {(foundation?.items?.filter((m: any) => m.division === "Dewan Pembina") || []).map((member: any, i: number) => (
+            {(filteredFoundation?.items?.filter((m: any) => m.division === "Dewan Pembina") || []).map((member: any, i: number) => (
               <motion.div 
                 key={i} 
                 whileHover={{ y: -5 }}
@@ -91,7 +138,7 @@ export function OrganizationTab() {
           </h4>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16 max-w-7xl mx-auto">
-            {(foundation?.items?.filter((m: any) => m.division === "Dewan Pengurus" && m.role) || []).map((item: any, i: number) => (
+            {(filteredFoundation?.items?.filter((m: any) => m.division === "Dewan Pengurus" && m.role) || []).map((item: any, i: number) => (
               <motion.div 
                 key={i} 
                 whileHover={{ scale: 1.02 }}
@@ -110,7 +157,7 @@ export function OrganizationTab() {
           <div className="backdrop-blur-xl bg-gray-50/50 p-10 md:p-14 rounded-[3rem] border border-gray-100 max-w-7xl mx-auto">
             <h5 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-12 text-center">Anggota Pengurus & Pengawas</h5>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8">
-              {(foundation?.items?.filter((m: any) => (m.division === "Anggota" || m.division === "Dewan Pengawas") || (!m.role && m.division === "Dewan Pengurus")) || []).map((member: any, i: number) => (
+              {(filteredFoundation?.items?.filter((m: any) => (m.division === "Anggota" || m.division === "Dewan Pengawas") || (!m.role && m.division === "Dewan Pengurus")) || []).map((member: any, i: number) => (
                 <div key={i} className="flex items-start gap-4 p-4 hover:bg-white rounded-2xl transition-colors group">
                   <div className="size-2 bg-[#E31D1A] rounded-full mt-2 group-hover:scale-150 transition-transform" />
                   <div className="flex flex-col">
@@ -137,7 +184,7 @@ export function OrganizationTab() {
         <div className="flex flex-col items-center space-y-20 max-w-full overflow-hidden">
           {/* Level 1: Ketua - Premium Elite Card */}
           {(() => {
-            const ketua = safeLecturers.find(l => l.roles?.includes('Ketua STT') || l.roles?.includes('Ketua'));
+            const ketua = filteredLecturers.find(l => l.roles?.includes('Ketua STT') || l.roles?.includes('Ketua'));
             return (
               <div className="flex flex-col items-center w-full">
                 <motion.div 
@@ -156,7 +203,7 @@ export function OrganizationTab() {
 
           {/* Level 2: Wakil Ketua - Glass Grid */}
           {(() => {
-            const wakilKetua = safeLecturers.filter(l =>
+            const wakilKetua = filteredLecturers.filter(l =>
               l.roles?.some((r: string) => r.toLowerCase().startsWith('wakil ketua'))
             );
             if (wakilKetua.length === 0) {
@@ -190,7 +237,7 @@ export function OrganizationTab() {
 
           {/* Level 3: Kaprodi - Minimalist Glass */}
           {(() => {
-            const kaprodi = safeLecturers.filter(l =>
+            const kaprodi = filteredLecturers.filter(l =>
               l.roles?.some((r: string) => r.toLowerCase().startsWith('kaprodi'))
             );
             if (kaprodi.length === 0) {
@@ -225,7 +272,7 @@ export function OrganizationTab() {
                 <h4 className="font-black text-3xl text-[#092C74] mt-6 tracking-tight">Dosen Tetap & Luar Biasa</h4>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {safeLecturers.map((lecturer, i) => (
+                {filteredLecturers.map((lecturer, i) => (
                   <motion.div 
                     key={i} 
                     whileHover={{ scale: 1.02 }}

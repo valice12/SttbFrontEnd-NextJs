@@ -2,8 +2,9 @@
 
 import { motion } from 'motion/react';
 import Link from 'next/link';
-import { GraduationCap, BookOpen, Award, Sparkles, Languages, Users, Layout, Scroll, Layers, Clock, ArrowRight } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { GraduationCap, BookOpen, Award, Sparkles, Languages, Users, Layout, Scroll, Layers, Clock, ArrowRight, Search } from 'lucide-react';
+import { useState, useEffect, useMemo } from 'react';
+import { Input } from '@/components/ui/input';
 import { dataService } from '@/lib/data-service';
 
 const iconMap: Record<string, any> = {
@@ -23,6 +24,8 @@ const bgPatternReversed = "/assets/background-reversed.webp";
 export function Akademik() {
   const [programs, setPrograms] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     async function fetchPrograms() {
@@ -38,6 +41,22 @@ export function Akademik() {
     }
     fetchPrograms();
   }, []);
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setSearchTerm(searchQuery);
+    }
+  };
+
+  const filteredPrograms = useMemo(() => {
+    if (!searchTerm) return programs;
+    const lowerSearch = searchTerm.toLowerCase();
+    return programs.filter(p => 
+      p.programName.toLowerCase().includes(lowerSearch) || 
+      p.title.toLowerCase().includes(lowerSearch) ||
+      (p.degree && p.degree.toLowerCase().includes(lowerSearch))
+    );
+  }, [programs, searchTerm]);
 
 
   if (loading) {
@@ -96,6 +115,21 @@ export function Akademik() {
 
       <section className="py-12">
         <div className="container mx-auto px-4">
+          
+          {/* Search Bar Standardized */}
+          <div className="mb-12 flex justify-center">
+            <div className="relative w-full max-w-2xl group">
+              <Search className="absolute left-6 top-1/2 -translate-y-1/2 size-5 text-gray-400 group-hover:text-[#092C74] transition-colors" />
+              <Input
+                type="text"
+                placeholder="Cari program studi (Tekan Enter)..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleSearchKeyDown}
+                className="pl-14 h-16 rounded-3xl border-2 border-white/50 bg-white/50 backdrop-blur-xl focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 text-sm font-black tracking-widest transition-all shadow-xl"
+              />
+            </div>
+          </div>
 
           <div className="mb-16">
             <div className="mb-10">
@@ -108,7 +142,7 @@ export function Akademik() {
             </div>
             {/* Desktop Grid Layout */}
             <div className="hidden lg:grid grid-cols-2 lg:grid-cols-3 gap-8">
-              {programs.filter((p: any) => p.programName.includes('Sarjana')).map((program: any, index: number) => {
+              {filteredPrograms.filter((p: any) => p.programName.includes('Sarjana')).map((program: any, index: number) => {
                 const IconComponent = iconMap[program.icon] || GraduationCap;
                 return (
                   <motion.div
@@ -147,7 +181,7 @@ export function Akademik() {
 
             {/* Mobile List Layout */}
             <div className="flex flex-col lg:hidden gap-4">
-              {programs.filter((p: any) => p.programName.includes('Sarjana')).map((program: any, index: number) => {
+              {filteredPrograms.filter((p: any) => p.programName.includes('Sarjana')).map((program: any, index: number) => {
                 const IconComponent = iconMap[program.icon] || GraduationCap;
                 return (
                   <Link key={program.slug} href={`/akademik/${program.slug}`}>
@@ -194,7 +228,7 @@ export function Akademik() {
             </div>
             {/* Desktop Grid Layout */}
             <div className="hidden lg:grid grid-cols-2 lg:grid-cols-3 gap-8">
-              {programs.filter((p: any) => p.programName.includes('Magister')).map((program: any, index: number) => {
+              {filteredPrograms.filter((p: any) => p.programName.includes('Magister')).map((program: any, index: number) => {
                 const IconComponent = iconMap[program.icon] || BookOpen;
                 return (
                   <motion.div
@@ -233,7 +267,7 @@ export function Akademik() {
 
             {/* Mobile List Layout */}
             <div className="flex flex-col lg:hidden gap-4">
-              {programs.filter((p: any) => p.programName.includes('Magister')).map((program: any, index: number) => {
+              {filteredPrograms.filter((p: any) => p.programName.includes('Magister')).map((program: any, index: number) => {
                 const IconComponent = iconMap[program.icon] || BookOpen;
                 return (
                   <Link key={program.slug} href={`/akademik/${program.slug}`}>
@@ -272,7 +306,7 @@ export function Akademik() {
           <div>
             {/* Desktop Grid Layout */}
             <div className="hidden lg:grid grid-cols-2 lg:grid-cols-3 gap-8">
-              {programs.filter((p: any) => !p.programName.includes('Sarjana') && !p.programName.includes('Magister')).map((program: any, index: number) => {
+              {filteredPrograms.filter((p: any) => !p.programName.includes('Sarjana') && !p.programName.includes('Magister')).map((program: any, index: number) => {
                 const IconComponent = iconMap[program.icon] || Award;
                 return (
                   <motion.div
@@ -305,7 +339,7 @@ export function Akademik() {
 
             {/* Mobile List Layout */}
             <div className="flex flex-col lg:hidden gap-4">
-              {programs.filter((p: any) => !p.programName.includes('Sarjana') && !p.programName.includes('Magister')).map((program: any, index: number) => {
+              {filteredPrograms.filter((p: any) => !p.programName.includes('Sarjana') && !p.programName.includes('Magister')).map((program: any, index: number) => {
                 const IconComponent = iconMap[program.icon] || Award;
                 return (
                   <Link key={program.slug} href={`/akademik/${program.slug}`}>

@@ -20,7 +20,6 @@ import { id } from 'date-fns/locale';
 import { MediaCard } from '@/components/common/NewsCard';
 import { dataService } from '@/lib/data-service';
 import { getImageUrl } from '@/lib/image-utils';
-import { useDebounce } from '@/lib/use-debounce';
 import { MediaNavbar } from '@/components/features/media/shared/MediaNavbar';
 
 const bgHeader = "/assets/sttb-2-BG.png";
@@ -29,7 +28,7 @@ const bgPattern = "/assets/Page-Panjang-1.webp";
 export function Berita() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
-  const debouncedSearchQuery = useDebounce(searchQuery, 700);
+  const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('date');
   const [date, setDate] = useState<Date | undefined>();
@@ -72,6 +71,13 @@ export function Berita() {
     loadFeatured();
   }, []);
 
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setSearchTerm(searchQuery);
+      setCurrentPage(1);
+    }
+  };
+
   useEffect(() => {
     async function fetchPaginatedNews() {
       try {
@@ -79,7 +85,7 @@ export function Berita() {
         const data = await dataService.getNews({
           page: currentPage,
           pageSize: itemsPerPage,
-          search: debouncedSearchQuery || undefined,
+          search: searchTerm || undefined,
           category: selectedCategory === 'all' ? undefined : selectedCategory,
           orderBy: sortBy === 'date' ? undefined : (sortBy === 'title' ? 'NewsTitle' : 'CategoryName'),
           orderState: sortBy === 'date' ? undefined : 'desc'
@@ -93,11 +99,11 @@ export function Berita() {
       }
     }
     fetchPaginatedNews();
-  }, [currentPage, debouncedSearchQuery, selectedCategory, sortBy, date]);
+  }, [currentPage, searchTerm, selectedCategory, sortBy, date]);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [debouncedSearchQuery, selectedCategory, sortBy, date]);
+  }, [searchTerm, selectedCategory, sortBy, date]);
 
   useEffect(() => {
     if (featuredNews.length === 0) {
@@ -293,10 +299,11 @@ export function Berita() {
                 <Search className="absolute left-6 top-1/2 -translate-y-1/2 size-5 text-gray-400 group-hover:text-[#092C74] transition-colors" />
                 <Input
                   type="text"
-                  placeholder="Cari berita..."
+                  placeholder="Tekan Enter untuk cari..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-14 h-14 rounded-2xl border-2 border-gray-50 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 text-sm font-black uppercase tracking-widest transition-all shadow-sm"
+                  onKeyDown={handleSearchKeyDown}
+                  className="pl-14 h-14 rounded-2xl border-2 border-gray-50 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-[#092C74]/5 text-sm font-black tracking-widest transition-all shadow-sm"
                 />
               </div>
   
