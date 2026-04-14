@@ -54,7 +54,7 @@ export const dataService = {
    */
   async getNews(params: { page?: number, pageSize?: number, search?: string, category?: string, orderBy?: string, orderState?: string } = {}): Promise<any> {
     const { page = 1, pageSize = 10, search, category, orderBy, orderState } = params;
-    
+
     const query = new URLSearchParams({
       PageNumber: page.toString(),
       PageSize: pageSize.toString(),
@@ -74,7 +74,7 @@ export const dataService = {
 
     const data = await this.fetchData<any>(`news/get-available-news?${query.toString()}`, 'news_list.json');
     const items = Array.isArray(data) ? data : (data?.items || []);
-    
+
     return {
       items: items.map((item: any) => ({
         ...item,
@@ -103,12 +103,12 @@ export const dataService = {
 
   async getEvents(params: { page?: number, pageSize?: number, search?: string, category?: string, date?: Date, orderBy?: string, orderState?: string } = {}): Promise<any> {
     const { page = 1, pageSize = 10, search, category, date, orderBy, orderState } = params;
-    
+
     const query = new URLSearchParams({
       PageNumber: page.toString(),
       PageSize: pageSize.toString(),
     });
-    
+
     if (search) {
       query.append('EventTitle', search);
     }
@@ -258,7 +258,7 @@ export const dataService = {
           PageNumber: page.toString(),
           PageSize: pageSize.toString(),
         });
-        
+
         if (search) {
           query.append('MediaTitle', search);
         }
@@ -277,7 +277,7 @@ export const dataService = {
         // Correct URL: route param, not query param
         const endpoint = `media/get-available-media/${apiFormat}?${query.toString()}`;
         const data = await this.fetchData<any>(endpoint, 'media_list.json');
-        
+
         const items = Array.isArray(data) ? data : (data?.Items || data?.items || []);
 
         const mapped = items.map((item: any) => ({
@@ -486,7 +486,7 @@ export const dataService = {
           division: item.division || item.Division || '',
           role: item.role || item.Role || ''
         }));
-        
+
         return {
           items: normalizedItems,
           totalItems: data.totalItems || data.TotalItems || 0,
@@ -502,24 +502,30 @@ export const dataService = {
     };
   },
 
-  async getLecturers(page = 1, pageSize = 10): Promise<any> {
+  async getLecturers(page = 1, pageSize = 50): Promise<any> {
     if (!USE_MOCK_DATA && API_BASE_URL) {
       try {
         const response = await fetch(`${API_BASE_URL}/profiles/get-all-lecturers?PageNumber=${page}&PageSize=${pageSize}`);
         if (!response.ok) throw new Error(`API error: ${response.statusText}`);
         const data = await response.json();
         const itemsList = data.items || data.Items || [];
-        const normalizedItems = itemsList.map((item: any) => ({
-          ...item,
-          lecturerName: item.lecturerName || item.LecturerName || item.name || '',
-          roles: item.roles || item.Roles || item.OrganizationalRole ? [item.OrganizationalRole] : [],
-          degrees: item.degrees || item.Degrees || []
-        }));
+        const normalizedItems = itemsList
+          .filter((item: any) => item.isActive !== false) // Only show active lecturers in public view
+          .map((item: any) => ({
+            ...item,
+            lecturerName: item.lecturerName || item.LecturerName || item.name || '',
+            // Handle different role field names and ensure it's always an array
+            roles: (item.roles && item.roles.length > 0) ? item.roles :
+              (item.Roles && item.Roles.length > 0) ? item.Roles :
+                (item.organizationalRole || item.OrganizationalRole) ? [item.organizationalRole || item.OrganizationalRole] : [],
+            degrees: item.degrees || item.Degrees || []
+          }));
 
         return {
           items: normalizedItems,
-          totalItems: data.totalItems || data.TotalItems || 0,
-          totalPages: data.totalPages || data.TotalPages || 0
+          totalItems: normalizedItems.length, // Update total based on active items
+          totalPages: Math.ceil(normalizedItems.length / pageSize),
+          currentPage: data.pageNumber || data.PageNumber || page
         };
       } catch (error) {
         console.warn('Failed to fetch lecturers, falling back to mock data:', error);
@@ -527,7 +533,7 @@ export const dataService = {
     }
     const fallback = await this.getLocalData<any>('lecturers_list.json');
     const itemsList = Array.isArray(fallback) ? fallback : (fallback?.items || fallback?.Items || []);
-    return { 
+    return {
       items: itemsList,
       totalItems: fallback?.totalItems || fallback?.TotalItems || 0,
       totalPages: fallback?.totalPages || fallback?.TotalPages || 0
@@ -550,7 +556,7 @@ export const dataService = {
           }
           throw errorData || new Error(`API error (${response.status}): ${response.statusText}`);
         }
-        
+
         const responseText = await response.text();
         return responseText ? JSON.parse(responseText) : { success: true };
       } catch (error: any) {
@@ -563,7 +569,7 @@ export const dataService = {
         throw error;
       }
     }
-    
+
     console.log("Mocking donation submission:", Object.fromEntries(donation.entries()));
     return new Promise((resolve) => setTimeout(() => resolve({ success: true, message: "Donation submitted successfully (mock)" }), 1000));
   },
@@ -588,7 +594,7 @@ export const dataService = {
           console.error("Library API Error (JSON):", errorData);
           throw errorData || new Error(`API error (${response.status}): ${response.statusText}`);
         }
-        
+
         const responseText = await response.text();
         return responseText ? JSON.parse(responseText) : { success: true };
       } catch (error: any) {
@@ -604,7 +610,7 @@ export const dataService = {
         throw error;
       }
     }
-    
+
     console.log("Mocking library membership submission:", Object.fromEntries(member.entries()));
     return new Promise((resolve) => setTimeout(() => resolve({ success: true, message: "Library membership submitted successfully (mock)" }), 1000));
   },
