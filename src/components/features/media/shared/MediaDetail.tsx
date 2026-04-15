@@ -10,6 +10,27 @@ import { useState, useEffect } from 'react';
 import { getImageUrl } from '@/lib/image-utils';
 const bgPattern = "/assets/Page-Panjang-1.webp";
 
+/**
+ * Extract a high-quality thumbnail URL from a YouTube link.
+ * Supports youtu.be/ short links and youtube.com/watch?v= links.
+ */
+function getYouTubeThumbnail(url: string): string | null {
+  if (!url) return null;
+  let videoId: string | null = null;
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname.includes('youtu.be')) {
+      videoId = parsed.pathname.slice(1).split('/')[0];
+    } else if (parsed.hostname.includes('youtube.com')) {
+      videoId = parsed.searchParams.get('v');
+    }
+  } catch {
+    return null;
+  }
+  if (!videoId) return null;
+  return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+}
+
 export function MediaDetail() {
   const { slug } = useParams();
   const [mediaItem, setMediaItem] = useState<any>(null);
@@ -65,32 +86,45 @@ export function MediaDetail() {
     >
        {/* Responsive Header */}
        <div className="relative h-[50vh] min-h-[400px] bg-gray-900 overflow-hidden">
-          <img src={getImageUrl(mediaItem.image, mediaItem.type)} alt={mediaItem.title} className="w-full h-full object-cover opacity-60 scale-105 blur-sm" />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
-          <div className="absolute inset-0 flex items-center justify-center">
-             <div className="container mx-auto px-4 text-center">
-                <motion.div
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  className="inline-block mb-6"
-                >
-                   {mediaItem.type === 'video' ? (
-                     <PlayCircle className="size-24 text-[#E31D1A] drop-shadow-2xl animate-pulse" />
-                   ) : (
-                     <FileText className="size-24 text-[#092C74] drop-shadow-2xl" />
-                   )}
-                </motion.div>
-                <h1 className="text-4xl md:text-6xl font-black text-[#003049] mb-4 drop-shadow-sm px-4">
-                  {mediaItem.title}
-                </h1>
-                <div className="flex justify-center gap-4 text-gray-600 font-bold uppercase tracking-widest text-xs">
-                   <span>{mediaItem.category}</span>
-                   <span>•</span>
-                   <span>{mediaItem.date}</span>
-                </div>
-             </div>
-          </div>
-       </div>
+           {(() => {
+             const videoUrl = mediaItem.videoUrl || mediaItem.link;
+             const bannerSrc = mediaItem.type === 'video' && videoUrl
+               ? (getYouTubeThumbnail(videoUrl) || getImageUrl(mediaItem.image, mediaItem.type))
+               : getImageUrl(mediaItem.image, mediaItem.type);
+             return <img src={bannerSrc} alt={mediaItem.title} className="w-full h-full object-cover opacity-60 scale-105 blur-sm" />;
+           })()}
+           <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
+           <div className="absolute inset-0 flex items-center justify-center">
+              <div className="container mx-auto px-4 text-center">
+                 <motion.div
+                   initial={{ scale: 0.9, opacity: 0 }}
+                   animate={{ scale: 1, opacity: 1 }}
+                   className="inline-block mb-6"
+                 >
+                    {mediaItem.type === 'video' ? (
+                      <a
+                        href={mediaItem.videoUrl || mediaItem.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group cursor-pointer"
+                      >
+                        <PlayCircle className="size-24 text-[#E31D1A] drop-shadow-2xl animate-pulse group-hover:scale-110 transition-transform" />
+                      </a>
+                    ) : (
+                      <FileText className="size-24 text-[#092C74] drop-shadow-2xl" />
+                    )}
+                 </motion.div>
+                 <h1 className="text-4xl md:text-6xl font-black text-[#003049] mb-4 drop-shadow-sm px-4">
+                   {mediaItem.title}
+                 </h1>
+                 <div className="flex justify-center gap-4 text-gray-600 font-bold uppercase tracking-widest text-xs">
+                    <span>{mediaItem.category}</span>
+                    <span>•</span>
+                    <span>{mediaItem.date}</span>
+                 </div>
+              </div>
+           </div>
+        </div>
 
        <div className="container mx-auto px-4 py-16 -mt-20 relative z-10">
           <div className="max-w-5xl mx-auto">
