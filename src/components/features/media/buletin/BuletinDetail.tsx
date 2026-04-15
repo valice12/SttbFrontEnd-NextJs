@@ -59,7 +59,7 @@ export function BuletinDetail() {
       style={{ backgroundImage: `url(${bgPattern})` }}
     >
       {/* Upper Bar */}
-      <div className="bg-white border-b sticky top-20 sm:top-32 z-30 shadow-sm">
+      <div className="bg-white border-b shadow-sm">
         <div className="container mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3">
           <div className="flex items-center gap-2 text-[10px] sm:text-xs font-black text-gray-500 uppercase tracking-widest truncate w-full sm:w-auto">
             <Link href="/media?tab=buletin" className="hover:text-[#092C74] shrink-0">Buletin kampus</Link>
