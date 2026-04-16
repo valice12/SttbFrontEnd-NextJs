@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Dukungan } from '@/components/features/dukungan/Dukungan';
 import { Metadata } from "next";
 
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function DukunganPage() {
-  return <Dukungan />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Dukungan />
+    </Suspense>
+  );
 }

@@ -1,3 +1,10 @@
-'use client';
+import { Suspense } from 'react';
+import { Admisi } from '@/components/features/admisi/Admisi';
 
-export { Admisi as default } from '@/components/features/admisi/Admisi';
+export default function AdmisiPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Admisi />
+    </Suspense>
+  );
+}
